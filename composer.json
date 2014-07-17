@@ -1,0 +1,21 @@
+{
+    "name": "romaricdrigon/orchestra",
+    "type": "symfony-bundle",
+    "description": "Naked Object framework build on top of Symfony2",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Romaric Drigon",
+            "email": "r.drigon@edsi-tech.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "RomaricDrigon\\Orchestra\\": ""
+        }
+    },
+    "require": {
+        "php":                      "~5.4",
+        "symfony/framework-bundle": "~2.3"
+    }
+}
