@@ -1,5 +1,5 @@
 {
-    "name": "romaricdrigon/orchestra",
+    "name": "romaricdrigon/orchestra-bundle",
     "type": "symfony-bundle",
     "description": "Naked Object framework build on top of Symfony2",
     "license": "MIT",
