@@ -11,7 +11,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "RomaricDrigon\\Orchestra\\": ""
+            "RomaricDrigon\\OrchestraBundle\\": ""
         }
     },
     "require": {
