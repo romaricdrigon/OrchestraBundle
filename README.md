@@ -22,12 +22,17 @@ class AppKernel extends Kernel
         );
 ```
 
-Import our routing file:
+Import our routes (both the XML and our custom type):
 ```yaml
 # app/config/routing.yml
-admin:
+orchestra_dashboard:
     resource: '@RomaricDrigonOrchestraBundle/Resources/config/routing.xml'
     prefix: /admin
+
+orchestra_generated:
+    prefix: /admin
+    resource: .
+    type: orchestra
 ```
 
 ## Getting started
