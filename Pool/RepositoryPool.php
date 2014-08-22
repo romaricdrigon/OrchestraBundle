@@ -10,6 +10,8 @@
 namespace RomaricDrigon\OrchestraBundle\Pool;
 
 use RomaricDrigon\OrchestraBundle\Domain\RepositoryInterface;
+use RomaricDrigon\OrchestraBundle\Exception\RepositoryAddedTwiceException;
+use RomaricDrigon\OrchestraBundle\Exception\RepositoryNotFoundException;
 
 /**
  * Class RepositoryPool
@@ -25,7 +27,7 @@ class RepositoryPool
      * Add a repository to the pool
      *
      * @param RepositoryInterface $repository
-     * @throws \Exception if we try to add twice a repository
+     * @throws RepositoryAddedTwiceException
      */
     public function addRepository(RepositoryInterface $repository)
     {
@@ -33,7 +35,7 @@ class RepositoryPool
         $slug = strtolower(get_class($repository));
 
         if (isset($this->repositoriesBySlug[$slug])) {
-            throw new \Exception('Repository with slug '.$slug.' seems to be registered twice!');
+            throw new RepositoryAddedTwiceException($slug);
         }
 
         $this->repositoriesBySlug[$slug] = $repository;
@@ -42,12 +44,12 @@ class RepositoryPool
     /**
      * @param string $slug
      * @return RepositoryInterface
-     * @throws \Exception
+     * @throws RepositoryNotFoundException
      */
     public function getBySlug($slug)
     {
         if (! isset($this->repositoriesBySlug[$slug])) {
-            throw new \Exception('Unable to find repository for slug '.$slug.'. Maybe you forget to register it with the the orchestra.repository tag?');
+            throw new RepositoryNotFoundException($slug);
         }
 
         return $this->repositoriesBySlug[$slug];
