@@ -24,4 +24,9 @@ class GenericController extends Controller
     {
         return new Response('Here soon you will see a nice dashboard');
     }
+
+    public function listAction()
+    {
+        return new Response('Here soon you will see a nice list from a repository');
+    }
 }
