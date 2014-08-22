@@ -33,9 +33,11 @@ admin:
 ## Getting started
 
 With Orchestra admin generator you will have to focus only on 2 objects: `Repositories` and `Entities`.
+All those objects must be placed within a valid Symfony2 bundle.
 
 ### Repositories
 
-Repositories must implements `RomaricDrigon\OrchestraBundle\Domain\RepositoryInterface`.
+We advise you to place those, by convention, in your bundle within a `Repository` folder. Those are NOT Doctrine repositories!
 
+They must implement `RomaricDrigon\OrchestraBundle\Domain\RepositoryInterface`.
 They must be declared as services, tagged with `orchestra.repository`.
