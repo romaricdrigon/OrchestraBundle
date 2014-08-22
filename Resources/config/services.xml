@@ -9,7 +9,7 @@
     </parameters>
 
     <services>
-        <service id="orchestra.pool.repository_pool" class="%orchestra.pool.repository_pool%">
+        <service id="orchestra.pool.repository_pool" class="%orchestra.pool.repository_pool%" public="false">
         </service>
     </services>
 </container>
