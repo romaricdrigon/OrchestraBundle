@@ -32,7 +32,7 @@ admin:
 
 ## Getting started
 
-With Orchestra admin generator you will have to focus only on 2 objects: `Repositories` and `Entities`.
+With Orchestra admin generator you will have to focus only on 2 objects: `Repositories` and `Aggregates`.
 All those objects must be placed within a valid Symfony2 bundle.
 
 ### Repositories
