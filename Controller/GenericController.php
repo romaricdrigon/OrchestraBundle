@@ -25,8 +25,8 @@ class GenericController extends Controller
         return new Response('Here soon you will see a nice dashboard');
     }
 
-    public function listAction()
+    public function listAction($repository_slug, $repository_method)
     {
-        return new Response('Here soon you will see a nice list from a repository');
+        return new Response('Here soon you will see a nice list from repository '.$repository_slug.' method '.$repository_method);
     }
 }

@@ -26,6 +26,8 @@ class RepositoryRouteBuilder
 
     protected $controller = 'RomaricDrigonOrchestraBundle:Generic:list';
 
+    protected $repositoryMethod = 'all';
+
     protected $patternSuffix = 'list';
 
     protected $namePrefix = 'orchestra_repository';
@@ -52,7 +54,9 @@ class RepositoryRouteBuilder
         foreach ($repositories as $slug => $repository) {
             $pattern = '/'.$slug.'/'.$this->patternSuffix;
             $defaults = [
-                '_controller'   => $this->controller
+                '_controller'   => $this->controller,
+                'repository_method' => $this->repositoryMethod,
+                'repository_slug'   => $slug
             ];
             $requirements = [
                 '_method'       => $this->methodRequirement
