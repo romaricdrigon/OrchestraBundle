@@ -20,8 +20,8 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class GenericController extends Controller
 {
-    public function indexAction()
+    public function dashboardAction()
     {
-        return new Response('No content here yet!');
+        return new Response('Here soon you will see a nice dashboard');
     }
 }

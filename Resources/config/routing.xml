@@ -4,6 +4,6 @@
         xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
     <route id="default_action" path="/">
-        <default key="_controller">RomaricDrigonOrchestraBundle:Generic:index</default>
+        <default key="_controller">RomaricDrigonOrchestraBundle:Generic:dashboard</default>
     </route>
 </routes>
