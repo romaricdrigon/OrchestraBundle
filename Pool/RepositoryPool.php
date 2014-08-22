@@ -55,4 +55,12 @@ class RepositoryPool
 
         return $this->repositoriesBySlug[$slug];
     }
+
+    /**
+     * @return array all repositories indexed by slug
+     */
+    public function all()
+    {
+        return $this->repositoriesBySlug;
+    }
 }
