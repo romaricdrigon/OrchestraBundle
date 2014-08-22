@@ -2,6 +2,8 @@
 
 namespace RomaricDrigon\OrchestraBundle\Pool;
 
+use RomaricDrigon\OrchestraBundle\Domain\RepositoryInterface;
+
 /**
  * Class RepositoryPool
  * @package RomaricDrigon\OrchestraBundle\Pool
@@ -10,5 +12,7 @@ namespace RomaricDrigon\OrchestraBundle\Pool;
  */
 class RepositoryPool
 {
-
+    public function addRepository(RepositoryInterface $repository)
+    {
+    }
 }

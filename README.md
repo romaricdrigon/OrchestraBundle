@@ -29,3 +29,13 @@ admin:
     resource: '@RomaricDrigonOrchestraBundle/Resources/config/routing.xml'
     prefix: /admin
 ```
+
+## Getting started
+
+With Orchestra admin generator you will have to focus only on 2 objects: `Repositories` and `Entities`.
+
+### Repositories
+
+Repositories must implements `RomaricDrigon\OrchestraBundle\Domain\RepositoryInterface`.
+
+They must be declared as services, tagged with `orchestra.repository`.
