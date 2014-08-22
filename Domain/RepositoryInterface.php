@@ -17,4 +17,10 @@ namespace RomaricDrigon\OrchestraBundle\Domain;
  */
 interface RepositoryInterface
 {
+    /**
+     * Returns all objects of associated class
+     *
+     * @return array
+     */
+    public function all();
 }
