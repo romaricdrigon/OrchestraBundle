@@ -32,7 +32,8 @@ class RepositoryPool
     public function addRepository(RepositoryInterface $repository)
     {
         // At the moment slug is not configurable otherwise
-        $slug = strtolower(str_replace('Repository', '', get_class($repository)));
+        $reflect = new \ReflectionClass($repository);
+        $slug = strtolower(str_replace('Repository', '', $reflect->getShortName()));
 
         if (isset($this->repositoriesBySlug[$slug])) {
             throw new RepositoryAddedTwiceException($slug);
