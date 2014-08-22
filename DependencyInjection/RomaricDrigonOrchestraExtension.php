@@ -7,6 +7,14 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\Loader;
 
+/**
+ * Class RomaricDrigonOrchestraExtension
+ * This file is part of the Orchestra project.
+ * @author Romaric Drigon <romaric.drigon@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 class RomaricDrigonOrchestraExtension extends Extension
 {
     /**
