@@ -63,9 +63,9 @@ class RepositoryPoolTest extends \PHPUnit_Framework_TestCase
 }
 
 final class MockRepository1 implements RepositoryInterface {
-    public function all() {}
+    public function listing() {}
 }
 
 final class MockRepository2 implements RepositoryInterface {
-    public function all() {}
+    public function listing() {}
 }

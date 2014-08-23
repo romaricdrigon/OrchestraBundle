@@ -18,9 +18,11 @@ namespace RomaricDrigon\OrchestraBundle\Domain;
 interface RepositoryInterface
 {
     /**
-     * Returns all objects of associated class
+     * Method used by "list" page ("list" is a PHP reserved keyword)
+     * Usually returns all instances of given type
+     * You may want to customize this, or which fields are displayed
      *
      * @return array
      */
-    public function all();
+    public function listing();
 }

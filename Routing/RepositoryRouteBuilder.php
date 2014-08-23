@@ -26,7 +26,7 @@ class RepositoryRouteBuilder
 
     protected $controller = 'RomaricDrigonOrchestraBundle:Generic:list';
 
-    protected $repositoryMethod = 'all';
+    protected $repositoryMethod = 'listing';
 
     protected $patternSuffix = 'list';
 

@@ -43,7 +43,7 @@ class RepositoryRouteBuilderTest extends \PHPUnit_Framework_TestCase
         $this->assertNotNull($route1 = $routes->get('orchestra_repository_mock1_list'));
 
         $this->assertEquals('/mock1/list', $route1->getPath());
-        $this->assertEquals('all', $route1->getDefault('repository_method'));
+        $this->assertEquals('listing', $route1->getDefault('repository_method'));
         $this->assertEquals('mock1', $route1->getDefault('repository_slug'));
 
         $this->assertNotNull($route2 = $routes->get('orchestra_repository_mock2_list'));

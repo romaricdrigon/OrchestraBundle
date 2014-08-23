@@ -12,7 +12,7 @@
 
     <services>
         <!-- pool -->
-        <service id="orchestra.pool.repository_pool" class="%orchestra.pool.repository_pool.class%" public="false">
+        <service id="orchestra.pool.repository_pool" class="%orchestra.pool.repository_pool.class%">
         </service>
 
         <!-- routing-related -->
