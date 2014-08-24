@@ -9,6 +9,7 @@
 
 namespace RomaricDrigon\OrchestraBundle\Tests\Routing;
 
+use RomaricDrigon\OrchestraBundle\Pool\RepositoryPool;
 use RomaricDrigon\OrchestraBundle\Routing\RepositoryRouteCollectionBuilder;
 use RomaricDrigon\OrchestraBundle\Tests\Pool\MockRepository1;
 use RomaricDrigon\OrchestraBundle\Tests\Pool\MockRepository2;
@@ -27,13 +28,6 @@ class RepositoryRouteCollectionBuilderTest extends \PHPUnit_Framework_TestCase
     
     public function setUp()
     {
-        $pool = \Phake::mock('RomaricDrigon\OrchestraBundle\Pool\RepositoryPool');
-
-        \Phake::when($pool)->all()->thenReturn([
-            'mock1' => new MockRepository1(),
-            'mock2' => new MockRepository2()
-        ]);
-
         $builder = \Phake::mock('RomaricDrigon\OrchestraBundle\Routing\RepositoryRouteBuilder');
 
         \Phake::when($builder)->buildRouteName('mock1')->thenReturn('name_mock1');
@@ -41,12 +35,32 @@ class RepositoryRouteCollectionBuilderTest extends \PHPUnit_Framework_TestCase
 
         \Phake::when($builder)->buildRoute($this->anything(), $this->anything())->thenReturn(new Route('path1'));
 
-        $this->sut = new RepositoryRouteCollectionBuilder($pool, $builder);
+        $this->sut = new RepositoryRouteCollectionBuilder($builder);
+    }
+
+    public function test_it_builds_empty_collection()
+    {
+        $pool = \Phake::mock('RomaricDrigon\OrchestraBundle\Pool\RepositoryPool');
+
+        \Phake::when($pool)->all()->thenReturn([]);
+
+        $this->assertNotNull($collection = $this->sut->getCollection($pool));
+
+        $this->assertInstanceOf('Symfony\Component\Routing\RouteCollection', $collection);
+
+        $this->assertEquals(0, count($collection));
     }
 
     public function test_it_builds_collection()
     {
-        $this->assertNotNull($collection = $this->sut->getCollection());
+        $pool = \Phake::mock('RomaricDrigon\OrchestraBundle\Pool\RepositoryPool');
+
+        \Phake::when($pool)->all()->thenReturn([
+            'mock1' => new MockRepository1(),
+            'mock2' => new MockRepository2()
+        ]);
+
+        $this->assertNotNull($collection = $this->sut->getCollection($pool));
 
         $this->assertInstanceOf('Symfony\Component\Routing\RouteCollection', $collection);
 
