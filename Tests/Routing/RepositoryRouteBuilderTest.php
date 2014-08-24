@@ -10,6 +10,7 @@
 namespace RomaricDrigon\OrchestraBundle\Tests\Routing;
 
 use RomaricDrigon\OrchestraBundle\Routing\RepositoryRouteBuilder;
+use RomaricDrigon\OrchestraBundle\Tests\Pool\MockRepository1;
 
 /**
  * Class RepositoryRouteBuilderTest
@@ -24,34 +25,33 @@ class RepositoryRouteBuilderTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $pool = \Phake::mock('RomaricDrigon\OrchestraBundle\Pool\RepositoryPool');
-
-        \Phake::when($pool)->all()->thenReturn([
-            'mock1' => 'anything',
-            'mock2' => 'not used'
-        ]);
-
-        $this->sut = new RepositoryRouteBuilder($pool);
+        $this->sut = new RepositoryRouteBuilder();
     }
 
-    public function test_it_builds_route_collection()
+    public function test_it_builds_name()
     {
-        $this->assertNotNull($routes = $this->sut->getCollection());
+        $slug = 'foo';
 
-        $this->assertEquals(2, count($routes));
+        $this->assertEquals('orchestra_repository_foo_list', $this->sut->buildRouteName($slug));
+    }
 
-        $this->assertNotNull($route1 = $routes->get('orchestra_repository_mock1_list'));
 
-        $this->assertEquals('/mock1/list', $route1->getPath());
-        $this->assertEquals('listing', $route1->getDefault('repository_method'));
-        $this->assertEquals('mock1', $route1->getDefault('repository_slug'));
+    public function test_it_builds_route()
+    {
+        $slug = 'foo';
+        $repository = new MockRepository1();
 
-        $this->assertNotNull($route2 = $routes->get('orchestra_repository_mock2_list'));
+        $this->assertNotNull($route = $this->sut->buildRoute($repository, $slug));
 
-        $this->assertEquals('/mock2/list', $route2->getPath());
-        $this->assertEquals('mock2', $route2->getDefault('repository_slug'));
+        $this->assertInstanceOf('Symfony\Component\Routing\Route', $route);
 
-        $this->assertNull($routes->get('orchestra_repository_mock3_list'));
+        $this->assertEquals('/foo/list', $route->getPath());
+
+        $this->assertEquals('RomaricDrigonOrchestraBundle:Generic:list', $route->getDefault('_controller'));
+        $this->assertEquals('listing', $route->getDefault('repository_method'));
+        $this->assertEquals('foo', $route->getDefault('repository_slug'));
+
+        $this->assertEquals('GET', $route->getRequirement('_method'));
     }
 }
  
