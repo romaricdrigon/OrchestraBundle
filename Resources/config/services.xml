@@ -7,6 +7,7 @@
     <parameters>
         <parameter key="orchestra.pool.repository_pool.class">RomaricDrigon\OrchestraBundle\Pool\RepositoryPool</parameter>
         <parameter key="orchestra.routing.repository_route_builder.class">RomaricDrigon\OrchestraBundle\Routing\RepositoryRouteBuilder</parameter>
+        <parameter key="orchestra.routing.repository_route_collection_builder.class">RomaricDrigon\OrchestraBundle\Routing\RepositoryRouteCollectionBuilder</parameter>
         <parameter key="orchestra.routing.route_loader.class">RomaricDrigon\OrchestraBundle\Routing\OrchestraRouteLoader</parameter>
         <parameter key="orchestra.menu.builder.class">RomaricDrigon\OrchestraBundle\Menu\MenuBuilder</parameter>
         <parameter key="orchestra.twig.orchestra_extension.class">RomaricDrigon\OrchestraBundle\Twig\OrchestraExtension</parameter>
@@ -22,8 +23,11 @@
             <argument type="service" id="orchestra.routing.repository_route_builder" />
             <tag name="routing.loader" />
         </service>
-        <service id="orchestra.routing.repository_route_builder" class="%orchestra.routing.repository_route_builder.class%" public="false">
+        <service id="orchestra.routing.repository_route_builder" class="%orchestra.routing.repository_route_builder.class%">
+        </service>
+        <service id="orchestra.routing.repository_route_collection_builder" class="%orchestra.routing.repository_route_collection_builder.class%" public="false">
             <argument type="service" id="orchestra.pool.repository_pool" />
+            <argument type="service" id="orchestra.routing.repository_route_builder" />
         </service>
 
         <!-- for Twig -->
