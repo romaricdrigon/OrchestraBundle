@@ -40,6 +40,7 @@
         <service id="orchestra.menu.builder" class="%orchestra.menu.builder.class%">
             <argument type="service" id="knp_menu.factory" />
             <argument type="service" id="orchestra.pool.repository_pool" />
+            <argument type="service" id="orchestra.routing.repository_route_builder" />
         </service>
         <service
                 id="orchestra.menu.main"
