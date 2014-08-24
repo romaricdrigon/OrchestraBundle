@@ -10,6 +10,7 @@
 namespace RomaricDrigon\OrchestraBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
+use RomaricDrigon\OrchestraBundle\Pool\RepositoryPoolInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -18,22 +19,35 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class MenuBuilder
 {
-    private $factory;
+    /**
+     * @var FactoryInterface
+     */
+    protected $factory;
+
+    /**
+     * @var RepositoryPoolInterface
+     */
+    protected $repositoryPool;
 
     /**
      * @param FactoryInterface $factory
+     * @param RepositoryPoolInterface $repositoryPool
      */
-    public function __construct(FactoryInterface $factory)
+    public function __construct(FactoryInterface $factory, RepositoryPoolInterface $repositoryPool)
     {
-        $this->factory = $factory;
+        $this->factory  = $factory;
+        $this->repositoryPool   = $repositoryPool;
     }
 
     public function createMainMenu(Request $request)
     {
         $menu = $this->factory->createItem('root');
 
-        //$menu->addChild('Home', array('route' => 'homepage'));
-        // ... add more children
+        $repositories = $this->repositoryPool->all();
+
+        foreach ($repositories as $slug => $repository) {
+            $menu->addChild($slug, ['route' => '/']);
+        }
 
         return $menu;
     }
