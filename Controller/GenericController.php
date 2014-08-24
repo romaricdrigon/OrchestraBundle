@@ -38,7 +38,8 @@ class GenericController extends Controller
         // TODO: return it!
 
         return $this->render('RomaricDrigonOrchestraBundle:Generic:list.html.twig', [
-            'content' => 'repository '.$repository_slug.' method '.$repository_method
+            'content'   => 'repository '.$repository_slug.' method '.$repository_method,
+            'repository_name' => $repository_slug
         ]);
     }
 }
