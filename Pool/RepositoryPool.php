@@ -19,7 +19,7 @@ use RomaricDrigon\OrchestraBundle\Exception\RepositoryNotFoundException;
  *
  * Represents a collection of all Repositories usable by Orchestra
  */
-class RepositoryPool
+class RepositoryPool implements RepositoryPoolInterface
 {
     protected $repositoriesBySlug = [];
 

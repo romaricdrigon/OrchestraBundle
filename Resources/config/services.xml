@@ -28,6 +28,7 @@
         <!-- (knp) menu-related -->
         <service id="orchestra.menu.builder" class="orchestra.menu.builder.class" public="false">
             <argument type="service" id="knp_menu.factory" />
+            <argument type="service" id="orchestra.pool.repository_pool" />
         </service>
         <service
                 id="orchestra.menu.main"
