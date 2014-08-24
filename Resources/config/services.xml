@@ -26,7 +26,7 @@
         </service>
 
         <!-- (knp) menu-related -->
-        <service id="orchestra.menu.builder" class="orchestra.menu.builder.class" public="false">
+        <service id="orchestra.menu.builder" class="orchestra.menu.builder.class">
             <argument type="service" id="knp_menu.factory" />
             <argument type="service" id="orchestra.pool.repository_pool" />
         </service>

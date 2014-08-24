@@ -9,7 +9,7 @@ Available as a Symfony2 Bundle
 Install bundle using composer:
 `composer require romaricdrigon/orchestra-bundle`
 
-Register the bundle in `app/AppKernel.php`:
+Register the bundle and the vendor we use in `app/AppKernel.php`:
 ```php
 class AppKernel extends Kernel
 {
@@ -19,6 +19,7 @@ class AppKernel extends Kernel
             // ...
 
             new RomaricDrigon\OrchestraBundle\RomaricDrigonOrchestraBundle(),
+            new Knp\Bundle\MenuBundle\KnpMenuBundle(),
         );
 ```
 
