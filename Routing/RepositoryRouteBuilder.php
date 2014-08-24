@@ -9,66 +9,68 @@
 
 namespace RomaricDrigon\OrchestraBundle\Routing;
 
-use RomaricDrigon\OrchestraBundle\Pool\RepositoryPool;
 use Symfony\Component\Routing\Route;
-use Symfony\Component\Routing\RouteCollection;
+use RomaricDrigon\OrchestraBundle\Domain\RepositoryInterface;
 
 /**
  * Class RepositoryRouteBuilder
  * @author Romaric Drigon <romaric.drigon@gmail.com>
  */
-class RepositoryRouteBuilder
+class RepositoryRouteBuilder implements RepositoryRouteBuilderInterface
 {
     /**
-     * @var RepositoryPool
+     * @var string the controller action a repository will redirect to
      */
-    protected $pool;
-
     protected $controller = 'RomaricDrigonOrchestraBundle:Generic:list';
 
+    /**
+     * @var string the method called on the repository class
+     */
     protected $repositoryMethod = 'listing';
 
+    /**
+     * @var string suffix to form route URI
+     */
     protected $patternSuffix = 'list';
 
+    /**
+     * @var string prefix to route name
+     */
     protected $namePrefix = 'orchestra_repository';
 
+    /**
+     * @var string suffix to route name
+     */
     protected $nameSuffix = 'list';
 
+    /**
+     * @var string methods allowed to o access to our repository
+     */
     protected $methodRequirement = 'GET';
 
-    public function __construct(RepositoryPool $pool)
+    /**
+     * @inheritdoc
+     */
+    public function buildRoute(RepositoryInterface $repositoryInterface, $slug)
     {
-        $this->pool = $pool;
+        $pattern = '/'.$slug.'/'.$this->patternSuffix;
+        $defaults = [
+            '_controller'   => $this->controller,
+            'repository_method' => $this->repositoryMethod,
+            'repository_slug'   => $slug
+        ];
+        $requirements = [
+            '_method'       => $this->methodRequirement
+        ];
+
+        return new Route($pattern, $defaults, $requirements);
     }
 
     /**
-     * Build a RouteCollection from all Orchestra-enabled repositories
-     *
-     * @return RouteCollection
+     * @inheritdoc
      */
-    public function getCollection()
+    public function buildRouteName($slug)
     {
-        $routes = new RouteCollection();
-        $repositories = $this->pool->all();
-
-        foreach ($repositories as $slug => $repository) {
-            $pattern = '/'.$slug.'/'.$this->patternSuffix;
-            $defaults = [
-                '_controller'   => $this->controller,
-                'repository_method' => $this->repositoryMethod,
-                'repository_slug'   => $slug
-            ];
-            $requirements = [
-                '_method'       => $this->methodRequirement
-            ];
-
-            $route = new Route($pattern, $defaults, $requirements);
-
-            $name = $this->namePrefix.'_'.$slug.'_'.$this->nameSuffix;
-
-            $routes->add($name, $route);
-        }
-
-        return $routes;
+        return $this->namePrefix.'_'.$slug.'_'.$this->nameSuffix;
     }
 } 
