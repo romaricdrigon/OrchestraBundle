@@ -2,7 +2,7 @@
 
 {% block body %}
     {# menu is built using Menu/MenuBuilder #}
-    {{ knp_menu_render('main') }}
+    {{ knp_menu_render('main', {'template': 'RomaricDrigonOrchestraBundle:Menu:knp_bootstrap.html.twig'}) }}
 
     <div class="container">
         {% block content '' %}

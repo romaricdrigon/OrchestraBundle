@@ -47,3 +47,7 @@ We advise you to place those, by convention, in your bundle within a `Repository
 
 They must implement `RomaricDrigon\OrchestraBundle\Domain\RepositoryInterface`.
 They must be declared as services, tagged with `orchestra.repository`.
+
+## Thanks
+
+Twitter Bootstrap integration have been realized using templates from [Braincrafted Bootstrap bundle](https://github.com/braincrafted/bootstrap-bundle)
