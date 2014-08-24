@@ -46,7 +46,7 @@ class MenuBuilder
         $repositories = $this->repositoryPool->all();
 
         foreach ($repositories as $slug => $repository) {
-            $menu->addChild($slug, ['route' => '/']);
+            $menu->addChild($slug, ['route' => 'orchestra_dashboard']);
         }
 
         return $menu;
