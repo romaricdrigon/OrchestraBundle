@@ -48,6 +48,15 @@ We advise you to place those, by convention, in your bundle within a `Repository
 They must implement `RomaricDrigon\OrchestraBundle\Domain\RepositoryInterface`.
 They must be declared as services, tagged with `orchestra.repository`.
 
+## Configuration
+
+You can configure the Bundle by putting those settings in your `config.yml`:
+```yaml
+# app/config/config.yml
+orchestra:
+    app_title: Orchestra # default. Will be used as title (prefix) for pages
+```
+
 ## Thanks
 
 Twitter Bootstrap integration have been realized using templates from [Braincrafted Bootstrap bundle](https://github.com/braincrafted/bootstrap-bundle)
