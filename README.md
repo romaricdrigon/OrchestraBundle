@@ -26,7 +26,7 @@ class AppKernel extends Kernel
 Import our routes (both the XML and our custom type):
 ```yaml
 # app/config/routing.yml
-orchestra_dashboard:
+orchestra_routing:
     resource: '@RomaricDrigonOrchestraBundle/Resources/config/routing.xml'
     prefix: /admin
 
