@@ -57,6 +57,10 @@ orchestra:
     app_title: Orchestra # default. Will be used as title (prefix) for pages
 ```
 
+## Misc
+
+IE8 is not supported by provided templates. Twitter Bootstrap is missing its JS polyfills, and we are using jQuery 2.0
+
 ## Thanks
 
 Twitter Bootstrap integration have been realized using templates from [Braincrafted Bootstrap bundle](https://github.com/braincrafted/bootstrap-bundle)
