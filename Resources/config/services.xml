@@ -8,6 +8,7 @@
         <parameter key="orchestra.pool.repository_pool.class">RomaricDrigon\OrchestraBundle\Pool\RepositoryPool</parameter>
         <parameter key="orchestra.routing.repository_route_builder.class">RomaricDrigon\OrchestraBundle\Routing\RepositoryRouteBuilder</parameter>
         <parameter key="orchestra.routing.route_loader.class">RomaricDrigon\OrchestraBundle\Routing\OrchestraRouteLoader</parameter>
+        <parameter key="orchestra.menu.builder.class">RomaricDrigon\OrchestraBundle\Menu\MenuBuilder</parameter>
     </parameters>
 
     <services>
@@ -22,6 +23,21 @@
         </service>
         <service id="orchestra.routing.repository_route_builder" class="%orchestra.routing.repository_route_builder.class%" public="false">
             <argument type="service" id="orchestra.pool.repository_pool" />
+        </service>
+
+        <!-- (knp) menu-related -->
+        <service id="orchestra.menu.builder" class="orchestra.menu.builder.class" public="false">
+            <argument type="service" id="knp_menu.factory" />
+        </service>
+        <service
+                id="orchestra.menu.main"
+                class="Knp\Menu\MenuItem"
+                factory-service="orchestra.menu.builder"
+                factory-method="createMainMenu"
+                scope="request"
+        >
+            <argument type="service" id="request" />
+            <tag name="knp_menu.menu" alias="main" />
         </service>
     </services>
 </container>
