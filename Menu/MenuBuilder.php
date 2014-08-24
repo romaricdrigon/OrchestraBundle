@@ -11,6 +11,7 @@ namespace RomaricDrigon\OrchestraBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
 use RomaricDrigon\OrchestraBundle\Pool\RepositoryPoolInterface;
+use RomaricDrigon\OrchestraBundle\Routing\RepositoryRouteBuilderInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -30,13 +31,20 @@ class MenuBuilder
     protected $repositoryPool;
 
     /**
+     * @var RepositoryRouteBuilderInterface
+     */
+    protected $repositoryRouteBuilder;
+
+    /**
      * @param FactoryInterface $factory
      * @param RepositoryPoolInterface $repositoryPool
+     * @param RepositoryRouteBuilderInterface $repositoryRouteBuilder
      */
-    public function __construct(FactoryInterface $factory, RepositoryPoolInterface $repositoryPool)
+    public function __construct(FactoryInterface $factory, RepositoryPoolInterface $repositoryPool, RepositoryRouteBuilderInterface $repositoryRouteBuilder)
     {
         $this->factory  = $factory;
         $this->repositoryPool   = $repositoryPool;
+        $this->repositoryRouteBuilder = $repositoryRouteBuilder;
     }
 
     public function createMainMenu(Request $request)
@@ -46,7 +54,7 @@ class MenuBuilder
         $repositories = $this->repositoryPool->all();
 
         foreach ($repositories as $slug => $repository) {
-            $menu->addChild($slug, ['route' => 'orchestra_dashboard']);
+            $menu->addChild($slug, ['route' => $this->repositoryRouteBuilder->buildRouteName($slug)]);
         }
 
         return $menu;
