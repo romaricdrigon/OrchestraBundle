@@ -13,21 +13,19 @@ use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\Loader;
+use Symfony\Component\HttpKernel\DependencyInjection\ConfigurableExtension;
 
 /**
  * Class RomaricDrigonOrchestraExtension
  * @author Romaric Drigon <romaric.drigon@gmail.com>
  */
-class RomaricDrigonOrchestraExtension extends Extension
+class RomaricDrigonOrchestraExtension extends ConfigurableExtension
 {
     /**
      * {@inheritDoc}
      */
-    public function load(array $configs, ContainerBuilder $container)
+    public function loadInternal(array $mergedConfig, ContainerBuilder $container)
     {
-        $configuration = new Configuration();
-        $config = $this->processConfiguration($configuration, $configs);
-
         // Register services
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
@@ -36,5 +34,10 @@ class RomaricDrigonOrchestraExtension extends Extension
         $asseticBundle = $container->getParameter('assetic.bundles');
         $asseticBundle[] = 'RomaricDrigonOrchestraBundle';
         $container->setParameter('assetic.bundles', $asseticBundle);
+
+        // We pass app_title to Twig
+        $twigGlobals = $container->getParameter('twig.globals');
+        $twigGlobals['orchestra_app_title'] = $mergedConfig['app_title'];
+        $container->setParameter('twig.globals', $twigGlobals);
     }
 }

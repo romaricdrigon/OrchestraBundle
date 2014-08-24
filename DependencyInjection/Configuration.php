@@ -24,9 +24,13 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('orchestra_bundle');
+        $rootNode = $treeBuilder->root('orchestra');
 
-        // define parameters
+        $rootNode
+            ->children()
+                ->scalarNode('app_title')->defaultValue('Orchestra')->end()
+            ->end()
+        ;
 
         return $treeBuilder;
     }
