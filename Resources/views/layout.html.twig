@@ -8,7 +8,10 @@
 
     {# stylesheets, combined using Assetic #}
     {% block stylesheets %}
-        {% stylesheets 'bundles/romaricdrigonorchestra/vendor/bootstrap/css/bootstrap.min.css' filter='cssrewrite' %}
+        {% stylesheets
+            'bundles/romaricdrigonorchestra/vendor/bootstrap/css/bootstrap.min.css'
+            'bundles/romaricdrigonorchestra/css/base.css'
+        filter='cssrewrite' %}
             <link rel="stylesheet" href="{{ asset_url }}" />
         {% endstylesheets %}
     {% endblock stylesheets %}
