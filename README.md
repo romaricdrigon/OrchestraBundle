@@ -53,7 +53,7 @@ They must be declared as services, tagged with `orchestra.repository`.
 You can configure the Bundle by putting those settings in your `config.yml`:
 ```yaml
 # app/config/config.yml
-orchestra:
+romaric_drigon_orchestra:
     app_title: Orchestra # default. Will be used as title (prefix) for pages
 ```
 
