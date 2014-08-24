@@ -9,6 +9,7 @@
         <parameter key="orchestra.routing.repository_route_builder.class">RomaricDrigon\OrchestraBundle\Routing\RepositoryRouteBuilder</parameter>
         <parameter key="orchestra.routing.route_loader.class">RomaricDrigon\OrchestraBundle\Routing\OrchestraRouteLoader</parameter>
         <parameter key="orchestra.menu.builder.class">RomaricDrigon\OrchestraBundle\Menu\MenuBuilder</parameter>
+        <parameter key="orchestra.twig.orchestra_extension">RomaricDrigon\OrchestraBundle\Twig\OrchestraExtension</parameter>
     </parameters>
 
     <services>
@@ -23,6 +24,12 @@
         </service>
         <service id="orchestra.routing.repository_route_builder" class="%orchestra.routing.repository_route_builder.class%" public="false">
             <argument type="service" id="orchestra.pool.repository_pool" />
+        </service>
+
+        <!-- for Twig -->
+        <service id="orchestra.twig.orchestra_extension" class="%orchestra.twig.orchestra_extension.class%">
+            <argument>%orchestra.app_title%</argument>
+            <tag name="twig.extension" />
         </service>
 
         <!-- (knp) menu-related -->

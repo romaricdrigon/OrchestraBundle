@@ -35,9 +35,7 @@ class RomaricDrigonOrchestraExtension extends ConfigurableExtension
         $asseticBundle[] = 'RomaricDrigonOrchestraBundle';
         $container->setParameter('assetic.bundles', $asseticBundle);
 
-        // We pass app_title to Twig
-        $twigGlobals = $container->getParameter('twig.globals');
-        $twigGlobals['orchestra_app_title'] = $mergedConfig['app_title'];
-        $container->setParameter('twig.globals', $twigGlobals);
+        // We pass parameters to the DI container
+        $container->setParameter('orchestra.app_title', $mergedConfig['app_title']);
     }
 }
