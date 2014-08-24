@@ -10,6 +10,7 @@
 namespace RomaricDrigon\OrchestraBundle\Routing;
 
 use Symfony\Component\Routing\RouteCollection;
+use RomaricDrigon\OrchestraBundle\Pool\RepositoryPoolInterface;
 
 /**
  * Interface RepositoryRouteCollectionBuilderInterface
@@ -20,7 +21,8 @@ interface RepositoryRouteCollectionBuilderInterface
     /**
      * Build a RouteCollection from all Orchestra-enabled repositories
      *
+     * @param RepositoryPoolInterface $pool
      * @return RouteCollection
      */
-    public function getCollection();
+    public function getCollection(RepositoryPoolInterface $pool);
 } 

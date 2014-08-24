@@ -19,28 +19,22 @@ use Symfony\Component\Routing\RouteCollection;
 class RepositoryRouteCollectionBuilder implements RepositoryRouteCollectionBuilderInterface
 {
     /**
-     * @var RepositoryPoolInterface
-     */
-    protected $pool;
-
-    /**
      * @var RepositoryRouteBuilderInterface
      */
     protected $repositoryRouteBuilder;
 
-    public function __construct(RepositoryPoolInterface $pool, RepositoryRouteBuilderInterface $repositoryRouteBuilder)
+    public function __construct(RepositoryRouteBuilderInterface $repositoryRouteBuilder)
     {
-        $this->pool = $pool;
         $this->repositoryRouteBuilder = $repositoryRouteBuilder;
     }
 
     /**
      * @inheritdoc
      */
-    public function getCollection()
+    public function getCollection(RepositoryPoolInterface $pool)
     {
         $collection = new RouteCollection();
-        $repositories = $this->pool->all();
+        $repositories = $pool->all();
 
         foreach ($repositories as $slug => $repository) {
             $routeName = $this->repositoryRouteBuilder->buildRouteName($slug);
