@@ -20,7 +20,7 @@
 
         <!-- routing-related -->
         <service id="orchestra.routing.route_loader" class="%orchestra.routing.route_loader.class%" public="false">
-            <argument type="service" id="orchestra.routing.repository_route_builder" />
+            <argument type="service" id="orchestra.routing.repository_route_collection_builder" />
             <argument type="service" id="orchestra.pool.repository_pool" />
             <tag name="routing.loader" />
         </service>
