@@ -1,8 +1,7 @@
 {% extends 'RomaricDrigonOrchestraBundle::layout.html.twig' %}
 
 {% block body %}
-    {# menu is built using Menu/MenuBuilder #}
-    {{ knp_menu_render('main', {'template': 'RomaricDrigonOrchestraBundle:Menu:knp_bootstrap.html.twig'}) }}
+    {% include 'RomaricDrigonOrchestraBundle:Menu:main_menu.html.twig' %}
 
     <div class="container">
         {% block content '' %}
