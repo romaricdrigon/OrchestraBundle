@@ -28,7 +28,13 @@ class RomaricDrigonOrchestraExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
+        // Register services
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
+
+        // We must also add our bundle to Assetic configuration
+        $asseticBundle = $container->getParameter('assetic.bundles');
+        $asseticBundle[] = 'RomaricDrigonOrchestraBundle';
+        $container->setParameter('assetic.bundles', $asseticBundle);
     }
 }
