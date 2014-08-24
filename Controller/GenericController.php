@@ -22,7 +22,7 @@ class GenericController extends Controller
 {
     public function dashboardAction()
     {
-        return new Response('Here soon you will see a nice dashboard');
+        return $this->render('RomaricDrigonOrchestraBundle:Generic:list.html.twig', []);
     }
 
     public function listAction($repository_slug, $repository_method)
