@@ -11,7 +11,7 @@
         {% stylesheets 'vendor/bootstrap/css/bootstrap.min.css' filter='cssrewrite' %}
             <link rel="stylesheet" href="{{ asset_url }}" />
         {% endstylesheets %}
-    {% endblock %}
+    {% endblock stylesheets %}
 </head>
 <body>
     {% block body '' %}
@@ -24,6 +24,6 @@
         %}
             <script src="{{ asset_url }}"></script>
         {% endjavascripts %}
-    {% endblock %}
+    {% endblock javascripts %}
 </body>
 </html>

@@ -27,6 +27,18 @@ class GenericController extends Controller
 
     public function listAction($repository_slug, $repository_method)
     {
-        return new Response('Here soon you will see a nice list from repository '.$repository_slug.' method '.$repository_method);
+        $repository = $this->get('orchestra.pool.repository_pool')->getBySlug($repository_slug);
+
+        // TODO: checks security (from annotation on repo)
+
+        // TODO: run repo
+
+        // TODO: build template
+
+        // TODO: return it!
+
+        return $this->renderView('RomaricDrigonOrchestraBundle:Generic:list', [
+            'content' => 'repository '.$repository_slug.' method '.$repository_method
+        ]);
     }
 }
