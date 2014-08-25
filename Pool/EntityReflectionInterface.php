@@ -16,7 +16,12 @@ namespace RomaricDrigon\OrchestraBundle\Pool;
 interface EntityReflectionInterface
 {
     /**
-     * @return \ReflectionClass
+     * @return string
      */
-    public function getReflectionClass();
+    public function getSlug();
+
+    /**
+     * @return \ReflectionMethod[] list of public methods from class, keys are slugs
+     */
+    public function getMethods();
 } 

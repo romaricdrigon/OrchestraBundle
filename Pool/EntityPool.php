@@ -29,7 +29,7 @@ class EntityPool implements EntityPoolInterface
     public function addEntityReflection(EntityReflectionInterface $entityReflection)
     {
         // At the moment slug is not configurable otherwise
-        $slug = strtolower($entityReflection->getReflectionClass()->getShortName());
+        $slug = $entityReflection->getSlug();
 
         if (isset($this->entitiesBySlug[$slug])) {
             throw new EntityAddedTwiceException($slug);

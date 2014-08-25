@@ -8,6 +8,7 @@
  */
 
 namespace RomaricDrigon\OrchestraBundle\Pool;
+use RomaricDrigon\OrchestraBundle\Exception\EntityTwiceSameSlugException;
 
 /**
  * Class EntityReflection
@@ -29,8 +30,31 @@ class EntityReflection implements EntityReflectionInterface
     /**
      * @inheritdoc
      */
-    public function getReflectionClass()
+    public function getSlug()
     {
-        return $this->reflectionClass;
+        return strtolower($this->reflectionClass->getShortName());
+    }
+
+    /**
+     * @throws EntityTwiceSameSlugException
+     * @return \ReflectionMethod[] list of public methods from class, keys are slugs
+     */
+    public function getMethods()
+    {
+        $reflectionMethods = $this->reflectionClass->getMethods(\ReflectionMethod::IS_PUBLIC);
+
+        $methods = [];
+
+        foreach ($reflectionMethods as $reflectionMethod) {
+            $slug = strtolower($reflectionMethod->getShortName());
+
+            if (isset($methods[$slug])) {
+                throw new EntityTwiceSameSlugException($reflectionMethod->getShortName(), $slug);
+            }
+
+            $methods[$slug] = $reflectionMethod;
+        }
+
+        return $methods;
     }
 } 
