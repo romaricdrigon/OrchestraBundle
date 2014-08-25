@@ -10,7 +10,6 @@
 namespace RomaricDrigon\OrchestraBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Class GenericController
@@ -29,13 +28,15 @@ class GenericController extends Controller
     {
         $repository = $this->get('orchestra.pool.repository_pool')->getBySlug($repository_slug);
 
+        $name = $this->get('orchestra.getter.repository_name_getter')->getName($repository);
+
         // TODO: checks security (from annotation on repo)
 
         // TODO: run repo
 
         return $this->render('RomaricDrigonOrchestraBundle:Generic:list.html.twig', [
             'content'   => 'repository '.$repository_slug.' method '.$repository_method,
-            'repository_name' => $repository_slug
+            'title'     => $name
         ]);
     }
 }

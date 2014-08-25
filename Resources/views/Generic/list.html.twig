@@ -1,9 +1,13 @@
 {% extends 'RomaricDrigonOrchestraBundle::base.html.twig' %}
 
 {% block title %}
-    {{ orchestra_app_title }} - {{ repository_name|capitalize }}
+    {{ orchestra_app_title }} - {{ title }}
 {% endblock title %}
 
 {% block content %}
+    <h1>{{ title }}</h1>
+
+    <p>
     {{ content }}
+    </p>
 {% endblock content %}
