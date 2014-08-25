@@ -34,7 +34,7 @@ class AddEntityCompilerPass implements CompilerPassInterface
 
         // For each bundle, we run our EntityFinder
         foreach ($bundles as $bundleNamespace) {
-            $entityFinder->addMethodCall('addEntitiesFromNamespace', [$bundleNamespace]);
+            $entityFinder->addMethodCall('addNamespace', [$bundleNamespace]);
         }
     }
 } 

@@ -15,8 +15,9 @@ namespace RomaricDrigon\OrchestraBundle\Finder;
  */
 class EntityFinder implements EntityFinderInterface
 {
-    public function addEntitiesFromNamespace($namespace)
+    public function addNamespace($namespace)
     {
-        
+        // Checks if we have an "Entity" subfolder
+
     }
 } 

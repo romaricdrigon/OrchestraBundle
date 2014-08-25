@@ -20,5 +20,5 @@ interface EntityFinderInterface
      *
      * @param string $namespace
      */
-    public function addEntitiesFromNamespace($namespace);
+    public function addNamespace($namespace);
 } 
