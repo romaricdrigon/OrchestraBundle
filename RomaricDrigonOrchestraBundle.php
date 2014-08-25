@@ -12,6 +12,7 @@ namespace RomaricDrigon\OrchestraBundle;
 use RomaricDrigon\OrchestraBundle\DependencyInjection\Compiler\AddRepositoryCompilerPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
+use RomaricDrigon\OrchestraBundle\DependencyInjection\Compiler\AddEntityCompilerPass;
 
 /**
  * Class RomaricDrigonOrchestraBundle
@@ -24,5 +25,6 @@ class RomaricDrigonOrchestraBundle extends Bundle
         parent::build($container);
 
         $container->addCompilerPass(new AddRepositoryCompilerPass());
+        $container->addCompilerPass(new AddEntityCompilerPass());
     }
 }

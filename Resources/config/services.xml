@@ -12,6 +12,7 @@
         <parameter key="orchestra.menu.builder.class">RomaricDrigon\OrchestraBundle\Menu\MenuBuilder</parameter>
         <parameter key="orchestra.twig.orchestra_extension.class">RomaricDrigon\OrchestraBundle\Twig\OrchestraExtension</parameter>
         <parameter key="orchestra.pool.repository_name_getter.class">RomaricDrigon\OrchestraBundle\Getter\RepositoryNameGetter</parameter>
+        <parameter key="orchestra.finder.entity_finder.class">RomaricDrigon\OrchestraBundle\Finder\EntityFinder</parameter>
     </parameters>
 
     <services>
@@ -22,6 +23,10 @@
         <!-- getter, or annotation reader -->
         <service id="orchestra.getter.repository_name_getter" class="%orchestra.pool.repository_name_getter.class%">
             <argument type="service" id="annotation_reader" />
+        </service>
+
+        <!-- finder -->
+        <service id="orchestra.finder.entity_finder" class="%orchestra.finder.entity_finder.class%">
         </service>
 
         <!-- routing-related -->
