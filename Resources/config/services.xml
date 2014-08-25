@@ -6,6 +6,7 @@
 
     <parameters>
         <parameter key="orchestra.pool.repository_pool.class">RomaricDrigon\OrchestraBundle\Pool\RepositoryPool</parameter>
+        <parameter key="orchestra.pool.entity_pool.class">RomaricDrigon\OrchestraBundle\Pool\EntityPool</parameter>
         <parameter key="orchestra.routing.repository_route_builder.class">RomaricDrigon\OrchestraBundle\Routing\RepositoryRouteBuilder</parameter>
         <parameter key="orchestra.routing.repository_route_collection_builder.class">RomaricDrigon\OrchestraBundle\Routing\RepositoryRouteCollectionBuilder</parameter>
         <parameter key="orchestra.routing.route_loader.class">RomaricDrigon\OrchestraBundle\Routing\OrchestraRouteLoader</parameter>
@@ -18,6 +19,8 @@
     <services>
         <!-- pool -->
         <service id="orchestra.pool.repository_pool" class="%orchestra.pool.repository_pool.class%">
+        </service>
+        <service id="orchestra.pool.entity_pool" class="%orchestra.pool.entity_pool.class%">
         </service>
 
         <!-- getter, or annotation reader -->
