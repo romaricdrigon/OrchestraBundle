@@ -9,6 +9,7 @@
 
 namespace RomaricDrigon\OrchestraBundle\Getter;
 
+use Doctrine\Common\Annotations\Reader;
 use RomaricDrigon\OrchestraBundle\Domain\RepositoryInterface;
 
 /**
@@ -18,10 +19,38 @@ use RomaricDrigon\OrchestraBundle\Domain\RepositoryInterface;
 class RepositoryNameGetter implements RepositoryNameGetterInterface
 {
     /**
+     * @var Reader
+     */
+    protected $annotationReader;
+
+    /**
+     * @var string class of the annotation we will be reading
+     */
+    protected $annotationClass = 'RomaricDrigon\\OrchestraBundle\\Annotation\\Name';
+
+
+    public function __construct(Reader $annotationReader)
+    {
+        $this->annotationReader = $annotationReader;
+    }
+
+    /**
      * @inheritdoc
      */
     public function getName(RepositoryInterface $repository)
     {
+        $reflectionObject = new \ReflectionObject($repository);
+
+        $annotation = $this->annotationReader->getClassAnnotation($reflectionObject, $this->annotationClass);
+
+        if (null !== $annotation) {
+            $name = $annotation->getName();
+
+            if ($name) {
+                return $name;
+            }
+        }
+
         return $this->generateDefaultName($repository);
     }
 
