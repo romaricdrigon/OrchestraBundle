@@ -10,7 +10,6 @@
 namespace RomaricDrigon\OrchestraBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
-use RomaricDrigon\OrchestraBundle\Getter\RepositoryNameGetter;
 use RomaricDrigon\OrchestraBundle\Getter\RepositoryNameGetterInterface;
 use RomaricDrigon\OrchestraBundle\Pool\RepositoryPoolInterface;
 use RomaricDrigon\OrchestraBundle\Routing\RepositoryRouteBuilderInterface;
@@ -56,6 +55,12 @@ class MenuBuilder
         $this->repositoryNameGetter     = $repositoryNameGetter;
     }
 
+    /**
+     * Creates the "main" menu, the one on top of every page
+     *
+     * @param Request $request
+     * @return \Knp\Menu\ItemInterface
+     */
     public function createMainMenu(Request $request)
     {
         $menu = $this->factory->createItem('root');
