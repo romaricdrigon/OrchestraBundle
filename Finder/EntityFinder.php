@@ -33,10 +33,31 @@ class EntityFinder implements EntityFinderInterface
         $this->namespaces[] = $this->buildEntityNamespace($namespace);
     }
 
-    public function buildPool()
+    /**
+     * @inheritdoc
+     */
+    public function getEntitiesPaths()
     {
+        $allClasses = get_declared_classes();
 
+        // We checks entities both implements EntityInterface
+        // and are in a correct /Entity folder
+        return array_filter($allClasses, function($className) {
+            $reflection = new \ReflectionClass($className);
+
+            // Order of checks is important here for optimization purpose
+            if ($reflection->implementsInterface('RomaricDrigon\OrchestraBundle\Domain\EntityInterface')) {
+                foreach ($this->namespaces as $namespace) {
+                    if ($reflection->inNamespace($namespace)) {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        });
     }
+
     /**
      * Builds the fully-qualified namespace where we will look for entities for that Bundle
      *

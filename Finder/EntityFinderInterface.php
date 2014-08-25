@@ -21,4 +21,9 @@ interface EntityFinderInterface
      * @param string $namespace
      */
     public function addNamespace($namespace);
+
+    /**
+     * @return string[] returns all paths of found entities
+     */
+    public function getEntitiesPaths();
 } 
