@@ -10,6 +10,7 @@
 namespace RomaricDrigon\OrchestraBundle\Routing;
 
 use RomaricDrigon\OrchestraBundle\Exception\LoaderAddedTwiceException;
+use RomaricDrigon\OrchestraBundle\Pool\EntityPoolInterface;
 use RomaricDrigon\OrchestraBundle\Pool\RepositoryPoolInterface;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\Config\Loader\LoaderResolverInterface;
@@ -31,12 +32,29 @@ class OrchestraRouteLoader implements LoaderInterface
      */
     private $repositoryPool;
 
+    /**
+     * @var EntityRouteCollectionBuilderInterface
+     */
+    private $entityRouteCollectionBuilder;
+
+    /**
+     * @var EntityPoolInterface
+     */
+    private $entityPool;
+
     private $loaded = false;
 
-    public function __construct(RepositoryRouteCollectionBuilderInterface $repositoryRouteCollectionBuilder, RepositoryPoolInterface $pool)
+    public function __construct(
+        RepositoryRouteCollectionBuilderInterface $repositoryRouteCollectionBuilder,
+        RepositoryPoolInterface $repositoryPool,
+        EntityRouteCollectionBuilderInterface $entityRouteCollectionBuilder,
+        EntityPoolInterface $entityPool
+    )
     {
         $this->repositoryRouteCollectionBuilder = $repositoryRouteCollectionBuilder;
-        $this->repositoryPool = $pool;
+        $this->repositoryPool = $repositoryPool;
+        $this->entityRouteCollectionBuilder = $entityRouteCollectionBuilder;
+        $this->entityPool   = $entityPool;
     }
 
     /**
@@ -54,6 +72,10 @@ class OrchestraRouteLoader implements LoaderInterface
         // We start by routes from Repositories
         $repositoriesRoutes = $this->repositoryRouteCollectionBuilder->getCollection($this->repositoryPool);
         $routes->addCollection($repositoriesRoutes);
+
+        // Then entities
+        $entitesRoutes = $this->entityRouteCollectionBuilder->getCollection($this->entityPool);
+        $routes->addCollection($entitesRoutes);
 
         $this->loaded = true;
 

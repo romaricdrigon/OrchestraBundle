@@ -9,7 +9,9 @@
         <parameter key="orchestra.pool.entity_pool.class">RomaricDrigon\OrchestraBundle\Pool\EntityPool</parameter>
         <parameter key="orchestra.pool.entity_pool_factory.class">RomaricDrigon\OrchestraBundle\Pool\EntityPoolFactory</parameter>
         <parameter key="orchestra.routing.repository_route_builder.class">RomaricDrigon\OrchestraBundle\Routing\RepositoryRouteBuilder</parameter>
+        <parameter key="orchestra.routing.entity_route_builder.class">RomaricDrigon\OrchestraBundle\Routing\EntityRouteBuilder</parameter>
         <parameter key="orchestra.routing.repository_route_collection_builder.class">RomaricDrigon\OrchestraBundle\Routing\RepositoryRouteCollectionBuilder</parameter>
+        <parameter key="orchestra.routing.entity_route_collection_builder.class">RomaricDrigon\OrchestraBundle\Routing\EntityRouteCollectionBuilder</parameter>
         <parameter key="orchestra.routing.route_loader.class">RomaricDrigon\OrchestraBundle\Routing\OrchestraRouteLoader</parameter>
         <parameter key="orchestra.menu.builder.class">RomaricDrigon\OrchestraBundle\Menu\MenuBuilder</parameter>
         <parameter key="orchestra.twig.orchestra_extension.class">RomaricDrigon\OrchestraBundle\Twig\OrchestraExtension</parameter>
@@ -45,12 +47,19 @@
         <service id="orchestra.routing.route_loader" class="%orchestra.routing.route_loader.class%" public="false">
             <argument type="service" id="orchestra.routing.repository_route_collection_builder" />
             <argument type="service" id="orchestra.pool.repository_pool" />
+            <argument type="service" id="orchestra.routing.entity_route_collection_builder" />
+            <argument type="service" id="orchestra.pool.entity_pool" />
             <tag name="routing.loader" />
         </service>
         <service id="orchestra.routing.repository_route_builder" class="%orchestra.routing.repository_route_builder.class%">
         </service>
         <service id="orchestra.routing.repository_route_collection_builder" class="%orchestra.routing.repository_route_collection_builder.class%" public="false">
             <argument type="service" id="orchestra.routing.repository_route_builder" />
+        </service>
+        <service id="orchestra.routing.entity_route_builder" class="%orchestra.routing.entity_route_builder.class%">
+        </service>
+        <service id="orchestra.routing.entity_route_collection_builder" class="%orchestra.routing.entity_route_collection_builder.class%" public="false">
+            <argument type="service" id="orchestra.routing.entity_route_builder" />
         </service>
 
         <!-- for Twig -->
