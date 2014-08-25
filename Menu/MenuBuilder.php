@@ -10,6 +10,8 @@
 namespace RomaricDrigon\OrchestraBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
+use RomaricDrigon\OrchestraBundle\Getter\RepositoryNameGetter;
+use RomaricDrigon\OrchestraBundle\Getter\RepositoryNameGetterInterface;
 use RomaricDrigon\OrchestraBundle\Pool\RepositoryPoolInterface;
 use RomaricDrigon\OrchestraBundle\Routing\RepositoryRouteBuilderInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -36,15 +38,22 @@ class MenuBuilder
     protected $repositoryRouteBuilder;
 
     /**
+     * @var RepositoryNameGetterInterface
+     */
+    protected $repositoryNameGetter;
+
+    /**
      * @param FactoryInterface $factory
      * @param RepositoryPoolInterface $repositoryPool
      * @param RepositoryRouteBuilderInterface $repositoryRouteBuilder
+     * @param RepositoryNameGetterInterface $repositoryNameGetter
      */
-    public function __construct(FactoryInterface $factory, RepositoryPoolInterface $repositoryPool, RepositoryRouteBuilderInterface $repositoryRouteBuilder)
+    public function __construct(FactoryInterface $factory, RepositoryPoolInterface $repositoryPool, RepositoryRouteBuilderInterface $repositoryRouteBuilder, RepositoryNameGetterInterface $repositoryNameGetter)
     {
         $this->factory  = $factory;
         $this->repositoryPool   = $repositoryPool;
-        $this->repositoryRouteBuilder = $repositoryRouteBuilder;
+        $this->repositoryRouteBuilder   = $repositoryRouteBuilder;
+        $this->repositoryNameGetter     = $repositoryNameGetter;
     }
 
     public function createMainMenu(Request $request)
@@ -54,7 +63,10 @@ class MenuBuilder
         $repositories = $this->repositoryPool->all();
 
         foreach ($repositories as $slug => $repository) {
-            $menu->addChild($slug, ['route' => $this->repositoryRouteBuilder->buildRouteName($slug)]);
+            $name = $this->repositoryNameGetter->getName($repository);
+            $routeName = $this->repositoryRouteBuilder->buildRouteName($slug);
+
+            $menu->addChild($name, ['route' => $routeName]);
         }
 
         return $menu;

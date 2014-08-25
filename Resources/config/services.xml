@@ -47,6 +47,7 @@
             <argument type="service" id="knp_menu.factory" />
             <argument type="service" id="orchestra.pool.repository_pool" />
             <argument type="service" id="orchestra.routing.repository_route_builder" />
+            <argument type="service" id="orchestra.getter.repository_name_getter" />
         </service>
         <service
                 id="orchestra.menu.main"
