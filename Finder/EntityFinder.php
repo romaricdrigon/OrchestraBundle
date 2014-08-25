@@ -15,9 +15,36 @@ namespace RomaricDrigon\OrchestraBundle\Finder;
  */
 class EntityFinder implements EntityFinderInterface
 {
+    /**
+     * string[] namespaces where to look for
+     */
+    protected $namespaces;
+
+    /**
+     * @var string the bundle subfolder/subnamespace where to look for entities
+     */
+    protected $entityNamespace = 'Entity';
+
+    /**
+     * @inheritdoc
+     */
     public function addNamespace($namespace)
     {
-        // Checks if we have an "Entity" subfolder
+        $this->namespaces[] = $this->buildEntityNamespace($namespace);
+    }
 
+    public function buildPool()
+    {
+
+    }
+    /**
+     * Builds the fully-qualified namespace where we will look for entities for that Bundle
+     *
+     * @param string $bundleNamespace
+     * @return string
+     */
+    protected function buildEntityNamespace($bundleNamespace)
+    {
+        return $bundleNamespace.'\\'.$this->entityNamespace;
     }
 } 
