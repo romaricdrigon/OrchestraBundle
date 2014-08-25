@@ -29,14 +29,14 @@ class OrchestraRouteLoader implements LoaderInterface
     /**
      * @var RepositoryPoolInterface
      */
-    private $pool;
+    private $repositoryPool;
 
     private $loaded = false;
 
     public function __construct(RepositoryRouteCollectionBuilderInterface $repositoryRouteCollectionBuilder, RepositoryPoolInterface $pool)
     {
         $this->repositoryRouteCollectionBuilder = $repositoryRouteCollectionBuilder;
-        $this->pool = $pool;
+        $this->repositoryPool = $pool;
     }
 
     /**
@@ -52,7 +52,7 @@ class OrchestraRouteLoader implements LoaderInterface
 
         // First routes are used first!
         // We start by routes from Repositories
-        $repositoriesRoutes = $this->repositoryRouteCollectionBuilder->getCollection($this->pool);
+        $repositoriesRoutes = $this->repositoryRouteCollectionBuilder->getCollection($this->repositoryPool);
         $routes->addCollection($repositoriesRoutes);
 
         $this->loaded = true;
