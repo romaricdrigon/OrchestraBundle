@@ -18,9 +18,9 @@ interface EntityPoolInterface
     /**
      * Add an entity to the pool
      *
-     * @param \ReflectionClass $entityReflection
+     * @param EntityReflectionInterface $entityReflection
      */
-    public function addEntityReflection(\ReflectionClass $entityReflection);
+    public function addEntityReflection(EntityReflectionInterface $entityReflection);
 
     /**
      * Get an entity from by slug

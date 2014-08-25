@@ -8,6 +8,7 @@
  */
 
 namespace RomaricDrigon\OrchestraBundle\Finder;
+use RomaricDrigon\OrchestraBundle\Pool\EntityReflection;
 
 /**
  * Class EntityFinder
@@ -51,7 +52,7 @@ class EntityFinder implements EntityFinderInterface
             if ($reflection->implementsInterface('RomaricDrigon\OrchestraBundle\Domain\EntityInterface')) {
                 foreach ($this->namespaces as $namespace) {
                     if ($reflection->inNamespace($namespace)) {
-                        $allClasses[] = $reflection;
+                        $allClasses[] = new EntityReflection($reflection);
 
                         continue;
                     }

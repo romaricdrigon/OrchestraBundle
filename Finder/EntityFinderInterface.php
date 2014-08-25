@@ -9,6 +9,8 @@
 
 namespace RomaricDrigon\OrchestraBundle\Finder;
 
+use RomaricDrigon\OrchestraBundle\Pool\EntityReflectionInterface;
+
 /**
  * Interface EntityFinderInterface
  * @author Romaric Drigon <romaric.drigon@gmail.com>
@@ -23,7 +25,7 @@ interface EntityFinderInterface
     public function addNamespace($namespace);
 
     /**
-     * @return \ReflectionClass[] returns all paths of found entities
+     * @return EntityReflectionInterface[] returns all paths of found entities
      */
     public function getEntitiesReflections();
 } 
