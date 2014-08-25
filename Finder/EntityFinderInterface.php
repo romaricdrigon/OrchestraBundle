@@ -23,7 +23,7 @@ interface EntityFinderInterface
     public function addNamespace($namespace);
 
     /**
-     * @return string[] returns all paths of found entities
+     * @return \ReflectionClass[] returns all paths of found entities
      */
-    public function getEntitiesPaths();
+    public function getEntitiesReflections();
 } 

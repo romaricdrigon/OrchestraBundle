@@ -36,26 +36,30 @@ class EntityFinder implements EntityFinderInterface
     /**
      * @inheritdoc
      */
-    public function getEntitiesPaths()
+    public function getEntitiesReflections()
     {
         $allClasses = get_declared_classes();
 
+        $entities = [];
+
         // We checks entities both implements EntityInterface
         // and are in a correct /Entity folder
-        return array_filter($allClasses, function($className) {
+        foreach ($allClasses as $className) {
             $reflection = new \ReflectionClass($className);
 
             // Order of checks is important here for optimization purpose
             if ($reflection->implementsInterface('RomaricDrigon\OrchestraBundle\Domain\EntityInterface')) {
                 foreach ($this->namespaces as $namespace) {
                     if ($reflection->inNamespace($namespace)) {
-                        return true;
+                        $allClasses[] = $reflection;
+
+                        continue;
                     }
                 }
             }
+        }
 
-            return false;
-        });
+        return $entities;
     }
 
     /**
