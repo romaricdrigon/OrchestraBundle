@@ -19,11 +19,23 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
  */
 class GenericController extends Controller
 {
+    /**
+     * Action for the dashboard page
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function dashboardAction()
     {
         return $this->render('RomaricDrigonOrchestraBundle:Generic:dashboard.html.twig', []);
     }
 
+    /**
+     * Action used when a repository "listing" is called
+     *
+     * @param string $repository_slug
+     * @param string $repository_method
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
     public function listAction($repository_slug, $repository_method)
     {
         $repository = $this->get('orchestra.pool.repository_pool')->getBySlug($repository_slug);
@@ -38,5 +50,17 @@ class GenericController extends Controller
             'content'   => 'repository '.$repository_slug.' method '.$repository_method,
             'title'     => $name
         ]);
+    }
+
+    /**
+     * Action used when a method on en Entity is called
+     *
+     * @param string $entity_slug
+     * @param string $entity_method
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function entityMethodAction($entity_slug, $entity_method)
+    {
+        return $this->render('RomaricDrigonOrchestraBundle:Generic:dashboard.html.twig', []);
     }
 }
