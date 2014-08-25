@@ -12,10 +12,10 @@ namespace RomaricDrigon\OrchestraBundle\Pool;
 use RomaricDrigon\OrchestraBundle\Finder\EntityFinderInterface;
 
 /**
- * Class EntityPoolBuilder
+ * Class EntityPoolFactory
  * @author Romaric Drigon <romaric.drigon@gmail.com>
  */
-class EntityPoolBuilder implements EntityPoolBuilderInterface
+class EntityPoolFactory implements EntityPoolFactoryInterface
 {
     /**
      * @var EntityFinderInterface
@@ -25,6 +25,16 @@ class EntityPoolBuilder implements EntityPoolBuilderInterface
     public function __construct(EntityFinderInterface $entityFinder)
     {
         $this->entityFinder = $entityFinder;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function createPool()
+    {
+        $pool = new EntityPool();
+
+        return $this->buildPool($pool);
     }
 
     /**

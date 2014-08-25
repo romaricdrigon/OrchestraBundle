@@ -10,11 +10,18 @@
 namespace RomaricDrigon\OrchestraBundle\Pool;
 
 /**
- * Interface EntityPoolBuilderInterface
+ * Interface EntityPoolFactoryInterface
  * @author Romaric Drigon <romaric.drigon@gmail.com>
  */
-interface EntityPoolBuilderInterface
+interface EntityPoolFactoryInterface
 {
+    /**
+     * Creates a built EntityPool
+     *
+     * @return EntityPoolInterface
+     */
+    public function createPool();
+
     /**
      * Add entities found by EntityFinder to the Pool
      *
