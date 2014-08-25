@@ -56,10 +56,11 @@ class GenericController extends Controller
      * Action used when a method on en Entity is called
      *
      * @param string $entity_slug
-     * @param string $entity_method
+     * @param string $entity_method name
+     * @param string $method_slug
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function entityMethodAction($entity_slug, $entity_method)
+    public function entityMethodAction($entity_slug, $entity_method, $method_slug)
     {
         return $this->render('RomaricDrigonOrchestraBundle:Generic:dashboard.html.twig', []);
     }

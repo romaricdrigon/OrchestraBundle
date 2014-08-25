@@ -50,6 +50,7 @@ class EntityRouteBuilder implements EntityRouteBuilderInterface
             $defaults = [
                 '_controller'   => $this->controller,
                 'entity_method' => $methodName,
+                'method_slug'   => $methodSlug,
                 'entity_slug'   => $slug
             ];
             $requirements = [
