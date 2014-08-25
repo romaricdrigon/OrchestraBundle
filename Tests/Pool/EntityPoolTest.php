@@ -11,6 +11,7 @@ namespace RomaricDrigon\OrchestraBundle\Tests\Pool;
 
 use RomaricDrigon\OrchestraBundle\Domain\EntityInterface;
 use RomaricDrigon\OrchestraBundle\Pool\EntityPool;
+use RomaricDrigon\OrchestraBundle\Pool\EntityReflection;
 
 /**
  * Class EntityPoolTest
@@ -30,28 +31,34 @@ class EntityPoolTest extends \PHPUnit_Framework_TestCase
 
     public function test_it_adds_and_gets_entities()
     {
-        $entity1 = new MockEntity1();
-        $this->sut->addEntity($entity1);
+        $entity = new MockEntity1();
+        $ref    = new \ReflectionClass($entity);
+        $er1    = new EntityReflection($ref);
+        $this->sut->addEntityReflection($er1);
         // slug should be "mock1"
 
-        $entity2 = new MockEntity2();
-        $this->sut->addEntity($entity2);
+        $entity = new MockEntity2();
+        $ref    = new \ReflectionClass($entity);
+        $er2    = new EntityReflection($ref);
+        $this->sut->addEntityReflection($er2);
         // slug should be "mock2"
 
-        $this->assertEquals($entity1, $this->sut->getBySlug('mockentity1'));
+        $this->assertEquals($er1, $this->sut->getBySlug('mockentity1'));
 
-        $this->assertEquals($entity2, $this->sut->getBySlug('mockentity2'));
+        $this->assertEquals($er2, $this->sut->getBySlug('mockentity2'));
     }
 
     public function test_it_throws_exception_when_adding_twice_entity()
     {
-        $entity1 = new MockEntity1();
+        $entity = new MockEntity1();
+        $ref    = new \ReflectionClass($entity);
+        $er1    = new EntityReflection($ref);
 
-        $this->sut->addEntity($entity1);
+        $this->sut->addEntityReflection($er1);
 
         $this->setExpectedException('RomaricDrigon\OrchestraBundle\Exception\EntityAddedTwiceException');
 
-        $this->sut->addEntity($entity1);
+        $this->sut->addEntityReflection($er1);
     }
 
     public function test_it_throws_exception_when_entity_not_found()
