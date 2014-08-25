@@ -38,24 +38,29 @@ class EntityRouteBuilder implements EntityRouteBuilderInterface
      */
     public function buildRoutes(EntityReflectionInterface $entity, $slug)
     {
-        // TODO: list methods on entity
+        $methods = $entity->getMethods();
 
-        $temp = 'void';
+        $routes = [];
 
-        $pattern = '/'.$slug.'/'.$temp;
-        $defaults = [
-            '_controller'   => $this->controller,
-            'entity_method' => $temp,
-            'entity_slug'   => $slug
-        ];
-        $requirements = [
-            '_method'       => $this->methodRequirement
-        ];
+        foreach ($methods as $method) {
+            $methodName = $method->getShortName();
+            $methodSlug = strtolower($methodName);
 
-        $routeName = $this->namePrefix.'_'.$slug.'_'.$temp;
+            $pattern = '/'.$slug.'/'.$methodSlug;
+            $defaults = [
+                '_controller'   => $this->controller,
+                'entity_method' => $methodName,
+                'entity_slug'   => $slug
+            ];
+            $requirements = [
+                '_method'       => $this->methodRequirement
+            ];
 
-        return [
-            $routeName => new Route($pattern, $defaults, $requirements)
-        ];
+            $routeName = $this->namePrefix.'_'.$slug.'_'.$methodSlug;
+
+            $routes[$routeName] = new Route($pattern, $defaults, $requirements);
+        }
+
+        return $routes;
     }
 } 
