@@ -35,7 +35,12 @@ class EntityRouteBuilder implements EntityRouteBuilderInterface
     protected $methodRequirement = 'GET';
 
     /**
-     * @inheritdoc
+     * Builds all routes for given EntityReflection
+     *
+     * @param EntityReflectionInterface $entity
+     * @param string $slug
+     * @throws EntityTwiceSameSlugException
+     * @return Route[] Routes, keys are route names
      */
     public function buildRoutes(EntityReflectionInterface $entity, $slug)
     {
@@ -47,9 +52,11 @@ class EntityRouteBuilder implements EntityRouteBuilderInterface
             $methodName = $method->getShortName();
             $methodSlug = strtolower($methodName);
 
-            if ('list' === $methodSlug) {
-                throw new EntityTwiceSameSlugException($entity->getName(), $slug);
-            }
+            // That should not happen, list being a PHP keyword
+            // put there for later
+            //if ('list' === $methodSlug) {
+            //    throw new EntityTwiceSameSlugException($entity->getName(), $slug);
+            //}
 
             $pattern = '/'.$slug.'/'.$methodSlug;
             $defaults = [
