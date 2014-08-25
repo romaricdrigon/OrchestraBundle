@@ -11,6 +11,8 @@ namespace RomaricDrigon\OrchestraBundle\Tests\Getter;
 
 use RomaricDrigon\OrchestraBundle\Getter\RepositoryNameGetter;
 use RomaricDrigon\OrchestraBundle\Tests\Pool\MockRepository1;
+use RomaricDrigon\OrchestraBundle\Tests\Pool\MockRepository2;
+use RomaricDrigon\OrchestraBundle\Domain\RepositoryInterface;
 
 /**
  * Class RepositoryNameGetterTest
@@ -22,15 +24,37 @@ class RepositoryNameGetterTest extends \PHPUnit_Framework_TestCase
      * @var RepositoryNameGetter
      */
     private $sut;
+
+    /**
+     * @var \ReflectionObject
+     */
+    private $reflectionofRepository;
+
+    /**
+     * @var RepositoryInterface
+     */
+    private $repoWithAnnotation;
     
     public function setUp()
     {
-        $this->sut = new RepositoryNameGetter();
+        $reader = \Phake::mock('Doctrine\Common\Annotations\Reader');
+
+        $this->repoWithAnnotation = new MockRepository1();
+        $this->reflectionofRepository = new \ReflectionObject($this->repoWithAnnotation);
+
+        \Phake::when($reader)->getClassAnnotation($this->reflectionofRepository, 'RomaricDrigon\\OrchestraBundle\\Annotation\\Name');
+
+        $this->sut = new RepositoryNameGetter($reader);
+    }
+
+    public function test_it_gets_name_from_annotation()
+    {
+        $this->assertEquals('Mock1', $this->sut->getName($this->repoWithAnnotation));
     }
 
     public function test_it_generate_default_name()
     {
-        $this->assertEquals('Mock1', $this->sut->getName(new MockRepository1()));
+        $this->assertEquals('Mock2', $this->sut->getName(new MockRepository2()));
     }
 }
  
