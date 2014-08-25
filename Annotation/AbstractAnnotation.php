@@ -23,7 +23,7 @@ abstract class AbstractAnnotation
      * Will build annotation, using extending class setters to set options of the annotation
      *
      * @param array $options
-     * @throws \InvalidArgumentException if our Annotation has options not allowed
+     * @throws AnnotationInvalidOption if our Annotation has options not allowed
      * @throws AnnotationWithoutValueException if our Annotation has a value and it shouldn't
      */
     public function __construct($options)
