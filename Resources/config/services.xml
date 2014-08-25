@@ -37,7 +37,7 @@
         <!-- finder and pool factory -->
         <service id="orchestra.finder.entity_finder" class="%orchestra.finder.entity_finder.class%">
         </service>
-        <service id="orchestra.pool.entity_pool_factory" class="%orchestra.finder.orchestra.pool.entity_pool_factory.class%">
+        <service id="orchestra.pool.entity_pool_factory" class="%orchestra.pool.entity_pool_factory.class%">
             <argument type="service" id="orchestra.finder.entity_finder" />
         </service>
 
