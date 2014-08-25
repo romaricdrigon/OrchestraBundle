@@ -9,8 +9,6 @@
 
 namespace RomaricDrigon\OrchestraBundle\Pool;
 
-use RomaricDrigon\OrchestraBundle\Domain\EntityInterface;
-
 /**
  * Interface EntityPoolInterface
  * @author Romaric Drigon <romaric.drigon@gmail.com>
@@ -20,15 +18,15 @@ interface EntityPoolInterface
     /**
      * Add an entity to the pool
      *
-     * @param EntityInterface $entity
+     * @param \ReflectionClass $entityReflection
      */
-    public function addEntity(EntityInterface $entity);
+    public function addEntityReflection(\ReflectionClass $entityReflection);
 
     /**
      * Get an entity from by slug
      *
      * @param string $slug
-     * @return EntityInterface
+     * @return \ReflectionClass
      */
     public function getBySlug($slug);
 

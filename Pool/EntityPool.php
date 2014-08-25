@@ -9,7 +9,6 @@
 
 namespace RomaricDrigon\OrchestraBundle\Pool;
 
-use RomaricDrigon\OrchestraBundle\Domain\EntityInterface;
 use RomaricDrigon\OrchestraBundle\Exception\EntityAddedTwiceException;
 use RomaricDrigon\OrchestraBundle\Exception\EntityNotFoundException;
 
@@ -24,20 +23,19 @@ class EntityPool implements EntityPoolInterface
     /**
      * Add an entity to the pool
      *
-     * @param EntityInterface $entity
+     * @param \ReflectionClass $entityReflection
      * @throws EntityAddedTwiceException
      */
-    public function addEntity(EntityInterface $entity)
+    public function addEntityReflection(\ReflectionClass $entityReflection)
     {
         // At the moment slug is not configurable otherwise
-        $reflect = new \ReflectionClass($entity);
-        $slug = strtolower($reflect->getShortName());
+        $slug = strtolower($entityReflection->getShortName());
 
         if (isset($this->entitiesBySlug[$slug])) {
             throw new EntityAddedTwiceException($slug);
         }
 
-        $this->entitiesBySlug[$slug] = $entity;
+        $this->entitiesBySlug[$slug] = $entityReflection;
     }
 
     /**
@@ -45,7 +43,7 @@ class EntityPool implements EntityPoolInterface
      *
      * @param string $slug
      * @throws EntityNotFoundException
-     * @return EntityInterface
+     * @return \ReflectionClass
      */
     public function getBySlug($slug)
     {
