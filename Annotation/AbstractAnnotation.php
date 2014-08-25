@@ -9,6 +9,7 @@
 
 namespace RomaricDrigon\OrchestraBundle\Annotation;
 use RomaricDrigon\OrchestraBundle\Exception\AnnotationWithoutValueException;
+use RomaricDrigon\OrchestraBundle\Exception\AnnotationWrongOption;
 
 /**
  * Class AbstractAnnotation
@@ -19,6 +20,8 @@ use RomaricDrigon\OrchestraBundle\Exception\AnnotationWithoutValueException;
 abstract class AbstractAnnotation
 {
     /**
+     * Will build annotation, using extending class setters to set options of the annotation
+     *
      * @param array $options
      * @throws \InvalidArgumentException if our Annotation has options not allowed
      * @throws AnnotationWithoutValueException if our Annotation has a value and it shouldn't
@@ -42,11 +45,16 @@ abstract class AbstractAnnotation
         }
 
         foreach ($options as $key => $value) {
-            if (! property_exists($this, $key)) {
-                throw new \InvalidArgumentException(sprintf('Property "%s" does not exist', $key));
+            $setterName = 'set'.ucfirst($key);
+
+            if (! method_exists($this, $setterName)) {
+                $reflect = new \ReflectionClass($this);
+                $annotationName = $reflect->getShortName();
+
+                throw new AnnotationWrongOption($annotationName, $key);
             }
 
-            $this->$key = $value;
+            $this->$setterName($value);
         }
     }
 

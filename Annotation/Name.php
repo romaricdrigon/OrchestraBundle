@@ -20,6 +20,25 @@ class Name extends AbstractAnnotation
      */
     private $name;
 
+    /**
+     * @param string $name
+     */
+    protected function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @inheritdoc
+     */
     protected function getValueProperty()
     {
         return 'name';
