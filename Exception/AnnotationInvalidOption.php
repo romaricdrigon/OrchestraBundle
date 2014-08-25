@@ -10,10 +10,10 @@
 namespace RomaricDrigon\OrchestraBundle\Exception;
 
 /**
- * Class AnnotationWrongOption
+ * Class AnnotationInvalidOption
  * @author Romaric Drigon <romaric.drigon@gmail.com>
  */
-class AnnotationWrongOption extends \Exception
+class AnnotationInvalidOption extends \Exception
 {
     public function __construct($annotationName, $option)
     {

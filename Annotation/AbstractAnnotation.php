@@ -9,7 +9,7 @@
 
 namespace RomaricDrigon\OrchestraBundle\Annotation;
 use RomaricDrigon\OrchestraBundle\Exception\AnnotationWithoutValueException;
-use RomaricDrigon\OrchestraBundle\Exception\AnnotationWrongOption;
+use RomaricDrigon\OrchestraBundle\Exception\AnnotationInvalidOption;
 
 /**
  * Class AbstractAnnotation
@@ -51,7 +51,7 @@ abstract class AbstractAnnotation
                 $reflect = new \ReflectionClass($this);
                 $annotationName = $reflect->getShortName();
 
-                throw new AnnotationWrongOption($annotationName, $key);
+                throw new AnnotationInvalidOption($annotationName, $key);
             }
 
             $this->$setterName($value);
