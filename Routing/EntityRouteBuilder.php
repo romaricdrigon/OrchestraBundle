@@ -9,6 +9,7 @@
 
 namespace RomaricDrigon\OrchestraBundle\Routing;
 
+use RomaricDrigon\OrchestraBundle\Exception\EntityTwiceSameSlugException;
 use Symfony\Component\Routing\Route;
 use RomaricDrigon\OrchestraBundle\Pool\EntityReflectionInterface;
 
@@ -45,6 +46,10 @@ class EntityRouteBuilder implements EntityRouteBuilderInterface
         foreach ($methods as $method) {
             $methodName = $method->getShortName();
             $methodSlug = strtolower($methodName);
+
+            if ('list' === $methodSlug) {
+                throw new EntityTwiceSameSlugException($entity->getName(), $slug);
+            }
 
             $pattern = '/'.$slug.'/'.$methodSlug;
             $defaults = [

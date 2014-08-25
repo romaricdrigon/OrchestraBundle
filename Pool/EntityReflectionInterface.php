@@ -24,4 +24,9 @@ interface EntityReflectionInterface
      * @return \ReflectionMethod[] list of public methods from class, keys are slugs
      */
     public function getMethods();
+
+    /**
+     * @return string
+     */
+    public function getName();
 } 

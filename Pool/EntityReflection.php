@@ -57,4 +57,12 @@ class EntityReflection implements EntityReflectionInterface
 
         return $methods;
     }
+
+    /**
+     * @inheritdoc
+     */
+    public function getName()
+    {
+        return $this->reflectionClass->getShortName();
+    }
 } 
