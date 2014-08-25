@@ -8,6 +8,7 @@
  */
 
 namespace RomaricDrigon\OrchestraBundle\Routing;
+
 use RomaricDrigon\OrchestraBundle\Pool\EntityPoolInterface;
 use Symfony\Component\Routing\RouteCollection;
 

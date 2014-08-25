@@ -74,8 +74,8 @@ class OrchestraRouteLoader implements LoaderInterface
         $routes->addCollection($repositoriesRoutes);
 
         // Then entities
-        $entitesRoutes = $this->entityRouteCollectionBuilder->getCollection($this->entityPool);
-        $routes->addCollection($entitesRoutes);
+        $entitiesRoutes = $this->entityRouteCollectionBuilder->getCollection($this->entityPool);
+        $routes->addCollection($entitiesRoutes);
 
         $this->loaded = true;
 
