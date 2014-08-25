@@ -7,6 +7,7 @@
     <parameters>
         <parameter key="orchestra.pool.repository_pool.class">RomaricDrigon\OrchestraBundle\Pool\RepositoryPool</parameter>
         <parameter key="orchestra.pool.entity_pool.class">RomaricDrigon\OrchestraBundle\Pool\EntityPool</parameter>
+        <parameter key="orchestra.pool.entity_pool_builder.class">RomaricDrigon\OrchestraBundle\Pool\EntityPoolBuilder</parameter>
         <parameter key="orchestra.routing.repository_route_builder.class">RomaricDrigon\OrchestraBundle\Routing\RepositoryRouteBuilder</parameter>
         <parameter key="orchestra.routing.repository_route_collection_builder.class">RomaricDrigon\OrchestraBundle\Routing\RepositoryRouteCollectionBuilder</parameter>
         <parameter key="orchestra.routing.route_loader.class">RomaricDrigon\OrchestraBundle\Routing\OrchestraRouteLoader</parameter>
@@ -28,8 +29,11 @@
             <argument type="service" id="annotation_reader" />
         </service>
 
-        <!-- finder -->
+        <!-- finder and pool builder -->
         <service id="orchestra.finder.entity_finder" class="%orchestra.finder.entity_finder.class%">
+        </service>
+        <service id="orchestra.pool.entity_pool_builder" class="%orchestra.finder.orchestra.pool.entity_pool_builder.class%">
+            <argument type="service" id="orchestra.finder.entity_finder" />
         </service>
 
         <!-- routing-related -->
