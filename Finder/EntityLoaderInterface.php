@@ -15,5 +15,15 @@ namespace RomaricDrigon\OrchestraBundle\Finder;
  */
 interface EntityLoaderInterface
 {
+    /**
+     * @param string $bundleNamespace
+     */
+    public function addBundleNamespace($bundleNamespace);
 
+    /**
+     * Load (if needed) all classes within entities folders, return their class names
+     *
+     * @return string[] fully qualified class names (with namespace) of all classes found within entities folders
+     */
+    public function load();
 } 

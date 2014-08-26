@@ -8,6 +8,7 @@
  */
 
 namespace RomaricDrigon\OrchestraBundle\Finder;
+
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 
@@ -46,16 +47,20 @@ class EntityLoader
     }
 
     /**
-     * @param string $bundleNamespace
+     * @inheritdoc
      */
     public function addBundleNamespace($bundleNamespace)
     {
         $this->bundleNamespaces[] = $bundleNamespace;
     }
 
-
+    /**
+     * @inheritdoc
+     */
     public function load()
     {
+        $entitiesClassNames = [];
+
         // First, we must make sure entities are all loaded
         // They may have been autoloaded, but if the class is not used somewhere, we won't be able to see it
         foreach ($this->bundleNamespaces as $bundleNamespace) {
@@ -65,20 +70,25 @@ class EntityLoader
             $entityDir = $this->buildEntityDir($bundleDir);
 
             if ($this->filesystem->exists($entityDir)) {
-                // Symfony Finder works recursively by default
-                $phpFiles = $this->finder->in($entityDir)->files()->name('/\.php$/');
+                // Symfony Finder works recursively by default - next code does not support this, so we limit depth
+                $phpFiles = $this->finder->in($entityDir)->files()->name('/\.php$/')->depth('== 0');
 
                 /** @var $file \SplFileInfo */
                 foreach ($phpFiles as $file) {
+                    // Following PSR, getBasename() remove ".php" suffix
                     $className = $entityNamespace.'\\'.$file->getBasename('.php');
 
                     // class may be defined, otherwise only way is to include it...
                     if (! class_exists($className)) {
                         include $file->getPathname();
                     }
+
+                    $entitiesClassNames[] = $className;
                 }
             }
         }
+
+        return $entitiesClassNames;
     }
 
     /**
