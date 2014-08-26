@@ -17,6 +17,9 @@
         <parameter key="orchestra.twig.orchestra_extension.class">RomaricDrigon\OrchestraBundle\Twig\OrchestraExtension</parameter>
         <parameter key="orchestra.pool.repository_name_getter.class">RomaricDrigon\OrchestraBundle\Getter\RepositoryNameGetter</parameter>
         <parameter key="orchestra.finder.entity_finder.class">RomaricDrigon\OrchestraBundle\Finder\EntityFinder</parameter>
+        <parameter key="orchestra.finder.entity_loader.class">RomaricDrigon\OrchestraBundle\Finder\EntityLoader</parameter>
+        <parameter key="orchestra.symfony.finder.class">Symfony\Component\Finder\Finder</parameter>
+        <parameter key="orchestra.symfony.filesystem.class">Symfony\Component\Filesystem\Filesystem</parameter>
     </parameters>
 
     <services>
@@ -38,7 +41,9 @@
 
         <!-- finder and pool factory -->
         <service id="orchestra.finder.entity_finder" class="%orchestra.finder.entity_finder.class%">
+            <argument type="service" id="orchestra.finder.entity_loader" />
         </service>
+        <service id="orchestra.finder.entity_loader" class="%orchestra.finder.entity_loader.class%" />
         <service id="orchestra.pool.entity_pool_factory" class="%orchestra.pool.entity_pool_factory.class%">
             <argument type="service" id="orchestra.finder.entity_finder" />
         </service>
@@ -85,5 +90,9 @@
             <argument type="service" id="request" />
             <tag name="knp_menu.menu" alias="main" />
         </service>
+
+        <!-- Symfony components -->
+        <service id="orchestra.symfony.finder" class="%orchestra.symfony.finder.class%" />
+        <service id="orchestra.symfony.filesystem" class="%orchestra.symfony.filesystem.class%" />
     </services>
 </container>

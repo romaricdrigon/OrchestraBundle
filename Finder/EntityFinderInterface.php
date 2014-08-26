@@ -18,14 +18,7 @@ use RomaricDrigon\OrchestraBundle\Pool\EntityReflectionInterface;
 interface EntityFinderInterface
 {
     /**
-     * Add to EntityPool entities from given namespace
-     *
-     * @param string $namespace
-     */
-    public function addNamespace($namespace);
-
-    /**
-     * @return EntityReflectionInterface[] returns all paths of found entities
+     * @return EntityReflectionInterface[] returns all valid entities
      */
     public function getEntitiesReflections();
 } 

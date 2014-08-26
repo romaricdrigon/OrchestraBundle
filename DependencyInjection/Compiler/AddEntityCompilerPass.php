@@ -30,11 +30,11 @@ class AddEntityCompilerPass implements CompilerPassInterface
 
         $bundles = $container->getParameter('kernel.bundles');
 
-        $entityFinder = $container->getDefinition('orchestra.finder.entity_finder');
+        $entityFinder = $container->getDefinition('orchestra.finder.entity_loader');
 
         // For each bundle, we run our EntityFinder
         foreach ($bundles as $bundleNamespace) {
-            $entityFinder->addMethodCall('addNamespace', [$bundleNamespace]);
+            $entityFinder->addMethodCall('addBundleNamespace', [$bundleNamespace]);
         }
     }
 } 
