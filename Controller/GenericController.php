@@ -42,7 +42,14 @@ class GenericController extends Controller
 
         $name = $this->get('orchestra.getter.repository_name_getter')->getName($repository);
 
+        // We will need corresponding entity, fetch it
+        $entityReflection = $this->get('orchestra.resolver.repository_entity')->findBySlug($repository_slug);
+
         // TODO: checks security (from annotation on repo)
+
+        // Finish to build repository in case it's a BaseRepository
+        // doing it there provide some value of lazy-loading
+        $this->get('orchestra.doctrine.repository_injecter')->injectDoctrine($repository, $entityReflection);
 
         // TODO: run repo
 

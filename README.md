@@ -130,21 +130,6 @@ You will then have access to the corresponding Doctrine repository.
             ...
 ```
 
-In the service declaration, add a `base="true"` attribute:
-```xml
-    <!-- your bundle services.xml -->
-    <?xml version="1.0" ?>
-    <container xmlns="http://symfony.com/schema/dic/services"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
-
-        <services>
-            <service id="romaric_drigon_example.my_repository" class="My\Repository\Class\Path">
-                <tag name="orchestra.repository" base="true" />
-            </service>
-            ...
-```
-
 #### Customize displayed name
 
 The name displayed for the Repository can be automatically generated, from the class name, or optionally personalized using the `@Name` annotation.
