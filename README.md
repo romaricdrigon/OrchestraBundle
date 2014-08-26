@@ -110,6 +110,41 @@ They must be declared as services, tagged with `orchestra.repository`:
             ...
 ```
 
+#### Fetching Doctrine repository
+
+An Orchestra Repository is a Symfony2 service, so you can inject it dependencies.
+
+For simplicity, you can extends the provided `BaseRepository` class.
+You will then have access to the corresponding Doctrine repository.
+
+```php
+    use RomaricDrigon\OrchestraBundle\Domain\Base\BaseRepository;
+    use RomaricDrigon\OrchestraBundle\Annotation\Name;
+
+    class MyRepository implements BaseRepository
+    {
+        public function someMethod()
+        {
+            $doctrineRepository = $this->getDoctrineRepository();
+
+            ...
+```
+
+In the service declaration, add a `base="true"` attribute:
+```xml
+    <!-- your bundle services.xml -->
+    <?xml version="1.0" ?>
+    <container xmlns="http://symfony.com/schema/dic/services"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+        <services>
+            <service id="romaric_drigon_example.my_repository" class="My\Repository\Class\Path">
+                <tag name="orchestra.repository" base="true" />
+            </service>
+            ...
+```
+
 #### Customize displayed name
 
 The name displayed for the Repository can be automatically generated, from the class name, or optionally personalized using the `@Name` annotation.
