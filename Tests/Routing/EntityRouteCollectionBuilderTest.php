@@ -75,5 +75,7 @@ class MockEntityReflection implements EntityReflectionInterface {
     public function getMethods() {}
 
     public function getName() {}
+
+    public function getNamespacedName() {}
 }
  
