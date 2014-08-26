@@ -46,7 +46,7 @@
         <service id="orchestra.finder.entity_loader" class="%orchestra.finder.entity_loader.class%" public="false">
             <argument type="service" id="orchestra.symfony.filesystem" />
         </service>
-        <service id="orchestra.pool.entity_pool_factory" class="%orchestra.pool.entity_pool_factory.class%" public="false">
+        <service id="orchestra.pool.entity_pool_factory" class="%orchestra.pool.entity_pool_factory.class%">
             <argument type="service" id="orchestra.finder.entity_finder" />
         </service>
 
