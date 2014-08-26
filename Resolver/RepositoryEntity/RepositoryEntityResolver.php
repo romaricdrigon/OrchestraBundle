@@ -35,6 +35,6 @@ class RepositoryEntityResolver implements RepositoryEntityResolverInterface
         // Pretty simple, uh?
         $entitySlug = $repositorySlug;
 
-        $this->entityPool->getBySlug($entitySlug);
+        return $this->entityPool->getBySlug($entitySlug);
     }
 } 
