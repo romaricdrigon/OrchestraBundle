@@ -16,7 +16,7 @@ use Symfony\Component\Finder\Finder;
  * Class EntityLoader
  * @author Romaric Drigon <romaric.drigon@gmail.com>
  */
-class EntityLoader
+class EntityLoader implements EntityLoaderInterface
 {
     /**
      * string[] bundles (that may contain entities) namespaces
