@@ -9,8 +9,8 @@
 
 namespace RomaricDrigon\OrchestraBundle\Finder;
 
+use Symfony\Component\ClassLoader\ClassMapGenerator;
 use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\Finder\Finder;
 
 /**
  * Class EntityLoader
@@ -30,20 +30,14 @@ class EntityLoader implements EntityLoaderInterface
     protected $entityNamespace = 'Entity';
 
     /**
-     * @var Finder instance of Symfony Finder component
-     */
-    protected $finder;
-
-    /**
      * @var Filesystem instance of Symfony Filesystem component
      */
     protected $filesystem;
 
 
-    public function __construct(Filesystem $filesystem, Finder $finder)
+    public function __construct(Filesystem $filesystem)
     {
         $this->filesystem   = $filesystem;
-        $this->finder       = $finder;
     }
 
     /**
@@ -66,40 +60,18 @@ class EntityLoader implements EntityLoaderInterface
         foreach ($this->bundleNamespaces as $bundleNamespace) {
             $bundle = new \ReflectionClass($bundleNamespace);
             $bundleDir = dirname($bundle->getFilename());
-            $entityNamespace = $this->buildEntityNamespace($bundleNamespace);
             $entityDir = $this->buildEntityDir($bundleDir);
 
             if ($this->filesystem->exists($entityDir)) {
-                // Symfony Finder works recursively by default - next code does not support this, so we limit depth
-                $phpFiles = $this->finder->in($entityDir)->files()->name('/\.php$/')->depth('== 0');
+                // Symfony component takes care of subfolders and so on...
+                $newClasses = ClassMapGenerator::createMap($entityDir);
 
-                /** @var $file \SplFileInfo */
-                foreach ($phpFiles as $file) {
-                    // Following PSR, getBasename() remove ".php" suffix
-                    $className = $entityNamespace.'\\'.$file->getBasename('.php');
-
-                    // class may be defined, otherwise only way is to include it...
-                    if (! class_exists($className)) {
-                        include $file->getPathname();
-                    }
-
-                    $entitiesClassNames[] = $className;
-                }
+                // duplicated classes (if that can happen!) will be merged
+                $entitiesClassNames = array_merge($entitiesClassNames, $newClasses);
             }
         }
 
-        return $entitiesClassNames;
-    }
-
-    /**
-     * Builds the fully-qualified namespace where we will look for entities for that Bundle
-     *
-     * @param string $bundleNamespace
-     * @return string
-     */
-    protected function buildEntityNamespace($bundleNamespace)
-    {
-        return $bundleNamespace.'\\'.$this->entityNamespace;
+        return array_keys($entitiesClassNames);
     }
 
     /**
