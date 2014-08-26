@@ -17,6 +17,7 @@
         <parameter key="orchestra.menu.builder.class">RomaricDrigon\OrchestraBundle\Menu\MenuBuilder</parameter>
         <parameter key="orchestra.twig.orchestra_extension.class">RomaricDrigon\OrchestraBundle\Twig\OrchestraExtension</parameter>
         <parameter key="orchestra.resolver.repository_name.class">RomaricDrigon\OrchestraBundle\Resolver\RepositoryNameResolver</parameter>
+        <parameter key="orchestra.resolver.repository_entity.class">RomaricDrigon\OrchestraBundle\Resolver\RepositoryEntity\RepositoryEntityResolver</parameter>
         <parameter key="orchestra.finder.entity_finder.class">RomaricDrigon\OrchestraBundle\Finder\EntityFinder</parameter>
         <parameter key="orchestra.finder.entity_loader.class">RomaricDrigon\OrchestraBundle\Finder\EntityLoader</parameter>
         <parameter key="orchestra.symfony.finder.class">Symfony\Component\Finder\Finder</parameter>
@@ -41,6 +42,9 @@
         <!-- resolver  -->
         <service id="orchestra.resolver.repository_name" class="%orchestra.resolver.repository_name.class%">
             <argument type="service" id="annotation_reader" />
+        </service>
+        <service id="orchestra.resolver.repository_entity" class="%orchestra.resolver.repository_entity.class%">
+            <argument type="service" id="orchestra.pool.entity_pool" />
         </service>
 
         <!-- finder and pool factory -->
