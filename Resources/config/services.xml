@@ -40,13 +40,13 @@
         </service>
 
         <!-- finder and pool factory -->
-        <service id="orchestra.finder.entity_finder" class="%orchestra.finder.entity_finder.class%">
+        <service id="orchestra.finder.entity_finder" class="%orchestra.finder.entity_finder.class%" public="false">
             <argument type="service" id="orchestra.finder.entity_loader" />
         </service>
-        <service id="orchestra.finder.entity_loader" class="%orchestra.finder.entity_loader.class%">
+        <service id="orchestra.finder.entity_loader" class="%orchestra.finder.entity_loader.class%" public="false">
             <argument type="service" id="orchestra.symfony.filesystem" />
         </service>
-        <service id="orchestra.pool.entity_pool_factory" class="%orchestra.pool.entity_pool_factory.class%">
+        <service id="orchestra.pool.entity_pool_factory" class="%orchestra.pool.entity_pool_factory.class%" public="false">
             <argument type="service" id="orchestra.finder.entity_finder" />
         </service>
 
@@ -58,7 +58,7 @@
             <argument type="service" id="orchestra.pool.entity_pool" />
             <tag name="routing.loader" />
         </service>
-        <service id="orchestra.routing.repository_route_builder" class="%orchestra.routing.repository_route_builder.class%">
+        <service id="orchestra.routing.repository_route_builder" class="%orchestra.routing.repository_route_builder.class%" public="false">
         </service>
         <service id="orchestra.routing.repository_route_collection_builder" class="%orchestra.routing.repository_route_collection_builder.class%" public="false">
             <argument type="service" id="orchestra.routing.repository_route_builder" />
@@ -94,7 +94,6 @@
         </service>
 
         <!-- Symfony components -->
-        <service id="orchestra.symfony.finder" class="%orchestra.symfony.finder.class%" />
         <service id="orchestra.symfony.filesystem" class="%orchestra.symfony.filesystem.class%" />
     </services>
 </container>
