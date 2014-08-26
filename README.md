@@ -10,29 +10,29 @@ Install bundle using composer: `composer require romaricdrigon/orchestra-bundle`
 
 Register the bundle and the vendor we use in `app/AppKernel.php`:
 ```php
-    class AppKernel extends Kernel
+class AppKernel extends Kernel
+{
+    public function registerBundles()
     {
-        public function registerBundles()
-        {
-            $bundles = array(
-                // ...
+        $bundles = array(
+            // ...
 
-                new RomaricDrigon\OrchestraBundle\RomaricDrigonOrchestraBundle(),
-                new Knp\Bundle\MenuBundle\KnpMenuBundle(),
-            );
+            new RomaricDrigon\OrchestraBundle\RomaricDrigonOrchestraBundle(),
+            new Knp\Bundle\MenuBundle\KnpMenuBundle(),
+        );
 ```
 
 Import our routes (both the XML and our custom type):
 ```yaml
-    # app/config/routing.yml
-    orchestra_routing:
-        resource: '@RomaricDrigonOrchestraBundle/Resources/config/routing.xml'
-        prefix: /admin
+# app/config/routing.yml
+orchestra_routing:
+    resource: '@RomaricDrigonOrchestraBundle/Resources/config/routing.xml'
+    prefix: /admin
 
-    orchestra_generated:
-        prefix: /admin
-        resource: .
-        type: orchestra
+orchestra_generated:
+    prefix: /admin
+    resource: .
+    type: orchestra
 ```
 
 ## Getting started
@@ -51,10 +51,10 @@ By convention, place those in your bundle `Entity` folder.
 
 They must implement `RomaricDrigon\OrchestraBundle\Domain\EntityInterface`:
 ```php
-    use RomaricDrigon\OrchestraBundle\Domain\EntityInterface;
+use RomaricDrigon\OrchestraBundle\Domain\EntityInterface;
 
-    class SomeEntity implements EntityInterface
-    {
+class SomeEntity implements EntityInterface
+{
 ```
 
 Naked Object follow a DDD mindset.
@@ -88,26 +88,26 @@ We advise you to place those, by convention, in your bundle within a `Repository
 
 They must implement `RomaricDrigon\OrchestraBundle\Domain\RepositoryInterface`:
 ```php
-    use RomaricDrigon\OrchestraBundle\Domain\RepositoryInterface;
-    use RomaricDrigon\OrchestraBundle\Annotation\Name;
+use RomaricDrigon\OrchestraBundle\Domain\RepositoryInterface;
+use RomaricDrigon\OrchestraBundle\Annotation\Name;
 
-    class MyRepository implements RepositoryInterface
-    {
+class MyRepository implements RepositoryInterface
+{
 ```
 
 They must be declared as services, tagged with `orchestra.repository`:
 ```xml
-    <!-- your bundle services.xml -->
-    <?xml version="1.0" ?>
-    <container xmlns="http://symfony.com/schema/dic/services"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+<!-- your bundle services.xml -->
+<?xml version="1.0" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-        <services>
-            <service id="romaric_drigon_example.my_repository" class="My\Repository\Class\Path">
-                <tag name="orchestra.repository" />
-            </service>
-            ...
+    <services>
+        <service id="romaric_drigon_example.my_repository" class="My\Repository\Class\Path">
+            <tag name="orchestra.repository" />
+        </service>
+        ...
 ```
 
 #### Fetching Doctrine repository
@@ -118,16 +118,16 @@ For simplicity, you can extends the provided `BaseRepository` class.
 You will then have access to the corresponding Doctrine repository.
 
 ```php
-    use RomaricDrigon\OrchestraBundle\Domain\Base\BaseRepository;
-    use RomaricDrigon\OrchestraBundle\Annotation\Name;
+use RomaricDrigon\OrchestraBundle\Domain\Base\BaseRepository;
+use RomaricDrigon\OrchestraBundle\Annotation\Name;
 
-    class MyRepository implements BaseRepository
+class MyRepository implements BaseRepository
+{
+    public function someMethod()
     {
-        public function someMethod()
-        {
-            $doctrineRepository = $this->getDoctrineRepository();
+        $doctrineRepository = $this->getDoctrineRepository();
 
-            ...
+        ...
 ```
 
 #### Customize displayed name
@@ -136,23 +136,23 @@ The name displayed for the Repository can be automatically generated, from the c
 
 Example:
 ```php
-    use RomaricDrigon\OrchestraBundle\Domain\RepositoryInterface;
-    use RomaricDrigon\OrchestraBundle\Annotation\Name;
+use RomaricDrigon\OrchestraBundle\Domain\RepositoryInterface;
+use RomaricDrigon\OrchestraBundle\Annotation\Name;
 
-    /**
-     * @Name("CustomName")
-     */
-    class MyRepository implements RepositoryInterface
-    {
+/**
+ * @Name("CustomName")
+ */
+class MyRepository implements RepositoryInterface
+{
 ```
 
 ## Configuration
 
 You can configure the Bundle by putting those settings in your `config.yml`:
 ```yaml
-    # app/config/config.yml
-    romaric_drigon_orchestra:
-        app_title: Orchestra # default. Will be used as title (prefix) for pages
+# app/config/config.yml
+romaric_drigon_orchestra:
+    app_title: Orchestra # default. Will be used as title (prefix) for pages
 ```
 
 ## Misc
@@ -162,6 +162,3 @@ IE8 is not supported by provided templates. Twitter Bootstrap is missing its JS 
 ## Thanks
 
 Twitter Bootstrap integration have been realized using templates from [Braincrafted Bootstrap bundle](https://github.com/braincrafted/bootstrap-bundle)
-
-
-*[DDD]: Domain-Driven Design
