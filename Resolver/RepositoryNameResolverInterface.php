@@ -7,15 +7,15 @@
  * file that was distributed with this source code.
  */
 
-namespace RomaricDrigon\OrchestraBundle\Getter;
+namespace RomaricDrigon\OrchestraBundle\Resolver;
 
 use RomaricDrigon\OrchestraBundle\Domain\RepositoryInterface;
 
 /**
- * Interface RepositoryNameGetterInterface
+ * Interface RepositoryNameResolverInterface
  * @author Romaric Drigon <romaric.drigon@gmail.com>
  */
-interface RepositoryNameGetterInterface
+interface RepositoryNameResolverInterface
 {
     /**
      * Get the repository name, to display

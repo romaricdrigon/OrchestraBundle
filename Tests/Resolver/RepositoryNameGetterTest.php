@@ -7,9 +7,9 @@
  * file that was distributed with this source code.
  */
 
-namespace RomaricDrigon\OrchestraBundle\Tests\Getter;
+namespace RomaricDrigon\OrchestraBundle\Tests\Resolver;
 
-use RomaricDrigon\OrchestraBundle\Getter\RepositoryNameGetter;
+use RomaricDrigon\OrchestraBundle\Resolver\RepositoryNameResolver;
 use RomaricDrigon\OrchestraBundle\Tests\Pool\MockRepository1;
 use RomaricDrigon\OrchestraBundle\Tests\Pool\MockRepository2;
 use RomaricDrigon\OrchestraBundle\Domain\RepositoryInterface;
@@ -21,7 +21,7 @@ use RomaricDrigon\OrchestraBundle\Domain\RepositoryInterface;
 class RepositoryNameGetterTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var RepositoryNameGetter
+     * @var RepositoryNameResolver
      */
     private $sut;
 
@@ -44,7 +44,7 @@ class RepositoryNameGetterTest extends \PHPUnit_Framework_TestCase
 
         \Phake::when($reader)->getClassAnnotation($this->reflectionofRepository, 'RomaricDrigon\\OrchestraBundle\\Annotation\\Name');
 
-        $this->sut = new RepositoryNameGetter($reader);
+        $this->sut = new RepositoryNameResolver($reader);
     }
 
     public function test_it_gets_name_from_annotation()
