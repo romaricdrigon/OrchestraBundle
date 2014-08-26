@@ -37,18 +37,54 @@ Import our routes (both the XML and our custom type):
 
 ## Getting started
 
-With Orchestra admin generator you will have to focus only on 2 objects: `Repositories` and `Entities`.
+With Orchestra admin generator you will have to focus only on 2 objects: `Entities` and `Repositories`.
 All those objects must be placed within a valid Symfony2 bundle.
+
+### Entities
+
+`Entities` are the basic Domain objects of your application.
+Even if we will see later that they are persisted, they may be differ than Doctrine entities.
+
+#### Basic entity
+
+By convention, place those in your bundle `Entity` folder.
+
+They must implement `RomaricDrigon\OrchestraBundle\Domain\EntityInterface`:
+```php
+    use RomaricDrigon\OrchestraBundle\Domain\EntityInterface;
+
+    class SomeEntity implements EntityInterface
+    {
+```
+
+Naked Object follow a DDD mindset.
+We strike not to have an [Anemic Domain Model](http://www.martinfowler.com/bliki/AnemicDomainModel.html).
+A few guidelines and advices:
+
+ * entities properties are private or protected, *not public*,, in compliance with encapsulation
+ * entities must have public getters for the properties you will want to expose, for example in the views
+ * they expose methods corresponding to actions on the objects, leading to modification of its internal state, but **not public setters**
+ * you may want to add *private* setters, in order to achieve self-encapsulation, it's up to you
+
+#### Persisting
+
+Usually, they are persisted. Orchestra supports Doctrine ORM through its Symfony2 bridge.
+You will have to do their mapping, using Doctrine annotations, YAML or XML as you want.
+For this part, please refer to [Symfony documentation](http://symfony.com/doc/2.4/book/doctrine.html).
 
 ### Repositories
 
 Those are NOT Doctrine repositories!
 We stick to the original Repository pattern (Fowler, 2002), "a collection-like interface for accessing domain objects".
 
+Their name will be the name of the `Entity` suffixed by `Repository` but you're free to do otherwise.
+
+**Each `Repository` must have a corresponding `Entity`, with the same slug (lowercase name without suffix):
+ for a `FooBar` entity, you must have a `FoobarRepository`, or `FooBarRepository` or `FooBar` (though this last is less readable).**
+
 #### Basic repository
 
 We advise you to place those, by convention, in your bundle within a `Repository` folder.
-By convention, their name will be the name of the `Entity` suffixed by `Repository` but you're free to do otherwise.
 
 They must implement `RomaricDrigon\OrchestraBundle\Domain\RepositoryInterface`:
 ```php
@@ -89,38 +125,6 @@ Example:
     class MyRepository implements RepositoryInterface
     {
 ```
-
-### Entities
-
-`Entities` are the basic Domain objects of your application.
-Even if we will see later that they are persisted, they may be differ than Doctrine entities.
-
-#### Basic entity
-
-By convention, place those in your bundle `Entity` folder.
-
-They must implement `RomaricDrigon\OrchestraBundle\Domain\EntityInterface`:
-```php
-    use RomaricDrigon\OrchestraBundle\Domain\EntityInterface;
-
-    class SomeEntity implements EntityInterface
-    {
-```
-
-Naked Object follow a DDD mindset.
-We strike not to have an [Anemic Domain Model](http://www.martinfowler.com/bliki/AnemicDomainModel.html).
-A few guidelines and advices:
-
- * entities properties are private or protected, *not public*,, in compliance with encapsulation
- * entities must have public getters for the properties you will want to expose, for example in the views
- * they expose methods corresponding to actions on the objects, leading to modification of its internal state, but **not public setters**
- * you may want to add *private* setters, in order to achieve self-encapsulation, it's up to you
-
-#### Persisting
-
-Usually, they are persisted. Orchestra supports Doctrine ORM through its Symfony2 bridge.
-You will have to do their mapping, using Doctrine annotations, YAML or XML as you want.
-For this part, please refer to [Symfony documentation](http://symfony.com/doc/2.4/book/doctrine.html).
 
 ## Configuration
 
