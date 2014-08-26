@@ -48,9 +48,8 @@ class EntityRouteBuilder implements EntityRouteBuilderInterface
 
         $routes = [];
 
-        foreach ($methods as $method) {
+        foreach ($methods as $methodSlug => $method) {
             $methodName = $method->getShortName();
-            $methodSlug = strtolower($methodName);
 
             // That should not happen, list being a PHP keyword
             // put there for later
