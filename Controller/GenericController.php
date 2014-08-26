@@ -40,7 +40,7 @@ class GenericController extends Controller
     {
         $repository = $this->get('orchestra.pool.repository_pool')->getBySlug($repository_slug);
 
-        $name = $this->get('orchestra.getter.repository_name_getter')->getName($repository);
+        $name = $this->get('orchestra.resolver.repository_name')->getName($repository);
 
         // We will need corresponding entity, fetch it
         $entityReflection = $this->get('orchestra.resolver.repository_entity')->findBySlug($repository_slug);
