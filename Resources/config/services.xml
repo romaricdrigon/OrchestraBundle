@@ -7,7 +7,8 @@
     <parameters>
         <parameter key="orchestra.pool.repository_pool.class">RomaricDrigon\OrchestraBundle\Pool\RepositoryPool</parameter>
         <parameter key="orchestra.pool.entity_pool.class">RomaricDrigon\OrchestraBundle\Pool\EntityPool</parameter>
-        <parameter key="orchestra.pool.entity_pool_factory.class">RomaricDrigon\OrchestraBundle\Pool\EntityPoolFactory</parameter>
+        <parameter key="orchestra.pool.entity_pool_factory.class">RomaricDrigon\OrchestraBundle\Pool\DoctrineRepositoryFinder</parameter>
+        <parameter key="orchestra.doctrine.repository_finder.class">RomaricDrigon\OrchestraBundle\Doctrine\EntityPoolFactory</parameter>
         <parameter key="orchestra.routing.repository_route_builder.class">RomaricDrigon\OrchestraBundle\Routing\RepositoryRouteBuilder</parameter>
         <parameter key="orchestra.routing.entity_route_builder.class">RomaricDrigon\OrchestraBundle\Routing\EntityRouteBuilder</parameter>
         <parameter key="orchestra.routing.repository_route_collection_builder.class">RomaricDrigon\OrchestraBundle\Routing\RepositoryRouteCollectionBuilder</parameter>
@@ -33,6 +34,9 @@
                 factory-method="createPool"
                 >
         </service>
+        <service id="orchestra.pool.entity_pool_factory" class="%orchestra.pool.entity_pool_factory.class%">
+            <argument type="service" id="orchestra.finder.entity_finder" />
+        </service>
 
         <!-- getter, or annotation reader -->
         <service id="orchestra.getter.repository_name_getter" class="%orchestra.pool.repository_name_getter.class%">
@@ -46,8 +50,8 @@
         <service id="orchestra.finder.entity_loader" class="%orchestra.finder.entity_loader.class%" public="false">
             <argument type="service" id="orchestra.symfony.filesystem" />
         </service>
-        <service id="orchestra.pool.entity_pool_factory" class="%orchestra.pool.entity_pool_factory.class%">
-            <argument type="service" id="orchestra.finder.entity_finder" />
+        <service id="orchestra.doctrine.repository_finder" class="%orchestra.doctrine.repository_finder.class%">
+            <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
 
         <!-- routing-related -->

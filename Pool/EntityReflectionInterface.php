@@ -29,4 +29,9 @@ interface EntityReflectionInterface
      * @return string
      */
     public function getName();
+
+    /**
+     * @return string Entity class name with its full namespace
+     */
+    public function getNamespacedName();
 } 
