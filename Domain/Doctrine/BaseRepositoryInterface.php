@@ -10,13 +10,12 @@
 namespace RomaricDrigon\OrchestraBundle\Domain\Base;
 
 use Doctrine\Common\Persistence\ObjectRepository;
-use RomaricDrigon\OrchestraBundle\Domain\RepositoryInterface;
 
 /**
  * Interface BaseRepositoryInterface
  * @author Romaric Drigon <romaric.drigon@gmail.com>
  */
-interface BaseRepositoryInterface extends RepositoryInterface
+interface DoctrineAwareInterface
 {
     /**
      * Will receive dependency

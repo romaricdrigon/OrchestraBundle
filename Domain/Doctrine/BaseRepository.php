@@ -10,19 +10,18 @@
 namespace RomaricDrigon\OrchestraBundle\Domain\Base;
 
 use Doctrine\Common\Persistence\ObjectRepository;
+use RomaricDrigon\OrchestraBundle\Domain\RepositoryInterface;
 
 /**
  * Class BaseRepository
  * @author Romaric Drigon <romaric.drigon@gmail.com>
  */
-abstract class BaseRepository implements BaseRepositoryInterface
+class BaseRepository implements DoctrineAwareInterface, RepositoryInterface
 {
     /**
-     * Private as we want users to have only one way to access it
-     *
      * @var ObjectRepository
      */
-    private $doctrineRepository;
+    protected $doctrineRepository;
 
     /**
      * @inheritdoc
@@ -33,16 +32,12 @@ abstract class BaseRepository implements BaseRepositoryInterface
     }
 
     /**
-     * We want users who extend this class to have only way to access Doctrine repository, and the goal is not to expose it outside
-     * @return ObjectRepository
-     */
-    final protected function getDoctrineRepository()
-    {
-        return $this->doctrineRepository;
-    }
-
-    /**
+     * Typical listing function, using Doctrine Repository findAll()
+     *
      * @inheritdoc
      */
-    abstract public function listing();
+    public function listing()
+    {
+        return $this->doctrineRepository->findAll();
+    }
 } 

@@ -9,7 +9,7 @@
 
 namespace RomaricDrigon\OrchestraBundle\Doctrine;
 
-use RomaricDrigon\OrchestraBundle\Domain\Base\BaseRepositoryInterface;
+use RomaricDrigon\OrchestraBundle\Domain\Base\DoctrineAwareInterface;
 use RomaricDrigon\OrchestraBundle\Domain\RepositoryInterface;
 use RomaricDrigon\OrchestraBundle\Core\Entity\EntityReflectionInterface;
 
@@ -34,11 +34,11 @@ class DoctrineInjecter implements DoctrineInjecterInterface
      */
     public function injectDoctrine(RepositoryInterface $repository, EntityReflectionInterface $entityReflection)
     {
-        if (false === $repository instanceof BaseRepositoryInterface) {
+        if (false === $repository instanceof DoctrineAwareInterface) {
             return; // nothing to do!
         }
 
-        /** @var $repository BaseRepositoryInterface */
+        /** @var $repository DoctrineAwareInterface */
 
         $doctrineRepository = $this->doctrineRepositoryFinder->findForEntity($entityReflection);
 
