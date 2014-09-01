@@ -5,9 +5,9 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="orchestra.pool.repository_pool.class">RomaricDrigon\OrchestraBundle\Pool\RepositoryPool</parameter>
-        <parameter key="orchestra.pool.entity_pool.class">RomaricDrigon\OrchestraBundle\Pool\EntityPool</parameter>
-        <parameter key="orchestra.pool.entity_pool_factory.class">RomaricDrigon\OrchestraBundle\Pool\EntityPoolFactory</parameter>
+        <parameter key="orchestra.pool.repository_pool.class">RomaricDrigon\OrchestraBundle\Core\Pool\RepositoryPool</parameter>
+        <parameter key="orchestra.pool.entity_pool.class">RomaricDrigon\OrchestraBundle\Core\Pool\EntityPool</parameter>
+        <parameter key="orchestra.pool.entity_pool_factory.class">RomaricDrigon\OrchestraBundle\Core\Pool\EntityPoolFactory</parameter>
 
         <parameter key="orchestra.doctrine.repository_finder.class">RomaricDrigon\OrchestraBundle\Doctrine\DoctrineRepositoryFinder</parameter>
         <parameter key="orchestra.doctrine.repository_injecter.class">RomaricDrigon\OrchestraBundle\Doctrine\DoctrineInjecter</parameter>
