@@ -9,7 +9,7 @@
 
 namespace RomaricDrigon\OrchestraBundle\Routing;
 
-use RomaricDrigon\OrchestraBundle\Pool\RepositoryPoolInterface;
+use RomaricDrigon\OrchestraBundle\Core\Pool\RepositoryPoolInterface;
 use Symfony\Component\Routing\RouteCollection;
 
 /**

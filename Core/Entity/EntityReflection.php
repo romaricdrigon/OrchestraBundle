@@ -7,7 +7,8 @@
  * file that was distributed with this source code.
  */
 
-namespace RomaricDrigon\OrchestraBundle\Pool;
+namespace RomaricDrigon\OrchestraBundle\Core\Entity;
+
 use RomaricDrigon\OrchestraBundle\Exception\EntityTwiceSameSlugException;
 
 /**
@@ -73,4 +74,4 @@ class EntityReflection implements EntityReflectionInterface
     {
         return $this->reflectionClass->getName();
     }
-} 
+}

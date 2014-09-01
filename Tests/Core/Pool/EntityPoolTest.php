@@ -7,11 +7,11 @@
  * file that was distributed with this source code.
  */
 
-namespace RomaricDrigon\OrchestraBundle\Tests\Pool;
+namespace RomaricDrigon\OrchestraBundle\Tests\Core\Pool;
 
 use RomaricDrigon\OrchestraBundle\Domain\EntityInterface;
-use RomaricDrigon\OrchestraBundle\Pool\EntityPool;
-use RomaricDrigon\OrchestraBundle\Pool\EntityReflection;
+use RomaricDrigon\OrchestraBundle\Core\Pool\EntityPool;
+use RomaricDrigon\OrchestraBundle\Core\Entity\EntityReflection;
 
 /**
  * Class EntityPoolTest

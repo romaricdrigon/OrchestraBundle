@@ -11,7 +11,7 @@ namespace RomaricDrigon\OrchestraBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
 use RomaricDrigon\OrchestraBundle\Resolver\RepositoryNameResolverInterface;
-use RomaricDrigon\OrchestraBundle\Pool\RepositoryPoolInterface;
+use RomaricDrigon\OrchestraBundle\Core\Pool\RepositoryPoolInterface;
 use RomaricDrigon\OrchestraBundle\Routing\RepositoryRouteBuilderInterface;
 use Symfony\Component\HttpFoundation\Request;
 

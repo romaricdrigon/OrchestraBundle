@@ -10,7 +10,7 @@
 namespace RomaricDrigon\OrchestraBundle\Tests\Routing;
 
 use RomaricDrigon\OrchestraBundle\Routing\RepositoryRouteBuilder;
-use RomaricDrigon\OrchestraBundle\Tests\Pool\MockRepository1;
+use RomaricDrigon\OrchestraBundle\Tests\Core\Pool\MockRepository1;
 
 /**
  * Class RepositoryRouteBuilderTest

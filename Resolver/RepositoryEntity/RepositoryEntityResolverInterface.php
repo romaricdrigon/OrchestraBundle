@@ -9,7 +9,7 @@
 
 namespace RomaricDrigon\OrchestraBundle\Resolver\RepositoryEntity;
 
-use RomaricDrigon\OrchestraBundle\Pool\EntityReflectionInterface;
+use RomaricDrigon\OrchestraBundle\Core\Entity\EntityReflectionInterface;
 
 /**
  * Interface RepositoryEntityResolverInterface

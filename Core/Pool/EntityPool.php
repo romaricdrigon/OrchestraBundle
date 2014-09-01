@@ -7,10 +7,11 @@
  * file that was distributed with this source code.
  */
 
-namespace RomaricDrigon\OrchestraBundle\Pool;
+namespace RomaricDrigon\OrchestraBundle\Core\Pool;
 
 use RomaricDrigon\OrchestraBundle\Exception\EntityAddedTwiceException;
 use RomaricDrigon\OrchestraBundle\Exception\EntityNotFoundException;
+use RomaricDrigon\OrchestraBundle\Core\Entity\EntityReflectionInterface;
 
 /**
  * Class EntityPool

@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-namespace RomaricDrigon\OrchestraBundle\Pool;
+namespace RomaricDrigon\OrchestraBundle\Core\Pool;
 
 /**
  * Interface EntityPoolFactoryInterface

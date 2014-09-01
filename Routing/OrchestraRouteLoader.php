@@ -10,8 +10,8 @@
 namespace RomaricDrigon\OrchestraBundle\Routing;
 
 use RomaricDrigon\OrchestraBundle\Exception\LoaderAddedTwiceException;
-use RomaricDrigon\OrchestraBundle\Pool\EntityPoolInterface;
-use RomaricDrigon\OrchestraBundle\Pool\RepositoryPoolInterface;
+use RomaricDrigon\OrchestraBundle\Core\Pool\EntityPoolInterface;
+use RomaricDrigon\OrchestraBundle\Core\Pool\RepositoryPoolInterface;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\Config\Loader\LoaderResolverInterface;
 use Symfony\Component\Routing\RouteCollection;

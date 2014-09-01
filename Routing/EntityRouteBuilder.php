@@ -11,7 +11,7 @@ namespace RomaricDrigon\OrchestraBundle\Routing;
 
 use RomaricDrigon\OrchestraBundle\Exception\EntityTwiceSameSlugException;
 use Symfony\Component\Routing\Route;
-use RomaricDrigon\OrchestraBundle\Pool\EntityReflectionInterface;
+use RomaricDrigon\OrchestraBundle\Core\Entity\EntityReflectionInterface;
 
 /**
  * Class EntityRouteBuilder

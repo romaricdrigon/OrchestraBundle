@@ -7,10 +7,10 @@
  * file that was distributed with this source code.
  */
 
-namespace RomaricDrigon\OrchestraBundle\Tests\Pool;
+namespace RomaricDrigon\OrchestraBundle\Tests\Core\Pool;
 
 use RomaricDrigon\OrchestraBundle\Domain\RepositoryInterface;
-use RomaricDrigon\OrchestraBundle\Pool\RepositoryPool;
+use RomaricDrigon\OrchestraBundle\Core\Pool\RepositoryPool;
 
 /**
  * Class RepositoryPoolTest

@@ -10,7 +10,7 @@
 namespace RomaricDrigon\OrchestraBundle\Tests\Routing;
 
 use RomaricDrigon\OrchestraBundle\Domain\EntityInterface;
-use RomaricDrigon\OrchestraBundle\Pool\EntityReflection;
+use RomaricDrigon\OrchestraBundle\Core\Entity\EntityReflection;
 use RomaricDrigon\OrchestraBundle\Routing\EntityRouteBuilder;
 use Symfony\Component\Routing\Route;
 

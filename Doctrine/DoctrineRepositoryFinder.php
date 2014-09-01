@@ -10,7 +10,7 @@
 namespace RomaricDrigon\OrchestraBundle\Doctrine;
 
 use Doctrine\ORM\EntityManagerInterface;
-use RomaricDrigon\OrchestraBundle\Pool\EntityReflectionInterface;
+use RomaricDrigon\OrchestraBundle\Core\Entity\EntityReflectionInterface;
 
 /**
  * Class DoctrineRepositoryFinder

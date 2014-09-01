@@ -9,7 +9,7 @@
 
 namespace RomaricDrigon\OrchestraBundle\Finder;
 
-use RomaricDrigon\OrchestraBundle\Pool\EntityReflection;
+use RomaricDrigon\OrchestraBundle\Core\Entity\EntityReflection;
 
 /**
  * Class EntityFinder

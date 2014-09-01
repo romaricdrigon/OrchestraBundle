@@ -9,10 +9,9 @@
 
 namespace RomaricDrigon\OrchestraBundle\Tests\Routing;
 
-use RomaricDrigon\OrchestraBundle\Pool\RepositoryPool;
 use RomaricDrigon\OrchestraBundle\Routing\RepositoryRouteCollectionBuilder;
-use RomaricDrigon\OrchestraBundle\Tests\Pool\MockRepository1;
-use RomaricDrigon\OrchestraBundle\Tests\Pool\MockRepository2;
+use RomaricDrigon\OrchestraBundle\Tests\Core\Pool\MockRepository1;
+use RomaricDrigon\OrchestraBundle\Tests\Core\Pool\MockRepository2;
 use Symfony\Component\Routing\Route;
 
 /**
@@ -40,7 +39,7 @@ class RepositoryRouteCollectionBuilderTest extends \PHPUnit_Framework_TestCase
 
     public function test_it_builds_empty_collection()
     {
-        $pool = \Phake::mock('RomaricDrigon\OrchestraBundle\Pool\RepositoryPool');
+        $pool = \Phake::mock('RomaricDrigon\OrchestraBundle\Core\Pool\RepositoryPool');
 
         \Phake::when($pool)->all()->thenReturn([]);
 
@@ -53,7 +52,7 @@ class RepositoryRouteCollectionBuilderTest extends \PHPUnit_Framework_TestCase
 
     public function test_it_builds_collection()
     {
-        $pool = \Phake::mock('RomaricDrigon\OrchestraBundle\Pool\RepositoryPool');
+        $pool = \Phake::mock('RomaricDrigon\OrchestraBundle\Core\Pool\RepositoryPool');
 
         \Phake::when($pool)->all()->thenReturn([
             'mock1' => new MockRepository1(),

@@ -9,7 +9,7 @@
 
 namespace RomaricDrigon\OrchestraBundle\Tests\Routing;
 
-use RomaricDrigon\OrchestraBundle\Pool\EntityReflectionInterface;
+use RomaricDrigon\OrchestraBundle\Core\Entity\EntityReflectionInterface;
 use RomaricDrigon\OrchestraBundle\Routing\EntityRouteCollectionBuilder;
 use Symfony\Component\Routing\Route;
 
@@ -36,7 +36,7 @@ class EntityRouteCollectionBuilderTest extends \PHPUnit_Framework_TestCase
 
     public function test_it_builds_empty_collection()
     {
-        $pool = \Phake::mock('RomaricDrigon\OrchestraBundle\Pool\EntityPool');
+        $pool = \Phake::mock('RomaricDrigon\OrchestraBundle\Core\Pool\EntityPool');
 
         \Phake::when($pool)->all()->thenReturn([]);
 
@@ -49,7 +49,7 @@ class EntityRouteCollectionBuilderTest extends \PHPUnit_Framework_TestCase
 
     public function test_it_builds_collection()
     {
-        $pool = \Phake::mock('RomaricDrigon\OrchestraBundle\Pool\EntityPool');
+        $pool = \Phake::mock('RomaricDrigon\OrchestraBundle\Core\Pool\EntityPool');
 
         \Phake::when($pool)->all()->thenReturn([
             'mock1' => new MockEntityReflection(),

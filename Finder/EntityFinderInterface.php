@@ -9,7 +9,7 @@
 
 namespace RomaricDrigon\OrchestraBundle\Finder;
 
-use RomaricDrigon\OrchestraBundle\Pool\EntityReflectionInterface;
+use RomaricDrigon\OrchestraBundle\Core\Entity\EntityReflectionInterface;
 
 /**
  * Interface EntityFinderInterface

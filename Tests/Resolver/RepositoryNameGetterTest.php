@@ -10,8 +10,8 @@
 namespace RomaricDrigon\OrchestraBundle\Tests\Resolver;
 
 use RomaricDrigon\OrchestraBundle\Resolver\RepositoryNameResolver;
-use RomaricDrigon\OrchestraBundle\Tests\Pool\MockRepository1;
-use RomaricDrigon\OrchestraBundle\Tests\Pool\MockRepository2;
+use RomaricDrigon\OrchestraBundle\Tests\Core\Pool\MockRepository1;
+use RomaricDrigon\OrchestraBundle\Tests\Core\Pool\MockRepository2;
 use RomaricDrigon\OrchestraBundle\Domain\RepositoryInterface;
 
 /**
