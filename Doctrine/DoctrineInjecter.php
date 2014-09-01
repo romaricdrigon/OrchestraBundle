@@ -9,7 +9,7 @@
 
 namespace RomaricDrigon\OrchestraBundle\Doctrine;
 
-use RomaricDrigon\OrchestraBundle\Domain\Base\DoctrineAwareInterface;
+use RomaricDrigon\OrchestraBundle\Domain\Doctrine\DoctrineAwareInterface;
 use RomaricDrigon\OrchestraBundle\Domain\RepositoryInterface;
 use RomaricDrigon\OrchestraBundle\Core\Entity\EntityReflectionInterface;
 

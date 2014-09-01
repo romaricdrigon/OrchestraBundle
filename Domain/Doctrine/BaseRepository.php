@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-namespace RomaricDrigon\OrchestraBundle\Domain\Base;
+namespace RomaricDrigon\OrchestraBundle\Domain\Doctrine;
 
 use Doctrine\Common\Persistence\ObjectRepository;
 use RomaricDrigon\OrchestraBundle\Domain\RepositoryInterface;
