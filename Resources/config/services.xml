@@ -125,11 +125,11 @@
         <service id="orchestra.event_listener.object_resolver" class="%orchestra.event_listener.object_resolver.class%">
             <argument type="service" id="orchestra.pool.entity_pool" />
             <argument type="service" id="orchestra.pool.repository_pool" />
+            <argument type="service" id="orchestra.resolver.repository_entity" />
             <tag name="kernel.event_subscriber" />
         </service>
         <service id="orchestra.event_listener.doctrine_repository" class="%orchestra.event_listener.doctrine_repository.class%">
             <argument type="service" id="orchestra.doctrine.repository_injecter" />
-            <argument type="service" id="orchestra.resolver.repository_entity" />
             <tag name="kernel.event_subscriber" />
         </service>
     </services>
