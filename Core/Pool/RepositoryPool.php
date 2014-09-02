@@ -9,7 +9,7 @@
 
 namespace RomaricDrigon\OrchestraBundle\Core\Pool;
 
-use RomaricDrigon\OrchestraBundle\Domain\RepositoryInterface;
+use RomaricDrigon\OrchestraBundle\Domain\Repository\RepositoryInterface;
 use RomaricDrigon\OrchestraBundle\Exception\RepositoryAddedTwiceException;
 use RomaricDrigon\OrchestraBundle\Exception\RepositoryNotFoundException;
 

@@ -10,7 +10,7 @@
 namespace RomaricDrigon\OrchestraBundle\Resolver;
 
 use Doctrine\Common\Annotations\Reader;
-use RomaricDrigon\OrchestraBundle\Domain\RepositoryInterface;
+use RomaricDrigon\OrchestraBundle\Domain\Repository\RepositoryInterface;
 
 /**
  * Class RepositoryNameResolver

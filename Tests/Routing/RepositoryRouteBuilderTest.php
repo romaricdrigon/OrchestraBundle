@@ -48,8 +48,6 @@ class RepositoryRouteBuilderTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('/foo/list', $route->getPath());
 
         $this->assertEquals('RomaricDrigonOrchestraBundle:Generic:list', $route->getDefault('_controller'));
-        $this->assertEquals('listing', $route->getDefault('repository_method'));
-        $this->assertEquals('foo', $route->getDefault('repository_slug'));
         $this->assertEquals(RepositoryRouteBuilder::ROUTE_TYPE, $route->getDefault('orchestra_type'));
 
         $this->assertEquals('GET', $route->getRequirement('_method'));
