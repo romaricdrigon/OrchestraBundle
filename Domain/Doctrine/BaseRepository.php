@@ -10,7 +10,7 @@
 namespace RomaricDrigon\OrchestraBundle\Domain\Doctrine;
 
 use Doctrine\Common\Persistence\ObjectRepository;
-use RomaricDrigon\OrchestraBundle\Domain\RepositoryInterface;
+use RomaricDrigon\OrchestraBundle\Domain\Repository\RepositoryInterface;
 
 /**
  * Class BaseRepository
