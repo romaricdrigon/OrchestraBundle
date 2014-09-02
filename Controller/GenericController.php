@@ -10,7 +10,6 @@
 namespace RomaricDrigon\OrchestraBundle\Controller;
 
 use RomaricDrigon\OrchestraBundle\Core\Entity\EntityReflectionInterface;
-use RomaricDrigon\OrchestraBundle\Domain\Entity\ListableInterface;
 use RomaricDrigon\OrchestraBundle\Domain\Repository\RepositoryInterface;
 use RomaricDrigon\OrchestraBundle\Exception\Domain\EntityNotListableException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -45,7 +44,7 @@ class GenericController extends Controller
     {
         $name = $this->get('orchestra.resolver.repository_name')->getName($repository);
 
-        if (! $entity instanceof ListableInterface) {
+        if (false === $entity->isListable()) {
             throw new EntityNotListableException($entity->getName());
         }
 
@@ -53,7 +52,7 @@ class GenericController extends Controller
         $objects = $repository->listing();
 
         // Do not use empty, Doctrine Collection does not support it, only count
-        $noData = (count($objects) === 0);
+        $noData = (0 === count($objects));
 
         // We will also need titles for our table header
         $headers = [];

@@ -34,4 +34,9 @@ interface EntityReflectionInterface
      * @return string Entity class name with its full namespace
      */
     public function getNamespacedName();
+
+    /**
+     * @return bool
+     */
+    public function isListable();
 } 
