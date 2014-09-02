@@ -32,6 +32,7 @@
         <parameter key="orchestra.symfony.filesystem.class">Symfony\Component\Filesystem\Filesystem</parameter>
 
         <parameter key="orchestra.event_listener.object_resolver.class">RomaricDrigon\OrchestraBundle\EventListener\ObjectResolverListener</parameter>
+        <parameter key="orchestra.event_listener.doctrine_repository.class">RomaricDrigon\OrchestraBundle\EventListener\DoctrineRepositoryListener</parameter>
     </parameters>
 
     <services>
@@ -121,9 +122,14 @@
         <service id="orchestra.symfony.filesystem" class="%orchestra.symfony.filesystem.class%" />
 
         <!-- kernel event listeners -->
-        <service id="orchestra.event_listener.object_resolver" class="%orchestra.event_listener.object_resolver.class%">
+        <service id="orchestra.event_listener.object_resolver" class="%orchestra.event_listener.object_resolver.class%" public="false">
             <argument type="service" id="orchestra.pool.entity_pool" />
             <argument type="service" id="orchestra.pool.repository_pool" />
+            <tag name="kernel.event_subscriber" />
+        </service>
+        <service id="orchestra.event_listener.doctrine_repository" class="%orchestra.event_listener.doctrine_repository.class%" public="false">
+            <argument type="service" id="orchestra.doctrine.repository_injecter" />
+            <argument type="service" id="orchestra.resolver.repository_entity" />
             <tag name="kernel.event_subscriber" />
         </service>
     </services>
