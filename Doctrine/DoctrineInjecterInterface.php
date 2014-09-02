@@ -9,7 +9,7 @@
 
 namespace RomaricDrigon\OrchestraBundle\Doctrine;
 
-use RomaricDrigon\OrchestraBundle\Domain\RepositoryInterface;
+use RomaricDrigon\OrchestraBundle\Domain\Doctrine\DoctrineAwareInterface;
 use RomaricDrigon\OrchestraBundle\Core\Entity\EntityReflectionInterface;
 
 /**
@@ -21,8 +21,8 @@ interface DoctrineInjecterInterface
     /**
      * Injects Doctrine correct repository into given $repository
      *
-     * @param RepositoryInterface $repository
+     * @param DoctrineAwareInterface $repository
      * @param EntityReflectionInterface $entityReflection
      */
-    public function injectDoctrine(RepositoryInterface $repository, EntityReflectionInterface $entityReflection);
+    public function injectDoctrine(DoctrineAwareInterface $repository, EntityReflectionInterface $entityReflection);
 } 
