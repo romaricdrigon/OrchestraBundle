@@ -7,7 +7,31 @@
 {% block content %}
     <h1>{{ title }}</h1>
 
-    <p>
-    {{ content }}
-    </p>
+    {% block table %}
+        <div class="table-responsive">
+            <table class="table table-hover">
+                {% block table_header %}
+                    <thead>
+                        <tr>
+                            {% for header in headers %}
+                                <th></th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                {% endblock table_header %}
+                {% block table_body %}
+                    <tbody>
+                        {% for object in objects %}
+                            {% set view = object.viewListing %}
+                            <tr>
+                                {% for field in view %}
+                                    <td></td>
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                {% endblock table_body %}
+            </table>
+        </div>
+    {% endblock table %}
 {% endblock content %}

@@ -49,10 +49,17 @@ class GenericController extends Controller
             throw new EntityNotListableException($entity->getName());
         }
 
+        // Get objects to show
         $objects = $repository->listing();
 
+        // We will also need titles for our table header
+        // TODO
+
+        // Finally, we need the routes for each entity
+        // TODO
+
         return $this->render('RomaricDrigonOrchestraBundle:Generic:list.html.twig', [
-            'content'   => 'repository',
+            'headers'   => [],
             'objects'   => $objects,
             'title'     => $name
         ]);
