@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-namespace RomaricDrigon\OrchestraBundle\Domain;
+namespace RomaricDrigon\OrchestraBundle\Domain\Repository;
 
 /**
  * Interface RepositoryInterface

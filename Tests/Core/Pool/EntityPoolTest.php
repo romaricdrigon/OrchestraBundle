@@ -9,7 +9,7 @@
 
 namespace RomaricDrigon\OrchestraBundle\Tests\Core\Pool;
 
-use RomaricDrigon\OrchestraBundle\Domain\EntityInterface;
+use RomaricDrigon\OrchestraBundle\Domain\Entity\EntityInterface;
 use RomaricDrigon\OrchestraBundle\Core\Pool\EntityPool;
 use RomaricDrigon\OrchestraBundle\Core\Entity\EntityReflection;
 

@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-namespace RomaricDrigon\OrchestraBundle\Domain;
+namespace RomaricDrigon\OrchestraBundle\Domain\Entity;
 
 /**
  * Interface EntityInterface
@@ -15,5 +15,4 @@ namespace RomaricDrigon\OrchestraBundle\Domain;
  */
 interface EntityInterface
 {
-
 } 

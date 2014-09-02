@@ -7,13 +7,12 @@
  * file that was distributed with this source code.
  */
 
-namespace RomaricDrigon\OrchestraBundle\Domain;
+namespace RomaricDrigon\OrchestraBundle\Domain\Query;
 
 /**
- * Interface CommandInterface
+ * Interface QueryInterface
  * @author Romaric Drigon <romaric.drigon@gmail.com>
  */
-interface CommandInterface
+interface QueryInterface
 {
-
 } 

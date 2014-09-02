@@ -49,9 +49,9 @@ Even if we will see later that they are persisted, they may be differ than Doctr
 
 By convention, place those in your bundle `Entity` folder.
 
-They must implement `RomaricDrigon\OrchestraBundle\Domain\EntityInterface`.
+They must implement `RomaricDrigon\OrchestraBundle\Domain\Entity\EntityInterface`.
 ```php
-use RomaricDrigon\OrchestraBundle\Domain\EntityInterface;
+use RomaricDrigon\OrchestraBundle\Domain\Entity\EntityInterface;
 
 class SomeEntity implements EntityInterface
 {
@@ -101,9 +101,9 @@ Their name will be the name of the `Entity` suffixed by `Repository` but you're 
 
 We advise you to place those, by convention, in your bundle within a `Repository` folder.
 
-They must implement `RomaricDrigon\OrchestraBundle\Domain\RepositoryInterface`:
+They must implement `RomaricDrigon\OrchestraBundle\Domain\Repository\RepositoryInterface`:
 ```php
-use RomaricDrigon\OrchestraBundle\Domain\RepositoryInterface;
+use RomaricDrigon\OrchestraBundle\Domain\Repository\RepositoryInterface;
 use RomaricDrigon\OrchestraBundle\Annotation\Name;
 
 class MyRepository implements RepositoryInterface
@@ -154,7 +154,7 @@ The name displayed for the Repository can be automatically generated, from the c
 
 Example:
 ```php
-use RomaricDrigon\OrchestraBundle\Domain\RepositoryInterface;
+use RomaricDrigon\OrchestraBundle\Domain\Repository\RepositoryInterface;
 use RomaricDrigon\OrchestraBundle\Annotation\Name;
 
 /**

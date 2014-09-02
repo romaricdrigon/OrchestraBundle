@@ -10,7 +10,7 @@
 namespace RomaricDrigon\OrchestraBundle\Controller;
 
 use RomaricDrigon\OrchestraBundle\Core\Entity\EntityReflectionInterface;
-use RomaricDrigon\OrchestraBundle\Domain\RepositoryInterface;
+use RomaricDrigon\OrchestraBundle\Domain\Repository\RepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 /**
