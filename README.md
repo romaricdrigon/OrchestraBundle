@@ -95,6 +95,7 @@ Orchestra will generate from it an action, a web page displaying the data from t
 
 *Note*: `QueryInterface` extends `\Traversable`.
 It means that a Query will have to either extend [`\Iterator`](http://php.net/manual/en/class.iterator.php) or [`IteratorAggregate`](http://php.net/manual/en/class.iteratoraggregate.php)
+Watch out, as of PHP 5.4.30, interface implementation order counts, you must implement one those 2 interfaces before implementing `QueryInterface`.
 
 ##### Command
 
