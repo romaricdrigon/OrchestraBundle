@@ -49,15 +49,22 @@ class RepositoryRouteBuilder implements RepositoryRouteBuilderInterface
     protected $methodRequirement = 'GET';
 
     /**
+     * Route type declared
+     */
+    const ROUTE_TYPE = 'repository';
+
+
+    /**
      * @inheritdoc
      */
     public function buildRoute(RepositoryInterface $repositoryInterface, $slug)
     {
         $pattern = '/'.$slug.'/'.$this->patternSuffix;
         $defaults = [
-            '_controller'   => $this->controller,
+            '_controller'       => $this->controller,
             'repository_method' => $this->repositoryMethod,
-            'repository_slug'   => $slug
+            'repository_slug'   => $slug,
+            'type'              => $this::ROUTE_TYPE
         ];
         $requirements = [
             '_method'       => $this->methodRequirement

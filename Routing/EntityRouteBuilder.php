@@ -35,6 +35,11 @@ class EntityRouteBuilder implements EntityRouteBuilderInterface
     protected $methodRequirement = 'GET';
 
     /**
+     * Route type declared
+     */
+    const ROUTE_TYPE = 'entity';
+
+    /**
      * Builds all routes for given EntityReflection
      *
      * @param EntityReflectionInterface $entity
@@ -62,7 +67,8 @@ class EntityRouteBuilder implements EntityRouteBuilderInterface
                 '_controller'   => $this->controller,
                 'entity_method' => $methodName,
                 'method_slug'   => $methodSlug,
-                'entity_slug'   => $slug
+                'entity_slug'   => $slug,
+                'type'          => $this::ROUTE_TYPE
             ];
             $requirements = [
                 '_method'       => $this->methodRequirement
