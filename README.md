@@ -49,7 +49,7 @@ Even if we will see later that they are persisted, they may be differ than Doctr
 
 By convention, place those in your bundle `Entity` folder.
 
-They must implement `RomaricDrigon\OrchestraBundle\Domain\EntityInterface`:
+They must implement `RomaricDrigon\OrchestraBundle\Domain\EntityInterface`.
 ```php
 use RomaricDrigon\OrchestraBundle\Domain\EntityInterface;
 
@@ -66,10 +66,25 @@ A few guidelines and advices:
  * they expose methods corresponding to actions on the objects, leading to modification of its internal state, but **not public setters**
  * you may want to add *private* setters, in order to achieve self-encapsulation, it's up to you
 
+
+#### Command and queries
+
+Entities apply the [Command-Query Separation principle](http://martinfowler.com/bliki/CommandQuerySeparation.html).
+
+##### Query
+
+Any entity method can return an object implementing `QueryInterface`.
+Orchestra will generate from it an action, a web page displaying the data from the returned object.
+
+##### Command
+
+Any entity method can accept an object implementing `CommandInterface`.
+Such method will be transformed into a web page with a Form.
+
 #### Persisting
 
 Usually, they are persisted. Orchestra supports Doctrine ORM through its Symfony2 bridge.
-You will have to do their mapping, using Doctrine annotations, YAML or XML as you want.
+You will have to do their mapping, using Doctrine annotations, YAML (advised) or XML as you want.
 For this part, please refer to [Symfony documentation](http://symfony.com/doc/2.4/book/doctrine.html).
 
 ### Repositories
