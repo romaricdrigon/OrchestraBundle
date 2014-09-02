@@ -65,10 +65,10 @@ class EntityRouteBuilder implements EntityRouteBuilderInterface
             $pattern = '/'.$slug.'/'.$methodSlug;
             $defaults = [
                 '_controller'   => $this->controller,
+                'orchestra_type' => $this::ROUTE_TYPE,
                 'entity_method' => $methodName,
                 'method_slug'   => $methodSlug,
-                'entity_slug'   => $slug,
-                'type'          => $this::ROUTE_TYPE
+                'entity_slug'   => $slug
             ];
             $requirements = [
                 '_method'       => $this->methodRequirement

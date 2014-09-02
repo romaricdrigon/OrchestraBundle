@@ -62,9 +62,9 @@ class RepositoryRouteBuilder implements RepositoryRouteBuilderInterface
         $pattern = '/'.$slug.'/'.$this->patternSuffix;
         $defaults = [
             '_controller'       => $this->controller,
+            'orchestra_type'    => $this::ROUTE_TYPE,
             'repository_method' => $this->repositoryMethod,
-            'repository_slug'   => $slug,
-            'type'              => $this::ROUTE_TYPE
+            'repository_slug'   => $slug
         ];
         $requirements = [
             '_method'       => $this->methodRequirement

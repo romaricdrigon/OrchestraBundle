@@ -45,7 +45,7 @@ class EntityRouteBuilderTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('foo', $route1->getDefault('entity_method'));
         $this->assertEquals('foo', $route1->getDefault('method_slug'));
         $this->assertEquals('mockentity', $route1->getDefault('entity_slug'));
-        $this->assertEquals(EntityRouteBuilder::ROUTE_TYPE, $route1->getDefault('type'));
+        $this->assertEquals(EntityRouteBuilder::ROUTE_TYPE, $route1->getDefault('orchestra_type'));
 
         /** @var Route $route2 */
         $this->assertInstanceOf('Symfony\Component\Routing\Route', $route2 = $routes['orchestra_entity_mockentity_foobar']);
