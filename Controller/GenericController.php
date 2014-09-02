@@ -9,6 +9,8 @@
 
 namespace RomaricDrigon\OrchestraBundle\Controller;
 
+use RomaricDrigon\OrchestraBundle\Core\Entity\EntityReflectionInterface;
+use RomaricDrigon\OrchestraBundle\Domain\RepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 /**
@@ -32,14 +34,13 @@ class GenericController extends Controller
     /**
      * Action used when a repository "listing" is called
      *
+     * @param RepositoryInterface $repository
      * @param string $repository_slug
      * @param string $repository_method
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function listAction($repository_slug, $repository_method)
+    public function listAction(RepositoryInterface $repository, $repository_slug, $repository_method)
     {
-        $repository = $this->get('orchestra.pool.repository_pool')->getBySlug($repository_slug);
-
         $name = $this->get('orchestra.resolver.repository_name')->getName($repository);
 
         // We will need corresponding entity, fetch it
@@ -62,12 +63,13 @@ class GenericController extends Controller
     /**
      * Action used when a method on en Entity is called
      *
+     * @param EntityReflectionInterface $entity
      * @param string $entity_slug
      * @param string $entity_method name
      * @param string $method_slug
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function entityMethodAction($entity_slug, $entity_method, $method_slug)
+    public function entityMethodAction(EntityReflectionInterface $entity, $entity_slug, $entity_method, $method_slug)
     {
         return $this->render('RomaricDrigonOrchestraBundle:Generic:dashboard.html.twig', []);
     }

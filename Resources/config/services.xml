@@ -30,6 +30,8 @@
 
         <parameter key="orchestra.symfony.finder.class">Symfony\Component\Finder\Finder</parameter>
         <parameter key="orchestra.symfony.filesystem.class">Symfony\Component\Filesystem\Filesystem</parameter>
+
+        <parameter key="orchestra.event_listener.object_resolver.class">RomaricDrigon\OrchestraBundle\EventListener\ObjectResolverListener</parameter>
     </parameters>
 
     <services>
@@ -117,5 +119,12 @@
 
         <!-- Symfony components -->
         <service id="orchestra.symfony.filesystem" class="%orchestra.symfony.filesystem.class%" />
+
+        <!-- kernel event listeners -->
+        <service id="orchestra.event_listener.object_resolver" class="%orchestra.event_listener.object_resolver.class%">
+            <argument type="service" id="orchestra.pool.entity_pool" />
+            <argument type="service" id="orchestra.pool.repository_pool" />
+            <tag name="kernel.event_subscriber" />
+        </service>
     </services>
 </container>
