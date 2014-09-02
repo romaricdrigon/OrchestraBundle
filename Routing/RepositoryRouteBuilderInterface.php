@@ -10,7 +10,7 @@
 namespace RomaricDrigon\OrchestraBundle\Routing;
 
 use Symfony\Component\Routing\Route;
-use RomaricDrigon\OrchestraBundle\Domain\RepositoryInterface;
+use RomaricDrigon\OrchestraBundle\Domain\Repository\RepositoryInterface;
 
 /**
  * Interface RepositoryRouteBuilder

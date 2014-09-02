@@ -38,12 +38,10 @@ class GenericController extends Controller
      *
      * @param RepositoryInterface $repository
      * @param EntityReflectionInterface $entity
-     * @param string $repository_slug
-     * @param string $repository_method
      * @throws EntityNotListableException
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function listAction(RepositoryInterface $repository, EntityReflectionInterface $entity, $repository_slug, $repository_method)
+    public function listAction(RepositoryInterface $repository, EntityReflectionInterface $entity)
     {
         $name = $this->get('orchestra.resolver.repository_name')->getName($repository);
 
@@ -51,12 +49,10 @@ class GenericController extends Controller
             throw new EntityNotListableException($entity->getName());
         }
 
-        // TODO: checks security (from annotation on repo)
-
         $objects = $repository->listing();
 
         return $this->render('RomaricDrigonOrchestraBundle:Generic:list.html.twig', [
-            'content'   => 'repository '.$repository_slug.' method '.$repository_method,
+            'content'   => 'repository',
             'objects'   => $objects,
             'title'     => $name
         ]);

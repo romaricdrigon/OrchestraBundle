@@ -10,7 +10,7 @@
 namespace RomaricDrigon\OrchestraBundle\Routing;
 
 use Symfony\Component\Routing\Route;
-use RomaricDrigon\OrchestraBundle\Domain\RepositoryInterface;
+use RomaricDrigon\OrchestraBundle\Domain\Repository\RepositoryInterface;
 
 /**
  * Class RepositoryRouteBuilder
@@ -22,11 +22,6 @@ class RepositoryRouteBuilder implements RepositoryRouteBuilderInterface
      * @var string the controller action a repository will redirect to
      */
     protected $controller = 'RomaricDrigonOrchestraBundle:Generic:list';
-
-    /**
-     * @var string the method called on the repository class
-     */
-    protected $repositoryMethod = 'listing';
 
     /**
      * @var string suffix to form route URI
@@ -62,9 +57,7 @@ class RepositoryRouteBuilder implements RepositoryRouteBuilderInterface
         $pattern = '/'.$slug.'/'.$this->patternSuffix;
         $defaults = [
             '_controller'       => $this->controller,
-            'orchestra_type'    => $this::ROUTE_TYPE,
-            'repository_method' => $this->repositoryMethod,
-            'repository_slug'   => $slug
+            'orchestra_type'    => $this::ROUTE_TYPE
         ];
         $requirements = [
             '_method'       => $this->methodRequirement
