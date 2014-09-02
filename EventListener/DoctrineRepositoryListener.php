@@ -47,10 +47,9 @@ class DoctrineRepositoryListener implements EventSubscriberInterface
         return [KernelEvents::CONTROLLER => ['onKernelController', self::PRIORITY]];
     }
 
-    public function __construct(DoctrineInjecterInterface $doctrineInjecter, RepositoryEntityResolverInterface $repositoryEntityResolver)
+    public function __construct(DoctrineInjecterInterface $doctrineInjecter)
     {
         $this->doctrineInjecter         = $doctrineInjecter;
-        $this->repositoryEntityResolver = $repositoryEntityResolver;
     }
 
     /**
@@ -70,13 +69,11 @@ class DoctrineRepositoryListener implements EventSubscriberInterface
         $repository = $request->attributes->get('repository');
 
         if ($repository instanceof DoctrineAwareInterface) {
-            if (! $request->attributes->has('repository_slug')) {
-                throw new MissingAttributeException('repository_slug');
+            if (! $request->attributes->has('entity')) {
+                throw new MissingAttributeException('entity');
             }
 
-            $slug = $request->attributes->get('repository_slug');
-
-            $entity = $this->repositoryEntityResolver->findBySlug($slug);
+            $entity = $request->attributes->get('entity');
 
             // Finally, inject Doctrine repository into ours
             $this->doctrineInjecter->injectDoctrine($repository, $entity);

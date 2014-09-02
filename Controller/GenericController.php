@@ -10,7 +10,9 @@
 namespace RomaricDrigon\OrchestraBundle\Controller;
 
 use RomaricDrigon\OrchestraBundle\Core\Entity\EntityReflectionInterface;
+use RomaricDrigon\OrchestraBundle\Domain\Entity\ListableInterface;
 use RomaricDrigon\OrchestraBundle\Domain\Repository\RepositoryInterface;
+use RomaricDrigon\OrchestraBundle\Exception\Domain\EntityNotListableException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 /**
@@ -35,13 +37,19 @@ class GenericController extends Controller
      * Action used when a repository "listing" is called
      *
      * @param RepositoryInterface $repository
+     * @param EntityReflectionInterface $entity
      * @param string $repository_slug
      * @param string $repository_method
+     * @throws EntityNotListableException
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function listAction(RepositoryInterface $repository, $repository_slug, $repository_method)
+    public function listAction(RepositoryInterface $repository, EntityReflectionInterface $entity, $repository_slug, $repository_method)
     {
         $name = $this->get('orchestra.resolver.repository_name')->getName($repository);
+
+        if (! $entity instanceof ListableInterface) {
+            throw new EntityNotListableException($entity->getName());
+        }
 
         // TODO: checks security (from annotation on repo)
 

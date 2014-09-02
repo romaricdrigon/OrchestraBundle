@@ -13,6 +13,7 @@ use RomaricDrigon\OrchestraBundle\Core\Pool\EntityPoolInterface;
 use RomaricDrigon\OrchestraBundle\Core\Pool\RepositoryPoolInterface;
 use RomaricDrigon\OrchestraBundle\Exception\Request\MissingAttributeException;
 use RomaricDrigon\OrchestraBundle\Exception\Request\UnsupportedTypeException;
+use RomaricDrigon\OrchestraBundle\Resolver\RepositoryEntity\RepositoryEntityResolverInterface;
 use RomaricDrigon\OrchestraBundle\Routing\EntityRouteBuilder;
 use RomaricDrigon\OrchestraBundle\Routing\RepositoryRouteBuilder;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -36,6 +37,11 @@ class ObjectResolverListener implements EventSubscriberInterface
     protected $repositoryPool;
 
     /**
+     * @var RepositoryEntityResolverInterface
+     */
+    protected $repositoryEntityResolver;
+
+    /**
      * Our subscriber priority
      */
     const PRIORITY = 1000;
@@ -48,10 +54,11 @@ class ObjectResolverListener implements EventSubscriberInterface
         return [KernelEvents::CONTROLLER => ['onKernelController', self::PRIORITY]];
     }
 
-    public function __construct(EntityPoolInterface $entityPool, RepositoryPoolInterface $repositoryPool)
+    public function __construct(EntityPoolInterface $entityPool, RepositoryPoolInterface $repositoryPool, RepositoryEntityResolverInterface $repositoryEntityResolver)
     {
         $this->entityPool   = $entityPool;
         $this->repositoryPool = $repositoryPool;
+        $this->repositoryEntityResolver = $repositoryEntityResolver;
     }
 
     /**
@@ -76,9 +83,14 @@ class ObjectResolverListener implements EventSubscriberInterface
             }
 
             $slug = $request->attributes->get('repository_slug');
+
             $repository = $this->repositoryPool->getBySlug($slug);
 
             $request->attributes->set('repository', $repository);
+
+            $entity = $this->repositoryEntityResolver->findBySlug($slug);
+
+            $request->attributes->set('entity', $entity);
         } else if (EntityRouteBuilder::ROUTE_TYPE === $type) {
             if (! $request->attributes->has('entity_slug')) {
                 throw new MissingAttributeException('entity_slug');
