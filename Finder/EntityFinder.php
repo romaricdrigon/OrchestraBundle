@@ -41,7 +41,7 @@ class EntityFinder implements EntityFinderInterface
             $reflection = new \ReflectionClass($className);
 
             // Order of checks is important here for optimization purpose
-            if ($reflection->implementsInterface('RomaricDrigon\OrchestraBundle\Domain\EntityInterface')) {
+            if ($reflection->implementsInterface('RomaricDrigon\OrchestraBundle\Domain\Entity\EntityInterface')) {
                 $entities[] = new EntityReflection($reflection);
             }
         }
