@@ -19,7 +19,7 @@
                         <thead>
                             <tr>
                                 {% for header in headers %}
-                                    <th></th>
+                                    <th>{{ header|capitalizes }}</th>
                                 {% endfor %}
                             </tr>
                         </thead>

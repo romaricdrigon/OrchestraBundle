@@ -24,6 +24,7 @@
         <parameter key="orchestra.resolver.repository_name.class">RomaricDrigon\OrchestraBundle\Resolver\RepositoryNameResolver</parameter>
         <parameter key="orchestra.resolver.repository_entity.class">RomaricDrigon\OrchestraBundle\Resolver\RepositoryEntity\RepositoryEntityResolver</parameter>
         <parameter key="orchestra.resolver.repository_slug.class">RomaricDrigon\OrchestraBundle\Resolver\RepositorySlug\RepositorySlugResolver</parameter>
+        <parameter key="orchestra.resolver.listing_header.class">RomaricDrigon\OrchestraBundle\Resolver\ListingHeader\ListingHeaderResolver</parameter>
 
         <parameter key="orchestra.finder.entity_finder.class">RomaricDrigon\OrchestraBundle\Finder\EntityFinder</parameter>
         <parameter key="orchestra.finder.entity_loader.class">RomaricDrigon\OrchestraBundle\Finder\EntityLoader</parameter>
@@ -58,6 +59,7 @@
             <argument type="service" id="orchestra.pool.entity_pool" />
         </service>
         <service id="orchestra.resolver.repository_slug" class="%orchestra.resolver.repository_slug.class%" />
+        <service id="orchestra.resolver.listing_header" class="%orchestra.resolver.listing_header.class%" />
 
         <!-- finder and pool factory -->
         <service id="orchestra.finder.entity_finder" class="%orchestra.finder.entity_finder.class%" public="false">

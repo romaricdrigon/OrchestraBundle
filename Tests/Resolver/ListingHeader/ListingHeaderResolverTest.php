@@ -33,14 +33,14 @@ class ListingHeaderResolverTest extends \PHPUnit_Framework_TestCase
     {
         $entity = new MockEntity();
 
-        $this->assertEquals(['h1', 'h2'], $this->sut->getHeader($entity, 'viewHeader'));
+        $this->assertEquals(['h1', 'h2'], $this->sut->getHeaders($entity, 'viewHeader'));
     }
 
     public function test_it_gets_query_headers()
     {
         $entity = new MockEntity();
 
-        $this->assertEquals(['h1', 'h2'], $this->sut->getHeader($entity, 'viewQuery'));
+        $this->assertEquals(['h1', 'h2'], $this->sut->getHeaders($entity, 'viewQuery'));
     }
 }
 

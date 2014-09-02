@@ -22,7 +22,7 @@ class ListingHeaderResolver implements ListingHeaderResolverInterface
     /**
      * @inheritdoc
      */
-    public function getHeader(EntityInterface $entity, $methodName)
+    public function getHeaders(EntityInterface $entity, $methodName)
     {
         // We must get some data
         $data = $entity->{$methodName}();

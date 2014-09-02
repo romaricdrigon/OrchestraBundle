@@ -56,13 +56,16 @@ class GenericController extends Controller
         $noData = (count($objects) === 0);
 
         // We will also need titles for our table header
-        // TODO
+        $headers = [];
+        if (false === $noData) {
+            $headers = $this->get('orchestra.resolver.listing_header.class')->getHeaders($objects[0], 'viewListing');
+        }
 
         // Finally, we need the routes for each entity
         // TODO
 
         return $this->render('RomaricDrigonOrchestraBundle:Generic:list.html.twig', [
-            'headers'   => [],
+            'headers'   => $headers,
             'no_data'   => $noData,
             'objects'   => $objects,
             'title'     => $name
