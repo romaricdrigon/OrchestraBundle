@@ -66,6 +66,23 @@ A few guidelines and advices:
  * they expose methods corresponding to actions on the objects, leading to modification of its internal state, but **not public setters**
  * you may want to add *private* setters, in order to achieve self-encapsulation, it's up to you
 
+#### Displaying the entity in listing
+
+If you want your entity to be displayed in the default listing page, it must implement `ListableInterface`:
+```php
+use RomaricDrigon\OrchestraBundle\Domain\Entity\EntityInterface;
+use RomaricDrigon\OrchestraBundle\Domain\Entity\ListableInterface;
+
+class SomeEntity implements EntityInterface, ListableInterface
+{
+    public function viewListing()
+    {
+        return ['some data', 'some more', '...'];
+    }
+```
+
+The data returned by `viewListing` will be displayed in the same order in each listing row.
+It can be an array or a `QueryInterface` object. You will learn more about queries in the next sections.
 
 #### Command and queries
 
@@ -73,7 +90,7 @@ Entities apply the [Command-Query Separation principle](http://martinfowler.com/
 
 ##### Query
 
-Any entity method can return an object implementing `QueryInterface`.
+Any entity method can return an array or an object implementing `QueryInterface`.
 Orchestra will generate from it an action, a web page displaying the data from the returned object.
 
 ##### Command
