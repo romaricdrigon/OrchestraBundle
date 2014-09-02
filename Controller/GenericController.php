@@ -52,6 +52,9 @@ class GenericController extends Controller
         // Get objects to show
         $objects = $repository->listing();
 
+        // Do not use empty, Doctrine Collection does not support it, only count
+        $noData = (count($objects) === 0);
+
         // We will also need titles for our table header
         // TODO
 
@@ -60,6 +63,7 @@ class GenericController extends Controller
 
         return $this->render('RomaricDrigonOrchestraBundle:Generic:list.html.twig', [
             'headers'   => [],
+            'no_data'   => $noData,
             'objects'   => $objects,
             'title'     => $name
         ]);
