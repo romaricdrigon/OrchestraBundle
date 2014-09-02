@@ -18,7 +18,7 @@ use RomaricDrigon\OrchestraBundle\Domain\Query\QueryInterface;
 interface ListableInterface
 {
     /**
-     * @return QueryInterface
+     * @return QueryInterface|array
      */
     public function viewListing();
 } 
