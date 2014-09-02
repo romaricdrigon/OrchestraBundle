@@ -45,10 +45,11 @@ class GenericController extends Controller
 
         // TODO: checks security (from annotation on repo)
 
-        // TODO: run repo
+        $objects = $repository->listing();
 
         return $this->render('RomaricDrigonOrchestraBundle:Generic:list.html.twig', [
             'content'   => 'repository '.$repository_slug.' method '.$repository_method,
+            'objects'   => $objects,
             'title'     => $name
         ]);
     }
