@@ -90,8 +90,11 @@ Entities apply the [Command-Query Separation principle](http://martinfowler.com/
 
 ##### Query
 
-Any entity method can return an array or an object implementing `QueryInterface`.
+Any entity method can return an array (simpler, preferred) or an object implementing `QueryInterface`.
 Orchestra will generate from it an action, a web page displaying the data from the returned object.
+
+*Note*: `QueryInterface` extends `\Traversable`.
+It means that a Query will have to either extend [`\Iterator`](http://php.net/manual/en/class.iterator.php) or [`IteratorAggregate`](http://php.net/manual/en/class.iteratoraggregate.php)
 
 ##### Command
 

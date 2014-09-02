@@ -13,6 +13,6 @@ namespace RomaricDrigon\OrchestraBundle\Domain\Query;
  * Interface QueryInterface
  * @author Romaric Drigon <romaric.drigon@gmail.com>
  */
-interface QueryInterface
+interface QueryInterface extends \Traversable
 {
 } 
