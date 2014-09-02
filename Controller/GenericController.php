@@ -57,7 +57,7 @@ class GenericController extends Controller
         // We will also need titles for our table header
         $headers = [];
         if (false === $noData) {
-            $headers = $this->get('orchestra.resolver.listing_header.class')->getHeaders($objects[0], 'viewListing');
+            $headers = $this->get('orchestra.resolver.listing_header')->getHeaders($objects[0], 'viewListing');
         }
 
         // Finally, we need the routes for each entity
