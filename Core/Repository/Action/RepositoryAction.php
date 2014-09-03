@@ -39,23 +39,15 @@ class RepositoryAction implements RepositoryActionInterface
     /**
      * @param string $method
      * @param string $name
+     * @param string $routeName
      */
-    public function __construct($method, $name)
+    public function __construct($method, $name, $routeName)
     {
         $this->method = $method;
         $this->name = $name;
-
-        $this->slug = strtolower($method);
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function setRouteName($routeName)
-    {
         $this->routeName = $routeName;
 
-        return $this;
+        $this->slug = strtolower($method);
     }
 
     /**

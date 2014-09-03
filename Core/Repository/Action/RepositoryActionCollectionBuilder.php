@@ -11,6 +11,7 @@ namespace RomaricDrigon\OrchestraBundle\Core\Repository\Action;
 
 use RomaricDrigon\OrchestraBundle\Domain\Repository\RepositoryInterface;
 use RomaricDrigon\OrchestraBundle\Resolver\RepositoryNameResolverInterface;
+use RomaricDrigon\OrchestraBundle\Resolver\RepositoryRouteName\RepositoryRouteNameResolverInterface;
 
 /**
  * Class RepositoryActionCollectionBuilder
@@ -23,13 +24,20 @@ class RepositoryActionCollectionBuilder implements RepositoryActionCollectionBui
      */
     protected $repositoryNameResolver;
 
+    /**
+     * @var RepositoryRouteNameResolverInterface
+     */
+    protected $repositoryRouteNameResolver;
+
 
     /**
      * @param RepositoryNameResolverInterface $repositoryNameResolver
+     * @param RepositoryRouteNameResolverInterface $repositoryRouteNameResolver
      */
-    public function __construct(RepositoryNameResolverInterface $repositoryNameResolver)
+    public function __construct(RepositoryNameResolverInterface $repositoryNameResolver, RepositoryRouteNameResolverInterface $repositoryRouteNameResolver)
     {
         $this->repositoryNameResolver = $repositoryNameResolver;
+        $this->repositoryRouteNameResolver = $repositoryRouteNameResolver;
     }
 
     /**
@@ -51,7 +59,9 @@ class RepositoryActionCollectionBuilder implements RepositoryActionCollectionBui
             // For now, name is the humanized version of Method name
             $name = $this->humanizeName($methodName);
 
-            $action = new RepositoryAction($methodName, $name);
+            $routeName = $this->repositoryRouteNameResolver->getRouteName($repository, $methodName);
+
+            $action = new RepositoryAction($methodName, $name, $routeName);
 
             $collection->addAction($action);
         }

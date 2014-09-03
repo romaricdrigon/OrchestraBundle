@@ -36,12 +36,6 @@ interface RepositoryActionInterface
     public function getRouteName();
 
     /**
-     * @param string $routeName
-     * @return $this
-     */
-    public function setRouteName($routeName);
-
-    /**
      * @return bool Is it the "listing" mandatory method?
      */
     public function isListing();

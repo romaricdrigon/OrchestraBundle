@@ -31,16 +31,6 @@ class RepositoryRouteBuilder implements RepositoryRouteBuilderInterface
     protected $genericController = 'RomaricDrigonOrchestraBundle:Generic:repositoryMethod';
 
     /**
-     * @var string suffix to form route URI
-     */
-    protected $patternSuffix = 'list';
-
-    /**
-     * @var string prefix to route name
-     */
-    protected $namePrefix = 'orchestra_repository';
-
-    /**
      * @var string methods allowed to o access to our repository
      */
     protected $methodRequirement = 'GET';
@@ -93,10 +83,7 @@ class RepositoryRouteBuilder implements RepositoryRouteBuilderInterface
             ];
 
             $route = new Route($pattern, $defaults, $requirements);
-            $routeName = $this->namePrefix.'_'.$slug.'_'.$action->getSlug();
-
-            // We can now set the Route Name on the action
-            $action->setRouteName($routeName);
+            $routeName = $action->getRouteName();
 
             $routes[$routeName] = $route;
         }
