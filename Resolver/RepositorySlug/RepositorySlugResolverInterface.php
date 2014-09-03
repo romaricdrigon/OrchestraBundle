@@ -9,7 +9,7 @@
 
 namespace RomaricDrigon\OrchestraBundle\Resolver\RepositorySlug;
 
-use RomaricDrigon\OrchestraBundle\Domain\RepositoryInterface;
+use RomaricDrigon\OrchestraBundle\Domain\Repository\RepositoryInterface;
 
 /**
  * Interface RepositorySlugResolverInterface
