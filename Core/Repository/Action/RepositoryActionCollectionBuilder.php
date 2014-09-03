@@ -62,7 +62,7 @@ class RepositoryActionCollectionBuilder implements RepositoryActionCollectionBui
         $collection = new RepositoryActionCollection($repoName);
 
         foreach ($methods as $method) {
-            if (true === $this->hiddenActionResolver->isHidden($repository)) {
+            if (true === $this->hiddenActionResolver->isHidden($method)) {
                 continue;
             }
 
