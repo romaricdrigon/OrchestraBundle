@@ -118,7 +118,7 @@
         <service
                 id="orchestra.menu.main"
                 class="Knp\Menu\MenuItem"
-                factory-service="orchestra.knp_builder.builder"
+                factory-service="orchestra.menu.knp_builder"
                 factory-method="createMainMenu"
                 scope="request"
         >
