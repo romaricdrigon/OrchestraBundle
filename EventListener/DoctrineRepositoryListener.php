@@ -10,6 +10,7 @@
 namespace RomaricDrigon\OrchestraBundle\EventListener;
 
 use RomaricDrigon\OrchestraBundle\Doctrine\DoctrineInjecterInterface;
+use RomaricDrigon\OrchestraBundle\Doctrine\ObjectManagerInterface;
 use RomaricDrigon\OrchestraBundle\Domain\Doctrine\DoctrineAwareInterface;
 use RomaricDrigon\OrchestraBundle\Exception\Request\MissingAttributeException;
 use RomaricDrigon\OrchestraBundle\Exception\Request\UnsupportedTypeException;
@@ -35,6 +36,11 @@ class DoctrineRepositoryListener implements EventSubscriberInterface
     protected $repositoryEntityResolver;
 
     /**
+     * @var ObjectManagerInterface
+     */
+    protected $objectManager;
+
+    /**
      * Our subscriber priority
      */
     const PRIORITY = 250;
@@ -47,9 +53,10 @@ class DoctrineRepositoryListener implements EventSubscriberInterface
         return [KernelEvents::CONTROLLER => ['onKernelController', self::PRIORITY]];
     }
 
-    public function __construct(DoctrineInjecterInterface $doctrineInjecter)
+    public function __construct(DoctrineInjecterInterface $doctrineInjecter, ObjectManagerInterface $objectManager)
     {
-        $this->doctrineInjecter         = $doctrineInjecter;
+        $this->doctrineInjecter = $doctrineInjecter;
+        $this->objectManager    = $objectManager;
     }
 
     /**
@@ -74,6 +81,9 @@ class DoctrineRepositoryListener implements EventSubscriberInterface
             }
 
             $entity = $request->attributes->get('entity');
+
+            // Inject object manager first
+            $repository->setObjectManager($this->objectManager);
 
             // Finally, inject Doctrine repository into ours
             $this->doctrineInjecter->injectDoctrine($repository, $entity);

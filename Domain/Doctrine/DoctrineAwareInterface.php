@@ -10,6 +10,7 @@
 namespace RomaricDrigon\OrchestraBundle\Domain\Doctrine;
 
 use Doctrine\Common\Persistence\ObjectRepository;
+use RomaricDrigon\OrchestraBundle\Doctrine\ObjectManagerInterface;
 
 /**
  * Interface BaseRepositoryInterface
@@ -23,4 +24,9 @@ interface DoctrineAwareInterface
      * @param ObjectRepository $repository
      */
     public function setDoctrineRepository(ObjectRepository $repository);
+
+    /**
+     * @param ObjectManagerInterface $objectManager
+     */
+    public function setObjectManager(ObjectManagerInterface $objectManager);
 } 

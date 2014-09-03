@@ -159,6 +159,7 @@
         </service>
         <service id="orchestra.event_listener.doctrine_repository" class="%orchestra.event_listener.doctrine_repository.class%">
             <argument type="service" id="orchestra.doctrine.repository_injecter" />
+            <argument type="service" id="orchestra.doctrine.object_manager" />
             <tag name="kernel.event_subscriber" />
         </service>
         <service id="orchestra.event_listener.command_resolver" class="%orchestra.event_listener.command_resolver.class%">
