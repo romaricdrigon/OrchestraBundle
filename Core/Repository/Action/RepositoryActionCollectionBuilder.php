@@ -10,6 +10,7 @@
 namespace RomaricDrigon\OrchestraBundle\Core\Repository\Action;
 
 use RomaricDrigon\OrchestraBundle\Domain\Repository\RepositoryInterface;
+use RomaricDrigon\OrchestraBundle\Resolver\HiddenAction\HiddenActionResolverInterface;
 use RomaricDrigon\OrchestraBundle\Resolver\RepositoryNameResolverInterface;
 use RomaricDrigon\OrchestraBundle\Resolver\RepositoryRouteName\RepositoryRouteNameResolverInterface;
 
@@ -29,15 +30,22 @@ class RepositoryActionCollectionBuilder implements RepositoryActionCollectionBui
      */
     protected $repositoryRouteNameResolver;
 
+    /**
+     * @var HiddenActionResolverInterface
+     */
+    protected $hiddenActionResolver;
+
 
     /**
      * @param RepositoryNameResolverInterface $repositoryNameResolver
      * @param RepositoryRouteNameResolverInterface $repositoryRouteNameResolver
+     * @param HiddenActionResolverInterface $hiddenActionResolver
      */
-    public function __construct(RepositoryNameResolverInterface $repositoryNameResolver, RepositoryRouteNameResolverInterface $repositoryRouteNameResolver)
+    public function __construct(RepositoryNameResolverInterface $repositoryNameResolver, RepositoryRouteNameResolverInterface $repositoryRouteNameResolver, HiddenActionResolverInterface $hiddenActionResolver)
     {
         $this->repositoryNameResolver = $repositoryNameResolver;
         $this->repositoryRouteNameResolver = $repositoryRouteNameResolver;
+        $this->hiddenActionResolver = $hiddenActionResolver;
     }
 
     /**
@@ -54,6 +62,10 @@ class RepositoryActionCollectionBuilder implements RepositoryActionCollectionBui
         $collection = new RepositoryActionCollection($repoName);
 
         foreach ($methods as $method) {
+            if (true === $this->hiddenActionResolver->isHidden($repository)) {
+                continue;
+            }
+
             $methodName = $method->getShortName();
 
             // For now, name is the humanized version of Method name
