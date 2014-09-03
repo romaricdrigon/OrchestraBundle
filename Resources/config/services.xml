@@ -89,6 +89,7 @@
             <tag name="routing.loader" />
         </service>
         <service id="orchestra.routing.repository_route_builder" class="%orchestra.routing.repository_route_builder.class%" public="false">
+            <argument type="service" id="orchestra.core_repository.action_collection_builder" />
         </service>
         <service id="orchestra.routing.repository_route_collection_builder" class="%orchestra.routing.repository_route_collection_builder.class%" public="false">
             <argument type="service" id="orchestra.routing.repository_route_builder" />
