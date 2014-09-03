@@ -50,6 +50,9 @@ class CommandType extends AbstractType
             // We let Symfony2 guess!
             $builder->add($property);
         }
+
+        // Add a submit button!
+        $builder->add('save', 'submit');
     }
 
     /**
