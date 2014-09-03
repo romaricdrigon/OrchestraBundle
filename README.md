@@ -102,6 +102,8 @@ Watch out, as of PHP 5.4.30, interface implementation order counts, you must imp
 Any entity method can accept an object implementing `CommandInterface`.
 Such method will be transformed into a web page with a Form.
 
+A `Command` is typically a simple data container, with public properties. Those public properties will be mapped to Orchestra-generated Form.
+
 *Note*: Orchestra will never call any Command constructor.
 
 #### Persisting
