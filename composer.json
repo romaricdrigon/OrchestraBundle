@@ -18,6 +18,7 @@
         "php":                      "~5.4",
         "symfony/framework-bundle": "~2.4",
         "symfony/expression-language": "~2.4",
+        "symfony/form": "~2.4",
         "symfony/class-loader": "~2.4",
         "symfony/filesystem": "~2.4",
         "doctrine/orm": "~2.2,>=2.2.3",
