@@ -19,6 +19,7 @@
         <parameter key="orchestra.routing.entity_route_collection_builder.class">RomaricDrigon\OrchestraBundle\Routing\EntityRouteCollectionBuilder</parameter>
         <parameter key="orchestra.routing.route_loader.class">RomaricDrigon\OrchestraBundle\Routing\OrchestraRouteLoader</parameter>
 
+        <parameter key="orchestra.menu.repository_menu">RomaricDrigon\OrchestraBundle\Menu\RepositoryMenu</parameter>
         <parameter key="orchestra.menu.knp_builder.class">RomaricDrigon\OrchestraBundle\Menu\KnpMenuBuilder</parameter>
         <parameter key="orchestra.twig.orchestra_extension.class">RomaricDrigon\OrchestraBundle\Twig\OrchestraExtension</parameter>
 
