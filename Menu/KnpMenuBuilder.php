@@ -10,8 +10,8 @@
 namespace RomaricDrigon\OrchestraBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
-use RomaricDrigon\OrchestraBundle\Exception\Domain\RepositoryInvalidException;
 use RomaricDrigon\OrchestraBundle\Core\Repository\Action\RepositoryActionInterface;
+use RomaricDrigon\OrchestraBundle\Resolver\RepositoryNameResolverInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -30,15 +30,22 @@ class KnpMenuBuilder
      */
     protected $repositoryMenu;
 
+    /**
+     * @var RepositoryNameResolverInterface
+     */
+    protected $repositoryNameResolver;
+
 
     /**
      * @param FactoryInterface $factory
      * @param RepositoryMenuInterface $repositoryMenu
+     * @param RepositoryNameResolverInterface $repositoryNameResolver
      */
-    public function __construct(FactoryInterface $factory, RepositoryMenuInterface $repositoryMenu)
+    public function __construct(FactoryInterface $factory, RepositoryMenuInterface $repositoryMenu, RepositoryNameResolverInterface $repositoryNameResolver)
     {
-        $this->factory  = $factory;
-        $this->repositoryMenu   = $repositoryMenu;
+        $this->factory = $factory;
+        $this->repositoryMenu = $repositoryMenu;
+        $this->repositoryNameResolver = $repositoryNameResolver;
     }
 
     /**
@@ -54,14 +61,8 @@ class KnpMenuBuilder
 
         $repositoriesMenu = $this->repositoryMenu->getMenu();
 
-        foreach ($repositoriesMenu as $slug => $repositoryActions) {
-            // We have at least a "listing" action
-            $listing = $repositoryActions->getListingAction();
-
-            if (null === $listing) {
-                throw new RepositoryInvalidException($slug);
-            }
-            $oneRepoMenu = $menu->addChild($listing->getName(), ['route' => $listing->getRouteName()]);
+        foreach ($repositoriesMenu as $repositoryActions) {
+            $oneRepoMenu = $menu->addChild($repositoryActions->getName());
 
             /** @var RepositoryActionInterface $action */
             foreach ($repositoryActions as $action) {
