@@ -126,8 +126,10 @@ class GenericController extends Controller
                     'Command run with success!'
                 );
 
-                // TODO: redirect to Repository listing
-                //return $this->redirect($this->generateUrl('agency_list'));
+                // We redirect to "listing" page/action
+                $listRoute = $this->get('orchestra.resolver.repository_route_name')->getRouteName($repository, 'listing');
+
+                return $this->redirect($this->generateUrl($listRoute));
             } else {
                 $this->get('session')->getFlashBag()->add(
                     'error',
