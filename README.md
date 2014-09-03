@@ -185,6 +185,22 @@ class MyRepository implements RepositoryInterface
 {
 ```
 
+#### Hiding a method
+
+You can add a Repository method from the menu by adding it a `@Hidden` annotation:
+```php
+use RomaricDrigon\OrchestraBundle\Domain\Repository\RepositoryInterface;
+use RomaricDrigon\OrchestraBundle\Annotation\Hidden;
+
+class MyRepository implements RepositoryInterface
+{
+    /**
+     * @Hidden
+     */
+    public function hiddenMethod()
+    {
+```
+
 ## Configuration
 
 You can configure the Bundle by putting those settings in your `config.yml`:

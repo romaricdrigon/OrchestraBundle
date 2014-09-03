@@ -11,6 +11,7 @@ namespace RomaricDrigon\OrchestraBundle\Domain\Doctrine;
 
 use Doctrine\Common\Persistence\ObjectRepository;
 use RomaricDrigon\OrchestraBundle\Domain\Repository\RepositoryInterface;
+use RomaricDrigon\OrchestraBundle\Annotation\Hidden;
 
 /**
  * Class BaseRepository
@@ -25,6 +26,8 @@ class BaseRepository implements DoctrineAwareInterface, RepositoryInterface
 
     /**
      * @inheritdoc
+     *
+     * @Hidden
      */
     public function setDoctrineRepository(ObjectRepository $repository)
     {
