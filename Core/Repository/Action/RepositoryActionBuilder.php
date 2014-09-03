@@ -55,7 +55,7 @@ class RepositoryActionBuilder implements RepositoryActionBuilderInterface
 
         $routeName = $this->repositoryRouteNameResolver->getRouteName($repository, $method);
 
-        $slug = $this->buildSlug($name);
+        $slug = $this->buildSlug($method);
 
         $command = $this->findCommand($reflectionMethod);
 
