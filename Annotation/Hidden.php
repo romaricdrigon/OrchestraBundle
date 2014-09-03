@@ -12,6 +12,8 @@ namespace RomaricDrigon\OrchestraBundle\Annotation;
 /**
  * Class Hidden
  * @author Romaric Drigon <romaric.drigon@gmail.com>
+ *
+ * @Annotation
  */
 class Hidden extends AbstractAnnotation
 {
