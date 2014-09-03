@@ -16,10 +16,10 @@ use RomaricDrigon\OrchestraBundle\Routing\RepositoryRouteBuilderInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Class MenuBuilder
+ * Class KnpMenuBuilder
  * @author Romaric Drigon <romaric.drigon@gmail.com>
  */
-class MenuBuilder
+class KnpMenuBuilder
 {
     /**
      * @var FactoryInterface

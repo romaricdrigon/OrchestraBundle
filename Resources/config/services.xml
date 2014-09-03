@@ -19,7 +19,7 @@
         <parameter key="orchestra.routing.entity_route_collection_builder.class">RomaricDrigon\OrchestraBundle\Routing\EntityRouteCollectionBuilder</parameter>
         <parameter key="orchestra.routing.route_loader.class">RomaricDrigon\OrchestraBundle\Routing\OrchestraRouteLoader</parameter>
 
-        <parameter key="orchestra.menu.builder.class">RomaricDrigon\OrchestraBundle\Menu\MenuBuilder</parameter>
+        <parameter key="orchestra.menu.knp_builder.class">RomaricDrigon\OrchestraBundle\Menu\KnpMenuBuilder</parameter>
         <parameter key="orchestra.twig.orchestra_extension.class">RomaricDrigon\OrchestraBundle\Twig\OrchestraExtension</parameter>
 
         <parameter key="orchestra.resolver.repository_name.class">RomaricDrigon\OrchestraBundle\Resolver\RepositoryNameResolver</parameter>
@@ -105,7 +105,7 @@
         </service>
 
         <!-- (knp) menu-related -->
-        <service id="orchestra.menu.builder" class="%orchestra.menu.builder.class%">
+        <service id="orchestra.menu.knp_builder" class="%orchestra.menu.knp_builder.class%">
             <argument type="service" id="knp_menu.factory" />
             <argument type="service" id="orchestra.pool.repository_pool" />
             <argument type="service" id="orchestra.routing.repository_route_builder" />
@@ -114,7 +114,7 @@
         <service
                 id="orchestra.menu.main"
                 class="Knp\Menu\MenuItem"
-                factory-service="orchestra.menu.builder"
+                factory-service="orchestra.knp_builder.builder"
                 factory-method="createMainMenu"
                 scope="request"
         >
