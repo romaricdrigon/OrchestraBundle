@@ -8,7 +8,7 @@
         <parameter key="orchestra.pool.repository_pool.class">RomaricDrigon\OrchestraBundle\Core\Pool\RepositoryPool</parameter>
         <parameter key="orchestra.pool.entity_pool.class">RomaricDrigon\OrchestraBundle\Core\Pool\EntityPool</parameter>
         <parameter key="orchestra.pool.entity_pool_factory.class">RomaricDrigon\OrchestraBundle\Core\Pool\EntityPoolFactory</parameter>
-        <parameter key="orchestra.core_repository.action_builder">RomaricDrigon\OrchestraBundle\Core\Repository\Action\RepositoryActionCollectionBuilder</parameter>
+        <parameter key="orchestra.core_repository.action_collection_builder.class">RomaricDrigon\OrchestraBundle\Core\Repository\Action\RepositoryActionCollectionBuilder</parameter>
 
         <parameter key="orchestra.doctrine.repository_finder.class">RomaricDrigon\OrchestraBundle\Doctrine\DoctrineRepositoryFinder</parameter>
         <parameter key="orchestra.doctrine.repository_injecter.class">RomaricDrigon\OrchestraBundle\Doctrine\DoctrineInjecter</parameter>
@@ -51,7 +51,7 @@
         <service id="orchestra.pool.entity_pool_factory" class="%orchestra.pool.entity_pool_factory.class%">
             <argument type="service" id="orchestra.finder.entity_finder" />
         </service>
-        <service id="orchestra.core_repository.action_builder" class="%orchestra.core_repository.action_builder%" />
+        <service id="orchestra.core_repository.action_collection_builder" class="%orchestra.core_repository.action_collection_builder.class%" />
 
         <!-- resolver  -->
         <service id="orchestra.resolver.repository_name" class="%orchestra.resolver.repository_name.class%">
@@ -105,11 +105,13 @@
         </service>
 
         <!-- (knp) menu-related -->
+        <service id="orchestra.menu.repository_menu" class="%orchestra.menu.repository_menu.class%">
+            <argument type="service" id="orchestra.pool.repository_pool" />
+            <argument type="service" id="orchestra.core_repository.action_collection_builder" />
+        </service>
         <service id="orchestra.menu.knp_builder" class="%orchestra.menu.knp_builder.class%">
             <argument type="service" id="knp_menu.factory" />
-            <argument type="service" id="orchestra.pool.repository_pool" />
-            <argument type="service" id="orchestra.routing.repository_route_builder" />
-            <argument type="service" id="orchestra.resolver.repository_name" />
+            <argument type="service" id="orchestra.menu.repository_menu" />
         </service>
         <service
                 id="orchestra.menu.main"

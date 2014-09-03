@@ -49,4 +49,18 @@ class RepositoryActionCollection implements \IteratorAggregate, RepositoryAction
     {
         return count($this->actions);
     }
+
+    /**
+     * @inheritdoc
+     */
+    public function getListingAction()
+    {
+        foreach ($this->actions as $action) {
+            if (true === $action->isListing()) {
+                return $action;
+            }
+        }
+
+        return null;
+    }
 } 

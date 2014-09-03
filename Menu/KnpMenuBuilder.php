@@ -10,9 +10,8 @@
 namespace RomaricDrigon\OrchestraBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
-use RomaricDrigon\OrchestraBundle\Resolver\RepositoryNameResolverInterface;
-use RomaricDrigon\OrchestraBundle\Core\Pool\RepositoryPoolInterface;
-use RomaricDrigon\OrchestraBundle\Routing\RepositoryRouteBuilderInterface;
+use RomaricDrigon\OrchestraBundle\Exception\Domain\RepositoryInvalidException;
+use RomaricDrigon\OrchestraBundle\Core\Repository\Action\RepositoryActionInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -27,51 +26,47 @@ class KnpMenuBuilder
     protected $factory;
 
     /**
-     * @var RepositoryPoolInterface
+     * @var RepositoryMenuInterface
      */
-    protected $repositoryPool;
+    protected $repositoryMenu;
 
-    /**
-     * @var RepositoryRouteBuilderInterface
-     */
-    protected $repositoryRouteBuilder;
-
-    /**
-     * @var RepositoryNameResolverInterface
-     */
-    protected $repositoryNameResolver;
 
     /**
      * @param FactoryInterface $factory
-     * @param RepositoryPoolInterface $repositoryPool
-     * @param RepositoryRouteBuilderInterface $repositoryRouteBuilder
-     * @param RepositoryNameResolverInterface $repositoryNameResolver
+     * @param RepositoryMenuInterface $repositoryMenu
      */
-    public function __construct(FactoryInterface $factory, RepositoryPoolInterface $repositoryPool, RepositoryRouteBuilderInterface $repositoryRouteBuilder, RepositoryNameResolverInterface $repositoryNameResolver)
+    public function __construct(FactoryInterface $factory, RepositoryMenuInterface $repositoryMenu)
     {
         $this->factory  = $factory;
-        $this->repositoryPool   = $repositoryPool;
-        $this->repositoryRouteBuilder   = $repositoryRouteBuilder;
-        $this->repositoryNameResolver   = $repositoryNameResolver;
+        $this->repositoryMenu   = $repositoryMenu;
     }
 
     /**
      * Creates the "main" menu, the one on top of every page
      *
      * @param Request $request
+     * @throws \RomaricDrigon\OrchestraBundle\Exception\Domain\RepositoryInvalidException
      * @return \Knp\Menu\ItemInterface
      */
     public function createMainMenu(Request $request)
     {
         $menu = $this->factory->createItem('root');
 
-        $repositories = $this->repositoryPool->all();
+        $repositoriesMenu = $this->repositoryMenu->getMenu();
 
-        foreach ($repositories as $slug => $repository) {
-            $name = $this->repositoryNameResolver->getName($repository);
-            $routeName = $this->repositoryRouteBuilder->buildRouteName($slug);
+        foreach ($repositoriesMenu as $slug => $repositoryActions) {
+            // We have at least a "listing" action
+            $listing = $repositoryActions->getListingAction();
 
-            $menu->addChild($name, ['route' => $routeName]);
+            if (null === $listing) {
+                throw new RepositoryInvalidException($slug);
+            }
+            $oneRepoMenu = $menu->addChild($listing->getName(), ['route' => $listing->getRouteName()]);
+
+            /** @var RepositoryActionInterface $action */
+            foreach ($repositoryActions as $action) {
+                $oneRepoMenu->addChild($action->getName(), ['route' => $action->getRouteName()]);
+            }
         }
 
         return $menu;
