@@ -153,6 +153,7 @@ They must be declared as services, tagged with `orchestra.repository`:
 An Orchestra Repository is a Symfony2 service, so you can inject it dependencies.
 
 Orchestra can automatically resolve and inject to your service the corresponding Doctrine repository.
+They will also receive a copy of Orchestra `ObjectManager`.
 To benefit from this, just implement `RomaricDrigon\OrchestraBundle\Domain\Doctrine\DoctrineAwareInterface`.
 
 For simplicity, you can extends the provided `BaseRepository` class.
@@ -166,6 +167,8 @@ class MyRepository implements BaseRepository
 {
     public function someMethod()
     {
+        $objectManager = $this->objectManager;
+
         $doctrineRepository = $this->doctrineRepository;
 
         ...
