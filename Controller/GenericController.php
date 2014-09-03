@@ -119,7 +119,7 @@ class GenericController extends Controller
         if ($request->isMethod('POST')) {
             if ($form->handleRequest($request) && $form->isValid()) {
                 // Pass the command to the repository, and we're done!
-                call_user_func([$repository, $repository_method]);
+                call_user_func([$repository, $repository_method], $command);
 
                 $this->get('session')->getFlashBag()->add(
                     'notice',
