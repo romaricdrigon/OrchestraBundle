@@ -23,7 +23,9 @@
 
         <parameter key="orchestra.menu.repository_menu.class">RomaricDrigon\OrchestraBundle\Menu\RepositoryMenu</parameter>
         <parameter key="orchestra.menu.knp_builder.class">RomaricDrigon\OrchestraBundle\Menu\KnpMenuBuilder</parameter>
+
         <parameter key="orchestra.twig.orchestra_extension.class">RomaricDrigon\OrchestraBundle\Twig\OrchestraExtension</parameter>
+        <parameter key="orchestra.twig.bootstrap_form_extension.class">RomaricDrigon\OrchestraBundle\Twig\BootstrapFormExtension</parameter>
 
         <parameter key="orchestra.resolver.repository_name.class">RomaricDrigon\OrchestraBundle\Resolver\RepositoryNameResolver</parameter>
         <parameter key="orchestra.resolver.repository_entity.class">RomaricDrigon\OrchestraBundle\Resolver\RepositoryEntity\RepositoryEntityResolver</parameter>
@@ -124,6 +126,9 @@
         <!-- for Twig -->
         <service id="orchestra.twig.orchestra_extension" class="%orchestra.twig.orchestra_extension.class%">
             <argument>%orchestra.app_title%</argument>
+            <tag name="twig.extension" />
+        </service>
+        <service id="orchestra.twig.bootstrap_form_extension" class="%orchestra.twig.bootstrap_form_extension.class%">
             <tag name="twig.extension" />
         </service>
 
