@@ -45,6 +45,7 @@ class RepositoryActionCollectionBuilderTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('RomaricDrigon\OrchestraBundle\Core\Repository\Action\RepositoryActionInterface', $listing);
         $this->assertEquals('listing', $listing->getMethod());
         $this->assertEquals('Listing', $listing->getName());
+        $this->assertTrue($listing->isListing());
 
         /** @var RepositoryAction $camelCase */
         $camelCase = $array[1];
@@ -52,6 +53,7 @@ class RepositoryActionCollectionBuilderTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('RomaricDrigon\OrchestraBundle\Core\Repository\Action\RepositoryActionInterface', $camelCase);
         $this->assertEquals('someCamelCaseName', $camelCase->getMethod());
         $this->assertEquals('Some Camel Case Name', $camelCase->getName());
+        $this->assertFalse($camelCase->isListing());
     }
 }
 

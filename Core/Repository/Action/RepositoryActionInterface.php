@@ -28,6 +28,11 @@ interface RepositoryActionInterface
     /**
      * @return string
      */
+    public function getSlug();
+
+    /**
+     * @return string
+     */
     public function getRouteName();
 
     /**
@@ -35,4 +40,9 @@ interface RepositoryActionInterface
      * @return $this
      */
     public function setRouteName($routeName);
+
+    /**
+     * @return bool Is it the "listing" mandatory method?
+     */
+    public function isListing();
 } 

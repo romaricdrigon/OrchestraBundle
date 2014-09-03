@@ -31,6 +31,12 @@ class RepositoryAction implements RepositoryActionInterface
     protected $routeName;
 
     /**
+     * @var string
+     */
+    protected $slug;
+
+
+    /**
      * @param string $method
      * @param string $name
      */
@@ -38,6 +44,8 @@ class RepositoryAction implements RepositoryActionInterface
     {
         $this->method = $method;
         $this->name = $name;
+
+        $this->slug = strtolower($method);
     }
 
     /**
@@ -72,5 +80,21 @@ class RepositoryAction implements RepositoryActionInterface
     public function getRouteName()
     {
         return $this->routeName;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function isListing()
+    {
+        return ($this->method === 'listing');
     }
 } 
