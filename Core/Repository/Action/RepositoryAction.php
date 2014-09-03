@@ -26,13 +26,20 @@ class RepositoryAction implements RepositoryActionInterface
     protected $name;
 
     /**
+     * @var string
+     */
+    protected $routeName;
+
+    /**
      * @param string $method
      * @param string $name
+     * @param string $routeName
      */
-    public function __construct($method, $name)
+    public function __construct($method, $name, $routeName)
     {
         $this->method = $method;
         $this->name = $name;
+        $this->routeName = $routeName;
     }
 
     /**
@@ -49,5 +56,13 @@ class RepositoryAction implements RepositoryActionInterface
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getRouteName()
+    {
+        return $this->routeName;
     }
 } 

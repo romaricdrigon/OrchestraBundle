@@ -19,7 +19,8 @@ interface RepositoryActionCollectionBuilderInterface
 {
     /**
      * @param RepositoryInterface $repository
+     * @param string $slug
      * @return RepositoryActionCollection
      */
-    public function build(RepositoryInterface $repository);
+    public function build(RepositoryInterface $repository, $slug);
 } 

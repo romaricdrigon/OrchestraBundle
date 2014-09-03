@@ -24,4 +24,9 @@ interface RepositoryActionInterface
      * @return string name
      */
     public function getName();
+
+    /**
+     * @return string
+     */
+    public function getRouteName();
 } 
