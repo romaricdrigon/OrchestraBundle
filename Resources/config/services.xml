@@ -10,6 +10,7 @@
         <parameter key="orchestra.pool.entity_pool_factory.class">RomaricDrigon\OrchestraBundle\Core\Pool\EntityPoolFactory</parameter>
         <parameter key="orchestra.core_repository.action_builder.class">RomaricDrigon\OrchestraBundle\Core\Repository\Action\RepositoryActionBuilder</parameter>
         <parameter key="orchestra.core_repository.action_collection_builder.class">RomaricDrigon\OrchestraBundle\Core\Repository\Action\RepositoryActionCollectionBuilder</parameter>
+        <parameter key="orchestra.core_entity.action_builder.class">RomaricDrigon\OrchestraBundle\Core\Entity\Action\EntityActionBuilder</parameter>
 
         <parameter key="orchestra.doctrine.repository_finder.class">RomaricDrigon\OrchestraBundle\Doctrine\DoctrineRepositoryFinder</parameter>
         <parameter key="orchestra.doctrine.repository_injecter.class">RomaricDrigon\OrchestraBundle\Doctrine\DoctrineInjecter</parameter>
@@ -33,6 +34,7 @@
         <parameter key="orchestra.resolver.repository_route_name.class">RomaricDrigon\OrchestraBundle\Resolver\RepositoryRouteName\RepositoryRouteNameResolver</parameter>
         <parameter key="orchestra.resolver.listing_header.class">RomaricDrigon\OrchestraBundle\Resolver\ListingHeader\ListingHeaderResolver</parameter>
         <parameter key="orchestra.resolver.hidden_action.class">RomaricDrigon\OrchestraBundle\Resolver\HiddenAction\HiddenActionResolver</parameter>
+        <parameter key="orchestra.resolver.entity_route_name.class">RomaricDrigon\OrchestraBundle\Resolver\EntityRouteName\EntityRouteNameResolver</parameter>
 
         <parameter key="orchestra.finder.entity_finder.class">RomaricDrigon\OrchestraBundle\Finder\EntityFinder</parameter>
         <parameter key="orchestra.finder.entity_loader.class">RomaricDrigon\OrchestraBundle\Finder\EntityLoader</parameter>
@@ -67,6 +69,10 @@
             <argument type="service" id="orchestra.resolver.repository_name" />
             <argument type="service" id="orchestra.core_repository.action_builder" />
         </service>
+        <service id="orchestra.core_entity.action_builder" class="%orchestra.core_entity.action_builder.class%" public="false">
+            <argument type="service" id="orchestra.resolver.entity_route_name" />
+            <argument type="service" id="orchestra.resolver.hidden_action" />
+        </service>
 
         <!-- resolver  -->
         <service id="orchestra.resolver.repository_name" class="%orchestra.resolver.repository_name.class%">
@@ -83,6 +89,7 @@
             <argument type="service" id="orchestra.resolver.repository_slug" />
         </service>
         <service id="orchestra.resolver.listing_header" class="%orchestra.resolver.listing_header.class%" />
+        <service id="orchestra.resolver.entity_route_name" class="%orchestra.resolver.entity_route_name.class%" />
 
         <!-- finder and pool factory -->
         <service id="orchestra.finder.entity_finder" class="%orchestra.finder.entity_finder.class%" public="false">
