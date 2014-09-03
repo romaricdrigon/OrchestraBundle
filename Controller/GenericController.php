@@ -122,7 +122,7 @@ class GenericController extends Controller
                 call_user_func([$repository, $repository_method], $command);
 
                 $this->get('session')->getFlashBag()->add(
-                    'notice',
+                    'success',
                     'Command run with success!'
                 );
 

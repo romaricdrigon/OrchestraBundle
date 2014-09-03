@@ -5,6 +5,30 @@
 
     {% block page %}
         <div class="container">
+            {% block flashbag %}
+                {% block success_flashbag %}
+                    {% for flashMessage in app.session.flashbag.get('success') %}
+                        <div class="alert alert-success" role="alert">
+                            {{ flashMessage }}
+                        </div>
+                    {% endfor %}
+                {% endblock success_flashbag %}
+                {% block notice_flashbag %}
+                    {% for flashMessage in app.session.flashbag.get('notice') %}
+                        <div class="alert alert-info" role="alert">
+                            {{ flashMessage }}
+                        </div>
+                    {% endfor %}
+                {% endblock notice_flashbag %}
+                {% block error_flashbag %}
+                    {% for flashMessage in app.session.flashbag.get('error') %}
+                        <div class="alert alert-danger" role="alert">
+                            {{ flashMessage }}
+                        </div>
+                    {% endfor %}
+                {% endblock error_flashbag %}
+            {% endblock flashbag %}
+
             {% block content '' %}
         </div>
     {% endblock page %}
