@@ -11,6 +11,8 @@ namespace RomaricDrigon\OrchestraBundle\Domain\Command;
 
 /**
  * Interface CommandInterface
+ * Watch out: a Command constructor will never be called by Orchestra
+ *
  * @author Romaric Drigon <romaric.drigon@gmail.com>
  */
 interface CommandInterface

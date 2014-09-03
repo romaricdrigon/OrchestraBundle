@@ -10,6 +10,7 @@
 namespace RomaricDrigon\OrchestraBundle\Controller;
 
 use RomaricDrigon\OrchestraBundle\Core\Entity\EntityReflectionInterface;
+use RomaricDrigon\OrchestraBundle\Domain\Command\CommandInterface;
 use RomaricDrigon\OrchestraBundle\Domain\Repository\RepositoryInterface;
 use RomaricDrigon\OrchestraBundle\Exception\Domain\EntityNotListableException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -104,9 +105,10 @@ class GenericController extends Controller
      * @param \RomaricDrigon\OrchestraBundle\Domain\Repository\RepositoryInterface $repository
      * @param EntityReflectionInterface $entity
      * @param string $repository_method
+     * @param CommandInterface $command
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function repositoryCommandAction(RepositoryInterface $repository, EntityReflectionInterface $entity, $repository_method)
+    public function repositoryCommandAction(RepositoryInterface $repository, EntityReflectionInterface $entity, $repository_method, CommandInterface $command)
     {
         return $this->render('RomaricDrigonOrchestraBundle:Generic:dashboard.html.twig', []);
     }

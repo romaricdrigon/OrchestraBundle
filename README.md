@@ -102,6 +102,8 @@ Watch out, as of PHP 5.4.30, interface implementation order counts, you must imp
 Any entity method can accept an object implementing `CommandInterface`.
 Such method will be transformed into a web page with a Form.
 
+*Note*: Orchestra will never call any Command constructor.
+
 #### Persisting
 
 Usually, they are persisted. Orchestra supports Doctrine ORM through its Symfony2 bridge.
