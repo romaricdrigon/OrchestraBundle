@@ -13,7 +13,7 @@ namespace RomaricDrigon\OrchestraBundle\Core\Repository\Action;
  * Class RepositoryActionCollection
  * @author Romaric Drigon <romaric.drigon@gmail.com>
  */
-class RepositoryActionCollection implements RepositoryActionCollectionInterface, \IteratorAggregate
+class RepositoryActionCollection implements \IteratorAggregate, RepositoryActionCollectionInterface
 {
     /**
      * @var RepositoryActionInterface[]
@@ -37,5 +37,15 @@ class RepositoryActionCollection implements RepositoryActionCollectionInterface,
      */
     public function getIterator() {
         return new \ArrayIterator($this->actions);
+    }
+
+    /**
+     * Required by \Countable
+     *
+     * @inheritdoc
+     */
+    public function count()
+    {
+        return count($this->actions);
     }
 } 

@@ -52,6 +52,8 @@ class RepositoryActionCollectionBuilder implements RepositoryActionCollectionBui
     {
         $name = preg_replace('/([:upper:])/', '/ $1/', $name);
 
+        $name = ucfirst($name);
+
         return trim($name);
     }
 } 

@@ -13,7 +13,7 @@ namespace RomaricDrigon\OrchestraBundle\Core\Repository\Action;
  * Interface RepositoryActionCollection
  * @author Romaric Drigon <romaric.drigon@gmail.com>
  */
-interface RepositoryActionCollectionInterface extends \Traversable
+interface RepositoryActionCollectionInterface extends \Traversable, \Countable
 {
     /**
      * @param RepositoryActionInterface $repositoryAction
