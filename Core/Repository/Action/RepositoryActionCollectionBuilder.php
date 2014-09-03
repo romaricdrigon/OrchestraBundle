@@ -10,7 +10,6 @@
 namespace RomaricDrigon\OrchestraBundle\Core\Repository\Action;
 
 use RomaricDrigon\OrchestraBundle\Domain\Repository\RepositoryInterface;
-use RomaricDrigon\OrchestraBundle\Routing\RepositoryRouteBuilderInterface;
 
 /**
  * Class RepositoryActionCollectionBuilder
@@ -19,23 +18,9 @@ use RomaricDrigon\OrchestraBundle\Routing\RepositoryRouteBuilderInterface;
 class RepositoryActionCollectionBuilder implements RepositoryActionCollectionBuilderInterface
 {
     /**
-     * @var \RomaricDrigon\OrchestraBundle\Routing\RepositoryRouteBuilderInterface
-     */
-    protected $repositoryRouteBuilder;
-
-
-    /**
-     * @param RepositoryRouteBuilderInterface $repositoryRouteBuilder
-     */
-    public function __construct(RepositoryRouteBuilderInterface $repositoryRouteBuilder)
-    {
-        $this->repositoryRouteBuilder = $repositoryRouteBuilder;
-    }
-
-    /**
      * @inheritdoc
      */
-    public function build(RepositoryInterface $repository, $slug)
+    public function build(RepositoryInterface $repository)
     {
         $reflection = new \ReflectionClass($repository);
 
@@ -49,9 +34,7 @@ class RepositoryActionCollectionBuilder implements RepositoryActionCollectionBui
             // For now, name is the humanized version of Method name
             $name = $this->humanizeName($methodName);
 
-            $routeName = $this->repositoryRouteBuilder->buildRouteName($slug);
-
-            $action = new RepositoryAction($methodName, $name, $routeName);
+            $action = new RepositoryAction($methodName, $name);
 
             $collection->addAction($action);
         }

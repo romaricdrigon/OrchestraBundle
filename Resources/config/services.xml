@@ -51,9 +51,7 @@
         <service id="orchestra.pool.entity_pool_factory" class="%orchestra.pool.entity_pool_factory.class%">
             <argument type="service" id="orchestra.finder.entity_finder" />
         </service>
-        <service id="orchestra.core_repository.action_builder" class="%orchestra.core_repository.action_builder%">
-            <argument type="service" id="orchestra.routing.repository_route_builder" />
-        </service>
+        <service id="orchestra.core_repository.action_builder" class="%orchestra.core_repository.action_builder%" />
 
         <!-- resolver  -->
         <service id="orchestra.resolver.repository_name" class="%orchestra.resolver.repository_name.class%">

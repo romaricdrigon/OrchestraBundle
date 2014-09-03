@@ -29,4 +29,10 @@ interface RepositoryActionInterface
      * @return string
      */
     public function getRouteName();
+
+    /**
+     * @param string $routeName
+     * @return $this
+     */
+    public function setRouteName($routeName);
 } 

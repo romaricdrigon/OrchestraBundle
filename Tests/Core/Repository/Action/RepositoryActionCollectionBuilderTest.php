@@ -26,18 +26,14 @@ class RepositoryActionCollectionBuilderTest extends \PHPUnit_Framework_TestCase
     
     public function setUp()
     {
-        $builder = \Phake::mock('RomaricDrigon\OrchestraBundle\Routing\RepositoryRouteBuilder');
-
-        \Phake::when($builder)->buildRouteName('mock')->thenReturn('name_mock');
-
-        $this->sut = new RepositoryActionCollectionBuilder($builder);
+        $this->sut = new RepositoryActionCollectionBuilder();
     }
 
     public function test_it_builds_collection()
     {
         $repo = new MockRepository();
 
-        $this->assertInstanceOf('RomaricDrigon\OrchestraBundle\Core\Repository\Action\RepositoryActionCollectionInterface', $collection = $this->sut->build($repo, 'mock'));
+        $this->assertInstanceOf('RomaricDrigon\OrchestraBundle\Core\Repository\Action\RepositoryActionCollectionInterface', $collection = $this->sut->build($repo));
 
         $this->assertEquals(2, count($collection));
 
@@ -49,7 +45,6 @@ class RepositoryActionCollectionBuilderTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('RomaricDrigon\OrchestraBundle\Core\Repository\Action\RepositoryActionInterface', $listing);
         $this->assertEquals('listing', $listing->getMethod());
         $this->assertEquals('Listing', $listing->getName());
-        $this->assertEquals('name_mock', $listing->getRouteName());
 
         /** @var RepositoryAction $camelCase */
         $camelCase = $array[1];
@@ -57,7 +52,6 @@ class RepositoryActionCollectionBuilderTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('RomaricDrigon\OrchestraBundle\Core\Repository\Action\RepositoryActionInterface', $camelCase);
         $this->assertEquals('someCamelCaseName', $camelCase->getMethod());
         $this->assertEquals('Some Camel Case Name', $camelCase->getName());
-        $this->assertEquals('name_mock', $camelCase->getRouteName());
     }
 }
 
