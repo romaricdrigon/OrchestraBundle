@@ -37,10 +37,11 @@ class RepositoryRouteCollectionBuilder implements RepositoryRouteCollectionBuild
         $repositories = $pool->all();
 
         foreach ($repositories as $slug => $repository) {
-            $routeName = $this->repositoryRouteBuilder->buildRouteName($slug);
-            $route = $this->repositoryRouteBuilder->buildRoute($repository, $slug);
+            $routes = $this->repositoryRouteBuilder->buildRoute($repository, $slug);
 
-            $collection->add($routeName, $route);
+            foreach ($routes as $routeName => $route) {
+                $collection->add($routeName, $route);
+            }
         }
 
         return $collection;

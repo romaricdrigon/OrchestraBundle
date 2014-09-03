@@ -19,19 +19,11 @@ use RomaricDrigon\OrchestraBundle\Domain\Repository\RepositoryInterface;
 interface RepositoryRouteBuilderInterface
 {
     /**
-     * Build name under which the route will be added to routing
-     *
-     * @param string $slug
-     * @return string
-     */
-    public function buildRouteName($slug);
-
-    /**
      * Build a Symfony Route for given repository
      *
      * @param RepositoryInterface $repositoryInterface
      * @param string $slug
-     * @return Route
+     * @return Route[]
      */
-    public function buildRoute(RepositoryInterface $repositoryInterface, $slug);
+    public function buildRoutes(RepositoryInterface $repositoryInterface, $slug);
 }
