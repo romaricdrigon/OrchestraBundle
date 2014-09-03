@@ -47,9 +47,9 @@ class RepositoryRouteBuilderTest extends \PHPUnit_Framework_TestCase
         $builder = \Phake::mock('RomaricDrigon\OrchestraBundle\Core\Repository\Action\RepositoryActionCollectionBuilder');
 
         $collection = (new RepositoryActionCollection('mock'))
-            ->addAction($this->action1 = new RepositoryAction('m1', 'n1'))
-            ->addAction($this->action2 = new RepositoryAction('m2', 'n2'))
-            ->addAction($this->action3 = new RepositoryAction('listing', 'listing'))
+            ->addAction($this->action1 = new RepositoryAction('m1', 'n1', 'r1', 's1'))
+            ->addAction($this->action2 = new RepositoryAction('m2', 'n2', 'r2', 's2'))
+            ->addAction($this->action3 = new RepositoryAction('listing', 'listing', 'listing', 'listing'))
         ;
 
         \Phake::when($builder)->build($this->anything())->thenReturn($collection);
@@ -67,33 +67,33 @@ class RepositoryRouteBuilderTest extends \PHPUnit_Framework_TestCase
 
         $this->assertCount(3, $routes);
 
-        $this->assertArrayHasKey('orchestra_repository_mock_m1', $routes);
+        $this->assertArrayHasKey('r1', $routes);
 
         /** @var Route $r1 */
-        $r1 = $routes['orchestra_repository_mock_m1'];
+        $r1 = $routes['r1'];
 
-        $this->assertEquals('/mock/m1', $r1->getPath());
+        $this->assertEquals('/mock/s1', $r1->getPath());
         $this->assertEquals('RomaricDrigonOrchestraBundle:Generic:repositoryMethod', $r1->getDefault('_controller'));
         $this->assertEquals('mock', $r1->getDefault('repository_slug'));
         $this->assertEquals('m1', $r1->getDefault('repository_method'));
         $this->assertEquals(RepositoryRouteBuilder::ROUTE_TYPE, $r1->getDefault('orchestra_type'));
         $this->assertEquals('GET', $r1->getRequirement('_method'));
 
-        $this->assertArrayHasKey('orchestra_repository_mock_m2', $routes);
+        $this->assertArrayHasKey('r2', $routes);
 
         /** @var Route $r2 */
-        $r2 = $routes['orchestra_repository_mock_m2'];
+        $r2 = $routes['r2'];
 
-        $this->assertEquals('/mock/m2', $r2->getPath());
+        $this->assertEquals('/mock/s2', $r2->getPath());
         $this->assertEquals('RomaricDrigonOrchestraBundle:Generic:repositoryMethod', $r2->getDefault('_controller'));
         $this->assertEquals('mock', $r2->getDefault('repository_slug'));
         $this->assertEquals('m2', $r2->getDefault('repository_method'));
         $this->assertEquals(RepositoryRouteBuilder::ROUTE_TYPE, $r2->getDefault('orchestra_type'));
 
-        $this->assertArrayHasKey('orchestra_repository_mock_listing', $routes);
+        $this->assertArrayHasKey('listing', $routes);
 
         /** @var Route $listing */
-        $listing = $routes['orchestra_repository_mock_listing'];
+        $listing = $routes['listing'];
 
         $this->assertEquals('/mock/listing', $listing->getPath());
         $this->assertEquals('RomaricDrigonOrchestraBundle:Generic:list', $listing->getDefault('_controller'));
