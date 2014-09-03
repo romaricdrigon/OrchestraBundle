@@ -11,7 +11,6 @@ namespace RomaricDrigon\OrchestraBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
 use RomaricDrigon\OrchestraBundle\Core\Repository\Action\RepositoryActionInterface;
-use RomaricDrigon\OrchestraBundle\Resolver\RepositoryNameResolverInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -30,22 +29,15 @@ class KnpMenuBuilder
      */
     protected $repositoryMenu;
 
-    /**
-     * @var RepositoryNameResolverInterface
-     */
-    protected $repositoryNameResolver;
-
 
     /**
      * @param FactoryInterface $factory
      * @param RepositoryMenuInterface $repositoryMenu
-     * @param RepositoryNameResolverInterface $repositoryNameResolver
      */
-    public function __construct(FactoryInterface $factory, RepositoryMenuInterface $repositoryMenu, RepositoryNameResolverInterface $repositoryNameResolver)
+    public function __construct(FactoryInterface $factory, RepositoryMenuInterface $repositoryMenu)
     {
         $this->factory = $factory;
         $this->repositoryMenu = $repositoryMenu;
-        $this->repositoryNameResolver = $repositoryNameResolver;
     }
 
     /**
