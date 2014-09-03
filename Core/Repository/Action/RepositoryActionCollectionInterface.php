@@ -25,4 +25,9 @@ interface RepositoryActionCollectionInterface extends \Traversable, \Countable
      * @return null|RepositoryActionInterface
      */
     public function getListingAction();
+
+    /**
+     * @return string Repository public name
+     */
+    public function getName();
 } 

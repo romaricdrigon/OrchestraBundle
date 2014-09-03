@@ -46,7 +46,7 @@ class RepositoryRouteBuilderTest extends \PHPUnit_Framework_TestCase
     {
         $builder = \Phake::mock('RomaricDrigon\OrchestraBundle\Core\Repository\Action\RepositoryActionCollectionBuilder');
 
-        $collection = (new RepositoryActionCollection())
+        $collection = (new RepositoryActionCollection('mock'))
             ->addAction($this->action1 = new RepositoryAction('m1', 'n1'))
             ->addAction($this->action2 = new RepositoryAction('m2', 'n2'))
             ->addAction($this->action3 = new RepositoryAction('listing', 'listing'))

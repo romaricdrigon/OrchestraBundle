@@ -21,6 +21,20 @@ class RepositoryActionCollection implements \IteratorAggregate, RepositoryAction
     protected $actions = [];
 
     /**
+     * @var string
+     */
+    protected $name;
+
+
+    /**
+     * @param string $name
+     */
+    public function __construct($name)
+    {
+        $this->name = $name;
+    }
+
+    /**
      * @inheritdoc
      */
     public function addAction(RepositoryActionInterface $repositoryAction)
@@ -62,5 +76,13 @@ class RepositoryActionCollection implements \IteratorAggregate, RepositoryAction
         }
 
         return null;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getName()
+    {
+        return $this->name;
     }
 } 

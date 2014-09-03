@@ -26,7 +26,11 @@ class RepositoryActionCollectionBuilderTest extends \PHPUnit_Framework_TestCase
     
     public function setUp()
     {
-        $this->sut = new RepositoryActionCollectionBuilder();
+        $nameResolver = \Phake::mock('RomaricDrigon\OrchestraBundle\Resolver\RepositoryNameResolver');
+
+        \Phake::when($nameResolver)->getName($this->anything())->thenReturn('mock');
+
+        $this->sut = new RepositoryActionCollectionBuilder($nameResolver);
     }
 
     public function test_it_builds_collection()
@@ -36,6 +40,7 @@ class RepositoryActionCollectionBuilderTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('RomaricDrigon\OrchestraBundle\Core\Repository\Action\RepositoryActionCollectionInterface', $collection = $this->sut->build($repo));
 
         $this->assertEquals(2, count($collection));
+        $this->assertEquals('mock', $collection->getName());
 
         $array = iterator_to_array($collection);
 

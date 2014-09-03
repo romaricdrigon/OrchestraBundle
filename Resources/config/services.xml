@@ -52,7 +52,9 @@
         <service id="orchestra.pool.entity_pool_factory" class="%orchestra.pool.entity_pool_factory.class%">
             <argument type="service" id="orchestra.finder.entity_finder" />
         </service>
-        <service id="orchestra.core_repository.action_collection_builder" class="%orchestra.core_repository.action_collection_builder.class%" />
+        <service id="orchestra.core_repository.action_collection_builder" class="%orchestra.core_repository.action_collection_builder.class%">
+            <argument type="service" id="orchestra.resolver.repository_name" />
+        </service>
 
         <!-- resolver  -->
         <service id="orchestra.resolver.repository_name" class="%orchestra.resolver.repository_name.class%">
