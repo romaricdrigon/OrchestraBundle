@@ -19,5 +19,11 @@ interface HiddenActionResolverInterface
      * @param object $object
      * @return bool
      */
-    public function isHidden($object);
+    public function isHiddenObject($object);
+
+    /**
+     * @param \ReflectionMethod $reflectionMethod
+     * @return bool
+     */
+    public function isHiddenReflectionMethod(\ReflectionMethod $reflectionMethod);
 } 

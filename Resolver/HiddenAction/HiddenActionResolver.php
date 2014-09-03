@@ -36,11 +36,25 @@ class HiddenActionResolver implements HiddenActionResolverInterface
     /**
      * @inheritdoc
      */
-    public function isHidden($object)
+    public function isHiddenObject($object)
     {
         $reflectionObject = new \ReflectionObject($object);
 
         $annotation = $this->annotationReader->getClassAnnotation($reflectionObject, $this->annotationClass);
+
+        if (null !== $annotation) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function isHiddenReflectionMethod(\ReflectionMethod $reflectionMethod)
+    {
+        $annotation = $this->annotationReader->getMethodAnnotation($reflectionMethod, $this->annotationClass);
 
         if (null !== $annotation) {
             return true;
