@@ -29,10 +29,15 @@ class RepositoryRouteCollectionBuilderTest extends \PHPUnit_Framework_TestCase
     {
         $builder = \Phake::mock('RomaricDrigon\OrchestraBundle\Routing\RepositoryRouteBuilder');
 
-        \Phake::when($builder)->buildRouteName('mock1')->thenReturn('name_mock1');
-        \Phake::when($builder)->buildRouteName('mock2')->thenReturn('name_mock2');
+        \Phake::when($builder)->buildRoutes($this->anything(), 'mock1')->thenReturn([
+            'name1' => new Route('path1'),
+            'name2' => new Route('path2')
+        ]);
 
-        \Phake::when($builder)->buildRoute($this->anything(), $this->anything())->thenReturn(new Route('path1'));
+        \Phake::when($builder)->buildRoutes($this->anything(), 'mock2')->thenReturn([
+            'name3' => new Route('path3'),
+            'name4' => new Route('path4')
+        ]);
 
         $this->sut = new RepositoryRouteCollectionBuilder($builder);
     }
@@ -63,10 +68,12 @@ class RepositoryRouteCollectionBuilderTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInstanceOf('Symfony\Component\Routing\RouteCollection', $collection);
 
-        $this->assertEquals(2, count($collection));
+        $this->assertEquals(4, count($collection));
 
-        $this->assertNotNull($collection->get('name_mock1'));
-        $this->assertNotNull($collection->get('name_mock2'));
+        $this->assertNotNull($collection->get('name1'));
+        $this->assertNotNull($collection->get('name2'));
+        $this->assertNotNull($collection->get('name3'));
+        $this->assertNotNull($collection->get('name4'));
 
         $this->assertNull($collection->get('foo'));
     }
