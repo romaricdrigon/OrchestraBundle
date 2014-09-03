@@ -97,4 +97,17 @@ class GenericController extends Controller
     {
         return $this->render('RomaricDrigonOrchestraBundle:Generic:dashboard.html.twig', []);
     }
+
+    /**
+     * Action used when a method accepting a Command, on en Repository is called
+     *
+     * @param \RomaricDrigon\OrchestraBundle\Domain\Repository\RepositoryInterface $repository
+     * @param EntityReflectionInterface $entity
+     * @param string $repository_method
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function repositoryCommandAction(RepositoryInterface $repository, EntityReflectionInterface $entity, $repository_method)
+    {
+        return $this->render('RomaricDrigonOrchestraBundle:Generic:dashboard.html.twig', []);
+    }
 }

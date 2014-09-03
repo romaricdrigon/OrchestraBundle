@@ -48,7 +48,7 @@ class RepositoryRouteBuilderTest extends \PHPUnit_Framework_TestCase
 
         $collection = (new RepositoryActionCollection('mock'))
             ->addAction($this->action1 = new RepositoryAction('m1', 'n1', 'r1', 's1'))
-            ->addAction($this->action2 = new RepositoryAction('m2', 'n2', 'r2', 's2'))
+            ->addAction($this->action2 = new RepositoryAction('m2', 'n2', 'r2', 's2', 'Some\Class\Command'))
             ->addAction($this->action3 = new RepositoryAction('listing', 'listing', 'listing', 'listing'))
         ;
 
@@ -78,6 +78,7 @@ class RepositoryRouteBuilderTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('m1', $r1->getDefault('repository_method'));
         $this->assertEquals(RepositoryRouteBuilder::ROUTE_TYPE, $r1->getDefault('orchestra_type'));
         $this->assertEquals('GET', $r1->getRequirement('_method'));
+        $this->assertNull($r1->getDefault('command_class'));
 
         $this->assertArrayHasKey('r2', $routes);
 
@@ -85,10 +86,11 @@ class RepositoryRouteBuilderTest extends \PHPUnit_Framework_TestCase
         $r2 = $routes['r2'];
 
         $this->assertEquals('/mock/s2', $r2->getPath());
-        $this->assertEquals('RomaricDrigonOrchestraBundle:Generic:repositoryMethod', $r2->getDefault('_controller'));
+        $this->assertEquals('RomaricDrigonOrchestraBundle:Generic:repositoryCommand', $r2->getDefault('_controller'));
         $this->assertEquals('mock', $r2->getDefault('repository_slug'));
         $this->assertEquals('m2', $r2->getDefault('repository_method'));
         $this->assertEquals(RepositoryRouteBuilder::ROUTE_TYPE, $r2->getDefault('orchestra_type'));
+        $this->assertEquals('Some\Class\Command', $r2->getDefault('command_class'));
 
         $this->assertArrayHasKey('listing', $routes);
 
@@ -100,6 +102,7 @@ class RepositoryRouteBuilderTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('mock', $listing->getDefault('repository_slug'));
         $this->assertEquals('listing', $listing->getDefault('repository_method'));
         $this->assertEquals(RepositoryRouteBuilder::ROUTE_TYPE, $listing->getDefault('orchestra_type'));
+        $this->assertNull($listing->getDefault('command_class'));
     }
 }
 

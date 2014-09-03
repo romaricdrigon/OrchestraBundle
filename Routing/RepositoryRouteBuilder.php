@@ -31,7 +31,12 @@ class RepositoryRouteBuilder implements RepositoryRouteBuilderInterface
     protected $genericController = 'RomaricDrigonOrchestraBundle:Generic:repositoryMethod';
 
     /**
-     * @var string methods allowed to o access to our repository
+     * @var string the controller action a repository method accepting a Command will redirect to
+     */
+    protected $commandController = 'RomaricDrigonOrchestraBundle:Generic:repositoryCommand';
+
+    /**
+     * @var string methods allowed to access to our repository
      */
     protected $methodRequirement = 'GET';
 
@@ -65,15 +70,9 @@ class RepositoryRouteBuilder implements RepositoryRouteBuilderInterface
 
         /** @var RepositoryActionInterface $action */
         foreach ($collection as $action) {
-            $controller = $this->genericController;
-
-            if (true === $action->isListing()) {
-                $controller = $this->listingController;
-            }
-
             $pattern = '/'.$slug.'/'.$action->getSlug();
             $defaults = [
-                '_controller'       => $controller,
+                '_controller'       => $this->genericController,
                 'orchestra_type'    => $this::ROUTE_TYPE,
                 'repository_method' => $action->getMethod(),
                 'repository_slug'   => $slug
@@ -81,6 +80,19 @@ class RepositoryRouteBuilder implements RepositoryRouteBuilderInterface
             $requirements = [
                 '_method'       => $this->methodRequirement
             ];
+
+            if (true === $action->isListing()) {
+                $defaults['_controller'] = $this->listingController;
+            }
+
+            if (true === $action->isCommand()) {
+                $defaults['_controller'] = $this->commandController;
+
+                // We add a "command"
+                $defaults['command_class'] = $action->getCommandClass();
+
+                $requirements['_method'] = 'GET|POST';
+            }
 
             $route = new Route($pattern, $defaults, $requirements);
             $routeName = $action->getRouteName();
