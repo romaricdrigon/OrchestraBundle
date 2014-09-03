@@ -35,7 +35,8 @@ class RepositoryActionCollection implements \IteratorAggregate, RepositoryAction
      *
      * @inheritdoc
      */
-    public function getIterator() {
+    public function getIterator()
+    {
         return new \ArrayIterator($this->actions);
     }
 

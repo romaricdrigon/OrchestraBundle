@@ -50,7 +50,7 @@ class RepositoryActionCollectionBuilder implements RepositoryActionCollectionBui
      */
     protected function humanizeName($name)
     {
-        $name = preg_replace('/([:upper:])/', '/ $1/', $name);
+        $name = preg_replace('/([A-Z]{1})/', ' $1', $name);
 
         $name = ucfirst($name);
 
