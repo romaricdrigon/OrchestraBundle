@@ -13,6 +13,7 @@
 
         <parameter key="orchestra.doctrine.repository_finder.class">RomaricDrigon\OrchestraBundle\Doctrine\DoctrineRepositoryFinder</parameter>
         <parameter key="orchestra.doctrine.repository_injecter.class">RomaricDrigon\OrchestraBundle\Doctrine\DoctrineInjecter</parameter>
+        <parameter key="orchestra.doctrine.object_manager.class">RomaricDrigon\OrchestraBundle\Doctrine\ObjectManager</parameter>
 
         <parameter key="orchestra.routing.repository_route_builder.class">RomaricDrigon\OrchestraBundle\Routing\RepositoryRouteBuilder</parameter>
         <parameter key="orchestra.routing.entity_route_builder.class">RomaricDrigon\OrchestraBundle\Routing\EntityRouteBuilder</parameter>
@@ -95,6 +96,9 @@
         </service>
         <service id="orchestra.doctrine.repository_injecter" class="%orchestra.doctrine.repository_injecter.class%">
             <argument type="service" id="orchestra.doctrine.repository_finder" />
+        </service>
+        <service id="orchestra.doctrine.object_manager" class="%orchestra.doctrine.object_manager.class%">
+            <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
 
         <!-- routing-related -->
