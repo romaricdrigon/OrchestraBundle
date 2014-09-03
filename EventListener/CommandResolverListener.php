@@ -51,8 +51,6 @@ class CommandResolverListener implements EventSubscriberInterface
 
         $command = $reflection->newInstanceWithoutConstructor();
 
-        // TODO: map with request
-
         $request->attributes->set('command', $command);
     }
 }
