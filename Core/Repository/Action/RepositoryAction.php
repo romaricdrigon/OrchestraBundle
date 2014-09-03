@@ -35,19 +35,26 @@ class RepositoryAction implements RepositoryActionInterface
      */
     protected $slug;
 
+    /**
+     * @var null|string
+     */
+    protected $command;
+
 
     /**
      * @param string $method
      * @param string $name
      * @param string $routeName
+     * @param string $slug
+     * @param string|null $command
      */
-    public function __construct($method, $name, $routeName)
+    public function __construct($method, $name, $routeName, $slug, $command)
     {
-        $this->method = $method;
-        $this->name = $name;
+        $this->method   = $method;
+        $this->name     = $name;
         $this->routeName = $routeName;
-
-        $this->slug = strtolower($method);
+        $this->slug     = $slug;
+        $this->command  = $command;
     }
 
     /**
@@ -80,6 +87,22 @@ class RepositoryAction implements RepositoryActionInterface
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function isCommand()
+    {
+        return (null !== $this->command);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getCommandClass()
+    {
+        return $this->command;
     }
 
     /**

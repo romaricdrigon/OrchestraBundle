@@ -39,4 +39,14 @@ interface RepositoryActionInterface
      * @return bool Is it the "listing" mandatory method?
      */
     public function isListing();
+
+    /**
+     * @return bool is it Command action?
+     */
+    public function isCommand();
+
+    /**
+     * @return null|string
+     */
+    public function getCommandClass();
 } 
