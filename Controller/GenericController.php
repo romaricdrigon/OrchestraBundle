@@ -13,7 +13,9 @@ use RomaricDrigon\OrchestraBundle\Core\Entity\EntityReflectionInterface;
 use RomaricDrigon\OrchestraBundle\Domain\Command\CommandInterface;
 use RomaricDrigon\OrchestraBundle\Domain\Repository\RepositoryInterface;
 use RomaricDrigon\OrchestraBundle\Exception\Domain\EntityNotListableException;
+use RomaricDrigon\OrchestraBundle\Form\Type\CommandType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class GenericController
@@ -102,14 +104,41 @@ class GenericController extends Controller
     /**
      * Action used when a method accepting a Command, on en Repository is called
      *
-     * @param \RomaricDrigon\OrchestraBundle\Domain\Repository\RepositoryInterface $repository
-     * @param EntityReflectionInterface $entity
+     * @param Request $request
+     * @param RepositoryInterface $repository
      * @param string $repository_method
      * @param CommandInterface $command
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function repositoryCommandAction(RepositoryInterface $repository, EntityReflectionInterface $entity, $repository_method, CommandInterface $command)
+    public function repositoryCommandAction(Request $request, RepositoryInterface $repository, $repository_method, CommandInterface $command)
     {
-        return $this->render('RomaricDrigonOrchestraBundle:Generic:dashboard.html.twig', []);
+        $form = $this->createForm(new CommandType($command), $command);
+
+        $repoName = $this->get('orchestra.resolver.repository_name')->getName($repository);
+
+        if ($request->isMethod('POST')) {
+            if ($form->handleRequest($request) && $form->isValid()) {
+                // Pass the command to the repository, and we're done!
+                call_user_func([$repository, $repository_method]);
+
+                $this->get('session')->getFlashBag()->add(
+                    'notice',
+                    'Command run with success!'
+                );
+
+                // TODO: redirect to Repository listing
+                //return $this->redirect($this->generateUrl('agency_list'));
+            } else {
+                $this->get('session')->getFlashBag()->add(
+                    'error',
+                    'An error happened!'
+                );
+            }
+        }
+
+        return $this->render('RomaricDrigonOrchestraBundle:Generic:repositoryCommand.html.twig', [
+            'form'  => $form->createView(),
+            'title' => $repoName
+        ]);
     }
 }

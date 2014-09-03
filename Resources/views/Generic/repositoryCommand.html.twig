@@ -1,0 +1,13 @@
+{% extends 'RomaricDrigonOrchestraBundle::base.html.twig' %}
+
+{% block title %}
+    {{ orchestra_app_title }} - {{ title }}
+{% endblock title %}
+
+{% block content %}
+    <h1>{{ title }}</h1>
+
+    {% block form %}
+        {{ form(form) }}
+    {% endblock form %}
+{% endblock content %}
