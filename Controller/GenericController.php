@@ -125,7 +125,7 @@ class GenericController extends Controller
      */
     public function repositoryCommandAction(Request $request, RepositoryInterface $repository, $repository_method, CommandInterface $command)
     {
-        $form = $this->createForm('command', $command, [
+        $form = $this->createForm('orchestra_command_type', $command, [
             'command' => $command
         ]);
 
@@ -176,7 +176,7 @@ class GenericController extends Controller
             throw new NotFoundHttpException();
         }
 
-        $form = $this->createForm('command', $command, [
+        $form = $this->createForm('orchestra_command_type', $command, [
             'command' => $command
         ]);
 

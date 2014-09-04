@@ -201,7 +201,7 @@
         <service id="orchestra.form.command_type" class="%orchestra.form.command_type.class%">
             <argument type="service" id="orchestra.resolver.form_type" />
             <argument type="service" id="orchestra.resolver.form_options" />
-            <tag name="form.type" alias="command" />
+            <tag name="form.type" alias="orchestra_command_type" />
         </service>
 
         <!-- Symfony components -->
