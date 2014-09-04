@@ -37,10 +37,12 @@ class CommandFactoryResolver implements CommandFactoryResolverInterface
     /**
      * @inheritdoc
      */
-    public function getCommandFactory(\ReflectionClass $commandClass)
+    public function getCommandFactory($commandClass)
     {
+        $reflection = new \ReflectionClass($commandClass);
+
         /** @var CommandFactory $annotation */
-        $annotation = $this->annotationReader->getClassAnnotation($commandClass, $this->annotationClass);
+        $annotation = $this->annotationReader->getClassAnnotation($reflection, $this->annotationClass);
 
         if (null !== $annotation) {
             return $annotation->getMethod();
