@@ -17,6 +17,7 @@ use RomaricDrigon\OrchestraBundle\Exception\Domain\EntityNotListableException;
 use RomaricDrigon\OrchestraBundle\Form\Type\CommandType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use RomaricDrigon\OrchestraBundle\Doctrine\ObjectManagerInterface;
 
 /**
  * Class GenericController
@@ -170,6 +171,10 @@ class GenericController extends Controller
                 // Pass the command to the repository, and we're done!
                 call_user_func([$object, $entity_method], $command);
 
+                // We have to save the result!
+                // We use our provided ObjectManager, not Doctrine
+                $this->getObjectManager()->saveObject($object);
+
                 $this->get('session')->getFlashBag()->add(
                     'success',
                     'Command run with success!'
@@ -186,5 +191,15 @@ class GenericController extends Controller
             'form'  => $form->createView(),
             'title' => $entity->getName().' - '.$entity_method
         ]);
+    }
+
+    /**
+     * Small helper
+     *
+     * @return ObjectManagerInterface
+     */
+    protected function getObjectManager()
+    {
+        return $this->get('orchestra.doctrine.object_manager');
     }
 }
