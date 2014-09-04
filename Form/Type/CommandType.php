@@ -13,6 +13,7 @@ use RomaricDrigon\OrchestraBundle\Domain\Command\CommandInterface;
 use RomaricDrigon\OrchestraBundle\Exception\Domain\CommandInvalidException;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 /**
  * Class CommandType
@@ -20,17 +21,8 @@ use Symfony\Component\Form\FormBuilderInterface;
  */
 class CommandType extends AbstractType
 {
-    /**
-     * @var CommandInterface
-     */
-    protected $command;
-
-    /**
-     * @param CommandInterface $command
-     */
-    public function __construct(CommandInterface $command)
+    public function __construct()
     {
-        $this->command = $command;
     }
 
     /**
@@ -38,10 +30,12 @@ class CommandType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $properties = get_object_vars($this->command);
+        $command = $options['command'];
+
+        $properties = get_object_vars($command);
 
         if (null === $properties) {
-            throw new CommandInvalidException($this->command);
+            throw new CommandInvalidException($command);
         }
 
         $properties = array_keys($properties);
@@ -61,5 +55,15 @@ class CommandType extends AbstractType
     public function getName()
     {
         return 'orchestra_command_type';
+    }
+
+    /**
+     * We require a "command" option
+     *
+     * {@inheritdoc}
+     */
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    {
+        $resolver->setRequired(['command']);
     }
 } 

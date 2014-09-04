@@ -188,6 +188,11 @@
             <tag name="knp_menu.menu" alias="main" />
         </service>
 
+        <!-- form -->
+        <service id="orchestra.form.command_type" class="%orchestra.form.command_type.class%">
+            <tag name="form.type" alias="command" />
+        </service>
+
         <!-- Symfony components -->
         <service id="orchestra.symfony.filesystem" class="%orchestra.symfony.filesystem.class%" />
 
