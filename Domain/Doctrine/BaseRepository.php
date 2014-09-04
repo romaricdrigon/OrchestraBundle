@@ -71,6 +71,6 @@ class BaseRepository implements DoctrineAwareInterface, RepositoryInterface
      */
     public function find($id)
     {
-        return $this->find($id);
+        return $this->doctrineRepository->find($id);
     }
 } 
