@@ -29,22 +29,22 @@ use RomaricDrigon\OrchestraBundle\Security\ExpressionLanguage;
 class SecurityListener implements EventSubscriberInterface
 {
     /**
-     * @var SecurityContextInterface|null
+     * @var SecurityContextInterface
      */
     protected $securityContext;
 
     /**
-     * @var ExpressionLanguage|null
+     * @var ExpressionLanguage
      */
     protected $language;
 
     /**
-     * @var AuthenticationTrustResolverInterface|null
+     * @var AuthenticationTrustResolverInterface
      */
     protected $trustResolver;
 
     /**
-     * @var RoleHierarchyInterface|null
+     * @var RoleHierarchyInterface
      */
     protected $roleHierarchy;
 
@@ -69,7 +69,7 @@ class SecurityListener implements EventSubscriberInterface
      * @param AuthenticationTrustResolverInterface $trustResolver
      * @param RoleHierarchyInterface $roleHierarchy
      */
-    public function __construct(SecurityContextInterface $securityContext = null, ExpressionLanguage $language = null, AuthenticationTrustResolverInterface $trustResolver = null, RoleHierarchyInterface $roleHierarchy = null)
+    public function __construct(SecurityContextInterface $securityContext, ExpressionLanguage $language, AuthenticationTrustResolverInterface $trustResolver, RoleHierarchyInterface $roleHierarchy)
     {
         $this->securityContext  = $securityContext;
         $this->language         = $language;
