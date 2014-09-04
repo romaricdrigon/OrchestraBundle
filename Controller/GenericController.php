@@ -18,7 +18,6 @@ use RomaricDrigon\OrchestraBundle\Domain\Repository\RepositoryInterface;
 use RomaricDrigon\OrchestraBundle\Exception\Domain\EntityNotListableException;
 use RomaricDrigon\OrchestraBundle\Exception\Event\InvalidEventException;
 use RomaricDrigon\OrchestraBundle\Exception\Event\RepositoryNotEnabledException;
-use RomaricDrigon\OrchestraBundle\Form\Type\CommandType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use RomaricDrigon\OrchestraBundle\Doctrine\ObjectManagerInterface;
