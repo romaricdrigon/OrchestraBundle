@@ -48,6 +48,8 @@
         <parameter key="orchestra.event_listener.doctrine_repository.class">RomaricDrigon\OrchestraBundle\EventListener\DoctrineRepositoryListener</parameter>
         <parameter key="orchestra.event_listener.command_resolver.class">RomaricDrigon\OrchestraBundle\EventListener\CommandResolverListener</parameter>
         <parameter key="orchestra.event_listener.entity_resolver.class">RomaricDrigon\OrchestraBundle\EventListener\EntityResolverListener</parameter>
+
+        <parameter key="orchestra.event_listener.repository_slug.class">RomaricDrigon\OrchestraBundle\EventListener\RepositorySlugListener</parameter>
     </parameters>
 
     <services>
@@ -189,6 +191,11 @@
         </service>
         <service id="orchestra.event_listener.entity_resolver" class="%orchestra.event_listener.entity_resolver.class%">
             <argument type="service" id="orchestra.resolver.entity_repository" />
+            <tag name="kernel.event_subscriber" />
+        </service>
+
+        <service id="orchestra.event_listener.repository_slug" class="%orchestra.event_listener.repository_slug.class%">
+            <argument type="service" id="orchestra.pool.repository_pool" />
             <tag name="kernel.event_subscriber" />
         </service>
     </services>
