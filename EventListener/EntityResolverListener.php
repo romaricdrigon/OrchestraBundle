@@ -63,13 +63,13 @@ class EntityResolverListener implements EventSubscriberInterface
 
         $type = $request->attributes->get('orchestra_type');
 
-        if (EntityRouteBuilder::ROUTE_TYPE === $type && $request->request->has('id')) {
+        if (EntityRouteBuilder::ROUTE_TYPE === $type && $request->query->has('id')) {
             if (! $request->attributes->has('entity')) {
                 throw new MissingAttributeException('entity');
             }
 
             $entity = $request->attributes->get('entity');
-            $id = $request->request->get('id');
+            $id = $request->query->get('id');
 
             $repository = $this->entityRepositoryResolver->findForEntity($entity);
 
