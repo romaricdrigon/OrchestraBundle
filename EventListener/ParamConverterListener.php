@@ -18,10 +18,10 @@ use Symfony\Component\HttpKernel\KernelEvents;
 use RomaricDrigon\OrchestraBundle\Resolver\EntityRepository\EntityRepositoryResolverInterface;
 
 /**
- * Class EntityResolverListener
+ * Class ParamConverterListener
  * @author Romaric Drigon <romaric.drigon@gmail.com>
  */
-class EntityResolverListener implements EventSubscriberInterface
+class ParamConverterListener implements EventSubscriberInterface
 {
     /**
      * @var EntityRepositoryResolverInterface
@@ -42,11 +42,6 @@ class EntityResolverListener implements EventSubscriberInterface
         return [KernelEvents::CONTROLLER => ['onKernelController', self::PRIORITY]];
     }
 
-    public function __construct(EntityRepositoryResolverInterface $entityRepositoryResolver)
-    {
-        $this->entityRepositoryResolver = $entityRepositoryResolver;
-    }
-
     /**
      * @param FilterControllerEvent $event
      * @throws MissingAttributeException
@@ -64,14 +59,13 @@ class EntityResolverListener implements EventSubscriberInterface
         $type = $request->attributes->get('orchestra_type');
 
         if (EntityRouteBuilder::ROUTE_TYPE === $type && $request->query->has('id')) {
-            if (! $request->attributes->has('entity')) {
-                throw new MissingAttributeException('entity');
+            if (! $request->attributes->has('repository')) {
+                throw new MissingAttributeException('repository');
             }
 
-            $entity = $request->attributes->get('entity');
-            $id = $request->query->get('id');
+            $repository = $request->attributes->get('repository');
 
-            $repository = $this->entityRepositoryResolver->findForEntity($entity);
+            $id = $request->query->get('id');
 
             $object = $repository->find($id);
 
