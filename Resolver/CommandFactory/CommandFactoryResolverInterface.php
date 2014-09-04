@@ -16,8 +16,8 @@ namespace RomaricDrigon\OrchestraBundle\Resolver\CommandFactory;
 interface CommandFactoryResolverInterface
 {
     /**
-     * @param \ReflectionClass $commandClass
+     * @param string $commandClass name of the Command class
      * @return string name of the entity method to use as a Factory
      */
-    public function getCommandFactory(\ReflectionClass $commandClass);
+    public function getCommandFactory($commandClass);
 } 
