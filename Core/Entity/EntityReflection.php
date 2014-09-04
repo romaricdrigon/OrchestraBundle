@@ -22,6 +22,8 @@ class EntityReflection implements EntityReflectionInterface
      */
     protected $reflectionClass;
 
+    protected $actionsCollection;
+
 
     public function __construct(\ReflectionClass $reflectionClass)
     {
@@ -38,25 +40,11 @@ class EntityReflection implements EntityReflectionInterface
 
     /**
      * @throws EntityTwiceSameSlugException
-     * @return \ReflectionMethod[] list of public methods from class, keys are slugs
+     * @return \ReflectionMethod[] list of public methods from class
      */
     public function getMethods()
     {
-        $reflectionMethods = $this->reflectionClass->getMethods(\ReflectionMethod::IS_PUBLIC);
-
-        $methods = [];
-
-        foreach ($reflectionMethods as $reflectionMethod) {
-            $slug = strtolower($reflectionMethod->getShortName());
-
-            if (isset($methods[$slug])) {
-                throw new EntityTwiceSameSlugException($reflectionMethod->getShortName(), $slug);
-            }
-
-            $methods[$slug] = $reflectionMethod;
-        }
-
-        return $methods;
+        return $this->reflectionClass->getMethods(\ReflectionMethod::IS_PUBLIC);
     }
 
     /**

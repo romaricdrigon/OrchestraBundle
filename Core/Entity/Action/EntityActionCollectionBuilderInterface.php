@@ -12,15 +12,14 @@ namespace RomaricDrigon\OrchestraBundle\Core\Entity\Action;
 use RomaricDrigon\OrchestraBundle\Core\Entity\EntityReflectionInterface;
 
 /**
- * Interface EntityActionBuilderInterface
+ * Interface EntityActionCollectionBuilderInterface
  * @author Romaric Drigon <romaric.drigon@gmail.com>
  */
-interface EntityActionBuilderInterface
+interface EntityActionCollectionBuilderInterface
 {
     /**
      * @param EntityReflectionInterface $entityReflection
-     * @param \ReflectionMethod $reflectionMethod
-     * @return EntityActionInterface|null
+     * @return EntityActionCollectionInterface
      */
-    public function build(EntityReflectionInterface $entityReflection, \ReflectionMethod $reflectionMethod);
+    public function build(EntityReflectionInterface $entityReflection);
 } 

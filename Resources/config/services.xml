@@ -11,6 +11,7 @@
         <parameter key="orchestra.core_repository.action_builder.class">RomaricDrigon\OrchestraBundle\Core\Repository\Action\RepositoryActionBuilder</parameter>
         <parameter key="orchestra.core_repository.action_collection_builder.class">RomaricDrigon\OrchestraBundle\Core\Repository\Action\RepositoryActionCollectionBuilder</parameter>
         <parameter key="orchestra.core_entity.action_builder.class">RomaricDrigon\OrchestraBundle\Core\Entity\Action\EntityActionBuilder</parameter>
+        <parameter key="orchestra.core_entity.action_collection_builder.class">RomaricDrigon\OrchestraBundle\Core\Entity\Action\EntityActionCollectionBuilder</parameter>
 
         <parameter key="orchestra.doctrine.repository_finder.class">RomaricDrigon\OrchestraBundle\Doctrine\DoctrineRepositoryFinder</parameter>
         <parameter key="orchestra.doctrine.repository_injecter.class">RomaricDrigon\OrchestraBundle\Doctrine\DoctrineInjecter</parameter>
@@ -72,6 +73,9 @@
         <service id="orchestra.core_entity.action_builder" class="%orchestra.core_entity.action_builder.class%" public="false">
             <argument type="service" id="orchestra.resolver.entity_route_name" />
             <argument type="service" id="orchestra.resolver.hidden_action" />
+        </service>
+        <service id="orchestra.core_entity.action_collection_builder" class="%orchestra.core_entity.action_collection_builder.class%" public="false">
+            <argument type="service" id="orchestra.core_entity.action_builder" />
         </service>
 
         <!-- resolver  -->
