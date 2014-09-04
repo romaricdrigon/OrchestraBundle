@@ -12,8 +12,12 @@ namespace RomaricDrigon\OrchestraBundle\Controller;
 use RomaricDrigon\OrchestraBundle\Core\Entity\EntityReflectionInterface;
 use RomaricDrigon\OrchestraBundle\Domain\Command\CommandInterface;
 use RomaricDrigon\OrchestraBundle\Domain\Entity\EntityInterface;
+use RomaricDrigon\OrchestraBundle\Domain\Event\EventInterface;
+use RomaricDrigon\OrchestraBundle\Domain\Repository\ReceiveEventInterface;
 use RomaricDrigon\OrchestraBundle\Domain\Repository\RepositoryInterface;
 use RomaricDrigon\OrchestraBundle\Exception\Domain\EntityNotListableException;
+use RomaricDrigon\OrchestraBundle\Exception\Event\InvalidEventException;
+use RomaricDrigon\OrchestraBundle\Exception\Event\RepositoryNotEnabledException;
 use RomaricDrigon\OrchestraBundle\Form\Type\CommandType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -202,13 +206,16 @@ class GenericController extends Controller
     /**
      * Action used when a method with a "EmitEvent" annotations is called
      *
+     * @param EntityReflectionInterface $entity
      * @param string $entity_method
      * @param EntityInterface $object
      * @param RepositoryInterface $repository
+     * @throws InvalidEventException
      * @throws NotFoundHttpException
+     * @throws RepositoryNotEnabledException
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function entityEventAction($entity_method, EntityInterface $object = null, RepositoryInterface $repository)
+    public function entityEventAction(EntityReflectionInterface $entity, $entity_method, EntityInterface $object = null, RepositoryInterface $repository)
     {
         if (null === $object) {
             throw new NotFoundHttpException();
@@ -217,16 +224,23 @@ class GenericController extends Controller
         // Get the Event
         $event = call_user_func([$object, $entity_method]);
 
-        // TODO: if event is null
+        // We accept "null", in that case we do nothing, but no other objects
+        if (null !== $event && ! $event instanceof EventInterface) {
+            throw new InvalidEventException($entity->getName(), $entity_method);
+        }
 
-        // TODO: check repo is enabled
+        if (! $repository instanceof ReceiveEventInterface) {
+            throw new RepositoryNotEnabledException($entity->getName());
+        }
 
-        call_user_func([$repository, 'receive'], $event);
+        if (null !== $event) {
+            call_user_func([$repository, 'receive'], $event);
 
-        $this->get('session')->getFlashBag()->add(
-            'success',
-            'Success!'
-        );
+            $this->get('session')->getFlashBag()->add(
+                'success',
+                'Success!'
+            );
+        }
 
         // We redirect to "listing" page/action
         $listRoute = $this->get('orchestra.resolver.repository_route_name')->getRouteName($repository, 'listing');
