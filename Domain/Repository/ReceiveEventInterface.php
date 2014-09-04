@@ -18,4 +18,4 @@ use RomaricDrigon\OrchestraBundle\Domain\Event\EventInterface;
 interface ReceiveEventInterface
 {
     public function receive(EventInterface $event);
-} 
+}

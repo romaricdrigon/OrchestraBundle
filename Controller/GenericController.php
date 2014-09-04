@@ -200,6 +200,41 @@ class GenericController extends Controller
     }
 
     /**
+     * Action used when a method with a "EmitEvent" annotations is called
+     *
+     * @param string $entity_method
+     * @param EntityInterface $object
+     * @param RepositoryInterface $repository
+     * @throws NotFoundHttpException
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function entityEventAction($entity_method, EntityInterface $object = null, RepositoryInterface $repository)
+    {
+        if (null === $object) {
+            throw new NotFoundHttpException();
+        }
+
+        // Get the Event
+        $event = call_user_func([$object, $entity_method]);
+
+        // TODO: if event is null
+
+        // TODO: check repo is enabled
+
+        call_user_func([$repository, 'receive'], $event);
+
+        $this->get('session')->getFlashBag()->add(
+            'success',
+            'Success!'
+        );
+
+        // We redirect to "listing" page/action
+        $listRoute = $this->get('orchestra.resolver.repository_route_name')->getRouteName($repository, 'listing');
+
+        return $this->redirect($this->generateUrl($listRoute));
+    }
+
+    /**
      * Small helper
      *
      * @return ObjectManagerInterface

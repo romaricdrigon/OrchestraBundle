@@ -22,14 +22,19 @@ use RomaricDrigon\OrchestraBundle\Core\Entity\EntityReflectionInterface;
 class EntityRouteBuilder implements EntityRouteBuilderInterface
 {
     /**
-     * @var string the controller action a repository will redirect to
+     * @var string the controller action an entity method will redirect to
      */
     protected $queryController = 'RomaricDrigonOrchestraBundle:Generic:entityQuery';
 
     /**
-     * @var string the controller action a repository method accepting a Command will redirect to
+     * @var string the controller action an entity method accepting a Command will redirect to
      */
     protected $commandController = 'RomaricDrigonOrchestraBundle:Generic:entityCommand';
+
+    /**
+     * @var string the controller action an entity method with a "EmitEvent" annotation will redirect to
+     */
+    protected $eventController = 'RomaricDrigonOrchestraBundle:Generic:entityEvent';
 
     /**
      * @var string methods allowed to access to our entity
@@ -86,6 +91,10 @@ class EntityRouteBuilder implements EntityRouteBuilderInterface
                 $defaults['command_class'] = $action->getCommandClass();
 
                 $requirements['_method'] = 'GET|POST';
+            }
+
+            if (true === $action->emitEvent()) {
+                $defaults['_controller'] = $this->eventController;
             }
 
             $route = new Route($pattern, $defaults, $requirements);
