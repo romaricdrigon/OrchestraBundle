@@ -23,7 +23,7 @@
                                 {% endfor %}
                                 {% if actions is not empty %}
                                     {% block action_header %}
-                                        <th></th>
+                                        <th class="col-sm-4"></th>
                                     {% endblock action_header %}
                                 {% endif %}
                             </tr>
@@ -39,7 +39,7 @@
                                     {% endfor %}
                                     {% if actions is not empty %}
                                         {% block action_column %}
-                                            <td>
+                                            <td class="col-sm-4">
                                                 <div class="btn-group btn-group-xs">
                                                     {% for action in actions %}
                                                         {% block action_button %}
