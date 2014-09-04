@@ -22,7 +22,7 @@ class CommandResolverListener implements EventSubscriberInterface
     /**
      * Our subscriber priority
      */
-    const PRIORITY = 750;
+    const PRIORITY = 300;
 
     /**
      * @inheritdoc

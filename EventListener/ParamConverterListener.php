@@ -32,7 +32,7 @@ class ParamConverterListener implements EventSubscriberInterface
      * Our subscriber priority
      * We must go after the Repository received Doctrine
      */
-    const PRIORITY = 150;
+    const PRIORITY = 500;
 
     /**
      * @inheritdoc

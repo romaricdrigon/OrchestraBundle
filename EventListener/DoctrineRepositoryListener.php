@@ -43,7 +43,7 @@ class DoctrineRepositoryListener implements EventSubscriberInterface
     /**
      * Our subscriber priority
      */
-    const PRIORITY = 250;
+    const PRIORITY = 700;
 
     /**
      * @inheritdoc
