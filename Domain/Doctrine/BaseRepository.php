@@ -66,6 +66,8 @@ class BaseRepository implements DoctrineAwareInterface, RepositoryInterface
      *
      * @param mixed $id
      * @return null|EntityInterface
+     *
+     * @Hidden
      */
     public function find($id)
     {
