@@ -46,6 +46,6 @@ class FormOptionsResolver implements FormOptionsResolverInterface
             return $annotation->getOptions();
         }
 
-        return null;
+        return [];
     }
 }

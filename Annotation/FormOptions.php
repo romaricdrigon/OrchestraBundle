@@ -27,7 +27,7 @@ class FormOptions extends AbstractAnnotation
      */
     public function getOptions()
     {
-        return $this->options;
+        return $this->options ?: [];
     }
 
     /**

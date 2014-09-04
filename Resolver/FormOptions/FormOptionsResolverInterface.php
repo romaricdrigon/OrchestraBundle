@@ -18,7 +18,7 @@ interface FormOptionsResolverInterface
 {
     /**
      * @param \ReflectionProperty $reflectionProperty
-     * @return FormType|null
+     * @return FormType|array
      */
     public function getFormOptions(\ReflectionProperty $reflectionProperty);
 } 
