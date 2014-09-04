@@ -46,8 +46,9 @@
         <parameter key="orchestra.finder.entity_finder.class">RomaricDrigon\OrchestraBundle\Finder\EntityFinder</parameter>
         <parameter key="orchestra.finder.entity_loader.class">RomaricDrigon\OrchestraBundle\Finder\EntityLoader</parameter>
 
-        <parameter key="orchestra.symfony.finder.class">Symfony\Component\Finder\Finder</parameter>
         <parameter key="orchestra.symfony.filesystem.class">Symfony\Component\Filesystem\Filesystem</parameter>
+
+        <parameter key="orchestra.form.command_type.class">RomaricDrigon\OrchestraBundle\Form\Type\CommandType</parameter>
 
         <parameter key="orchestra.event_listener.doctrine_repository.class">RomaricDrigon\OrchestraBundle\EventListener\DoctrineRepositoryListener</parameter>
         <parameter key="orchestra.event_listener.command_resolver.class">RomaricDrigon\OrchestraBundle\EventListener\CommandResolverListener</parameter>
