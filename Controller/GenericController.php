@@ -9,7 +9,6 @@
 
 namespace RomaricDrigon\OrchestraBundle\Controller;
 
-use Doctrine\ORM\EntityNotFoundException;
 use RomaricDrigon\OrchestraBundle\Core\Entity\EntityReflectionInterface;
 use RomaricDrigon\OrchestraBundle\Domain\Command\CommandInterface;
 use RomaricDrigon\OrchestraBundle\Domain\Entity\EntityInterface;
@@ -170,7 +169,6 @@ class GenericController extends Controller
         if (null === $object) {
             throw new NotFoundHttpException();
         }
-
 
         $form = $this->createForm(new CommandType($command), $command);
 
