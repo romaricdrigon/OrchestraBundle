@@ -116,6 +116,13 @@ Usually, they are persisted. Orchestra supports Doctrine ORM through its Symfony
 You will have to do their mapping, using Doctrine annotations, YAML (advised) or XML as you want.
 For this part, please refer to [Symfony documentation](http://symfony.com/doc/2.4/book/doctrine.html).
 
+#### Events
+
+Events are objects implementing `EventInterface`. An Entity can emit Events.
+
+A method emitting en Event must return either an Event or `null` (in that case nothing will happen).
+The `Event` will be passed to the corresponding Repository `receive` method (*it must implement `ReceiveEventInterface`*). You can then decide what to do.
+
 ### Repositories
 
 Those are NOT Doctrine repositories!
