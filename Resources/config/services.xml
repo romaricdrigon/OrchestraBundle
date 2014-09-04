@@ -38,6 +38,7 @@
         <parameter key="orchestra.resolver.hidden_action.class">RomaricDrigon\OrchestraBundle\Resolver\HiddenAction\HiddenActionResolver</parameter>
         <parameter key="orchestra.resolver.entity_route_name.class">RomaricDrigon\OrchestraBundle\Resolver\EntityRouteName\EntityRouteNameResolver</parameter>
         <parameter key="orchestra.resolver.command_factory.class">RomaricDrigon\OrchestraBundle\Resolver\CommandFactory\CommandFactoryResolver</parameter>
+        <parameter key="orchestra.resolver.emit_event.class">RomaricDrigon\OrchestraBundle\Resolver\EmitEvent\EmitEventResolver</parameter>
 
         <parameter key="orchestra.finder.entity_finder.class">RomaricDrigon\OrchestraBundle\Finder\EntityFinder</parameter>
         <parameter key="orchestra.finder.entity_loader.class">RomaricDrigon\OrchestraBundle\Finder\EntityLoader</parameter>
@@ -92,6 +93,9 @@
             <argument type="service" id="annotation_reader" />
         </service>
         <service id="orchestra.resolver.command_factory" class="%orchestra.resolver.command_factory.class%">
+            <argument type="service" id="annotation_reader" />
+        </service>
+        <service id="orchestra.resolver.emit_event" class="%orchestra.resolver.emit_event.class%">
             <argument type="service" id="annotation_reader" />
         </service>
         <service id="orchestra.resolver.repository_entity" class="%orchestra.resolver.repository_entity.class%">
