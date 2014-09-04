@@ -129,6 +129,7 @@
             <argument type="service" id="orchestra.routing.repository_route_builder" />
         </service>
         <service id="orchestra.routing.entity_route_builder" class="%orchestra.routing.entity_route_builder.class%">
+            <argument type="service" id="orchestra.core_entity.action_collection_builder" />
         </service>
         <service id="orchestra.routing.entity_route_collection_builder" class="%orchestra.routing.entity_route_collection_builder.class%" public="false">
             <argument type="service" id="orchestra.routing.entity_route_builder" />
