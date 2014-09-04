@@ -144,6 +144,11 @@ class SecurityListener implements EventSubscriberInterface
 
         $expression = $this->securityResolver->getExpression($reflectionMethod);
 
+        // We may have no Security expression
+        if (null === $expression) {
+            return;
+        }
+
         if (! $this->language->evaluate($expression, $this->getVariables($request))) {
             throw new AccessDeniedException(sprintf('Expression "%s" denied access.', $expression));
         }
