@@ -39,6 +39,7 @@
         <parameter key="orchestra.resolver.entity_route_name.class">RomaricDrigon\OrchestraBundle\Resolver\EntityRouteName\EntityRouteNameResolver</parameter>
         <parameter key="orchestra.resolver.command_factory.class">RomaricDrigon\OrchestraBundle\Resolver\CommandFactory\CommandFactoryResolver</parameter>
         <parameter key="orchestra.resolver.emit_event.class">RomaricDrigon\OrchestraBundle\Resolver\EmitEvent\EmitEventResolver</parameter>
+        <parameter key="orchestra.resolver.security.class">RomaricDrigon\OrchestraBundle\Resolver\Security\SecurityResolver</parameter>
 
         <parameter key="orchestra.finder.entity_finder.class">RomaricDrigon\OrchestraBundle\Finder\EntityFinder</parameter>
         <parameter key="orchestra.finder.entity_loader.class">RomaricDrigon\OrchestraBundle\Finder\EntityLoader</parameter>
@@ -100,6 +101,9 @@
             <argument type="service" id="annotation_reader" />
         </service>
         <service id="orchestra.resolver.emit_event" class="%orchestra.resolver.emit_event.class%">
+            <argument type="service" id="annotation_reader" />
+        </service>
+        <service id="orchestra.resolver.security" class="%orchestra.resolver.security.class%">
             <argument type="service" id="annotation_reader" />
         </service>
         <service id="orchestra.resolver.repository_entity" class="%orchestra.resolver.repository_entity.class%">
@@ -221,6 +225,7 @@
             <argument type="service" id="orchestra.security.expression_language" />
             <argument type="service" id="security.authentication.trust_resolver" />
             <argument type="service" id="security.role_hierarchy" />
+            <argument type="service" id="orchestra.resolver.security" />
             <tag name="kernel.event_subscriber" />
         </service>
 

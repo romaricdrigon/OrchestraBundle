@@ -9,6 +9,9 @@
 
 namespace RomaricDrigon\OrchestraBundle\EventListener;
 
+use RomaricDrigon\OrchestraBundle\Resolver\Security\SecurityResolverInterface;
+use RomaricDrigon\OrchestraBundle\Routing\EntityRouteBuilder;
+use RomaricDrigon\OrchestraBundle\Routing\RepositoryRouteBuilder;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,6 +21,9 @@ use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\Role\RoleHierarchyInterface;
 use RomaricDrigon\OrchestraBundle\Security\ExpressionLanguage;
+use RomaricDrigon\OrchestraBundle\Exception\Request\MissingAttributeException;
+use RomaricDrigon\OrchestraBundle\Core\Entity\EntityReflectionInterface;
+use RomaricDrigon\OrchestraBundle\Domain\Repository\RepositoryInterface;
 
 /**
  * Class SecurityListener
@@ -49,6 +55,11 @@ class SecurityListener implements EventSubscriberInterface
     protected $roleHierarchy;
 
     /**
+     * @var SecurityResolverInterface
+     */
+    protected $securityResolver;
+
+    /**
      * Our subscriber priority
      * Way below so we can access as much attributes as possible
      */
@@ -68,33 +79,78 @@ class SecurityListener implements EventSubscriberInterface
      * @param ExpressionLanguage $language
      * @param AuthenticationTrustResolverInterface $trustResolver
      * @param RoleHierarchyInterface $roleHierarchy
+     * @param SecurityResolverInterface $securityResolver
      */
-    public function __construct(SecurityContextInterface $securityContext, ExpressionLanguage $language, AuthenticationTrustResolverInterface $trustResolver, RoleHierarchyInterface $roleHierarchy)
+    public function __construct(SecurityContextInterface $securityContext, ExpressionLanguage $language, AuthenticationTrustResolverInterface $trustResolver, RoleHierarchyInterface $roleHierarchy, SecurityResolverInterface $securityResolver)
     {
         $this->securityContext  = $securityContext;
         $this->language         = $language;
         $this->trustResolver    = $trustResolver;
         $this->roleHierarchy    = $roleHierarchy;
+        $this->securityResolver = $securityResolver;
     }
 
     /**
      * @param FilterControllerEvent $event
-     * @throws \LogicException
-     * @throws \Symfony\Component\Security\Core\Exception\AccessDeniedException
+     * @throws AccessDeniedException
+     * @throws MissingAttributeException
      */
     public function onKernelController(FilterControllerEvent $event)
     {
         $request = $event->getRequest();
 
-        // TODO: fetch Security annotation
+        // First, check if it's an Orchestra request
+        if (! $request->attributes->has('orchestra_type')) {
+            return;
+        }
 
-        if (!$this->language->evaluate($configuration->getExpression(), $this->getVariables($request))) {
-            throw new AccessDeniedException(sprintf('Expression "%s" denied access.', $configuration->getExpression()));
+        $type = $request->attributes->get('orchestra_type');
+
+        if (EntityRouteBuilder::ROUTE_TYPE === $type) {
+            if (! $request->attributes->has('entity')) {
+                throw new MissingAttributeException('entity');
+            }
+
+            /** @var EntityReflectionInterface $entity */
+            $entity = $request->attributes->get('entity');
+
+            if (! $request->attributes->has('entity_method')) {
+                throw new MissingAttributeException('entity_method');
+            }
+
+            $entityMethod = $request->attributes->get('entity_method');
+
+            $reflectionMethod = $entity->getMethod($entityMethod);
+        } else if (RepositoryRouteBuilder::ROUTE_TYPE === $type) {
+            if (! $request->attributes->has('repository')) {
+                throw new MissingAttributeException('repository');
+            }
+
+            /** @var RepositoryInterface $repository */
+            $repository = $request->attributes->get('repository');
+
+            $repositoryReflection = new \ReflectionClass($repository);
+
+            if (! $request->attributes->has('repository_method')) {
+                throw new MissingAttributeException('repository_method');
+            }
+
+            $repositoryMethod = $request->attributes->get('repository_method');
+
+            $reflectionMethod = $repositoryReflection->getMethod($repositoryMethod);
+        } else {
+            return;
+        }
+
+        $expression = $this->securityResolver->getExpression($reflectionMethod);
+
+        if (! $this->language->evaluate($expression, $this->getVariables($request))) {
+            throw new AccessDeniedException(sprintf('Expression "%s" denied access.', $expression));
         }
     }
 
     // code should be sync with Symfony\Component\Security\Core\Authorization\Voter\ExpressionVoter
-    private function getVariables(Request $request)
+    protected function getVariables(Request $request)
     {
         $token = $this->securityContext->getToken();
 

@@ -26,6 +26,12 @@ interface EntityReflectionInterface
     public function getMethods();
 
     /**
+     * @param string $methodName
+     * @return \ReflectionMethod
+     */
+    public function getMethod($methodName);
+
+    /**
      * @return string
      */
     public function getName();
