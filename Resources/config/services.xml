@@ -52,6 +52,7 @@
         <parameter key="orchestra.event_listener.repository_slug.class">RomaricDrigon\OrchestraBundle\EventListener\RepositorySlugListener</parameter>
         <parameter key="orchestra.event_listener.entity_slug.class">RomaricDrigon\OrchestraBundle\EventListener\EntitySlugListener</parameter>
         <parameter key="orchestra.event_listener.repository.class">RomaricDrigon\OrchestraBundle\EventListener\RepositoryListener</parameter>
+        <parameter key="orchestra.event_listener.entity.class">RomaricDrigon\OrchestraBundle\EventListener\EntityListener</parameter>
     </parameters>
 
     <services>
@@ -206,6 +207,10 @@
         </service>
         <service id="orchestra.event_listener.repository" class="%orchestra.event_listener.repository.class%">
             <argument type="service" id="orchestra.resolver.repository_entity" />
+            <tag name="kernel.event_subscriber" />
+        </service>
+        <service id="orchestra.event_listener.entity" class="%orchestra.event_listener.entity.class%">
+            <argument type="service" id="orchestra.resolver.entity_repository" />
             <tag name="kernel.event_subscriber" />
         </service>
     </services>
