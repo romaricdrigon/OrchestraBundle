@@ -9,6 +9,7 @@
 
 namespace RomaricDrigon\OrchestraBundle\Controller;
 
+use Doctrine\ORM\EntityNotFoundException;
 use RomaricDrigon\OrchestraBundle\Core\Entity\EntityReflectionInterface;
 use RomaricDrigon\OrchestraBundle\Domain\Command\CommandInterface;
 use RomaricDrigon\OrchestraBundle\Domain\Entity\EntityInterface;
@@ -18,6 +19,7 @@ use RomaricDrigon\OrchestraBundle\Form\Type\CommandType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use RomaricDrigon\OrchestraBundle\Doctrine\ObjectManagerInterface;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Class GenericController
@@ -160,10 +162,16 @@ class GenericController extends Controller
      * @param EntityReflectionInterface $entity
      * @param string $entity_method
      * @param EntityInterface $object
+     * @throws NotFoundHttpException
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function entityCommandAction(Request $request, CommandInterface $command, EntityReflectionInterface $entity, $entity_method, EntityInterface $object = null)
     {
+        if (null === $object) {
+            throw new NotFoundHttpException();
+        }
+
+
         $form = $this->createForm(new CommandType($command), $command);
 
         if ($request->isMethod('POST')) {
