@@ -22,8 +22,7 @@ interface EntityRouteBuilderInterface
      * Builds all routes for given EntityReflection
      *
      * @param EntityReflectionInterface $entity
-     * @param string $slug
      * @return Route[] Routes, keys are route names
      */
-    public function buildRoutes(EntityReflectionInterface $entity, $slug);
+    public function buildRoutes(EntityReflectionInterface $entity);
 } 

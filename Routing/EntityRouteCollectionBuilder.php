@@ -36,8 +36,8 @@ class EntityRouteCollectionBuilder implements EntityRouteCollectionBuilderInterf
         $collection = new RouteCollection();
         $entities   = $pool->all();
 
-        foreach ($entities as $slug => $entity) {
-            $routes = $this->entityRouteBuilder->buildRoutes($entity, $slug);
+        foreach ($entities as $entity) {
+            $routes = $this->entityRouteBuilder->buildRoutes($entity);
 
             foreach ($routes as $routeName => $route) {
                 $collection->add($routeName, $route);

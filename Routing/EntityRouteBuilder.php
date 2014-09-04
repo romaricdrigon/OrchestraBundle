@@ -9,6 +9,8 @@
 
 namespace RomaricDrigon\OrchestraBundle\Routing;
 
+use RomaricDrigon\OrchestraBundle\Core\Entity\Action\EntityActionInterface;
+use RomaricDrigon\OrchestraBundle\Core\Entity\Action\EntityActionCollectionBuilderInterface;
 use RomaricDrigon\OrchestraBundle\Exception\EntityTwiceSameSlugException;
 use Symfony\Component\Routing\Route;
 use RomaricDrigon\OrchestraBundle\Core\Entity\EntityReflectionInterface;
@@ -22,12 +24,12 @@ class EntityRouteBuilder implements EntityRouteBuilderInterface
     /**
      * @var string the controller action a repository will redirect to
      */
-    protected $controller = 'RomaricDrigonOrchestraBundle:Generic:entityMethod';
+    protected $genericController = 'RomaricDrigonOrchestraBundle:Generic:entityMethod';
 
     /**
-     * @var string prefix to route name
+     * @var string the controller action a repository method accepting a Command will redirect to
      */
-    protected $namePrefix = 'orchestra_entity';
+    protected $commandController = 'RomaricDrigonOrchestraBundle:Generic:entityCommand';
 
     /**
      * @var string methods allowed to access to our entity
@@ -40,43 +42,56 @@ class EntityRouteBuilder implements EntityRouteBuilderInterface
     const ROUTE_TYPE = 'entity';
 
     /**
+     * @var EntityActionCollectionBuilderInterface
+     */
+    protected $entityActionCollectionBuilder;
+
+
+    public function __construct(EntityActionCollectionBuilderInterface $entityActionCollectionBuilder)
+    {
+        $this->entityActionCollectionBuilder = $entityActionCollectionBuilder;
+    }
+
+    /**
      * Builds all routes for given EntityReflection
      *
      * @param EntityReflectionInterface $entity
-     * @param string $slug
      * @throws EntityTwiceSameSlugException
      * @return Route[] Routes, keys are route names
      */
-    public function buildRoutes(EntityReflectionInterface $entity, $slug)
+    public function buildRoutes(EntityReflectionInterface $entity)
     {
-        $methods = $entity->getMethods();
+        $collection = $this->entityActionCollectionBuilder->build($entity);
 
         $routes = [];
 
-        foreach ($methods as $methodSlug => $method) {
-            $methodName = $method->getShortName();
-
-            // That should not happen, list being a PHP keyword
-            // put there for later
-            //if ('list' === $methodSlug) {
-            //    throw new EntityTwiceSameSlugException($entity->getName(), $slug);
-            //}
-
-            $pattern = '/'.$slug.'/'.$methodSlug;
+        /** @var EntityActionInterface $action */
+        foreach ($collection as $action) {
+            $pattern = '/'.$entity->getSlug().'/'.$action->getSlug();
             $defaults = [
-                '_controller'   => $this->controller,
+                '_controller'   => $this->genericController,
                 'orchestra_type' => $this::ROUTE_TYPE,
-                'entity_method' => $methodName,
-                'method_slug'   => $methodSlug,
-                'entity_slug'   => $slug
+                'entity_method' => $action->getMethod(),
+                'method_slug'   => $action->getSlug(),
+                'entity_slug'   => $entity->getSlug()
             ];
             $requirements = [
                 '_method'       => $this->methodRequirement
             ];
 
-            $routeName = $this->namePrefix.'_'.$slug.'_'.$methodSlug;
+            if (true === $action->isCommand()) {
+                $defaults['_controller'] = $this->commandController;
 
-            $routes[$routeName] = new Route($pattern, $defaults, $requirements);
+                // We add a "command"
+                $defaults['command_class'] = $action->getCommandClass();
+
+                $requirements['_method'] = 'GET|POST';
+            }
+
+            $route = new Route($pattern, $defaults, $requirements);
+            $routeName = $action->getRouteName();
+
+            $routes[$routeName] = $route;
         }
 
         return $routes;

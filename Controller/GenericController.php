@@ -143,4 +143,47 @@ class GenericController extends Controller
             'title' => $repoName
         ]);
     }
+
+    /**
+     * Action used when a method accepting a Command, on en Entity is called
+     *
+     * @param Request $request
+     * @param CommandInterface $command
+     * @param EntityReflectionInterface $entity
+     * @param string $entity_method
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function entityCommandAction(Request $request, CommandInterface $command, EntityReflectionInterface $entity, $entity_method)
+    {
+        $form = $this->createForm(new CommandType($command), $command);
+
+        $repoName = $this->get('orchestra.resolver.repository_name')->getName($repository);
+
+        if ($request->isMethod('POST')) {
+            if ($form->handleRequest($request) && $form->isValid()) {
+                // Pass the command to the repository, and we're done!
+                call_user_func([$repository, $repository_method], $command);
+
+                $this->get('session')->getFlashBag()->add(
+                    'success',
+                    'Command run with success!'
+                );
+
+                // We redirect to "listing" page/action
+                $listRoute = $this->get('orchestra.resolver.repository_route_name')->getRouteName($repository, 'listing');
+
+                return $this->redirect($this->generateUrl($listRoute));
+            } else {
+                $this->get('session')->getFlashBag()->add(
+                    'error',
+                    'An error happened!'
+                );
+            }
+        }
+
+        return $this->render('RomaricDrigonOrchestraBundle:Generic:repositoryCommand.html.twig', [
+            'form'  => $form->createView(),
+            'title' => $repoName
+        ]);
+    }
 }
