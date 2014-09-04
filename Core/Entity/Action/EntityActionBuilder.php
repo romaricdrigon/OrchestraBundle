@@ -9,6 +9,7 @@
 
 namespace RomaricDrigon\OrchestraBundle\Core\Entity\Action;
 
+use RomaricDrigon\OrchestraBundle\Resolver\EmitEvent\EmitEventResolverInterface;
 use RomaricDrigon\OrchestraBundle\Resolver\EntityRouteName\EntityRouteNameResolverInterface;
 use RomaricDrigon\OrchestraBundle\Resolver\HiddenAction\HiddenActionResolverInterface;
 use RomaricDrigon\OrchestraBundle\Core\Entity\EntityReflectionInterface;
@@ -29,11 +30,17 @@ class EntityActionBuilder implements EntityActionBuilderInterface
      */
     protected $entityRouteNameResolver;
 
+    /**
+     * @var EmitEventResolverInterface
+     */
+    protected $emitEventResolver;
 
-    public function __construct(EntityRouteNameResolverInterface $entityRouteNameResolver, HiddenActionResolverInterface $hiddenActionResolver)
+
+    public function __construct(EntityRouteNameResolverInterface $entityRouteNameResolver, HiddenActionResolverInterface $hiddenActionResolver, EmitEventResolverInterface $emitEventResolver)
     {
         $this->hiddenActionResolver     = $hiddenActionResolver;
         $this->entityRouteNameResolver  = $entityRouteNameResolver;
+        $this->emitEventResolver        = $emitEventResolver;
     }
 
     /**
@@ -55,7 +62,9 @@ class EntityActionBuilder implements EntityActionBuilderInterface
 
         $command = $this->findCommand($reflectionMethod);
 
-        $action = new EntityAction($method, $name, $routeName, $slug, $command);
+        $emitEvent = $this->emitEventResolver->methodEmitsEvent($reflectionMethod);
+
+        $action = new EntityAction($method, $name, $routeName, $slug, $command, $emitEvent);
 
         return $action;
     }

@@ -44,4 +44,9 @@ interface EntityActionInterface
      * @return null|string
      */
     public function getCommandClass();
+
+    /**
+     * @return bool
+     */
+    public function emitEvent();
 } 

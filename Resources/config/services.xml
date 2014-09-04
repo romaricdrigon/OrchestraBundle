@@ -80,6 +80,7 @@
         <service id="orchestra.core_entity.action_builder" class="%orchestra.core_entity.action_builder.class%" public="false">
             <argument type="service" id="orchestra.resolver.entity_route_name" />
             <argument type="service" id="orchestra.resolver.hidden_action" />
+            <argument type="service" id="orchestra.resolver.emit_event" />
         </service>
         <service id="orchestra.core_entity.action_collection_builder" class="%orchestra.core_entity.action_collection_builder.class%">
             <argument type="service" id="orchestra.core_entity.action_builder" />

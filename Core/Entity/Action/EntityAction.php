@@ -40,6 +40,11 @@ class EntityAction implements EntityActionInterface
      */
     protected $command;
 
+    /**
+     * @var bool
+     */
+    protected $emitEvent;
+
 
     /**
      * @param string $method
@@ -47,14 +52,16 @@ class EntityAction implements EntityActionInterface
      * @param string $routeName
      * @param string $slug
      * @param string|null $command
+     * @param bool $emitEvent
      */
-    public function __construct($method, $name, $routeName, $slug, $command = null)
+    public function __construct($method, $name, $routeName, $slug, $command = null, $emitEvent = false)
     {
         $this->method   = $method;
         $this->name     = $name;
         $this->routeName = $routeName;
         $this->slug     = $slug;
         $this->command  = $command;
+        $this->emitEvent = $emitEvent;
     }
 
     /**
@@ -95,6 +102,14 @@ class EntityAction implements EntityActionInterface
     public function isCommand()
     {
         return (null !== $this->command);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function emitEvent()
+    {
+        return $this->emitEvent;
     }
 
     /**
