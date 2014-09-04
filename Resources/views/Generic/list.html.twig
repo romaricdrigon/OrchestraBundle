@@ -39,15 +39,15 @@
                                     {% endfor %}
                                     {% if actions is not empty %}
                                         {% block action_column %}
-                                            <th>
-                                                <div class="btn-toolbar" role="toolbar">
+                                            <td>
+                                                <div class="btn-group btn-group-xs">
                                                     {% for action in actions %}
                                                         {% block action_button %}
                                                             <a href="{{ url(action.routeName, {'id': object.id}) }}" class="btn btn-default">{{ action.name }}</a>
                                                         {% endblock action_button %}
                                                     {% endfor %}
                                                 </div>
-                                            </th>
+                                            </td>
                                         {% endblock action_column %}
                                     {% endif %}
                                 </tr>
