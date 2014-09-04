@@ -11,6 +11,7 @@ namespace RomaricDrigon\OrchestraBundle\Controller;
 
 use RomaricDrigon\OrchestraBundle\Core\Entity\EntityReflectionInterface;
 use RomaricDrigon\OrchestraBundle\Domain\Command\CommandInterface;
+use RomaricDrigon\OrchestraBundle\Domain\Entity\EntityInterface;
 use RomaricDrigon\OrchestraBundle\Domain\Repository\RepositoryInterface;
 use RomaricDrigon\OrchestraBundle\Exception\Domain\EntityNotListableException;
 use RomaricDrigon\OrchestraBundle\Form\Type\CommandType;
@@ -79,13 +80,16 @@ class GenericController extends Controller
      * Action used when a method on en Entity is called
      *
      * @param EntityReflectionInterface $entity
-     * @param string $entity_slug
+     * @param EntityInterface|null $object
      * @param string $entity_method name
-     * @param string $method_slug
+     * @internal param string $entity_slug
+     * @internal param string $method_slug
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function entityMethodAction(EntityReflectionInterface $entity, $entity_slug, $entity_method, $method_slug)
+    public function entityMethodAction(EntityReflectionInterface $entity, EntityInterface $object = null, $entity_method)
     {
+        // TODO: we may (must ?) return a Query
+
         return $this->render('RomaricDrigonOrchestraBundle:Generic:dashboard.html.twig', []);
     }
 
@@ -99,6 +103,8 @@ class GenericController extends Controller
      */
     public function repositoryMethodAction(RepositoryInterface $repository, EntityReflectionInterface $entity, $repository_method)
     {
+        // TODO: we may (must ?) return a Query
+
         return $this->render('RomaricDrigonOrchestraBundle:Generic:dashboard.html.twig', []);
     }
 
@@ -152,28 +158,22 @@ class GenericController extends Controller
      * @param CommandInterface $command
      * @param EntityReflectionInterface $entity
      * @param string $entity_method
+     * @param EntityInterface $object
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function entityCommandAction(Request $request, CommandInterface $command, EntityReflectionInterface $entity, $entity_method)
+    public function entityCommandAction(Request $request, CommandInterface $command, EntityReflectionInterface $entity, $entity_method, EntityInterface $object = null)
     {
         $form = $this->createForm(new CommandType($command), $command);
-
-        $repoName = $this->get('orchestra.resolver.entity_name')->getName($entity);
 
         if ($request->isMethod('POST')) {
             if ($form->handleRequest($request) && $form->isValid()) {
                 // Pass the command to the repository, and we're done!
-                call_user_func([$entity, $entity_method], $command);
+                call_user_func([$object, $entity_method], $command);
 
                 $this->get('session')->getFlashBag()->add(
                     'success',
                     'Command run with success!'
                 );
-
-                // We redirect to "listing" page/action
-                $listRoute = $this->get('orchestra.resolver.repository_route_name')->getRouteName($entity, 'listing');
-
-                return $this->redirect($this->generateUrl($listRoute));
             } else {
                 $this->get('session')->getFlashBag()->add(
                     'error',
@@ -182,9 +182,9 @@ class GenericController extends Controller
             }
         }
 
-        return $this->render('RomaricDrigonOrchestraBundle:Generic:repositoryCommand.html.twig', [
+        return $this->render('RomaricDrigonOrchestraBundle:Generic:entityCommand.html.twig', [
             'form'  => $form->createView(),
-            'title' => $repoName
+            'title' => $entity->getName().' - '.$entity_method
         ]);
     }
 }
