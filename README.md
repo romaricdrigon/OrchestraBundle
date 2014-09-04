@@ -203,9 +203,9 @@ class MyRepository implements RepositoryInterface
 {
 ```
 
-#### Hiding a method
+## Hiding a method
 
-You can add a Repository method from the menu by adding it a `@Hidden` annotation:
+You can add an Entity or Repository method from the menu by adding it a `@Hidden` annotation:
 ```php
 use RomaricDrigon\OrchestraBundle\Domain\Repository\RepositoryInterface;
 use RomaricDrigon\OrchestraBundle\Annotation\Hidden;
@@ -218,6 +218,17 @@ class MyRepository implements RepositoryInterface
     public function hiddenMethod()
     {
 ```
+
+Note this does not work on interface, only child classes.
+
+## Security
+
+Orchestra fully integrates with Symfony2 Security component, and does not try to interfere with it.
+
+As a convenience, you can add `@Security` annotations to an Entity or Repository method to restrict access to the corresponding page.
+The content of this annotation is a valid Symfony2 Expression, identical to those used by the [SensioFrameworkExtraBundle](http://symfony.com/doc/current/bundles/SensioFrameworkExtraBundle/annotations/security.html)
+
+Moreover you can access Orchestra objects, such as `repository`, `entity` which an `EntityReflection` or `object` the eventual current `EntityInterface` (but not the `Request` object directly).
 
 ## Configuration
 
