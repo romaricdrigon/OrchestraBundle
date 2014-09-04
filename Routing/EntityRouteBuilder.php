@@ -24,7 +24,7 @@ class EntityRouteBuilder implements EntityRouteBuilderInterface
     /**
      * @var string the controller action a repository will redirect to
      */
-    protected $genericController = 'RomaricDrigonOrchestraBundle:Generic:entityMethod';
+    protected $queryController = 'RomaricDrigonOrchestraBundle:Generic:entityQuery';
 
     /**
      * @var string the controller action a repository method accepting a Command will redirect to
@@ -69,7 +69,7 @@ class EntityRouteBuilder implements EntityRouteBuilderInterface
         foreach ($collection as $action) {
             $pattern = '/'.$entity->getSlug().'/'.$action->getSlug();
             $defaults = [
-                '_controller'   => $this->genericController,
+                '_controller'   => $this->queryController,
                 'orchestra_type' => $this::ROUTE_TYPE,
                 'entity_method' => $action->getMethod(),
                 'method_slug'   => $action->getSlug(),

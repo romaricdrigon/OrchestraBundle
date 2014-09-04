@@ -28,7 +28,7 @@ class RepositoryRouteBuilder implements RepositoryRouteBuilderInterface
     /**
      * @var string the controller action a repository method will redirect to
      */
-    protected $genericController = 'RomaricDrigonOrchestraBundle:Generic:repositoryMethod';
+    protected $queryController = 'RomaricDrigonOrchestraBundle:Generic:repositoryQuery';
 
     /**
      * @var string the controller action a repository method accepting a Command will redirect to
@@ -72,7 +72,7 @@ class RepositoryRouteBuilder implements RepositoryRouteBuilderInterface
         foreach ($collection as $action) {
             $pattern = '/'.$slug.'/'.$action->getSlug();
             $defaults = [
-                '_controller'       => $this->genericController,
+                '_controller'       => $this->queryController,
                 'orchestra_type'    => $this::ROUTE_TYPE,
                 'repository_method' => $action->getMethod(),
                 'repository_slug'   => $slug

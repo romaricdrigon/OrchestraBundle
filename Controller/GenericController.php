@@ -88,7 +88,7 @@ class GenericController extends Controller
      * @internal param string $method_slug
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function entityMethodAction(EntityReflectionInterface $entity, EntityInterface $object = null, $entity_method)
+    public function entityQueryAction(EntityReflectionInterface $entity, EntityInterface $object = null, $entity_method)
     {
         // TODO: we may (must ?) return a Query
 
@@ -103,7 +103,7 @@ class GenericController extends Controller
      * @param string $repository_method
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function repositoryMethodAction(RepositoryInterface $repository, EntityReflectionInterface $entity, $repository_method)
+    public function repositoryQueryAction(RepositoryInterface $repository, EntityReflectionInterface $entity, $repository_method)
     {
         // TODO: we may (must ?) return a Query
 
