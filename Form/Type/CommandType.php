@@ -63,7 +63,7 @@ class CommandType extends AbstractType
             $type = $this->formTypeResolver->getFormType($property);
             $options = $this->formOptionsResolver->getFormOptions($property);
 
-            $builder->add($property, $type, $options);
+            $builder->add($property->getName(), $type, $options);
         }
 
         // Add a submit button!
