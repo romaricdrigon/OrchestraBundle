@@ -235,3 +235,5 @@ IE8 is not supported by provided templates. Twitter Bootstrap is missing its JS 
 ## Thanks
 
 Twitter Bootstrap integration have been realized using templates from [Braincrafted Bootstrap bundle](https://github.com/braincrafted/bootstrap-bundle)
+
+Security annotation are supported in a very similar way to [SensioFrameworkExtraBundle](https://github.com/sensiolabs/SensioFrameworkExtraBundle)

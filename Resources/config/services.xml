@@ -53,6 +53,9 @@
         <parameter key="orchestra.event_listener.entity_slug.class">RomaricDrigon\OrchestraBundle\EventListener\EntitySlugListener</parameter>
         <parameter key="orchestra.event_listener.repository.class">RomaricDrigon\OrchestraBundle\EventListener\RepositoryListener</parameter>
         <parameter key="orchestra.event_listener.entity.class">RomaricDrigon\OrchestraBundle\EventListener\EntityListener</parameter>
+        <parameter key="orchestra.event_listener.security.class">RomaricDrigon\OrchestraBundle\EventListener\SecurityListener</parameter>
+
+        <parameter key="orchestra.security.expression_language.class">RomaricDrigon\OrchestraBundle\Security\ExpressionLanguage</parameter>
     </parameters>
 
     <services>
@@ -213,5 +216,15 @@
             <argument type="service" id="orchestra.resolver.entity_repository" />
             <tag name="kernel.event_subscriber" />
         </service>
+        <service id="orchestra.event_listener.security" class="%orchestra.event_listener.security.class%">
+            <argument type="service" id="security.context" on-invalid="null" />
+            <argument type="service" id="orchestra.security.expression_language" on-invalid="null" />
+            <argument type="service" id="security.authentication.trust_resolver" on-invalid="null" />
+            <argument type="service" id="security.role_hierarchy" on-invalid="null" />
+            <tag name="kernel.event_subscriber" />
+        </service>
+
+        <!-- security -->
+        <service id="orchestra.security.expression_language" class="%orchestra.security.expression_language.class%" public="false" />
     </services>
 </container>
