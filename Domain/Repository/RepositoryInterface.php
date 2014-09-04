@@ -9,6 +9,8 @@
 
 namespace RomaricDrigon\OrchestraBundle\Domain\Repository;
 
+use RomaricDrigon\OrchestraBundle\Domain\Entity\EntityInterface;
+
 /**
  * Interface RepositoryInterface
  * @author Romaric Drigon <romaric.drigon@gmail.com>
@@ -25,4 +27,13 @@ interface RepositoryInterface
      * @return array
      */
     public function listing();
+
+    /**
+     * Provide a way to fetch an entity
+     * Receive an ID, the same than returned by the entity getId()
+     *
+     * @param mixed $id
+     * @return EntityInterface|null
+     */
+    public function find($id);
 }

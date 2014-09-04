@@ -49,12 +49,15 @@ Even if we will see later that they are persisted, they may be differ than Doctr
 
 By convention, place those in your bundle `Entity` folder.
 
-They must implement `RomaricDrigon\OrchestraBundle\Domain\Entity\EntityInterface`.
+They must implement `RomaricDrigon\OrchestraBundle\Domain\Entity\EntityInterface`: Orchestra must be able to get a unique ID for each entity instance.
 ```php
 use RomaricDrigon\OrchestraBundle\Domain\Entity\EntityInterface;
 
 class SomeEntity implements EntityInterface
 {
+    public function getId()
+    {
+        return ...
 ```
 
 Naked Object follow a DDD mindset.
