@@ -17,6 +17,8 @@ use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Security\Core\Authentication\AuthenticationTrustResolverInterface;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Role\RoleInterface;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\Role\RoleHierarchyInterface;
@@ -81,7 +83,7 @@ class SecurityListener implements EventSubscriberInterface
      * @param RoleHierarchyInterface $roleHierarchy
      * @param SecurityResolverInterface $securityResolver
      */
-    public function __construct(SecurityContextInterface $securityContext, ExpressionLanguage $language, AuthenticationTrustResolverInterface $trustResolver, RoleHierarchyInterface $roleHierarchy, SecurityResolverInterface $securityResolver)
+    public function __construct(SecurityContextInterface $securityContext, ExpressionLanguage $language, AuthenticationTrustResolverInterface $trustResolver, RoleHierarchyInterface $roleHierarchy = null, SecurityResolverInterface $securityResolver)
     {
         $this->securityContext  = $securityContext;
         $this->language         = $language;
@@ -157,19 +159,25 @@ class SecurityListener implements EventSubscriberInterface
     // code should be sync with Symfony\Component\Security\Core\Authorization\Voter\ExpressionVoter
     protected function getVariables(Request $request)
     {
-        $token = $this->securityContext->getToken();
+        $token  = $this->securityContext->getToken();
+        $user   = null;
+        $roles  = [];
 
-        if (null !== $this->roleHierarchy) {
-            $roles = $this->roleHierarchy->getReachableRoles($token->getRoles());
-        } else {
-            $roles = $token->getRoles();
+        if ($token instanceof TokenInterface) {
+            $user = $token->getUser();
+
+            if (null !== $this->roleHierarchy) {
+                $roles = $this->roleHierarchy->getReachableRoles($token->getRoles());
+            } else {
+                $roles = $token->getRoles();
+            }
         }
 
         $variables = array(
             'token' => $token,
-            'user'  => $token->getUser(),
+            'user'  => $user,
             // we removed "object" and "request"
-            'roles' => array_map(function ($role) { return $role->getRole(); }, $roles),
+            'roles' => array_map(function (RoleInterface $role) { return $role->getRole(); }, $roles),
             'trust_resolver' => $this->trustResolver,
             'security_context' => $this->securityContext,
         );

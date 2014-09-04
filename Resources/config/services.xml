@@ -224,7 +224,7 @@
             <argument type="service" id="security.context" />
             <argument type="service" id="orchestra.security.expression_language" />
             <argument type="service" id="security.authentication.trust_resolver" />
-            <argument type="service" id="security.role_hierarchy" />
+            <argument type="service" id="security.role_hierarchy" on-invalid="null" />
             <argument type="service" id="orchestra.resolver.security" />
             <tag name="kernel.event_subscriber" />
         </service>
