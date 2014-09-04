@@ -40,6 +40,8 @@
         <parameter key="orchestra.resolver.command_factory.class">RomaricDrigon\OrchestraBundle\Resolver\CommandFactory\CommandFactoryResolver</parameter>
         <parameter key="orchestra.resolver.emit_event.class">RomaricDrigon\OrchestraBundle\Resolver\EmitEvent\EmitEventResolver</parameter>
         <parameter key="orchestra.resolver.security.class">RomaricDrigon\OrchestraBundle\Resolver\Security\SecurityResolver</parameter>
+        <parameter key="orchestra.resolver.form_type.class">RomaricDrigon\OrchestraBundle\Resolver\FormType\FormTypeResolver</parameter>
+        <parameter key="orchestra.resolver.form_options.class">RomaricDrigon\OrchestraBundle\Resolver\FormOptions\FormOptionsResolver</parameter>
 
         <parameter key="orchestra.finder.entity_finder.class">RomaricDrigon\OrchestraBundle\Finder\EntityFinder</parameter>
         <parameter key="orchestra.finder.entity_loader.class">RomaricDrigon\OrchestraBundle\Finder\EntityLoader</parameter>
@@ -104,6 +106,12 @@
             <argument type="service" id="annotation_reader" />
         </service>
         <service id="orchestra.resolver.security" class="%orchestra.resolver.security.class%">
+            <argument type="service" id="annotation_reader" />
+        </service>
+        <service id="orchestra.resolver.form_options" class="%orchestra.resolver.form_options.class%">
+            <argument type="service" id="annotation_reader" />
+        </service>
+        <service id="orchestra.resolver.form_type" class="%orchestra.resolver.form_type.class%">
             <argument type="service" id="annotation_reader" />
         </service>
         <service id="orchestra.resolver.repository_entity" class="%orchestra.resolver.repository_entity.class%">
