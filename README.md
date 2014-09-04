@@ -107,7 +107,8 @@ Such method will be transformed into a web page with a Form.
 
 A `Command` is typically a simple data container, with public properties. Those public properties will be mapped to Orchestra-generated Form.
 
-*Note*: Orchestra will never call any Command constructor.
+*Note*: A Command will be called either by calling its constructor (in that case it should receive no argument), either you can designate a factory method on the entity.
+In that case, use the `CommandFactory` annotation on your Command class.
 
 #### Persisting
 

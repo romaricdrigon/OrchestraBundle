@@ -186,6 +186,7 @@
             <tag name="kernel.event_subscriber" />
         </service>
         <service id="orchestra.event_listener.command_resolver" class="%orchestra.event_listener.command_resolver.class%">
+            <argument type="service" id="orchestra.resolver.command_factory" />
             <tag name="kernel.event_subscriber" />
         </service>
         <service id="orchestra.event_listener.param_converter" class="%orchestra.event_listener.param_converter.class%">
