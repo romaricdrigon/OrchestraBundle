@@ -66,7 +66,7 @@
             <argument type="service" id="orchestra.resolver.repository_route_name" />
             <argument type="service" id="orchestra.resolver.hidden_action" />
         </service>
-        <service id="orchestra.core_repository.action_collection_builder" class="%orchestra.core_repository.action_collection_builder.class%" public="false">
+        <service id="orchestra.core_repository.action_collection_builder" class="%orchestra.core_repository.action_collection_builder.class%">
             <argument type="service" id="orchestra.resolver.repository_name" />
             <argument type="service" id="orchestra.core_repository.action_builder" />
         </service>
@@ -74,7 +74,7 @@
             <argument type="service" id="orchestra.resolver.entity_route_name" />
             <argument type="service" id="orchestra.resolver.hidden_action" />
         </service>
-        <service id="orchestra.core_entity.action_collection_builder" class="%orchestra.core_entity.action_collection_builder.class%" public="false">
+        <service id="orchestra.core_entity.action_collection_builder" class="%orchestra.core_entity.action_collection_builder.class%">
             <argument type="service" id="orchestra.core_entity.action_builder" />
         </service>
 
