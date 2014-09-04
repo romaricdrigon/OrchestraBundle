@@ -21,6 +21,11 @@
                                 {% for header in headers %}
                                     <th>{{ header|capitalize }}</th>
                                 {% endfor %}
+                                {% if actions is not empty %}
+                                    {% block action_header %}
+                                        <th></th>
+                                    {% endblock action_header %}
+                                {% endif %}
                             </tr>
                         </thead>
                     {% endblock table_header %}
@@ -32,6 +37,19 @@
                                     {% for field in view %}
                                         <td>{{ field }}</td>
                                     {% endfor %}
+                                    {% if actions is not empty %}
+                                        {% block action_column %}
+                                            <th>
+                                                <div class="btn-toolbar" role="toolbar">
+                                                    {% for action in actions %}
+                                                        {% block action_button %}
+                                                            <a href="{{ url(action.routeName, {'id': object.id}) }}" class="btn btn-default">{{ action.name }}</a>
+                                                        {% endblock action_button %}
+                                                    {% endfor %}
+                                                </div>
+                                            </th>
+                                        {% block action_column %}
+                                    {% endif %}
                                 </tr>
                             {% endfor %}
                         </tbody>

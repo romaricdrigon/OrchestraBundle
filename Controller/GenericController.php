@@ -64,9 +64,10 @@ class GenericController extends Controller
         }
 
         // Finally, we need the routes for each entity
-        // TODO
+        $actions = $this->get('orchestra.core_entity.action_collection_builder')->build($entity);
 
         return $this->render('RomaricDrigonOrchestraBundle:Generic:list.html.twig', [
+            'actions'   => $actions,
             'headers'   => $headers,
             'no_data'   => $noData,
             'objects'   => $objects,
@@ -157,12 +158,12 @@ class GenericController extends Controller
     {
         $form = $this->createForm(new CommandType($command), $command);
 
-        $repoName = $this->get('orchestra.resolver.repository_name')->getName($repository);
+        $repoName = $this->get('orchestra.resolver.entity_name')->getName($entity);
 
         if ($request->isMethod('POST')) {
             if ($form->handleRequest($request) && $form->isValid()) {
                 // Pass the command to the repository, and we're done!
-                call_user_func([$repository, $repository_method], $command);
+                call_user_func([$entity, $entity_method], $command);
 
                 $this->get('session')->getFlashBag()->add(
                     'success',
@@ -170,7 +171,7 @@ class GenericController extends Controller
                 );
 
                 // We redirect to "listing" page/action
-                $listRoute = $this->get('orchestra.resolver.repository_route_name')->getRouteName($repository, 'listing');
+                $listRoute = $this->get('orchestra.resolver.repository_route_name')->getRouteName($entity, 'listing');
 
                 return $this->redirect($this->generateUrl($listRoute));
             } else {
