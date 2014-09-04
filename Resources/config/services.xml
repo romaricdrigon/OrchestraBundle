@@ -31,6 +31,7 @@
 
         <parameter key="orchestra.resolver.repository_name.class">RomaricDrigon\OrchestraBundle\Resolver\RepositoryNameResolver</parameter>
         <parameter key="orchestra.resolver.repository_entity.class">RomaricDrigon\OrchestraBundle\Resolver\RepositoryEntity\RepositoryEntityResolver</parameter>
+        <parameter key="orchestra.resolver.entity_repository.class">RomaricDrigon\OrchestraBundle\Resolver\EntityRepository\EntityRepositoryResolver</parameter>
         <parameter key="orchestra.resolver.repository_slug.class">RomaricDrigon\OrchestraBundle\Resolver\RepositorySlug\RepositorySlugResolver</parameter>
         <parameter key="orchestra.resolver.repository_route_name.class">RomaricDrigon\OrchestraBundle\Resolver\RepositoryRouteName\RepositoryRouteNameResolver</parameter>
         <parameter key="orchestra.resolver.listing_header.class">RomaricDrigon\OrchestraBundle\Resolver\ListingHeader\ListingHeaderResolver</parameter>
@@ -87,6 +88,9 @@
         </service>
         <service id="orchestra.resolver.repository_entity" class="%orchestra.resolver.repository_entity.class%">
             <argument type="service" id="orchestra.pool.entity_pool" />
+        </service>
+        <service id="orchestra.resolver.entity_repository" class="%orchestra.resolver.entity_repository.class%">
+            <argument type="service" id="orchestra.pool.repository_pool" />
         </service>
         <service id="orchestra.resolver.repository_slug" class="%orchestra.resolver.repository_slug.class%" />
         <service id="orchestra.resolver.repository_route_name" class="%orchestra.resolver.repository_route_name.class%">

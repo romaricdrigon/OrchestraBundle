@@ -40,7 +40,7 @@
                                     {% if actions is not empty %}
                                         {% block action_column %}
                                             <td class="col-sm-4">
-                                                <div class="btn-group btn-group-xs">
+                                                <div class="btn-group btn-group-xs pull-right">
                                                     {% for action in actions %}
                                                         {% block action_button %}
                                                             <a href="{{ url(action.routeName, {'id': object.id}) }}" class="btn btn-default">{{ action.name }}</a>
