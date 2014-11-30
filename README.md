@@ -4,6 +4,16 @@ Orchestra Bundle
 Orchestra is a Naked Object implementation on top of Symfony2
 Available as a Symfony2 Bundle
 
+## Why Orchestra?
+
+[Naked Object](http://en.wikipedia.org/wiki/Naked_objects) is a powerful pattern first described by Richard Pawson.  
+It states that business objects, if correctly modelled, are sufficient to create an application, the technical code being generic enough to be automatically generated.
+
+Orchestra aims to be such an admin generator: a library that helps you focusing on modelling the Domain right, and do all the "boring code" for you.  
+
+Maybe you will want to personalize it further, then it's ok, Orchestra is not about restraining you but helping you quickly create a starter application, that may be used as a prototype, a proof-of-concept, or for discussions with business experts...
+Note that Orchestra application are made to be production-ready, safe to use, and to offer decent performances. Everything is done by reflection (eventually cached), no direct code generation in here.
+
 ## Installation
 
 Install bundle using composer: `composer require romaricdrigon/orchestra-bundle`
