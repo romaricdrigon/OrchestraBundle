@@ -4,6 +4,9 @@ Orchestra Bundle
 Orchestra is a Naked Object implementation on top of Symfony2
 Available as a Symfony2 Bundle
 
+[![Latest Stable Version](https://poser.pugx.org/romaricdrigon/orchestra-bundle/v/stable.svg)](https://packagist.org/packages/romaricdrigon/orchestra-bundle)
+[![License](https://poser.pugx.org/romaricdrigon/orchestra-bundle/license.svg)](https://packagist.org/packages/romaricdrigon/orchestra-bundle)
+
 ## Why Orchestra?
 
 [Naked Object](http://en.wikipedia.org/wiki/Naked_objects) is a powerful pattern first described by Richard Pawson.  
