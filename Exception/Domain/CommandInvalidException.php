@@ -17,6 +17,6 @@ class CommandInvalidException extends \Exception
 {
     public function __construct($command)
     {
-        parent::__construct('Received an invalid Command: '.var_dump($command));
+        parent::__construct('Received an invalid Command: '.is_object($command) ? get_class($command) : gettype($command));
     }
 } 
