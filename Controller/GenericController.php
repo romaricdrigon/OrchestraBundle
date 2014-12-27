@@ -93,8 +93,6 @@ class GenericController extends Controller
      */
     public function entityQueryAction(EntityReflectionInterface $entity, EntityInterface $object = null, $entity_method)
     {
-        // TODO: we may (must ?) return a Query
-
         return $this->render('RomaricDrigonOrchestraBundle:Generic:dashboard.html.twig', []);
     }
 
@@ -108,8 +106,6 @@ class GenericController extends Controller
      */
     public function repositoryQueryAction(RepositoryInterface $repository, EntityReflectionInterface $entity, $repository_method)
     {
-        // TODO: we may (must ?) return a Query
-
         return $this->render('RomaricDrigonOrchestraBundle:Generic:dashboard.html.twig', []);
     }
 
