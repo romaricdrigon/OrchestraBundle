@@ -6,6 +6,7 @@ Available as a Symfony2 Bundle
 
 [![Latest Stable Version](https://poser.pugx.org/romaricdrigon/orchestra-bundle/v/stable.svg)](https://packagist.org/packages/romaricdrigon/orchestra-bundle)
 [![License](https://poser.pugx.org/romaricdrigon/orchestra-bundle/license.svg)](https://packagist.org/packages/romaricdrigon/orchestra-bundle)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/69a47b43-e701-439f-bc13-d46558286f54/mini.png)](https://insight.sensiolabs.com/projects/69a47b43-e701-439f-bc13-d46558286f54)
 
 ## Why Orchestra?
 
