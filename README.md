@@ -17,6 +17,14 @@ Orchestra aims to be such an admin generator: a library that helps you focusing 
 Maybe you will want to personalize it further, then it's ok, Orchestra is not about restraining you but helping you quickly create a starter application, that may be used as a prototype, a proof-of-concept, or for discussions with business experts...
 Note that Orchestra application are made to be production-ready, safe to use, and to offer decent performances. Everything is done by reflection (eventually cached), no direct code generation in here.
 
+## Roadmap / version
+
+Roadmap:
+
+ * **0.8** (current): functional but still **beta** version. Using is OK, but extending may change
+ * 0.9 : production-ready. Several code optimizations are needed
+ * 1.0 : first stable version. Some refactors have to occur before, but not after before a 2.0 version.
+
 ## Installation
 
 Install bundle using composer: `composer require romaricdrigon/orchestra-bundle`
