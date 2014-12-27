@@ -68,5 +68,7 @@ class MockRepository implements RepositoryInterface {
     public function someCamelCaseName() {}
 
     protected function trap() {}
+
+    public function find($id) {}
 }
  

@@ -53,6 +53,8 @@ class MockEntity implements EntityInterface {
     {
         return new MockQuery();
     }
+
+    public function getId() {}
 }
 
 class MockQuery implements \IteratorAggregate, QueryInterface {

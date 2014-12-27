@@ -64,8 +64,12 @@ class RepositoryPoolTest extends \PHPUnit_Framework_TestCase
 
 final class MockRepository1 implements RepositoryInterface {
     public function listing() {}
+
+    public function find($id) {}
 }
 
 final class MockRepository2 implements RepositoryInterface {
     public function listing() {}
+
+    public function find($id) {}
 }

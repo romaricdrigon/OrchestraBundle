@@ -61,4 +61,6 @@ class MockEntity implements EntityInterface {
     public function foo() {}
 
     public function fooBar() {}
+
+    public function getId() {}
 }

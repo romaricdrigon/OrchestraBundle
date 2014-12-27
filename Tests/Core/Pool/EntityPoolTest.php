@@ -69,7 +69,11 @@ class EntityPoolTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-class MockEntity1 implements EntityInterface {}
+class MockEntity1 implements EntityInterface {
+    public function getId() {}
+}
 
-class MockEntity2 implements EntityInterface {}
+class MockEntity2 implements EntityInterface {
+    public function getId() {}
+}
  

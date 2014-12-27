@@ -108,4 +108,6 @@ class RepositoryRouteBuilderTest extends \PHPUnit_Framework_TestCase
 
 class MockRepository implements RepositoryInterface {
     public function listing() {}
+
+    public function find($id) {}
 }
