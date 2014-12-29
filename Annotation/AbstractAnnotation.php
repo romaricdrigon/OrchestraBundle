@@ -8,8 +8,8 @@
  */
 
 namespace RomaricDrigon\OrchestraBundle\Annotation;
-use RomaricDrigon\OrchestraBundle\Exception\AnnotationWithoutValueException;
-use RomaricDrigon\OrchestraBundle\Exception\AnnotationInvalidOption;
+
+use RomaricDrigon\OrchestraBundle\Exception\AnnotationException;
 
 /**
  * Class AbstractAnnotation
@@ -23,8 +23,7 @@ abstract class AbstractAnnotation
      * Will build annotation, using extending class setters to set options of the annotation
      *
      * @param array $options
-     * @throws AnnotationInvalidOption if our Annotation has options not allowed
-     * @throws AnnotationWithoutValueException if our Annotation has a value and it shouldn't
+     * @throws AnnotationException if our Annotation has options not allowed or if our Annotation has a value and it shouldn't
      */
     public function __construct($options)
     {
@@ -36,7 +35,7 @@ abstract class AbstractAnnotation
                 $reflect = new \ReflectionClass($this);
                 $annotationName = $reflect->getShortName();
 
-                throw new AnnotationWithoutValueException($annotationName);
+                throw new AnnotationException('@'.$annotationName.'("value") is not a valid syntax');
             }
 
             $options[$property] = $options['value'];
@@ -51,7 +50,7 @@ abstract class AbstractAnnotation
                 $reflect = new \ReflectionClass($this);
                 $annotationName = $reflect->getShortName();
 
-                throw new AnnotationInvalidOption($annotationName, $key);
+                throw new AnnotationException('Annotation '.$annotationName.' does not have a '.$key.' option');
             }
 
             $this->$setterName($value);
@@ -65,4 +64,4 @@ abstract class AbstractAnnotation
      * @return string|false
      */
     abstract protected function getValueProperty();
-} 
+}

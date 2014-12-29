@@ -10,13 +10,12 @@
 namespace RomaricDrigon\OrchestraBundle\Exception;
 
 /**
- * Class AnnotationWithoutValueException
+ * Class AnnotationException
+ * Represents an exception related to an Annotation provided by Orchestra, relative to the syntax or usage,
+ * not the meaning. For that one see DomainErrorException.
+ *
  * @author Romaric Drigon <romaric.drigon@gmail.com>
  */
-class AnnotationWithoutValueException extends \Exception
+class AnnotationException extends \Exception
 {
-    public function __construct($annotationName)
-    {
-        parent::__construct('@'.$annotationName.'("value") is not a valid syntax');
-    }
 }

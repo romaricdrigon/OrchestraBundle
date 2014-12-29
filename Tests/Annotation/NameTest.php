@@ -33,7 +33,7 @@ class NameTest extends \PHPUnit_Framework_TestCase
 
     public function test_it_does_not_allow_other_options()
     {
-        $this->setExpectedException('RomaricDrigon\OrchestraBundle\Exception\AnnotationInvalidOption');
+        $this->setExpectedException('RomaricDrigon\OrchestraBundle\Exception\AnnotationException');
 
         new Name(['value' => 'some value', 'foo' => 'bar']);
     }
