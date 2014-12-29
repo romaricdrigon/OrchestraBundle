@@ -10,7 +10,7 @@
 namespace RomaricDrigon\OrchestraBundle\Resolver\EntityRepository;
 
 use RomaricDrigon\OrchestraBundle\Core\Entity\EntityReflectionInterface;
-use RomaricDrigon\OrchestraBundle\Domain\Repository\RepositoryInterface;
+use RomaricDrigon\OrchestraBundle\Core\Repository\RepositoryDefinitionInterface;
 
 /**
  * Interface EntityRepositoryResolverInterface
@@ -22,7 +22,7 @@ interface EntityRepositoryResolverInterface
      * Find Repository corresponding to given Entity
      *
      * @param EntityReflectionInterface $entityReflection
-     * @return RepositoryInterface
+     * @return RepositoryDefinitionInterface
      */
     public function findForEntity(EntityReflectionInterface $entityReflection);
 }

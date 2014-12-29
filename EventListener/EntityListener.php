@@ -60,8 +60,8 @@ class EntityListener implements EventSubscriberInterface
 
         $entity = $request->attributes->get('entity');
 
-        $repository = $this->entityRepositoryResolver->findForEntity($entity);
+        $repositoryDefinition = $this->entityRepositoryResolver->findForEntity($entity);
 
-        $request->attributes->set('repository', $repository);
+        $request->attributes->set('repository_definition', $repositoryDefinition);
     }
 }
