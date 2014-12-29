@@ -21,7 +21,7 @@ interface ListingHeaderResolverInterface
      * @param EntityInterface $entity
      * @param string $methodName
      * @return array headers names
-     * @throws \RomaricDrigon\OrchestraBundle\Exception\Domain\EntityQueryReturnException
+     * @throws \RomaricDrigon\OrchestraBundle\Exception\DomainErrorException
      */
     public function getHeaders(EntityInterface $entity, $methodName);
 }
