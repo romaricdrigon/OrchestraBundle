@@ -9,7 +9,7 @@
 
 namespace RomaricDrigon\OrchestraBundle\Core\Repository\Action;
 
-use RomaricDrigon\OrchestraBundle\Domain\Repository\RepositoryInterface;
+use RomaricDrigon\OrchestraBundle\Core\Repository\RepositoryDefinitionInterface;
 use RomaricDrigon\OrchestraBundle\Resolver\RepositoryNameResolverInterface;
 
 /**
@@ -42,18 +42,16 @@ class RepositoryActionCollectionBuilder implements RepositoryActionCollectionBui
     /**
      * @inheritdoc
      */
-    public function build(RepositoryInterface $repository)
+    public function build(RepositoryDefinitionInterface $repositoryDefinition)
     {
-        $reflection = new \ReflectionClass($repository);
+        $repoName = $this->repositoryNameResolver->getName($repositoryDefinition);
 
-        $repoName = $this->repositoryNameResolver->getName($repository);
-
-        $methods = $reflection->getMethods(\ReflectionMethod::IS_PUBLIC);
+        $methods = $repositoryDefinition->getMethods();
 
         $collection = new RepositoryActionCollection($repoName);
 
         foreach ($methods as $method) {
-            $action = $this->repositoryActionBuilder->build($repository, $method);
+            $action = $this->repositoryActionBuilder->build($repositoryDefinition, $method);
 
             if (null === $action) {
                 continue;

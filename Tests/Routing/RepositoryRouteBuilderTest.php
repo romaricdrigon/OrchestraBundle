@@ -10,7 +10,6 @@
 namespace RomaricDrigon\OrchestraBundle\Tests\Routing;
 
 use RomaricDrigon\OrchestraBundle\Core\Repository\Action\RepositoryAction;
-use RomaricDrigon\OrchestraBundle\Domain\Repository\RepositoryInterface;
 use RomaricDrigon\OrchestraBundle\Routing\RepositoryRouteBuilder;
 use RomaricDrigon\OrchestraBundle\Core\Repository\Action\RepositoryActionCollection;
 use Symfony\Component\Routing\Route;
@@ -59,9 +58,9 @@ class RepositoryRouteBuilderTest extends \PHPUnit_Framework_TestCase
 
     public function test_it_builds_route()
     {
-        $repository = new MockRepository();
+        $repositoryDefinition = \Phake::mock('RomaricDrigon\OrchestraBundle\Core\Repository\RepositoryDefinitionInterface');
 
-        $this->assertNotNull($routes = $this->sut->buildRoutes($repository, 'mock'));
+        $this->assertNotNull($routes = $this->sut->buildRoutes($repositoryDefinition, 'mock'));
 
         $this->assertInternalType('array', $routes);
 
@@ -104,10 +103,4 @@ class RepositoryRouteBuilderTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(RepositoryRouteBuilder::ROUTE_TYPE, $listing->getDefault('orchestra_type'));
         $this->assertNull($listing->getDefault('command_class'));
     }
-}
-
-class MockRepository implements RepositoryInterface {
-    public function listing() {}
-
-    public function find($id) {}
 }

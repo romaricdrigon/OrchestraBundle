@@ -9,7 +9,7 @@
 
 namespace RomaricDrigon\OrchestraBundle\Resolver\RepositoryRouteName;
 
-use RomaricDrigon\OrchestraBundle\Domain\Repository\RepositoryInterface;
+use RomaricDrigon\OrchestraBundle\Core\Repository\RepositoryDefinitionInterface;
 
 /**
  * Interface RepositoryRouteNameResolverInterface
@@ -20,9 +20,9 @@ interface RepositoryRouteNameResolverInterface
     const NAME_PREFIX = 'orchestra_repository';
 
     /**
-     * @param RepositoryInterface $repository
+     * @param RepositoryDefinitionInterface $repositoryDefinition
      * @param string $methodName
      * @return string
      */
-    public function getRouteName(RepositoryInterface $repository, $methodName);
+    public function getRouteName(RepositoryDefinitionInterface $repositoryDefinition, $methodName);
 }

@@ -9,8 +9,7 @@
 
 namespace RomaricDrigon\OrchestraBundle\Resolver\RepositoryRouteName;
 
-use RomaricDrigon\OrchestraBundle\Domain\Repository\RepositoryInterface;
-use RomaricDrigon\OrchestraBundle\Resolver\RepositorySlug\RepositorySlugResolverInterface;
+use RomaricDrigon\OrchestraBundle\Core\Repository\RepositoryDefinitionInterface;
 
 /**
  * Class RepositoryRouteNameResolver
@@ -19,24 +18,11 @@ use RomaricDrigon\OrchestraBundle\Resolver\RepositorySlug\RepositorySlugResolver
 class RepositoryRouteNameResolver implements RepositoryRouteNameResolverInterface
 {
     /**
-     * @var RepositorySlugResolverInterface
-     */
-    protected $repositorySlugResolver;
-
-    /**
-     * @param RepositorySlugResolverInterface $repositorySlugResolver
-     */
-    public function __construct(RepositorySlugResolverInterface $repositorySlugResolver)
-    {
-        $this->repositorySlugResolver = $repositorySlugResolver;
-    }
-
-    /**
      * @inheritdoc
      */
-    public function getRouteName(RepositoryInterface $repository, $methodName)
+    public function getRouteName(RepositoryDefinitionInterface $repositoryDefinition, $methodName)
     {
-        $slug = $this->repositorySlugResolver->getSlug($repository);
+        $slug = $repositoryDefinition->getSlug();
 
         return $this::NAME_PREFIX.'_'.$slug.'_'.strtolower($methodName);
     }

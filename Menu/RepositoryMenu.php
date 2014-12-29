@@ -62,10 +62,10 @@ class RepositoryMenu implements RepositoryMenuInterface
      */
     protected function buildMenu()
     {
-        $repositories = $this->repositoryPool->all();
+        $repositoryDefinitions = $this->repositoryPool->all();
 
-        foreach ($repositories as $slug => $repository) {
-            $this->menu[$slug] = $this->repositoryActionCollectionBuilder->build($repository);
+        foreach ($repositoryDefinitions as $slug => $repositoryDefinition) {
+            $this->menu[$slug] = $this->repositoryActionCollectionBuilder->build($repositoryDefinition);
         }
     }
 }

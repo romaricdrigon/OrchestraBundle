@@ -9,8 +9,8 @@
 
 namespace RomaricDrigon\OrchestraBundle\Routing;
 
+use RomaricDrigon\OrchestraBundle\Core\Repository\RepositoryDefinitionInterface;
 use Symfony\Component\Routing\Route;
-use RomaricDrigon\OrchestraBundle\Domain\Repository\RepositoryInterface;
 
 /**
  * Interface RepositoryRouteBuilder
@@ -21,9 +21,9 @@ interface RepositoryRouteBuilderInterface
     /**
      * Build a Symfony Route for given repository
      *
-     * @param RepositoryInterface $repositoryInterface
+     * @param RepositoryDefinitionInterface $repositoryDefinition
      * @param string $slug
      * @return Route[]
      */
-    public function buildRoutes(RepositoryInterface $repositoryInterface, $slug);
+    public function buildRoutes(RepositoryDefinitionInterface $repositoryDefinition, $slug);
 }

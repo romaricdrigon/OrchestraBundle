@@ -32,7 +32,7 @@ interface RepositoryPoolInterface
     public function getBySlug($slug);
 
     /**
-     * @return array all repositories indexed by slug
+     * @return array all repository definitions indexed by slug
      */
     public function all();
 }

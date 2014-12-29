@@ -9,7 +9,7 @@
 
 namespace RomaricDrigon\OrchestraBundle\Core\Repository\Action;
 
-use RomaricDrigon\OrchestraBundle\Domain\Repository\RepositoryInterface;
+use RomaricDrigon\OrchestraBundle\Core\Repository\RepositoryDefinitionInterface;
 use RomaricDrigon\OrchestraBundle\Resolver\RepositoryRouteName\RepositoryRouteNameResolverInterface;
 use RomaricDrigon\OrchestraBundle\Resolver\HiddenAction\HiddenActionResolverInterface;
 
@@ -43,7 +43,7 @@ class RepositoryActionBuilder implements RepositoryActionBuilderInterface
     /**
      * @inheritdoc
      */
-    public function build(RepositoryInterface $repository, \ReflectionMethod $reflectionMethod)
+    public function build(RepositoryDefinitionInterface $repositoryDefinition, \ReflectionMethod $reflectionMethod)
     {
         if (true === $this->hiddenActionResolver->isHiddenReflectionMethod($reflectionMethod)) {
             return null;
@@ -53,7 +53,7 @@ class RepositoryActionBuilder implements RepositoryActionBuilderInterface
 
         $name = $this->buildName($method);
 
-        $routeName = $this->repositoryRouteNameResolver->getRouteName($repository, $method);
+        $routeName = $this->repositoryRouteNameResolver->getRouteName($repositoryDefinition, $method);
 
         $slug = $this->buildSlug($method);
 

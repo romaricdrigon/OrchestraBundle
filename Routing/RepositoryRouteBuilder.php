@@ -11,8 +11,8 @@ namespace RomaricDrigon\OrchestraBundle\Routing;
 
 use RomaricDrigon\OrchestraBundle\Core\Repository\Action\RepositoryActionCollectionBuilderInterface;
 use Symfony\Component\Routing\Route;
-use RomaricDrigon\OrchestraBundle\Domain\Repository\RepositoryInterface;
 use RomaricDrigon\OrchestraBundle\Core\Repository\Action\RepositoryActionInterface;
+use RomaricDrigon\OrchestraBundle\Core\Repository\RepositoryDefinitionInterface;
 
 /**
  * Class RepositoryRouteBuilder
@@ -62,9 +62,9 @@ class RepositoryRouteBuilder implements RepositoryRouteBuilderInterface
     /**
      * @inheritdoc
      */
-    public function buildRoutes(RepositoryInterface $repositoryInterface, $slug)
+    public function buildRoutes(RepositoryDefinitionInterface $repositoryDefinition, $slug)
     {
-        $collection = $this->repositoryActionCollectionBuilder->build($repositoryInterface);
+        $collection = $this->repositoryActionCollectionBuilder->build($repositoryDefinition);
 
         $routes = [];
 

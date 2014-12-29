@@ -9,7 +9,7 @@
 
 namespace RomaricDrigon\OrchestraBundle\Core\Repository\Action;
 
-use RomaricDrigon\OrchestraBundle\Domain\Repository\RepositoryInterface;
+use RomaricDrigon\OrchestraBundle\Core\Repository\RepositoryDefinitionInterface;
 
 /**
  * Interface RepositoryActionCollectionBuilderInterface
@@ -18,8 +18,8 @@ use RomaricDrigon\OrchestraBundle\Domain\Repository\RepositoryInterface;
 interface RepositoryActionCollectionBuilderInterface
 {
     /**
-     * @param RepositoryInterface $repository
+     * @param RepositoryDefinitionInterface $repositoryDefinition
      * @return RepositoryActionCollection
      */
-    public function build(RepositoryInterface $repository);
+    public function build(RepositoryDefinitionInterface $repositoryDefinition);
 }
