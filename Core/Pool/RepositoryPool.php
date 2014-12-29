@@ -9,7 +9,8 @@
 
 namespace RomaricDrigon\OrchestraBundle\Core\Pool;
 
-use RomaricDrigon\OrchestraBundle\Domain\Repository\RepositoryInterface;
+use RomaricDrigon\OrchestraBundle\Core\Repository\RepositoryDefinition;
+use RomaricDrigon\OrchestraBundle\Core\Repository\RepositoryDefinitionInterface;
 use RomaricDrigon\OrchestraBundle\Exception\DomainErrorException;
 
 /**
@@ -20,30 +21,36 @@ use RomaricDrigon\OrchestraBundle\Exception\DomainErrorException;
  */
 class RepositoryPool implements RepositoryPoolInterface
 {
+    /**
+     * @var RepositoryDefinitionInterface[]
+     */
     protected $repositoriesBySlug = [];
 
     /**
      * Add a repository to the pool
      *
-     * @param RepositoryInterface $repository
+     * @param string $repositoryClass
+     * @param string|null $serviceId
      * @throws DomainErrorException
      */
-    public function addRepository(RepositoryInterface $repository)
+    public function addRepository($repositoryClass, $serviceId)
     {
-        // At the moment slug is not configurable otherwise
-        $reflect = new \ReflectionClass($repository);
-        $slug = strtolower(str_replace('Repository', '', $reflect->getShortName()));
+        $reflectionClass = new \ReflectionClass($repositoryClass);
+
+        $repositoryDefinition = new RepositoryDefinition($reflectionClass, $serviceId);
+
+        $slug = $repositoryDefinition->getSlug();
 
         if (isset($this->repositoriesBySlug[$slug])) {
             throw new DomainErrorException('Two repositories has the same "'.$slug.'" slug!');
         }
 
-        $this->repositoriesBySlug[$slug] = $repository;
+        $this->repositoriesBySlug[$slug] = $repositoryDefinition;
     }
 
     /**
      * @param string $slug
-     * @return RepositoryInterface
+     * @return RepositoryDefinitionInterface
      * @throws DomainErrorException
      */
     public function getBySlug($slug)

@@ -9,7 +9,7 @@
 
 namespace RomaricDrigon\OrchestraBundle\Core\Pool;
 
-use RomaricDrigon\OrchestraBundle\Domain\Repository\RepositoryInterface;
+use RomaricDrigon\OrchestraBundle\Core\Repository\RepositoryDefinitionInterface;
 
 /**
  * Interface RepositoryPoolInterface
@@ -20,13 +20,14 @@ interface RepositoryPoolInterface
     /**
      * Add a repository to the pool
      *
-     * @param RepositoryInterface $repository
+     * @param string $repositoryClass fully qualified class name
+     * @param string|null $serviceId the repository is a Symfony service, its ID
      */
-    public function addRepository(RepositoryInterface $repository);
+    public function addRepository($repositoryClass, $serviceId);
 
     /**
      * @param string $slug
-     * @return RepositoryInterface
+     * @return RepositoryDefinitionInterface
      */
     public function getBySlug($slug);
 

@@ -12,7 +12,6 @@ namespace RomaricDrigon\OrchestraBundle\DependencyInjection\Compiler;
 use RomaricDrigon\OrchestraBundle\Exception\OrchestraRuntimeException;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * Class AddRepositoryCompilerPass
@@ -25,7 +24,9 @@ class AddRepositoryCompilerPass implements CompilerPassInterface
      */
     protected $generatedRepositoryPrefix = 'orchestra.doctrine.repository';
 
-
+    /**
+     * @inheritdoc
+     */
     public function process(ContainerBuilder $container)
     {
         if (! $container->hasDefinition('orchestra.pool.repository_pool')) {
@@ -37,7 +38,9 @@ class AddRepositoryCompilerPass implements CompilerPassInterface
         $taggedServices = $container->findTaggedServiceIds('orchestra.repository');
 
         foreach ($taggedServices as $id => $tagAttributes) {
-            $repositoryPool->addMethodCall('addRepository', [new Reference($id)]);
+            $definition = $container->getDefinition($id);
+
+            $repositoryPool->addMethodCall('addRepository', [$definition->getClass(), $id]);
         }
     }
 }
