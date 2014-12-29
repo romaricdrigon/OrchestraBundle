@@ -9,7 +9,7 @@
 
 namespace RomaricDrigon\OrchestraBundle\Form\Type;
 
-use RomaricDrigon\OrchestraBundle\Exception\DomainInvalidException;
+use RomaricDrigon\OrchestraBundle\Exception\DomainErrorException;
 use RomaricDrigon\OrchestraBundle\Resolver\FormOptions\FormOptionsResolverInterface;
 use RomaricDrigon\OrchestraBundle\Resolver\FormType\FormTypeResolverInterface;
 use Symfony\Component\Form\AbstractType;
@@ -55,7 +55,7 @@ class CommandType extends AbstractType
         $properties = $reflectionCommand->getProperties(\ReflectionProperty::IS_PUBLIC);
 
         if (true === empty($properties)) {
-            throw new DomainInvalidException('Expecting a Command, but received '.is_object($command) ? get_class($command) : gettype($command));
+            throw new DomainErrorException('Expecting a Command, but received '.is_object($command) ? get_class($command) : gettype($command));
         }
 
         foreach ($properties as $property) {

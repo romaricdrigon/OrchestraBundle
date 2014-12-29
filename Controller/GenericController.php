@@ -16,7 +16,6 @@ use RomaricDrigon\OrchestraBundle\Domain\Event\EventInterface;
 use RomaricDrigon\OrchestraBundle\Domain\Repository\ReceiveEventInterface;
 use RomaricDrigon\OrchestraBundle\Domain\Repository\RepositoryInterface;
 use RomaricDrigon\OrchestraBundle\Exception\DomainErrorException;
-use RomaricDrigon\OrchestraBundle\Exception\DomainInvalidException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use RomaricDrigon\OrchestraBundle\Doctrine\ObjectManagerInterface;
@@ -208,7 +207,7 @@ class GenericController extends Controller
      * @param string $entity_method
      * @param EntityInterface $object
      * @param RepositoryInterface $repository
-     * @throws DomainInvalidException
+     * @throws DomainErrorException
      * @throws NotFoundHttpException
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -223,11 +222,11 @@ class GenericController extends Controller
 
         // We accept "null", in that case we do nothing, but no other objects
         if (null !== $event && ! $event instanceof EventInterface) {
-            throw new DomainInvalidException('An invalid Event was emitted by '.$entity->getName().' '.$entity_method.'. Maybe you forgot to implement EventInterface? Result must be either an implementation either null.');
+            throw new DomainErrorException('An invalid Event was emitted by '.$entity->getName().' '.$entity_method.'. Maybe you forgot to implement EventInterface? Result must be either an implementation either null.');
         }
 
         if (! $repository instanceof ReceiveEventInterface) {
-            throw new DomainInvalidException('Repository for Entity '.$entity->getName().' can not receive Events. Maybe you forgot to implement ReceiveEventInterface?');
+            throw new DomainErrorException('Repository for Entity '.$entity->getName().' can not receive Events. Maybe you forgot to implement ReceiveEventInterface?');
         }
 
         if (null !== $event) {
