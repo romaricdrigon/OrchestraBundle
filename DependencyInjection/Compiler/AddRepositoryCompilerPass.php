@@ -68,7 +68,7 @@ class AddRepositoryCompilerPass implements CompilerPassInterface
                 $doctrineServiceName = self::DOCTRINE_REPOSITORY_PREFIX . $entityClass;
 
                 if (!$container->has($doctrineServiceName)) {
-                    $doctrineRepositoryDefinition = (new Definition())
+                    $doctrineRepositoryDefinition = (new Definition('Doctrine\ORM\EntityRepository')) // we are forced to give a class
                         ->setFactoryService(self::DOCTRINE_ENTITY_MANAGER_SERVICE_ID)
                         ->setFactoryMethod('getRepository')
                         ->addArgument($entityClass);
