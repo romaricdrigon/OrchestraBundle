@@ -133,12 +133,6 @@
         </service>
 
         <!-- doctrine bridge -->
-        <service id="orchestra.doctrine.repository_finder" class="%orchestra.doctrine.repository_finder.class%" public="false">
-            <argument type="service" id="doctrine.orm.entity_manager" />
-        </service>
-        <service id="orchestra.doctrine.repository_injecter" class="%orchestra.doctrine.repository_injecter.class%">
-            <argument type="service" id="orchestra.doctrine.repository_finder" />
-        </service>
         <service id="orchestra.doctrine.object_manager" class="%orchestra.doctrine.object_manager.class%">
             <argument type="service" id="doctrine.orm.entity_manager" />
         </service>
@@ -204,11 +198,6 @@
         <service id="orchestra.symfony.filesystem" class="%orchestra.symfony.filesystem.class%" />
 
         <!-- kernel event listeners -->
-        <service id="orchestra.event_listener.doctrine_repository" class="%orchestra.event_listener.doctrine_repository.class%">
-            <argument type="service" id="orchestra.doctrine.repository_injecter" />
-            <argument type="service" id="orchestra.doctrine.object_manager" />
-            <tag name="kernel.event_subscriber" />
-        </service>
         <service id="orchestra.event_listener.command_resolver" class="%orchestra.event_listener.command_resolver.class%">
             <argument type="service" id="orchestra.resolver.command_factory" />
             <tag name="kernel.event_subscriber" />

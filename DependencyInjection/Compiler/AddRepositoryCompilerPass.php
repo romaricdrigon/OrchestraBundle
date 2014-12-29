@@ -22,10 +22,11 @@ use Symfony\Component\DependencyInjection\Reference;
  */
 class AddRepositoryCompilerPass implements CompilerPassInterface
 {
-    /**
-     * @var string prefix we use to generated Doctrine Repositories services ID
-     */
-    protected $generatedRepositoryPrefix = 'orchestra.doctrine.repository';
+    const OBJECT_MANAGER_SERVICE_ID = 'orchestra.doctrine.object_manager';
+
+    const DOCTRINE_ENTITY_MANAGER_SERVICE_ID = 'doctrine.orm.entity_manager';
+
+    const DOCTRINE_REPOSITORY_PREFIX = 'orchestra.doctrine_repository.';
 
     /**
      * @inheritdoc
@@ -52,6 +53,27 @@ class AddRepositoryCompilerPass implements CompilerPassInterface
 
             // Add it to the Pool
             $repositoryPool->addMethodCall('addRepository', [$class, $id, $entityClass]);
+
+            // It's also now we see if we need to inject it a Doctrine Repository
+            if ($reflection->implementsInterface('RomaricDrigon\OrchestraBundle\Domain\Doctrine\DoctrineAwareInterface')) {
+                $definition->addMethodCall('setObjectManager', [new Reference(self::OBJECT_MANAGER_SERVICE_ID)]);
+
+                // Because Doctrine repositories are complex, we need to add them as services first
+                $doctrineServiceName = self::DOCTRINE_REPOSITORY_PREFIX.$entityClass;
+
+                if (! $container->has($doctrineServiceName)) {
+                    $doctrineRepositoryDefinition = (new Definition())
+                        ->setFactoryService(self::DOCTRINE_ENTITY_MANAGER_SERVICE_ID)
+                        ->setFactoryMethod('getRepository')
+                        ->addArgument($entityClass)
+                    ;
+                    $container->addDefinitions([
+                        $doctrineServiceName => $doctrineRepositoryDefinition
+                    ]);
+                }
+
+                $definition->addMethodCall('setDoctrineRepository', [new Reference($doctrineServiceName)]);
+            }
         }
     }
 }
