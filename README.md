@@ -97,6 +97,7 @@ A few guidelines and advices:
 #### Displaying the entity in listing
 
 If you want your entity to be displayed in the default listing page, it must implement `ListableEntityInterface`:
+
 ```php
 use RomaricDrigon\OrchestraBundle\Domain\Entity\EntityInterface;
 use RomaricDrigon\OrchestraBundle\Domain\Entity\ListableEntityInterface;
@@ -218,13 +219,12 @@ class MyRepository implements BaseRepository
 
 The name displayed for the Repository can be automatically generated, from the class name, or optionally personalized using the `@Name` annotation.
 
-Example:
 ```php
 use RomaricDrigon\OrchestraBundle\Domain\Repository\RepositoryInterface;
-use RomaricDrigon\OrchestraBundle\Annotation\Name;
+use RomaricDrigon\OrchestraBundle\Annotation as Orchestra;
 
 /**
- * @Name("CustomName")
+ * @Orchestra\Name("CustomName")
  */
 class MyRepository implements RepositoryInterface
 {
@@ -232,15 +232,16 @@ class MyRepository implements RepositoryInterface
 
 ## Hiding a method
 
-You can add an Entity or Repository method from the menu by adding it a `@Hidden` annotation:
+You can add an Entity or Repository method from the menu by adding it a `@Hidden` annotation.
+
 ```php
 use RomaricDrigon\OrchestraBundle\Domain\Repository\RepositoryInterface;
-use RomaricDrigon\OrchestraBundle\Annotation\Hidden;
+use RomaricDrigon\OrchestraBundle\Annotation as Orchestra;
 
 class MyRepository implements RepositoryInterface
 {
     /**
-     * @Hidden
+     * @Orchestra\Hidden
      */
     public function hiddenMethod()
     {
