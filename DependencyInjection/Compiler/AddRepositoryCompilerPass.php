@@ -41,13 +41,19 @@ class AddRepositoryCompilerPass implements CompilerPassInterface
 
         $taggedServices = $container->findTaggedServiceIds('orchestra.repository');
 
-        foreach ($taggedServices as $id => $tagAttributes) {
-            if (! isset($tagAttributes['entityClass'])) {
-                throw new ConfigurationException('Orchestra Repository "'.$id.'" is declared without the required "entityClass" attribute in service declaration!');
+        foreach ($taggedServices as $id => $tags) {
+            if (count($tags) > 1) {
+                throw new ConfigurationException('Service "'.$id.'" have more than one "orchestra_repository" tag, which is not allowed');
+            }
+
+            $tagAttributes = $tags[0];
+
+            if (!isset($tagAttributes['entityClass'])) {
+                throw new ConfigurationException('Orchestra Repository "' . $id . '" is declared without the required "entityClass" attribute in service declaration!');
             }
 
             $definition = $container->getDefinition($id);
-            $class      = $definition->getClass();
+            $class = $definition->getClass();
             $reflection = new \ReflectionClass($class);
             $entityClass = $tagAttributes['entityClass'];
 
@@ -59,14 +65,13 @@ class AddRepositoryCompilerPass implements CompilerPassInterface
                 $definition->addMethodCall('setObjectManager', [new Reference(self::OBJECT_MANAGER_SERVICE_ID)]);
 
                 // Because Doctrine repositories are complex, we need to add them as services first
-                $doctrineServiceName = self::DOCTRINE_REPOSITORY_PREFIX.$entityClass;
+                $doctrineServiceName = self::DOCTRINE_REPOSITORY_PREFIX . $entityClass;
 
-                if (! $container->has($doctrineServiceName)) {
+                if (!$container->has($doctrineServiceName)) {
                     $doctrineRepositoryDefinition = (new Definition())
                         ->setFactoryService(self::DOCTRINE_ENTITY_MANAGER_SERVICE_ID)
                         ->setFactoryMethod('getRepository')
-                        ->addArgument($entityClass)
-                    ;
+                        ->addArgument($entityClass);
                     $container->addDefinitions([
                         $doctrineServiceName => $doctrineRepositoryDefinition
                     ]);
