@@ -193,4 +193,4 @@ class BootstrapFormExtension extends \Twig_Extension
             $this->getLabelCol(), $label, $this->getWidgetCol(), $value
         );
     }
-} 
+}

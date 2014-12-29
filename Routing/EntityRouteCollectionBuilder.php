@@ -46,4 +46,4 @@ class EntityRouteCollectionBuilder implements EntityRouteCollectionBuilderInterf
 
         return $collection;
     }
-} 
+}

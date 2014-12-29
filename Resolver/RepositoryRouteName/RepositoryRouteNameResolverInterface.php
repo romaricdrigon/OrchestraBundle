@@ -25,4 +25,4 @@ interface RepositoryRouteNameResolverInterface
      * @return string
      */
     public function getRouteName(RepositoryInterface $repository, $methodName);
-} 
+}

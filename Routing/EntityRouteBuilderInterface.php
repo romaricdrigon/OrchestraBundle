@@ -25,4 +25,4 @@ interface EntityRouteBuilderInterface
      * @return Route[] Routes, keys are route names
      */
     public function buildRoutes(EntityReflectionInterface $entity);
-} 
+}

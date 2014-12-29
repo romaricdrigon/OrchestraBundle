@@ -23,4 +23,4 @@ interface EntityRouteCollectionBuilderInterface
      * @return RouteCollection
      */
     public function getCollection(EntityPoolInterface $pool);
-} 
+}

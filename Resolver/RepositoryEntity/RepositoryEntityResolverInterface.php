@@ -24,4 +24,4 @@ interface RepositoryEntityResolverInterface
      * @return EntityReflectionInterface
      */
     public function findBySlug($repositorySlug);
-} 
+}

@@ -76,4 +76,3 @@ class MockEntity1 implements EntityInterface {
 class MockEntity2 implements EntityInterface {
     public function getId() {}
 }
- 

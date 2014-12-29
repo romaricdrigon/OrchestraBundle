@@ -22,4 +22,4 @@ interface RepositorySlugResolverInterface
      * @return string Repository slug
      */
     public function getSlug(RepositoryInterface $repository);
-} 
+}

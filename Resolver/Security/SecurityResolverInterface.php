@@ -22,4 +22,4 @@ interface SecurityResolverInterface
      * @return Expression|null
      */
     public function getExpression(\ReflectionMethod $reflectionMethod);
-} 
+}

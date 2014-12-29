@@ -25,4 +25,4 @@ interface RepositoryNameResolverInterface
      * @return string
      */
     public function getName(RepositoryInterface $repository);
-} 
+}

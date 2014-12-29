@@ -26,4 +26,4 @@ interface HiddenActionResolverInterface
      * @return bool
      */
     public function isHiddenReflectionMethod(\ReflectionMethod $reflectionMethod);
-} 
+}

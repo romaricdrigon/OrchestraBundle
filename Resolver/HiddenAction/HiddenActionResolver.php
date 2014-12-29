@@ -62,4 +62,4 @@ class HiddenActionResolver implements HiddenActionResolverInterface
 
         return false;
     }
-} 
+}

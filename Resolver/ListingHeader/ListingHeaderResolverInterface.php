@@ -24,4 +24,4 @@ interface ListingHeaderResolverInterface
      * @throws \RomaricDrigon\OrchestraBundle\Exception\Domain\EntityQueryReturnException
      */
     public function getHeaders(EntityInterface $entity, $methodName);
-} 
+}

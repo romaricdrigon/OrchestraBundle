@@ -26,4 +26,4 @@ class RepositorySlugResolver implements RepositorySlugResolverInterface
 
         return strtolower(str_replace('Repository', '', $reflect->getShortName()));
     }
-} 
+}

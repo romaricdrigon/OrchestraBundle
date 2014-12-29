@@ -21,4 +21,4 @@ interface FormTypeResolverInterface
      * @return FormType|null
      */
     public function getFormType(\ReflectionProperty $reflectionProperty);
-} 
+}

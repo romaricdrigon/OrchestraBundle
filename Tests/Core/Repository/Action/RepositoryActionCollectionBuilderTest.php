@@ -71,4 +71,3 @@ class MockRepository implements RepositoryInterface {
 
     public function find($id) {}
 }
- 

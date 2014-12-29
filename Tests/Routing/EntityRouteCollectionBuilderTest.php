@@ -82,4 +82,3 @@ class MockEntityReflection implements EntityReflectionInterface {
 
     public function getMethod($methodName) {}
 }
- 

@@ -57,4 +57,3 @@ class RepositoryNameGetterTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Mock2', $this->sut->getName(new MockRepository2()));
     }
 }
- 

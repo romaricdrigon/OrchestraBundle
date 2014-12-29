@@ -40,4 +40,4 @@ class RepositoryRouteNameResolver implements RepositoryRouteNameResolverInterfac
 
         return $this::NAME_PREFIX.'_'.$slug.'_'.strtolower($methodName);
     }
-} 
+}

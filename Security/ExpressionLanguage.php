@@ -30,4 +30,4 @@ class ExpressionLanguage extends BaseExpressionLanguage
             return $variables['security_context']->isGranted($attributes, $object);
         });
     }
-} 
+}

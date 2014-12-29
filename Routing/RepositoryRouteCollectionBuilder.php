@@ -46,4 +46,4 @@ class RepositoryRouteCollectionBuilder implements RepositoryRouteCollectionBuild
 
         return $collection;
     }
-} 
+}

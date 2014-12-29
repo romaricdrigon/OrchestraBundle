@@ -102,4 +102,4 @@ class RepositoryRouteBuilder implements RepositoryRouteBuilderInterface
 
         return $routes;
     }
-} 
+}

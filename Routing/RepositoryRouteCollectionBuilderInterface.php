@@ -25,4 +25,4 @@ interface RepositoryRouteCollectionBuilderInterface
      * @return RouteCollection
      */
     public function getCollection(RepositoryPoolInterface $pool);
-} 
+}

@@ -78,4 +78,3 @@ class RepositoryRouteCollectionBuilderTest extends \PHPUnit_Framework_TestCase
         $this->assertNull($collection->get('foo'));
     }
 }
- 
