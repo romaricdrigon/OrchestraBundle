@@ -52,7 +52,7 @@ class GenericController extends Controller
         $name = $this->get('orchestra.resolver.repository_name')->getName($repository);
 
         if (false === $entity->isListable()) {
-            throw new DomainErrorException('Entity '.$entity->getName().' is not listable. Maybe you forgot to implement ListableInterface?');
+            throw new DomainErrorException('Entity '.$entity->getName().' is not listable. Maybe you forgot to implement ListableEntityInterface?');
         }
 
         // Get objects to show

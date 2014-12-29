@@ -12,10 +12,10 @@ namespace RomaricDrigon\OrchestraBundle\Domain\Entity;
 use RomaricDrigon\OrchestraBundle\Domain\Query\QueryInterface;
 
 /**
- * Interface ListableInterface
+ * Interface ListableEntityInterface
  * @author Romaric Drigon <romaric.drigon@gmail.com>
  */
-interface ListableInterface
+interface ListableEntityInterface
 {
     /**
      * @return QueryInterface|array

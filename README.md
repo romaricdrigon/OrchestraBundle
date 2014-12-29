@@ -96,12 +96,12 @@ A few guidelines and advices:
 
 #### Displaying the entity in listing
 
-If you want your entity to be displayed in the default listing page, it must implement `ListableInterface`:
+If you want your entity to be displayed in the default listing page, it must implement `ListableEntityInterface`:
 ```php
 use RomaricDrigon\OrchestraBundle\Domain\Entity\EntityInterface;
-use RomaricDrigon\OrchestraBundle\Domain\Entity\ListableInterface;
+use RomaricDrigon\OrchestraBundle\Domain\Entity\ListableEntityInterface;
 
-class SomeEntity implements EntityInterface, ListableInterface
+class SomeEntity implements EntityInterface, ListableEntityInterface
 {
     public function viewListing()
     {
