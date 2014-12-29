@@ -71,4 +71,12 @@ class RepositoryDefinition implements RepositoryDefinitionInterface
     {
         return $this->serviceId;
     }
+
+    /**
+     * @inheritdoc
+     */
+    public function getReflection()
+    {
+        return $this->reflectionClass;
+    }
 }

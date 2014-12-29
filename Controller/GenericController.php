@@ -10,6 +10,7 @@
 namespace RomaricDrigon\OrchestraBundle\Controller;
 
 use RomaricDrigon\OrchestraBundle\Core\Entity\EntityReflectionInterface;
+use RomaricDrigon\OrchestraBundle\Core\Repository\RepositoryDefinitionInterface;
 use RomaricDrigon\OrchestraBundle\Domain\Command\CommandInterface;
 use RomaricDrigon\OrchestraBundle\Domain\Entity\EntityInterface;
 use RomaricDrigon\OrchestraBundle\Domain\Event\EventInterface;
@@ -42,14 +43,14 @@ class GenericController extends Controller
     /**
      * Action used when a repository "listing" is called
      *
-     * @param RepositoryInterface $repository
+     * @param RepositoryDefinitionInterface $repository_definition
      * @param EntityReflectionInterface $entity
      * @throws DomainErrorException
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function listAction(RepositoryInterface $repository, EntityReflectionInterface $entity)
+    public function listAction(RepositoryDefinitionInterface $repository_definition, EntityReflectionInterface $entity)
     {
-        $name = $this->get('orchestra.resolver.repository_name')->getName($repository);
+        $name = $this->get('orchestra.resolver.repository_name')->getName($repository_definition);
 
         if (false === $entity->isListable()) {
             throw new DomainErrorException('Entity '.$entity->getName().' is not listable. Maybe you forgot to implement ListableEntityInterface?');

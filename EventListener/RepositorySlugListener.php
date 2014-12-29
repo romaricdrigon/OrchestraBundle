@@ -56,8 +56,8 @@ class RepositorySlugListener implements EventSubscriberInterface
 
         $slug = $request->attributes->get('repository_slug');
 
-        $repository = $this->repositoryPool->getBySlug($slug);
+        $repositoryDefinition = $this->repositoryPool->getBySlug($slug);
 
-        $request->attributes->set('repository', $repository);
+        $request->attributes->set('repository_definition', $repositoryDefinition);
     }
 }

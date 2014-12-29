@@ -9,7 +9,7 @@
 
 namespace RomaricDrigon\OrchestraBundle\Resolver;
 
-use RomaricDrigon\OrchestraBundle\Domain\Repository\RepositoryInterface;
+use RomaricDrigon\OrchestraBundle\Core\Repository\RepositoryDefinitionInterface;
 
 /**
  * Interface RepositoryNameResolverInterface
@@ -21,8 +21,8 @@ interface RepositoryNameResolverInterface
      * Get the repository name, to display
      * There may be none, and we will generate a default then
      *
-     * @param RepositoryInterface $repository
+     * @param RepositoryDefinitionInterface $repositoryDefinition
      * @return string
      */
-    public function getName(RepositoryInterface $repository);
+    public function getName(RepositoryDefinitionInterface $repositoryDefinition);
 }

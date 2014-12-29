@@ -40,4 +40,10 @@ interface RepositoryDefinitionInterface
      * @return string ID of the service in DIC
      */
     public function getServiceId();
+
+    /**
+     * @return \ReflectionClass
+     * Temp, to be removed
+     */
+    public function getReflection();
 }

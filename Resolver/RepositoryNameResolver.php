@@ -10,7 +10,7 @@
 namespace RomaricDrigon\OrchestraBundle\Resolver;
 
 use Doctrine\Common\Annotations\Reader;
-use RomaricDrigon\OrchestraBundle\Domain\Repository\RepositoryInterface;
+use RomaricDrigon\OrchestraBundle\Core\Repository\RepositoryDefinitionInterface;
 
 /**
  * Class RepositoryNameResolver
@@ -37,11 +37,9 @@ class RepositoryNameResolver implements RepositoryNameResolverInterface
     /**
      * @inheritdoc
      */
-    public function getName(RepositoryInterface $repository)
+    public function getName(RepositoryDefinitionInterface $repositoryDefinition)
     {
-        $reflectionObject = new \ReflectionObject($repository);
-
-        $annotation = $this->annotationReader->getClassAnnotation($reflectionObject, $this->annotationClass);
+        $annotation = $this->annotationReader->getClassAnnotation($repositoryDefinition->getReflection(), $this->annotationClass);
 
         if (null !== $annotation) {
             $name = $annotation->getName();
@@ -51,19 +49,6 @@ class RepositoryNameResolver implements RepositoryNameResolverInterface
             }
         }
 
-        return $this->generateDefaultName($repository);
-    }
-
-    /**
-     * Returns a string extracted from Repository class name, without the "Repository" part
-     *
-     * @param RepositoryInterface $repository
-     * @return string
-     */
-    protected function generateDefaultName(RepositoryInterface $repository)
-    {
-        $reflect = new \ReflectionClass($repository);
-
-        return str_replace('Repository', '', $reflect->getShortName());
+        return $repositoryDefinition->getName();
     }
 }
