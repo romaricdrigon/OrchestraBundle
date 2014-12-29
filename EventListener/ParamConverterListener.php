@@ -9,8 +9,7 @@
 
 namespace RomaricDrigon\OrchestraBundle\EventListener;
 
-use RomaricDrigon\OrchestraBundle\Exception\Request\MissingAttributeException;
-use RomaricDrigon\OrchestraBundle\Exception\Request\UnsupportedTypeException;
+use RomaricDrigon\OrchestraBundle\Exception\OrchestraRuntimeException;
 use RomaricDrigon\OrchestraBundle\Routing\EntityRouteBuilder;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
@@ -44,8 +43,7 @@ class ParamConverterListener implements EventSubscriberInterface
 
     /**
      * @param FilterControllerEvent $event
-     * @throws MissingAttributeException
-     * @throws UnsupportedTypeException
+     * @throws OrchestraRuntimeException
      */
     public function onKernelController(FilterControllerEvent $event)
     {
@@ -60,7 +58,7 @@ class ParamConverterListener implements EventSubscriberInterface
 
         if (EntityRouteBuilder::ROUTE_TYPE === $type && $request->query->has('id')) {
             if (! $request->attributes->has('repository')) {
-                throw new MissingAttributeException('repository');
+                throw new OrchestraRuntimeException('Request has an orchestra_type, but no "repository" attribute was found');
             }
 
             $repository = $request->attributes->get('repository');
@@ -72,4 +70,4 @@ class ParamConverterListener implements EventSubscriberInterface
             $request->attributes->set('object', $object);
         }
     }
-} 
+}

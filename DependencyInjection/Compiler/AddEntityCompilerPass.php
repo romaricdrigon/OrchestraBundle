@@ -9,7 +9,7 @@
 
 namespace RomaricDrigon\OrchestraBundle\DependencyInjection\Compiler;
 
-use RomaricDrigon\OrchestraBundle\Exception\UnavailableEntityFinderException;
+use RomaricDrigon\OrchestraBundle\Exception\OrchestraRuntimeException;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
@@ -25,7 +25,7 @@ class AddEntityCompilerPass implements CompilerPassInterface
     public function process(ContainerBuilder $container)
     {
         if (! $container->hasDefinition('orchestra.finder.entity_finder')) {
-            throw new UnavailableEntityFinderException();
+            throw new OrchestraRuntimeException('Orchestra EntityFinder is unavailable');
         }
 
         $bundles = $container->getParameter('kernel.bundles');

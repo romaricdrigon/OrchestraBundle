@@ -9,11 +9,11 @@
 
 namespace RomaricDrigon\OrchestraBundle\EventListener;
 
+use RomaricDrigon\OrchestraBundle\Exception\OrchestraRuntimeException;
 use RomaricDrigon\OrchestraBundle\Resolver\CommandFactory\CommandFactoryResolverInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
-use RomaricDrigon\OrchestraBundle\Exception\Request\MissingAttributeException;
 
 /**
  * Class CommandResolverListener
@@ -50,7 +50,7 @@ class CommandResolverListener implements EventSubscriberInterface
 
     /**
      * @param FilterControllerEvent $event
-     * @throws MissingAttributeException
+     * @throws OrchestraRuntimeException
      */
     public function onKernelController(FilterControllerEvent $event)
     {
@@ -68,7 +68,7 @@ class CommandResolverListener implements EventSubscriberInterface
 
         if (null !== $commandFactoryMethod) {
             if (! $request->attributes->has('object')) {
-                throw new MissingAttributeException('object');
+                throw new OrchestraRuntimeException('Request is missing attribute "object"');
             }
 
             $object = $request->attributes->get('object');

@@ -10,13 +10,11 @@
 namespace RomaricDrigon\OrchestraBundle\Exception;
 
 /**
- * Class UnavailableRepositoryPoolException
+ * Class RuntimeException
+ * Exceptions occurring at runtime, in Orchestra internals, without precise cause.
+ *
  * @author Romaric Drigon <romaric.drigon@gmail.com>
  */
-class UnavailableRepositoryPoolException extends \Exception
+class OrchestraRuntimeException extends \RuntimeException
 {
-    public function __construct()
-    {
-        parent::__construct('Orchestra RepositoryPool is unavailable');
-    }
-} 
+}

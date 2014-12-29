@@ -9,7 +9,7 @@
 
 namespace RomaricDrigon\OrchestraBundle\DependencyInjection\Compiler;
 
-use RomaricDrigon\OrchestraBundle\Exception\UnavailableRepositoryPoolException;
+use RomaricDrigon\OrchestraBundle\Exception\OrchestraRuntimeException;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
@@ -29,7 +29,7 @@ class AddRepositoryCompilerPass implements CompilerPassInterface
     public function process(ContainerBuilder $container)
     {
         if (! $container->hasDefinition('orchestra.pool.repository_pool')) {
-            throw new UnavailableRepositoryPoolException();
+            throw new OrchestraRuntimeException('Orchestra RepositoryPool is unavailable');
         }
 
         $repositoryPool = $container->getDefinition('orchestra.pool.repository_pool');

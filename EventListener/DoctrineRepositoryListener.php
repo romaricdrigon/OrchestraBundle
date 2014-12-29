@@ -12,8 +12,7 @@ namespace RomaricDrigon\OrchestraBundle\EventListener;
 use RomaricDrigon\OrchestraBundle\Doctrine\DoctrineInjecterInterface;
 use RomaricDrigon\OrchestraBundle\Doctrine\ObjectManagerInterface;
 use RomaricDrigon\OrchestraBundle\Domain\Doctrine\DoctrineAwareInterface;
-use RomaricDrigon\OrchestraBundle\Exception\Request\MissingAttributeException;
-use RomaricDrigon\OrchestraBundle\Exception\Request\UnsupportedTypeException;
+use RomaricDrigon\OrchestraBundle\Exception\OrchestraRuntimeException;
 use RomaricDrigon\OrchestraBundle\Resolver\RepositoryEntity\RepositoryEntityResolverInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
@@ -61,8 +60,7 @@ class DoctrineRepositoryListener implements EventSubscriberInterface
 
     /**
      * @param FilterControllerEvent $event
-     * @throws MissingAttributeException
-     * @throws UnsupportedTypeException
+     * @throws OrchestraRuntimeException
      */
     public function onKernelController(FilterControllerEvent $event)
     {
@@ -77,7 +75,7 @@ class DoctrineRepositoryListener implements EventSubscriberInterface
 
         if ($repository instanceof DoctrineAwareInterface) {
             if (! $request->attributes->has('entity')) {
-                throw new MissingAttributeException('entity');
+                throw new OrchestraRuntimeException('Request has an orchestra_type, but no "entity" attribute was found');
             }
 
             $entity = $request->attributes->get('entity');
@@ -89,4 +87,4 @@ class DoctrineRepositoryListener implements EventSubscriberInterface
             $this->doctrineInjecter->injectDoctrine($repository, $entity);
         }
     }
-} 
+}
