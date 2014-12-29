@@ -15,7 +15,7 @@ use RomaricDrigon\OrchestraBundle\Domain\Entity\EntityInterface;
 use RomaricDrigon\OrchestraBundle\Domain\Event\EventInterface;
 use RomaricDrigon\OrchestraBundle\Domain\Repository\ReceiveEventInterface;
 use RomaricDrigon\OrchestraBundle\Domain\Repository\RepositoryInterface;
-use RomaricDrigon\OrchestraBundle\Exception\Domain\EntityNotListableException;
+use RomaricDrigon\OrchestraBundle\Exception\DomainErrorException;
 use RomaricDrigon\OrchestraBundle\Exception\Event\InvalidEventException;
 use RomaricDrigon\OrchestraBundle\Exception\Event\RepositoryNotEnabledException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -46,7 +46,7 @@ class GenericController extends Controller
      *
      * @param RepositoryInterface $repository
      * @param EntityReflectionInterface $entity
-     * @throws EntityNotListableException
+     * @throws DomainErrorException
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function listAction(RepositoryInterface $repository, EntityReflectionInterface $entity)
@@ -54,7 +54,7 @@ class GenericController extends Controller
         $name = $this->get('orchestra.resolver.repository_name')->getName($repository);
 
         if (false === $entity->isListable()) {
-            throw new EntityNotListableException($entity->getName());
+            throw new DomainErrorException('Entity '.$entity->getName().' is not listable. Maybe you forgot to implement ListableInterface?');
         }
 
         // Get objects to show

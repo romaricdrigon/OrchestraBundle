@@ -44,7 +44,6 @@ class KnpMenuBuilder
      * Creates the "main" menu, the one on top of every page
      *
      * @param Request $request
-     * @throws \RomaricDrigon\OrchestraBundle\Exception\Domain\RepositoryInvalidException
      * @return \Knp\Menu\ItemInterface
      */
     public function createMainMenu(Request $request)

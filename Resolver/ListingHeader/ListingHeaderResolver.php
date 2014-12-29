@@ -11,7 +11,7 @@ namespace RomaricDrigon\OrchestraBundle\Resolver\ListingHeader;
 
 use RomaricDrigon\OrchestraBundle\Domain\Entity\EntityInterface;
 use RomaricDrigon\OrchestraBundle\Domain\Query\QueryInterface;
-use RomaricDrigon\OrchestraBundle\Exception\Domain\EntityQueryReturnException;
+use RomaricDrigon\OrchestraBundle\Exception\DomainErrorException;
 
 /**
  * Class ListingHeaderResolver
@@ -43,7 +43,7 @@ class ListingHeaderResolver implements ListingHeaderResolverInterface
         } else {
             $entityName = (new \ReflectionClass($entity))->getName();
 
-            throw new EntityQueryReturnException($entityName, $methodName);
+            throw new DomainErrorException('Entity '.$entityName.' method '.$methodName.' should return either an array, either an instance of QueryInterface');
         }
     }
 }
