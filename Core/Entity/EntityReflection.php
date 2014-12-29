@@ -73,6 +73,6 @@ class EntityReflection implements EntityReflectionInterface
      */
     public function isListable()
     {
-        return $this->reflectionClass->implementsInterface('RomaricDrigon\OrchestraBundle\Domain\Entity\ListableInterface');
+        return $this->reflectionClass->implementsInterface('RomaricDrigon\OrchestraBundle\Domain\Entity\ListableEntityInterface');
     }
 }
