@@ -35,7 +35,7 @@ class RepositoryNameResolverTest extends \PHPUnit_Framework_TestCase
 
         $reflection = \Phake::mock('\ReflectionClass');
 
-        $this->repoWithAnnotation = new RepositoryDefinition($reflection, 'orchestra.id');
+        $this->repoWithAnnotation = new RepositoryDefinition($reflection, 'orchestra.id', 'Some\\Class');
 
         $annotation = \Phake::mock('RomaricDrigon\OrchestraBundle\Annotation\Name');
 

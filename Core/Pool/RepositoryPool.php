@@ -31,13 +31,14 @@ class RepositoryPool implements RepositoryPoolInterface
      *
      * @param string $repositoryClass
      * @param string|null $serviceId
+     * @param string $entityClass
      * @throws DomainErrorException
      */
-    public function addRepository($repositoryClass, $serviceId)
+    public function addRepository($repositoryClass, $serviceId, $entityClass)
     {
         $reflectionClass = new \ReflectionClass($repositoryClass);
 
-        $repositoryDefinition = new RepositoryDefinition($reflectionClass, $serviceId);
+        $repositoryDefinition = new RepositoryDefinition($reflectionClass, $serviceId, $entityClass);
 
         $slug = $repositoryDefinition->getSlug();
 

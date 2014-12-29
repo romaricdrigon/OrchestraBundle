@@ -21,9 +21,10 @@ interface RepositoryPoolInterface
      * Add a repository to the pool
      *
      * @param string $repositoryClass fully qualified class name
-     * @param string|null $serviceId the repository is a Symfony service, its ID
+     * @param string $serviceId the repository is a Symfony service, its ID
+     * @param string $entityClass fully qualified class name of the corresponding entity
      */
-    public function addRepository($repositoryClass, $serviceId);
+    public function addRepository($repositoryClass, $serviceId, $entityClass);
 
     /**
      * @param string $slug

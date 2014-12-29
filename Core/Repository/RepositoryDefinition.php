@@ -25,11 +25,17 @@ class RepositoryDefinition implements RepositoryDefinitionInterface
      */
     protected $serviceId;
 
+    /**
+     * @var string
+     */
+    protected $entityClass;
 
-    public function __construct(\ReflectionClass $reflectionClass, $serviceId)
+
+    public function __construct(\ReflectionClass $reflectionClass, $serviceId, $entityClass)
     {
         $this->reflectionClass  = $reflectionClass;
         $this->serviceId        = $serviceId;
+        $this->entityClass      = $entityClass;
     }
 
     /**
@@ -78,5 +84,13 @@ class RepositoryDefinition implements RepositoryDefinitionInterface
     public function getReflection()
     {
         return $this->reflectionClass;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getEntityClass()
+    {
+        return $this->entityClass;
     }
 }

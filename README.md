@@ -163,6 +163,7 @@ Their name will be the name of the `Entity` suffixed by `Repository` but you're 
 We advise you to place those, by convention, in your bundle within a `Repository` folder.
 
 They must implement `RomaricDrigon\OrchestraBundle\Domain\Repository\RepositoryInterface`:
+
 ```php
 use RomaricDrigon\OrchestraBundle\Domain\Repository\RepositoryInterface;
 use RomaricDrigon\OrchestraBundle\Annotation\Name;
@@ -171,7 +172,8 @@ class MyRepository implements RepositoryInterface
 {
 ```
 
-They must be declared as services, tagged with `orchestra.repository`:
+They must be declared as services, tagged with `orchestra.repository` and **indicating the corresponding entity class**:
+
 ```xml
 <!-- your bundle services.xml -->
 <?xml version="1.0" ?>
@@ -181,7 +183,7 @@ They must be declared as services, tagged with `orchestra.repository`:
 
     <services>
         <service id="romaric_drigon_example.my_repository" class="My\Repository\Class\Path">
-            <tag name="orchestra.repository" />
+            <tag name="orchestra.repository" entityClass="Acme\Demo\Entity\SomeEntity" />
         </service>
         ...
 ```

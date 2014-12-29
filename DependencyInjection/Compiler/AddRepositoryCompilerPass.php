@@ -9,9 +9,12 @@
 
 namespace RomaricDrigon\OrchestraBundle\DependencyInjection\Compiler;
 
+use RomaricDrigon\OrchestraBundle\Exception\ConfigurationException;
 use RomaricDrigon\OrchestraBundle\Exception\OrchestraRuntimeException;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * Class AddRepositoryCompilerPass
@@ -38,9 +41,17 @@ class AddRepositoryCompilerPass implements CompilerPassInterface
         $taggedServices = $container->findTaggedServiceIds('orchestra.repository');
 
         foreach ($taggedServices as $id => $tagAttributes) {
-            $definition = $container->getDefinition($id);
+            if (! isset($tagAttributes['entityClass'])) {
+                throw new ConfigurationException('Orchestra Repository "'.$id.'" is declared without the required "entityClass" attribute in service declaration!');
+            }
 
-            $repositoryPool->addMethodCall('addRepository', [$definition->getClass(), $id]);
+            $definition = $container->getDefinition($id);
+            $class      = $definition->getClass();
+            $reflection = new \ReflectionClass($class);
+            $entityClass = $tagAttributes['entityClass'];
+
+            // Add it to the Pool
+            $repositoryPool->addMethodCall('addRepository', [$class, $id, $entityClass]);
         }
     }
 }
