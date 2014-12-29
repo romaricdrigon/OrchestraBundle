@@ -63,6 +63,8 @@ orchestra_generated:
 With Orchestra admin generator you will have to focus only on 2 objects: `Entities` and `Repositories`.
 All those objects must be placed within a valid Symfony2 bundle.
 
+**TL;DR:** you can find a working example at [Orchestra-example](https://github.com/romaricdrigon/Orchestra-example)
+
 ### Entities
 
 `Entities` are the basic Domain objects of your application.
