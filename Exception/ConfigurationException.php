@@ -10,13 +10,11 @@
 namespace RomaricDrigon\OrchestraBundle\Exception;
 
 /**
- * Class LoaderAddedTwiceException
+ * Class ConfigurationException
+ * Represents an exception caused by Orchestra bundle (mis)configuration.
+ *
  * @author Romaric Drigon <romaric.drigon@gmail.com>
  */
-class LoaderAddedTwiceException extends \RuntimeException
+class ConfigurationException extends \Exception
 {
-    public function __construct()
-    {
-        parent::__construct('Do not add the "orchestra" loader more than once!');
-    }
-} 
+}

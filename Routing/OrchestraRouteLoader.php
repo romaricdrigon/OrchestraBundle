@@ -9,7 +9,7 @@
 
 namespace RomaricDrigon\OrchestraBundle\Routing;
 
-use RomaricDrigon\OrchestraBundle\Exception\LoaderAddedTwiceException;
+use RomaricDrigon\OrchestraBundle\Exception\ConfigurationException;
 use RomaricDrigon\OrchestraBundle\Core\Pool\EntityPoolInterface;
 use RomaricDrigon\OrchestraBundle\Core\Pool\RepositoryPoolInterface;
 use Symfony\Component\Config\Loader\LoaderInterface;
@@ -63,7 +63,7 @@ class OrchestraRouteLoader implements LoaderInterface
     public function load($resource, $type = null)
     {
         if (true === $this->loaded) {
-            throw new LoaderAddedTwiceException();
+            throw new ConfigurationException('Do not add the "orchestra" route loader more than once!');
         }
 
         $routes = new RouteCollection();
@@ -105,4 +105,4 @@ class OrchestraRouteLoader implements LoaderInterface
     public function setResolver(LoaderResolverInterface $resolver)
     {
     }
-} 
+}
