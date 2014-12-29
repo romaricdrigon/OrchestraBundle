@@ -10,8 +10,8 @@
 namespace RomaricDrigon\OrchestraBundle\Core\Pool;
 
 use RomaricDrigon\OrchestraBundle\Domain\Repository\RepositoryInterface;
+use RomaricDrigon\OrchestraBundle\Exception\DomainErrorException;
 use RomaricDrigon\OrchestraBundle\Exception\RepositoryAddedTwiceException;
-use RomaricDrigon\OrchestraBundle\Exception\RepositoryNotFoundException;
 
 /**
  * Class RepositoryPool
@@ -45,12 +45,12 @@ class RepositoryPool implements RepositoryPoolInterface
     /**
      * @param string $slug
      * @return RepositoryInterface
-     * @throws RepositoryNotFoundException
+     * @throws DomainErrorException
      */
     public function getBySlug($slug)
     {
         if (! isset($this->repositoriesBySlug[$slug])) {
-            throw new RepositoryNotFoundException($slug);
+            throw new DomainErrorException('Unable to find repository for slug '.$slug.'. Maybe you forget to register it as a service with the the "orchestra.repository" tag?');
         }
 
         return $this->repositoriesBySlug[$slug];

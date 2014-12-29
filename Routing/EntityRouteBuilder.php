@@ -11,7 +11,6 @@ namespace RomaricDrigon\OrchestraBundle\Routing;
 
 use RomaricDrigon\OrchestraBundle\Core\Entity\Action\EntityActionInterface;
 use RomaricDrigon\OrchestraBundle\Core\Entity\Action\EntityActionCollectionBuilderInterface;
-use RomaricDrigon\OrchestraBundle\Exception\EntityTwiceSameSlugException;
 use Symfony\Component\Routing\Route;
 use RomaricDrigon\OrchestraBundle\Core\Entity\EntityReflectionInterface;
 
@@ -61,7 +60,6 @@ class EntityRouteBuilder implements EntityRouteBuilderInterface
      * Builds all routes for given EntityReflection
      *
      * @param EntityReflectionInterface $entity
-     * @throws EntityTwiceSameSlugException
      * @return Route[] Routes, keys are route names
      */
     public function buildRoutes(EntityReflectionInterface $entity)

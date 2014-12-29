@@ -9,8 +9,6 @@
 
 namespace RomaricDrigon\OrchestraBundle\Core\Entity;
 
-use RomaricDrigon\OrchestraBundle\Exception\EntityTwiceSameSlugException;
-
 /**
  * Class EntityReflection
  * @author Romaric Drigon <romaric.drigon@gmail.com>
@@ -39,7 +37,6 @@ class EntityReflection implements EntityReflectionInterface
     }
 
     /**
-     * @throws EntityTwiceSameSlugException
      * @return \ReflectionMethod[] list of public methods from class
      */
     public function getMethods()

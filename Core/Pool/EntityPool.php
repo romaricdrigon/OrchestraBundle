@@ -9,8 +9,8 @@
 
 namespace RomaricDrigon\OrchestraBundle\Core\Pool;
 
+use RomaricDrigon\OrchestraBundle\Exception\DomainErrorException;
 use RomaricDrigon\OrchestraBundle\Exception\EntityAddedTwiceException;
-use RomaricDrigon\OrchestraBundle\Exception\EntityNotFoundException;
 use RomaricDrigon\OrchestraBundle\Core\Entity\EntityReflectionInterface;
 
 /**
@@ -43,13 +43,13 @@ class EntityPool implements EntityPoolInterface
      * Get an entity from by slug
      *
      * @param string $slug
-     * @throws EntityNotFoundException
+     * @throws DomainErrorException
      * @return \ReflectionClass
      */
     public function getBySlug($slug)
     {
         if (! isset($this->entitiesBySlug[$slug])) {
-            throw new EntityNotFoundException($slug);
+            throw new DomainErrorException('Unable to find entity for slug '.$slug.'!');
         }
 
         return $this->entitiesBySlug[$slug];
