@@ -10,7 +10,6 @@
 namespace RomaricDrigon\OrchestraBundle\Core\Pool;
 
 use RomaricDrigon\OrchestraBundle\Exception\DomainErrorException;
-use RomaricDrigon\OrchestraBundle\Exception\EntityAddedTwiceException;
 use RomaricDrigon\OrchestraBundle\Core\Entity\EntityReflectionInterface;
 
 /**
@@ -25,7 +24,7 @@ class EntityPool implements EntityPoolInterface
      * Add an entity to the pool
      *
      * @param EntityReflectionInterface $entityReflection
-     * @throws EntityAddedTwiceException
+     * @throws DomainErrorException
      */
     public function addEntityReflection(EntityReflectionInterface $entityReflection)
     {
@@ -33,7 +32,7 @@ class EntityPool implements EntityPoolInterface
         $slug = $entityReflection->getSlug();
 
         if (isset($this->entitiesBySlug[$slug])) {
-            throw new EntityAddedTwiceException($slug);
+            throw new DomainErrorException('Two entities are registered with the same "'.$slug.'" slug!');
         }
 
         $this->entitiesBySlug[$slug] = $entityReflection;
@@ -62,4 +61,4 @@ class EntityPool implements EntityPoolInterface
     {
         return $this->entitiesBySlug;
     }
-} 
+}

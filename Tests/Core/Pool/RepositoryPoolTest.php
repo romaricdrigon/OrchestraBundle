@@ -49,7 +49,7 @@ class RepositoryPoolTest extends \PHPUnit_Framework_TestCase
 
         $this->sut->addRepository($repo1);
 
-        $this->setExpectedException('RomaricDrigon\OrchestraBundle\Exception\RepositoryAddedTwiceException');
+        $this->setExpectedException('RomaricDrigon\OrchestraBundle\Exception\DomainErrorException');
 
         $this->sut->addRepository($repo1);
     }

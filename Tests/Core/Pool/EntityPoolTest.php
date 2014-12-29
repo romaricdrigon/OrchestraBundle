@@ -56,7 +56,7 @@ class EntityPoolTest extends \PHPUnit_Framework_TestCase
 
         $this->sut->addEntityReflection($er1);
 
-        $this->setExpectedException('RomaricDrigon\OrchestraBundle\Exception\EntityAddedTwiceException');
+        $this->setExpectedException('RomaricDrigon\OrchestraBundle\Exception\DomainErrorException');
 
         $this->sut->addEntityReflection($er1);
     }

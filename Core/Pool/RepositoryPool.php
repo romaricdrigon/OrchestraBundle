@@ -11,7 +11,6 @@ namespace RomaricDrigon\OrchestraBundle\Core\Pool;
 
 use RomaricDrigon\OrchestraBundle\Domain\Repository\RepositoryInterface;
 use RomaricDrigon\OrchestraBundle\Exception\DomainErrorException;
-use RomaricDrigon\OrchestraBundle\Exception\RepositoryAddedTwiceException;
 
 /**
  * Class RepositoryPool
@@ -27,7 +26,7 @@ class RepositoryPool implements RepositoryPoolInterface
      * Add a repository to the pool
      *
      * @param RepositoryInterface $repository
-     * @throws RepositoryAddedTwiceException
+     * @throws DomainErrorException
      */
     public function addRepository(RepositoryInterface $repository)
     {
@@ -36,7 +35,7 @@ class RepositoryPool implements RepositoryPoolInterface
         $slug = strtolower(str_replace('Repository', '', $reflect->getShortName()));
 
         if (isset($this->repositoriesBySlug[$slug])) {
-            throw new RepositoryAddedTwiceException($slug);
+            throw new DomainErrorException('Two repositories has the same "'.$slug.'" slug!');
         }
 
         $this->repositoriesBySlug[$slug] = $repository;
