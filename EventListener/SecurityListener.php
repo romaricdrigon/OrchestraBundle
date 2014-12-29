@@ -25,7 +25,7 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\Role\RoleHierarchyInterface;
 use RomaricDrigon\OrchestraBundle\Security\ExpressionLanguage;
 use RomaricDrigon\OrchestraBundle\Core\Entity\EntityReflectionInterface;
-use RomaricDrigon\OrchestraBundle\Domain\Repository\RepositoryInterface;
+use RomaricDrigon\OrchestraBundle\Core\Repository\RepositoryDefinitionInterface;
 
 /**
  * Class SecurityListener
@@ -124,14 +124,12 @@ class SecurityListener implements EventSubscriberInterface
 
             $reflectionMethod = $entity->getMethod($entityMethod);
         } else if (RepositoryRouteBuilder::ROUTE_TYPE === $type) {
-            if (! $request->attributes->has('repository')) {
-                throw new OrchestraRuntimeException('Request is missing attribute "repository"');
+            if (! $request->attributes->has('repository_definition')) {
+                throw new OrchestraRuntimeException('Request is missing attribute "repository_definition"');
             }
 
-            /** @var RepositoryInterface $repository */
-            $repository = $request->attributes->get('repository');
-
-            $repositoryReflection = new \ReflectionClass($repository);
+            /** @var RepositoryDefinitionInterface $repositoryDefinition */
+            $repositoryDefinition = $request->attributes->get('repository_definition');
 
             if (! $request->attributes->has('repository_method')) {
                 throw new OrchestraRuntimeException('Request is missing attribute "repository_method"');
@@ -139,7 +137,7 @@ class SecurityListener implements EventSubscriberInterface
 
             $repositoryMethod = $request->attributes->get('repository_method');
 
-            $reflectionMethod = $repositoryReflection->getMethod($repositoryMethod);
+            $reflectionMethod = $repositoryDefinition->getMethod($repositoryMethod);
         } else {
             return;
         }
