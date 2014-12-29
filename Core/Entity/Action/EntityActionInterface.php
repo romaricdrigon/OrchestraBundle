@@ -49,4 +49,4 @@ interface EntityActionInterface
      * @return bool
      */
     public function emitEvent();
-} 
+}

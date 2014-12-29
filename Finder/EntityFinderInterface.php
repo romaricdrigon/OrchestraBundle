@@ -21,4 +21,4 @@ interface EntityFinderInterface
      * @return EntityReflectionInterface[] returns all valid entities
      */
     public function getEntitiesReflections();
-} 
+}

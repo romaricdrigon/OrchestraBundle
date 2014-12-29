@@ -19,4 +19,4 @@ interface EntityInterface
      * @return mixed an ID used to identify an entity instance
      */
     public function getId();
-} 
+}

@@ -23,4 +23,4 @@ interface RepositoryActionBuilderInterface
      * @return RepositoryActionInterface|null
      */
     public function build(RepositoryInterface $repository, \ReflectionMethod $reflectionMethod);
-} 
+}

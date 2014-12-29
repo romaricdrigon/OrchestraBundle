@@ -39,4 +39,4 @@ class DoctrineRepositoryFinder implements DoctrineRepositoryFinderInterface
 
         return $this->entityManager->getRepository($entityDoctrineName);
     }
-} 
+}

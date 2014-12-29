@@ -22,4 +22,4 @@ interface RepositoryActionCollectionBuilderInterface
      * @return RepositoryActionCollection
      */
     public function build(RepositoryInterface $repository);
-} 
+}

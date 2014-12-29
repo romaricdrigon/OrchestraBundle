@@ -24,4 +24,4 @@ class EntityRouteNameResolver implements EntityRouteNameResolverInterface
     {
         return $this::NAME_PREFIX.'_'.$entityReflection->getSlug().'_'.strtolower($methodName);
     }
-} 
+}

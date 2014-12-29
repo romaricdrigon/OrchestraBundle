@@ -20,4 +20,4 @@ interface CommandFactoryResolverInterface
      * @return string name of the entity method to use as a Factory
      */
     public function getCommandFactory($commandClass);
-} 
+}

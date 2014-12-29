@@ -50,4 +50,4 @@ class EntityPoolFactory implements EntityPoolFactoryInterface
 
         return $pool;
     }
-} 
+}

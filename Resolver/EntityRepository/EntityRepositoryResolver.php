@@ -41,4 +41,4 @@ class EntityRepositoryResolver implements EntityRepositoryResolverInterface
 
         return $this->repositoryPool->getBySlug($repositorySlug);
     }
-} 
+}

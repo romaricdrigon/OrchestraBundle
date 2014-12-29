@@ -70,4 +70,4 @@ class EventCollection implements EventCollectionInterface
     {
         return new \ArrayIterator($this->events);
     }
-} 
+}

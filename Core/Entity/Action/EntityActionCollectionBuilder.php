@@ -51,4 +51,4 @@ class EntityActionCollectionBuilder implements EntityActionCollectionBuilderInte
 
         return $collection;
     }
-} 
+}

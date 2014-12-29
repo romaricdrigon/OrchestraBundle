@@ -40,4 +40,4 @@ class AddRepositoryCompilerPass implements CompilerPassInterface
             $repositoryPool->addMethodCall('addRepository', [new Reference($id)]);
         }
     }
-} 
+}

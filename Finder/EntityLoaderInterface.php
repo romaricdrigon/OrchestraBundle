@@ -26,4 +26,4 @@ interface EntityLoaderInterface
      * @return string[] fully qualified class names (with namespace) of all classes found within entities folders
      */
     public function load();
-} 
+}

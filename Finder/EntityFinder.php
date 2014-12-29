@@ -48,4 +48,4 @@ class EntityFinder implements EntityFinderInterface
 
         return $entities;
     }
-} 
+}

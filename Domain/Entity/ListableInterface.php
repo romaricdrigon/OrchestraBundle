@@ -21,4 +21,4 @@ interface ListableInterface
      * @return QueryInterface|array
      */
     public function viewListing();
-} 
+}

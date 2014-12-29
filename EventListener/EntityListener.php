@@ -64,4 +64,4 @@ class EntityListener implements EventSubscriberInterface
 
         $request->attributes->set('repository', $repository);
     }
-} 
+}

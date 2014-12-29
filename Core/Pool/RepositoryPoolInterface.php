@@ -34,4 +34,4 @@ interface RepositoryPoolInterface
      * @return array all repositories indexed by slug
      */
     public function all();
-} 
+}

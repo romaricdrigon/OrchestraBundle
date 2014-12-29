@@ -21,4 +21,4 @@ interface RepositoryMenuInterface
      * @return RepositoryActionCollectionInterface[] keys are repository slug
      */
     public function getMenu();
-} 
+}

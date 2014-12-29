@@ -15,4 +15,4 @@ namespace RomaricDrigon\OrchestraBundle\Domain\Query;
  */
 interface QueryInterface extends \Traversable
 {
-} 
+}

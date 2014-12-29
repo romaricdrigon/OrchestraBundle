@@ -49,4 +49,4 @@ interface RepositoryActionInterface
      * @return null|string
      */
     public function getCommandClass();
-} 
+}

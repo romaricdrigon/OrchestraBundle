@@ -45,4 +45,4 @@ class CommandFactory extends AbstractAnnotation
     {
         return 'method';
     }
-} 
+}

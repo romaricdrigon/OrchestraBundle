@@ -45,4 +45,4 @@ class Name extends AbstractAnnotation
     {
         return 'name';
     }
-} 
+}

@@ -17,4 +17,4 @@ namespace RomaricDrigon\OrchestraBundle\Domain\Command;
  */
 interface CommandInterface
 {
-} 
+}

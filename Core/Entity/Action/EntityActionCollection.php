@@ -50,4 +50,4 @@ class EntityActionCollection implements \IteratorAggregate, EntityActionCollecti
     {
         return count($this->actions);
     }
-} 
+}

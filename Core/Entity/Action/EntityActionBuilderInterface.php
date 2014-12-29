@@ -23,4 +23,4 @@ interface EntityActionBuilderInterface
      * @return EntityActionInterface|null
      */
     public function build(EntityReflectionInterface $entityReflection, \ReflectionMethod $reflectionMethod);
-} 
+}

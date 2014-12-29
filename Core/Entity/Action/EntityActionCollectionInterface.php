@@ -20,4 +20,4 @@ interface EntityActionCollectionInterface extends \Traversable, \Countable
      * @return $this
      */
     public function addAction(EntityActionInterface $entityAction);
-} 
+}

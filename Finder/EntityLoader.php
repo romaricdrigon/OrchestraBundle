@@ -84,4 +84,4 @@ class EntityLoader implements EntityLoaderInterface
     {
         return $bundleDir.'/'.$this->entityNamespace;
     }
-} 
+}

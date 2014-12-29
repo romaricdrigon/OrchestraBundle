@@ -22,4 +22,4 @@ interface EntityActionCollectionBuilderInterface
      * @return EntityActionCollectionInterface
      */
     public function build(EntityReflectionInterface $entityReflection);
-} 
+}

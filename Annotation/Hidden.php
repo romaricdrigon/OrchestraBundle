@@ -24,4 +24,4 @@ class Hidden extends AbstractAnnotation
     {
         return false; // We have no value
     }
-} 
+}

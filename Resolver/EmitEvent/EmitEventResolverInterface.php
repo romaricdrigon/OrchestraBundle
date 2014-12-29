@@ -20,4 +20,4 @@ interface EmitEventResolverInterface
      * @return bool
      */
     public function methodEmitsEvent(\ReflectionMethod $reflectionMethod);
-} 
+}

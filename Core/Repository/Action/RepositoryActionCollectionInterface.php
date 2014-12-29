@@ -30,4 +30,4 @@ interface RepositoryActionCollectionInterface extends \Traversable, \Countable
      * @return string Repository public name
      */
     public function getName();
-} 
+}

@@ -68,4 +68,4 @@ class RepositoryMenu implements RepositoryMenuInterface
             $this->menu[$slug] = $this->repositoryActionCollectionBuilder->build($repository);
         }
     }
-} 
+}

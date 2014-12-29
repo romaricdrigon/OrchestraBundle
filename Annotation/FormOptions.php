@@ -45,4 +45,4 @@ class FormOptions extends AbstractAnnotation
     {
         return 'options';
     }
-} 
+}

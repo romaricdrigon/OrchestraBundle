@@ -112,4 +112,4 @@ class RepositoryAction implements RepositoryActionInterface
     {
         return ($this->method === 'listing');
     }
-} 
+}

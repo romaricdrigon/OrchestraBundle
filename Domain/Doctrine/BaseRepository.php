@@ -73,4 +73,4 @@ class BaseRepository implements DoctrineAwareInterface, RepositoryInterface
     {
         return $this->doctrineRepository->find($id);
     }
-} 
+}

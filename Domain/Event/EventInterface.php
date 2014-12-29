@@ -15,4 +15,4 @@ namespace RomaricDrigon\OrchestraBundle\Domain\Event;
  */
 interface EventInterface
 {
-} 
+}

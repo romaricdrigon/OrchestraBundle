@@ -64,4 +64,4 @@ class RepositoryActionCollectionBuilder implements RepositoryActionCollectionBui
 
         return $collection;
     }
-} 
+}

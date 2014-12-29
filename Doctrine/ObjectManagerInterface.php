@@ -28,4 +28,4 @@ interface ObjectManagerInterface
      * @param $object
      */
     public function removeObject($object);
-} 
+}

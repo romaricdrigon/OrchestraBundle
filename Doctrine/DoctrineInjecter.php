@@ -37,4 +37,4 @@ class DoctrineInjecter implements DoctrineInjecterInterface
 
         $repository->setDoctrineRepository($doctrineRepository);
     }
-} 
+}

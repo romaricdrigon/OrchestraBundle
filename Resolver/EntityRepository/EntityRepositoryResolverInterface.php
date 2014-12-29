@@ -25,4 +25,4 @@ interface EntityRepositoryResolverInterface
      * @return RepositoryInterface
      */
     public function findForEntity(EntityReflectionInterface $entityReflection);
-} 
+}

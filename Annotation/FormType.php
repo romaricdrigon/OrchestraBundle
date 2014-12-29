@@ -45,4 +45,4 @@ class FormType extends AbstractAnnotation
     {
         return 'type';
     }
-} 
+}

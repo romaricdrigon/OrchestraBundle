@@ -45,4 +45,4 @@ interface EntityReflectionInterface
      * @return bool
      */
     public function isListable();
-} 
+}

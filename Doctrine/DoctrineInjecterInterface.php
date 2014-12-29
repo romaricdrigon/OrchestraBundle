@@ -25,4 +25,4 @@ interface DoctrineInjecterInterface
      * @param EntityReflectionInterface $entityReflection
      */
     public function injectDoctrine(DoctrineAwareInterface $repository, EntityReflectionInterface $entityReflection);
-} 
+}

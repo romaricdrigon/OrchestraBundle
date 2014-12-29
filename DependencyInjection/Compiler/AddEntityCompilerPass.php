@@ -37,4 +37,4 @@ class AddEntityCompilerPass implements CompilerPassInterface
             $entityFinder->addMethodCall('addBundleNamespace', [$bundleNamespace]);
         }
     }
-} 
+}

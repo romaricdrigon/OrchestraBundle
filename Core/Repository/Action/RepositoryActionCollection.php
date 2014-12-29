@@ -85,4 +85,4 @@ class RepositoryActionCollection implements \IteratorAggregate, RepositoryAction
     {
         return $this->name;
     }
-} 
+}

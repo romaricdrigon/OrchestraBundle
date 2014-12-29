@@ -185,4 +185,4 @@ class SecurityListener implements EventSubscriberInterface
         // controller variables should also be accessible: repository, entity...
         return array_merge($request->attributes->all(), $variables);
     }
-} 
+}

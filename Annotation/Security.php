@@ -45,4 +45,4 @@ class Security extends AbstractAnnotation
     {
         return 'expression';
     }
-} 
+}

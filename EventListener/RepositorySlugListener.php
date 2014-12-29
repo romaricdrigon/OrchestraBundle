@@ -60,4 +60,4 @@ class RepositorySlugListener implements EventSubscriberInterface
 
         $request->attributes->set('repository', $repository);
     }
-} 
+}

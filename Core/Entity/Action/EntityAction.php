@@ -119,4 +119,4 @@ class EntityAction implements EntityActionInterface
     {
         return $this->command;
     }
-} 
+}

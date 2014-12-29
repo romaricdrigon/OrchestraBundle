@@ -36,4 +36,4 @@ interface EntityPoolInterface
      * @return array all entities indexed by slug
      */
     public function all();
-} 
+}

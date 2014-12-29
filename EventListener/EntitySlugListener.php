@@ -60,4 +60,4 @@ class EntitySlugListener implements EventSubscriberInterface
 
         $request->attributes->set('entity', $entity);
     }
-} 
+}

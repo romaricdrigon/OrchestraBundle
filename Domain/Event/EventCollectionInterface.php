@@ -34,4 +34,4 @@ interface EventCollectionInterface extends \Countable, \IteratorAggregate
      * @return EventInterface
      */
     public function shift();
-} 
+}

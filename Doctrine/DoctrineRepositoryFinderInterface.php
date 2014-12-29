@@ -25,4 +25,4 @@ interface DoctrineRepositoryFinderInterface
      * @return ObjectRepository
      */
     public function findForEntity(EntityReflectionInterface $entityReflection);
-} 
+}

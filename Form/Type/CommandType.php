@@ -87,4 +87,4 @@ class CommandType extends AbstractType
     {
         $resolver->setRequired(['command']);
     }
-} 
+}

@@ -29,4 +29,4 @@ interface DoctrineAwareInterface
      * @param ObjectManagerInterface $objectManager
      */
     public function setObjectManager(ObjectManagerInterface $objectManager);
-} 
+}

@@ -23,4 +23,4 @@ interface EntityRouteNameResolverInterface
      * @inheritdoc
      */
     public function getRouteName(EntityReflectionInterface $entityReflection, $methodName);
-} 
+}
