@@ -9,6 +9,7 @@
 
 namespace RomaricDrigon\OrchestraBundle\EventListener;
 
+use RomaricDrigon\OrchestraBundle\Exception\OrchestraRuntimeException;
 use RomaricDrigon\OrchestraBundle\Resolver\Security\SecurityResolverInterface;
 use RomaricDrigon\OrchestraBundle\Routing\EntityRouteBuilder;
 use RomaricDrigon\OrchestraBundle\Routing\RepositoryRouteBuilder;
@@ -23,7 +24,6 @@ use Symfony\Component\Security\Core\SecurityContextInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\Role\RoleHierarchyInterface;
 use RomaricDrigon\OrchestraBundle\Security\ExpressionLanguage;
-use RomaricDrigon\OrchestraBundle\Exception\Request\MissingAttributeException;
 use RomaricDrigon\OrchestraBundle\Core\Entity\EntityReflectionInterface;
 use RomaricDrigon\OrchestraBundle\Domain\Repository\RepositoryInterface;
 
@@ -95,7 +95,7 @@ class SecurityListener implements EventSubscriberInterface
     /**
      * @param FilterControllerEvent $event
      * @throws AccessDeniedException
-     * @throws MissingAttributeException
+     * @throws OrchestraRuntimeException
      */
     public function onKernelController(FilterControllerEvent $event)
     {
@@ -110,14 +110,14 @@ class SecurityListener implements EventSubscriberInterface
 
         if (EntityRouteBuilder::ROUTE_TYPE === $type) {
             if (! $request->attributes->has('entity')) {
-                throw new MissingAttributeException('entity');
+                throw new OrchestraRuntimeException('Request is missing attribute "entity"');
             }
 
             /** @var EntityReflectionInterface $entity */
             $entity = $request->attributes->get('entity');
 
             if (! $request->attributes->has('entity_method')) {
-                throw new MissingAttributeException('entity_method');
+                throw new OrchestraRuntimeException('Request is missing attribute "entity_method"');
             }
 
             $entityMethod = $request->attributes->get('entity_method');
@@ -125,7 +125,7 @@ class SecurityListener implements EventSubscriberInterface
             $reflectionMethod = $entity->getMethod($entityMethod);
         } else if (RepositoryRouteBuilder::ROUTE_TYPE === $type) {
             if (! $request->attributes->has('repository')) {
-                throw new MissingAttributeException('repository');
+                throw new OrchestraRuntimeException('Request is missing attribute "repository"');
             }
 
             /** @var RepositoryInterface $repository */
@@ -134,7 +134,7 @@ class SecurityListener implements EventSubscriberInterface
             $repositoryReflection = new \ReflectionClass($repository);
 
             if (! $request->attributes->has('repository_method')) {
-                throw new MissingAttributeException('repository_method');
+                throw new OrchestraRuntimeException('Request is missing attribute "repository_method"');
             }
 
             $repositoryMethod = $request->attributes->get('repository_method');
