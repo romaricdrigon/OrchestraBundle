@@ -63,7 +63,7 @@ class EntityPoolTest extends \PHPUnit_Framework_TestCase
 
     public function test_it_throws_exception_when_entity_not_found()
     {
-        $this->setExpectedException('RomaricDrigon\OrchestraBundle\Exception\EntityNotFoundException');
+        $this->setExpectedException('RomaricDrigon\OrchestraBundle\Exception\DomainErrorException');
 
         $this->sut->getBySlug('foo');
     }

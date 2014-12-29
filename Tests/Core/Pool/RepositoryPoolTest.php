@@ -56,7 +56,7 @@ class RepositoryPoolTest extends \PHPUnit_Framework_TestCase
 
     public function test_it_throws_exception_when_repository_not_found()
     {
-        $this->setExpectedException('RomaricDrigon\OrchestraBundle\Exception\RepositoryNotFoundException');
+        $this->setExpectedException('RomaricDrigon\OrchestraBundle\Exception\DomainErrorException');
 
         $this->sut->getBySlug('foo');
     }
