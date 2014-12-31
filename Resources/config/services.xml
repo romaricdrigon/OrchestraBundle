@@ -7,7 +7,7 @@
     <parameters>
         <parameter key="orchestra.pool.repository_pool.class">RomaricDrigon\OrchestraBundle\Core\Pool\RepositoryPool</parameter>
         <parameter key="orchestra.pool.entity_pool.class">RomaricDrigon\OrchestraBundle\Core\Pool\EntityPool</parameter>
-        <parameter key="orchestra.pool.entity_pool_factory.class">RomaricDrigon\OrchestraBundle\Core\Pool\EntityPoolFactory</parameter>
+        <parameter key="orchestra.pool.entity_pool_factory.class">RomaricDrigon\OrchestraBundle\Core\Pool\Factory\EntityPoolFactory</parameter>
         <parameter key="orchestra.core_repository.action_builder.class">RomaricDrigon\OrchestraBundle\Core\Repository\Action\RepositoryActionBuilder</parameter>
         <parameter key="orchestra.core_repository.action_collection_builder.class">RomaricDrigon\OrchestraBundle\Core\Repository\Action\RepositoryActionCollectionBuilder</parameter>
         <parameter key="orchestra.core_entity.action_builder.class">RomaricDrigon\OrchestraBundle\Core\Entity\Action\EntityActionBuilder</parameter>
