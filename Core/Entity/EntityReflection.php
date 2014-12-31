@@ -20,12 +20,36 @@ class EntityReflection implements EntityReflectionInterface
      */
     protected $reflectionClass;
 
-    protected $actionsCollection;
+    /**
+     * @var string
+     */
+    protected $slug;
+
+    /**
+     * @var string
+     */
+    protected $name;
+
+    /**
+     * @var string
+     */
+    protected $namespacedName;
+
+    /**
+     * @var bool
+     */
+    protected $isListable;
 
 
     public function __construct(\ReflectionClass $reflectionClass)
     {
         $this->reflectionClass = $reflectionClass;
+
+        // Build/cache a few properties
+        $this->slug = strtolower($reflectionClass->getShortName());
+        $this->name = $reflectionClass->getShortName();
+        $this->namespacedName = $reflectionClass->getName();
+        $this->isListable = $reflectionClass->implementsInterface('RomaricDrigon\OrchestraBundle\Domain\Entity\ListableEntityInterface');
     }
 
     /**
@@ -33,7 +57,7 @@ class EntityReflection implements EntityReflectionInterface
      */
     public function getSlug()
     {
-        return strtolower($this->reflectionClass->getShortName());
+        return $this->slug;
     }
 
     /**
@@ -57,7 +81,7 @@ class EntityReflection implements EntityReflectionInterface
      */
     public function getName()
     {
-        return $this->reflectionClass->getShortName();
+        return $this->name;
     }
 
     /**
@@ -65,7 +89,7 @@ class EntityReflection implements EntityReflectionInterface
      */
     public function getNamespacedName()
     {
-        return $this->reflectionClass->getName();
+        return $this->namespacedName;
     }
 
     /**
@@ -73,6 +97,6 @@ class EntityReflection implements EntityReflectionInterface
      */
     public function isListable()
     {
-        return $this->reflectionClass->implementsInterface('RomaricDrigon\OrchestraBundle\Domain\Entity\ListableEntityInterface');
+        return $this->isListable;
     }
 }

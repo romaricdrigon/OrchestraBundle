@@ -30,12 +30,26 @@ class RepositoryDefinition implements RepositoryDefinitionInterface
      */
     protected $entityClass;
 
+    /**
+     * @var string
+     */
+    protected $name;
+
+    /**
+     * @var string
+     */
+    protected $slug;
+
 
     public function __construct(\ReflectionClass $reflectionClass, $serviceId, $entityClass)
     {
         $this->reflectionClass  = $reflectionClass;
         $this->serviceId        = $serviceId;
         $this->entityClass      = $entityClass;
+
+        // Build/cache a few properties
+        $this->name = str_replace('Repository', '', $this->reflectionClass->getShortName());
+        $this->slug = strtolower($this->name);
     }
 
     /**
@@ -43,7 +57,7 @@ class RepositoryDefinition implements RepositoryDefinitionInterface
      */
     public function getSlug()
     {
-        return strtolower($this->getName());
+        return $this->slug;
     }
 
     /**
@@ -67,7 +81,7 @@ class RepositoryDefinition implements RepositoryDefinitionInterface
      */
     public function getName()
     {
-        return str_replace('Repository', '', $this->reflectionClass->getShortName());
+        return $this->name;
     }
 
     /**
