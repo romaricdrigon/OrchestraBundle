@@ -9,9 +9,7 @@
 
 namespace RomaricDrigon\OrchestraBundle\Tests\Core\Pool;
 
-use RomaricDrigon\OrchestraBundle\Domain\Entity\EntityInterface;
 use RomaricDrigon\OrchestraBundle\Core\Pool\EntityPool;
-use RomaricDrigon\OrchestraBundle\Core\Entity\EntityReflection;
 
 /**
  * Class EntityPoolTest
@@ -31,34 +29,31 @@ class EntityPoolTest extends \PHPUnit_Framework_TestCase
 
     public function test_it_adds_and_gets_entities()
     {
-        $entity = new MockEntity1();
-        $ref    = new \ReflectionClass($entity);
-        $er1    = new EntityReflection($ref);
-        $this->sut->addEntityReflection($er1);
-        // slug should be "mock1"
+        $reflection1 = \Phake::mock('RomaricDrigon\OrchestraBundle\Core\Entity\EntityReflectionInterface');
+        \Phake::when($reflection1)->getSlug()->thenReturn('mockentity1');
 
-        $entity = new MockEntity2();
-        $ref    = new \ReflectionClass($entity);
-        $er2    = new EntityReflection($ref);
-        $this->sut->addEntityReflection($er2);
-        // slug should be "mock2"
+        $reflection2 = \Phake::mock('RomaricDrigon\OrchestraBundle\Core\Entity\EntityReflectionInterface');
+        \Phake::when($reflection2)->getSlug()->thenReturn('mockentity2');
 
-        $this->assertEquals($er1, $this->sut->getBySlug('mockentity1'));
+        $this->sut->addEntityReflection($reflection1);
+        $this->sut->addEntityReflection($reflection2);
 
-        $this->assertEquals($er2, $this->sut->getBySlug('mockentity2'));
+        $this->assertCount(2, $this->sut->all());
+
+        $this->assertEquals($reflection1, $this->sut->getBySlug('mockentity1'));
+        $this->assertEquals($reflection2, $this->sut->getBySlug('mockentity2'));
     }
 
     public function test_it_throws_exception_when_adding_twice_entity()
     {
-        $entity = new MockEntity1();
-        $ref    = new \ReflectionClass($entity);
-        $er1    = new EntityReflection($ref);
+        $reflection1 = \Phake::mock('RomaricDrigon\OrchestraBundle\Core\Entity\EntityReflectionInterface');
+        \Phake::when($reflection1)->getSlug()->thenReturn('mockentity1');
 
-        $this->sut->addEntityReflection($er1);
+        $this->sut->addEntityReflection($reflection1);
 
         $this->setExpectedException('RomaricDrigon\OrchestraBundle\Exception\DomainErrorException');
 
-        $this->sut->addEntityReflection($er1);
+        $this->sut->addEntityReflection($reflection1);
     }
 
     public function test_it_throws_exception_when_entity_not_found()
@@ -67,12 +62,4 @@ class EntityPoolTest extends \PHPUnit_Framework_TestCase
 
         $this->sut->getBySlug('foo');
     }
-}
-
-class MockEntity1 implements EntityInterface {
-    public function getId() {}
-}
-
-class MockEntity2 implements EntityInterface {
-    public function getId() {}
 }
