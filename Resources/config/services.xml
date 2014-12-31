@@ -7,7 +7,6 @@
     <parameters>
         <parameter key="orchestra.pool.repository_pool.class">RomaricDrigon\OrchestraBundle\Core\Pool\RepositoryPool</parameter>
         <parameter key="orchestra.pool.entity_pool.class">RomaricDrigon\OrchestraBundle\Core\Pool\EntityPool</parameter>
-        <parameter key="orchestra.pool.entity_pool_factory.class">RomaricDrigon\OrchestraBundle\Core\Pool\Factory\EntityPoolFactory</parameter>
         <parameter key="orchestra.core_repository.action_builder.class">RomaricDrigon\OrchestraBundle\Core\Repository\Action\RepositoryActionBuilder</parameter>
         <parameter key="orchestra.core_repository.action_collection_builder.class">RomaricDrigon\OrchestraBundle\Core\Repository\Action\RepositoryActionCollectionBuilder</parameter>
         <parameter key="orchestra.core_entity.action_builder.class">RomaricDrigon\OrchestraBundle\Core\Entity\Action\EntityActionBuilder</parameter>
@@ -44,6 +43,8 @@
 
         <parameter key="orchestra.finder.entity_finder.class">RomaricDrigon\OrchestraBundle\Finder\EntityFinder</parameter>
         <parameter key="orchestra.finder.entity_loader.class">RomaricDrigon\OrchestraBundle\Finder\EntityLoader</parameter>
+        <parameter key="orchestra.pool.entity_pool_factory.class">RomaricDrigon\OrchestraBundle\Core\Pool\Factory\EntityPoolFactory</parameter>
+        <parameter key="orchestra.pool.repository_pool_factory.class">RomaricDrigon\OrchestraBundle\Core\Pool\Factory\RepositoryPoolFactory</parameter>
 
         <parameter key="orchestra.symfony.filesystem.class">Symfony\Component\Filesystem\Filesystem</parameter>
 
@@ -63,18 +64,18 @@
 
     <services>
         <!-- core -->
-        <service id="orchestra.pool.repository_pool" class="%orchestra.pool.repository_pool.class%">
-        </service>
+        <service
+                id="orchestra.pool.repository_pool"
+                class="%orchestra.pool.repository_pool.class%"
+                factory-service="orchestra.pool.repository_pool_factory"
+                factory-method="createPool"
+            />
         <service
                 id="orchestra.pool.entity_pool"
                 class="%orchestra.pool.entity_pool.class%"
                 factory-service="orchestra.pool.entity_pool_factory"
                 factory-method="createPool"
-                >
-        </service>
-        <service id="orchestra.pool.entity_pool_factory" class="%orchestra.pool.entity_pool_factory.class%">
-            <argument type="service" id="orchestra.finder.entity_finder" />
-        </service>
+            />
         <service id="orchestra.core_repository.action_builder" class="%orchestra.core_repository.action_builder.class%" public="false">
             <argument type="service" id="orchestra.resolver.repository_route_name" />
             <argument type="service" id="orchestra.resolver.hidden_action" />
@@ -130,6 +131,11 @@
         </service>
         <service id="orchestra.finder.entity_loader" class="%orchestra.finder.entity_loader.class%" public="false">
             <argument type="service" id="orchestra.symfony.filesystem" />
+        </service>
+        <service id="orchestra.pool.entity_pool_factory" class="%orchestra.pool.entity_pool_factory.class%" public="false">
+            <argument type="service" id="orchestra.finder.entity_finder" />
+        </service>
+        <service id="orchestra.pool.repository_pool_factory" class="%orchestra.pool.repository_pool_factory.class%" public="false">
         </service>
 
         <!-- doctrine bridge -->

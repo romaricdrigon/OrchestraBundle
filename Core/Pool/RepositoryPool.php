@@ -9,7 +9,6 @@
 
 namespace RomaricDrigon\OrchestraBundle\Core\Pool;
 
-use RomaricDrigon\OrchestraBundle\Core\Repository\RepositoryDefinition;
 use RomaricDrigon\OrchestraBundle\Core\Repository\RepositoryDefinitionInterface;
 use RomaricDrigon\OrchestraBundle\Exception\DomainErrorException;
 
@@ -27,19 +26,13 @@ class RepositoryPool implements RepositoryPoolInterface
     protected $repositoriesBySlug = [];
 
     /**
-     * Add a repository to the pool
+     * Add a repository definition to the pool
      *
-     * @param string $repositoryClass
-     * @param string|null $serviceId
-     * @param string $entityClass
+     * @param RepositoryDefinitionInterface $repositoryDefinition
      * @throws DomainErrorException
      */
-    public function addRepository($repositoryClass, $serviceId, $entityClass)
+    public function addRepositoryDefinition(RepositoryDefinitionInterface $repositoryDefinition)
     {
-        $reflectionClass = new \ReflectionClass($repositoryClass);
-
-        $repositoryDefinition = new RepositoryDefinition($reflectionClass, $serviceId, $entityClass);
-
         $slug = $repositoryDefinition->getSlug();
 
         if (isset($this->repositoriesBySlug[$slug])) {

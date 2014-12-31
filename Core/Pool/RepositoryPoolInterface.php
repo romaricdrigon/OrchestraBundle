@@ -18,13 +18,11 @@ use RomaricDrigon\OrchestraBundle\Core\Repository\RepositoryDefinitionInterface;
 interface RepositoryPoolInterface
 {
     /**
-     * Add a repository to the pool
+     * Add a repository definition to the pool
      *
-     * @param string $repositoryClass fully qualified class name
-     * @param string $serviceId the repository is a Symfony service, its ID
-     * @param string $entityClass fully qualified class name of the corresponding entity
+     * @param RepositoryDefinitionInterface $repositoryDefinition
      */
-    public function addRepository($repositoryClass, $serviceId, $entityClass);
+    public function addRepositoryDefinition(RepositoryDefinitionInterface $repositoryDefinition);
 
     /**
      * @param string $slug

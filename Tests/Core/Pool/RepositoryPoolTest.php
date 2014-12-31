@@ -9,7 +9,6 @@
 
 namespace RomaricDrigon\OrchestraBundle\Tests\Core\Pool;
 
-use RomaricDrigon\OrchestraBundle\Domain\Repository\RepositoryInterface;
 use RomaricDrigon\OrchestraBundle\Core\Pool\RepositoryPool;
 
 /**
@@ -30,24 +29,31 @@ class RepositoryPoolTest extends \PHPUnit_Framework_TestCase
 
     public function test_it_adds_and_gets_repositories()
     {
-        $this->sut->addRepository('RomaricDrigon\OrchestraBundle\Tests\Core\Pool\MockRepository1', 'orchestra.service.mock1', 'Some\\Class\\Mock1');
+        $definition1 = \Phake::mock('RomaricDrigon\OrchestraBundle\Core\Repository\RepositoryDefinition');
+        \Phake::when($definition1)->getSlug()->thenReturn('mock1');
 
-        $this->sut->addRepository('RomaricDrigon\OrchestraBundle\Tests\Core\Pool\MockRepository2', 'orchestra.service.mock2', 'Some\\Class\\Mock2');
+        $definition2 = \Phake::mock('RomaricDrigon\OrchestraBundle\Core\Repository\RepositoryDefinition');
+        \Phake::when($definition2)->getSlug()->thenReturn('mock2');
 
-        $this->assertNotNull($repo1 = $this->sut->getBySlug('mock1'));
-        $this->assertEquals('orchestra.service.mock1', $repo1->getServiceId());
+        $this->sut->addRepositoryDefinition($definition1);
+        $this->sut->addRepositoryDefinition($definition2);
 
-        $this->assertNotNull($repo2 = $this->sut->getBySlug('mock2'));
-        $this->assertEquals('orchestra.service.mock2', $repo2->getServiceId());
+        $this->assertCount(2, $this->sut->all());
+
+        $this->assertEquals($definition1, $this->sut->getBySlug('mock1'));
+        $this->assertEquals($definition2, $this->sut->getBySlug('mock2'));
     }
 
     public function test_it_throws_exception_when_adding_twice_repository()
     {
-        $this->sut->addRepository('RomaricDrigon\OrchestraBundle\Tests\Core\Pool\MockRepository1', 'orchestra.service.mock1', 'Some\\Class\\Mock1');
+        $definition1 = \Phake::mock('RomaricDrigon\OrchestraBundle\Core\Repository\RepositoryDefinition');
+        \Phake::when($definition1)->getSlug()->thenReturn('mock1');
+
+        $this->sut->addRepositoryDefinition($definition1);
 
         $this->setExpectedException('RomaricDrigon\OrchestraBundle\Exception\DomainErrorException');
 
-        $this->sut->addRepository('RomaricDrigon\OrchestraBundle\Tests\Core\Pool\MockRepository1', 'orchestra.service.mock1', 'Some\\Class\\Mock1');
+        $this->sut->addRepositoryDefinition($definition1);
     }
 
     public function test_it_throws_exception_when_repository_not_found()
@@ -58,14 +64,4 @@ class RepositoryPoolTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-final class MockRepository1 implements RepositoryInterface {
-    public function listing() {}
 
-    public function find($id) {}
-}
-
-final class MockRepository2 implements RepositoryInterface {
-    public function listing() {}
-
-    public function find($id) {}
-}

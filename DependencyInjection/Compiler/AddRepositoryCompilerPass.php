@@ -22,6 +22,8 @@ use Symfony\Component\DependencyInjection\Reference;
  */
 class AddRepositoryCompilerPass implements CompilerPassInterface
 {
+    const REPOSITORY_POOL_FACTORY_SERVICE_ID = 'orchestra.pool.repository_pool_factory';
+
     const OBJECT_MANAGER_SERVICE_ID = 'orchestra.doctrine.object_manager';
 
     const DOCTRINE_ENTITY_MANAGER_SERVICE_ID = 'doctrine.orm.entity_manager';
@@ -33,11 +35,11 @@ class AddRepositoryCompilerPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        if (! $container->hasDefinition('orchestra.pool.repository_pool')) {
-            throw new OrchestraRuntimeException('Orchestra RepositoryPool is unavailable');
+        if (! $container->hasDefinition(self::REPOSITORY_POOL_FACTORY_SERVICE_ID)) {
+            throw new OrchestraRuntimeException('Orchestra RepositoryPoolFactory is unavailable');
         }
 
-        $repositoryPool = $container->getDefinition('orchestra.pool.repository_pool');
+        $repositoryPoolFactory = $container->getDefinition(self::REPOSITORY_POOL_FACTORY_SERVICE_ID);
 
         $taggedServices = $container->findTaggedServiceIds('orchestra.repository');
 
@@ -58,7 +60,7 @@ class AddRepositoryCompilerPass implements CompilerPassInterface
             $entityClass = $tagAttributes['entityClass'];
 
             // Add it to the Pool
-            $repositoryPool->addMethodCall('addRepository', [$class, $id, $entityClass]);
+            $repositoryPoolFactory->addMethodCall('addRepository', [$class, $id, $entityClass]);
 
             // It's also now we see if we need to inject it a Doctrine Repository
             if ($reflection->implementsInterface('RomaricDrigon\OrchestraBundle\Domain\Doctrine\DoctrineAwareInterface')) {
