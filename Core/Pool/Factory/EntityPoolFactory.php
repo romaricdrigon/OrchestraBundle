@@ -17,7 +17,7 @@ use RomaricDrigon\OrchestraBundle\Core\Pool\EntityPool;
  * Class EntityPoolFactory
  * @author Romaric Drigon <romaric.drigon@gmail.com>
  */
-class EntityPoolFactory implements EntityPoolFactoryInterface
+class EntityPoolFactory
 {
     /**
      * @var EntityFinderInterface
@@ -30,7 +30,9 @@ class EntityPoolFactory implements EntityPoolFactoryInterface
     }
 
     /**
-     * @inheritdoc
+     * Factory method for the EntityPool
+     *
+     * @return EntityPoolInterface
      */
     public function createPool()
     {
@@ -40,7 +42,8 @@ class EntityPoolFactory implements EntityPoolFactoryInterface
     }
 
     /**
-     * @inheritdoc
+     * @param EntityPoolInterface $pool
+     * @return EntityPoolInterface
      */
     public function buildPool(EntityPoolInterface $pool)
     {
