@@ -244,7 +244,7 @@ class GenericController extends Controller
         }
 
         // We redirect to "listing" page/action
-        $listRoute = $this->get('orchestra.resolver.repository_route_name')->getRouteName($repository, 'listing');
+        $listRoute = $this->get('orchestra.resolver.repository_route_name')->getRouteName($repository_definition, 'listing');
 
         return $this->redirect($this->generateUrl($listRoute));
     }
