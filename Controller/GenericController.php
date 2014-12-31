@@ -44,20 +44,18 @@ class GenericController extends Controller
      * Action used when a repository "listing" is called
      *
      * @param RepositoryDefinitionInterface $repository_definition
+     * @param RepositoryInterface $repository
      * @param EntityReflectionInterface $entity
      * @throws DomainErrorException
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function listAction(RepositoryDefinitionInterface $repository_definition, EntityReflectionInterface $entity)
+    public function listAction(RepositoryDefinitionInterface $repository_definition, RepositoryInterface $repository, EntityReflectionInterface $entity)
     {
         $name = $this->get('orchestra.resolver.repository_name')->getName($repository_definition);
 
         if (false === $entity->isListable()) {
             throw new DomainErrorException('Entity '.$entity->getName().' is not listable. Maybe you forgot to implement ListableEntityInterface?');
         }
-
-        /** @var RepositoryInterface $repository */
-        $repository = $this->get($repository_definition->getServiceId());
 
         // Get objects to show
         $objects = $repository->listing();
@@ -102,11 +100,12 @@ class GenericController extends Controller
      * Action used when a method on en Repository is called
      *
      * @param RepositoryDefinitionInterface $repository_definition
+     * @param RepositoryInterface $repository
      * @param EntityReflectionInterface $entity
      * @param string $repository_method
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function repositoryQueryAction(RepositoryDefinitionInterface $repository_definition, EntityReflectionInterface $entity, $repository_method)
+    public function repositoryQueryAction(RepositoryDefinitionInterface $repository_definition, RepositoryInterface $repository, EntityReflectionInterface $entity, $repository_method)
     {
         return $this->render('RomaricDrigonOrchestraBundle:Generic:dashboard.html.twig', []);
     }
@@ -116,11 +115,12 @@ class GenericController extends Controller
      *
      * @param Request $request
      * @param RepositoryDefinitionInterface $repository_definition
+     * @param RepositoryInterface $repository
      * @param string $repository_method
      * @param CommandInterface $command
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function repositoryCommandAction(Request $request, RepositoryDefinitionInterface $repository_definition, $repository_method, CommandInterface $command)
+    public function repositoryCommandAction(Request $request, RepositoryDefinitionInterface $repository_definition, RepositoryInterface $repository, $repository_method, CommandInterface $command)
     {
         $form = $this->createForm('orchestra_command_type', $command, [
             'command' => $command
@@ -130,9 +130,6 @@ class GenericController extends Controller
 
         if ($request->isMethod('POST')) {
             if ($form->handleRequest($request) && $form->isValid()) {
-                /** @var RepositoryInterface $repository */
-                $repository = $this->get($repository_definition->getServiceId());
-
                 // Pass the command to the repository, and we're done!
                 call_user_func([$repository, $repository_method], $command);
 
@@ -214,11 +211,12 @@ class GenericController extends Controller
      * @param string $entity_method
      * @param EntityInterface $object
      * @param RepositoryDefinitionInterface $repository_definition
+     * @param RepositoryInterface $repository
      * @throws DomainErrorException
      * @throws NotFoundHttpException
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function entityEventAction(EntityReflectionInterface $entity, $entity_method, EntityInterface $object = null, RepositoryDefinitionInterface $repository_definition)
+    public function entityEventAction(EntityReflectionInterface $entity, $entity_method, EntityInterface $object = null, RepositoryDefinitionInterface $repository_definition, RepositoryInterface $repository)
     {
         if (null === $object) {
             throw new NotFoundHttpException();
@@ -231,9 +229,6 @@ class GenericController extends Controller
         if (null !== $event && ! $event instanceof EventInterface) {
             throw new DomainErrorException('An invalid Event was emitted by '.$entity->getName().' '.$entity_method.'. Maybe you forgot to implement EventInterface? Result must be either an implementation either null.');
         }
-
-        /** @var RepositoryInterface $repository */
-        $repository = $this->get($repository_definition->getServiceId());
 
         if (! $repository instanceof ReceiveEventInterface) {
             throw new DomainErrorException('Repository for Entity '.$entity->getName().' can not receive Events. Maybe you forgot to implement ReceiveEventInterface?');
