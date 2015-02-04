@@ -10,7 +10,6 @@
 namespace RomaricDrigon\OrchestraBundle\Core\Repository\Action;
 
 use RomaricDrigon\OrchestraBundle\Core\Repository\RepositoryDefinitionInterface;
-use RomaricDrigon\OrchestraBundle\Resolver\RepositoryNameResolverInterface;
 
 /**
  * Class RepositoryActionCollectionBuilder
@@ -19,23 +18,16 @@ use RomaricDrigon\OrchestraBundle\Resolver\RepositoryNameResolverInterface;
 class RepositoryActionCollectionBuilder implements RepositoryActionCollectionBuilderInterface
 {
     /**
-     * @var RepositoryNameResolverInterface
-     */
-    protected $repositoryNameResolver;
-
-    /**
      * @var RepositoryActionBuilderInterface
      */
     protected $repositoryActionBuilder;
 
 
     /**
-     * @param RepositoryNameResolverInterface $repositoryNameResolver
      * @param RepositoryActionBuilderInterface $repositoryActionBuilder
      */
-    public function __construct(RepositoryNameResolverInterface $repositoryNameResolver, RepositoryActionBuilderInterface $repositoryActionBuilder)
+    public function __construct(RepositoryActionBuilderInterface $repositoryActionBuilder)
     {
-        $this->repositoryNameResolver   = $repositoryNameResolver;
         $this->repositoryActionBuilder  = $repositoryActionBuilder;
     }
 
@@ -44,9 +36,8 @@ class RepositoryActionCollectionBuilder implements RepositoryActionCollectionBui
      */
     public function build(RepositoryDefinitionInterface $repositoryDefinition)
     {
-        $repoName = $this->repositoryNameResolver->getName($repositoryDefinition);
-
-        $methods = $repositoryDefinition->getMethods();
+        $repoName   = $repositoryDefinition->getName();
+        $methods    = $repositoryDefinition->getMethods();
 
         $collection = new RepositoryActionCollection($repoName);
 

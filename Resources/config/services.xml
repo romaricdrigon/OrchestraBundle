@@ -82,7 +82,6 @@
             <argument type="service" id="orchestra.resolver.hidden_action" />
         </service>
         <service id="orchestra.core_repository.action_collection_builder" class="%orchestra.core_repository.action_collection_builder.class%">
-            <argument type="service" id="orchestra.resolver.repository_name" />
             <argument type="service" id="orchestra.core_repository.action_builder" />
         </service>
         <service id="orchestra.core_entity.action_builder" class="%orchestra.core_entity.action_builder.class%" public="false">
