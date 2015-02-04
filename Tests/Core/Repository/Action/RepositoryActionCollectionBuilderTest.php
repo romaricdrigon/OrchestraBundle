@@ -26,7 +26,7 @@ class RepositoryActionCollectionBuilderTest extends \PHPUnit_Framework_TestCase
     
     public function setUp()
     {
-        $nameResolver = \Phake::mock('RomaricDrigon\OrchestraBundle\Resolver\RepositoryNameResolver');
+        $nameResolver = \Phake::mock('RomaricDrigon\OrchestraBundle\Resolver\Repository\RepositoryNameResolver');
 
         \Phake::when($nameResolver)->getName($this->anything())->thenReturn('mock');
 

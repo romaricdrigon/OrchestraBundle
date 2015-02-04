@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-namespace RomaricDrigon\OrchestraBundle\Resolver;
+namespace RomaricDrigon\OrchestraBundle\Resolver\Repository;
 
 use Doctrine\Common\Annotations\Reader;
 use RomaricDrigon\OrchestraBundle\Core\Repository\RepositoryDefinitionInterface;
@@ -16,7 +16,7 @@ use RomaricDrigon\OrchestraBundle\Core\Repository\RepositoryDefinitionInterface;
  * Class RepositoryNameResolver
  * @author Romaric Drigon <romaric.drigon@gmail.com>
  */
-class RepositoryNameResolver implements RepositoryNameResolverInterface
+class RepositoryNameResolver
 {
     /**
      * @var Reader

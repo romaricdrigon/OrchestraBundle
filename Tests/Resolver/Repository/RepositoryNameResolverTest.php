@@ -10,7 +10,7 @@
 namespace RomaricDrigon\OrchestraBundle\Tests\Resolver;
 
 use RomaricDrigon\OrchestraBundle\Core\Repository\RepositoryDefinition;
-use RomaricDrigon\OrchestraBundle\Resolver\RepositoryNameResolver;
+use RomaricDrigon\OrchestraBundle\Resolver\Repository\RepositoryNameResolver;
 
 /**
  * Class RepositoryNameResolverTest
