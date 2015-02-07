@@ -11,6 +11,7 @@
         <parameter key="orchestra.core_repository.action_collection_builder.class">RomaricDrigon\OrchestraBundle\Core\Repository\Action\RepositoryActionCollectionBuilder</parameter>
         <parameter key="orchestra.core_entity.action_builder.class">RomaricDrigon\OrchestraBundle\Core\Entity\Action\EntityActionBuilder</parameter>
         <parameter key="orchestra.core_entity.action_collection_builder.class">RomaricDrigon\OrchestraBundle\Core\Entity\Action\EntityActionCollectionBuilder</parameter>
+        <parameter key="orchestra.core_repository.definition_factory.class">RomaricDrigon\OrchestraBundle\Core\Repository\RepositoryDefinitionFactory</parameter>
 
         <parameter key="orchestra.doctrine.repository_finder.class">RomaricDrigon\OrchestraBundle\Doctrine\DoctrineRepositoryFinder</parameter>
         <parameter key="orchestra.doctrine.repository_injecter.class">RomaricDrigon\OrchestraBundle\Doctrine\DoctrineInjecter</parameter>
@@ -91,6 +92,9 @@
         </service>
         <service id="orchestra.core_entity.action_collection_builder" class="%orchestra.core_entity.action_collection_builder.class%">
             <argument type="service" id="orchestra.core_entity.action_builder" />
+        </service>
+        <service id="orchestra.core_repository.definition_factory" class="%orchestra.core_repository.definition_factory.class%">
+            <argument type="service" id="orchestra.resolver.repository_name" />
         </service>
 
         <!-- resolver  -->

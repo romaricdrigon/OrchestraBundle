@@ -12,6 +12,7 @@ namespace RomaricDrigon\OrchestraBundle\Core\Pool\Factory;
 use RomaricDrigon\OrchestraBundle\Core\Repository\RepositoryDefinition;
 use RomaricDrigon\OrchestraBundle\Core\Pool\RepositoryPoolInterface;
 use RomaricDrigon\OrchestraBundle\Core\Pool\RepositoryPool;
+use RomaricDrigon\OrchestraBundle\Core\Repository\RepositoryDefinitionFactory;
 
 /**
  * Class RepositoryPoolFactory
@@ -24,6 +25,18 @@ class RepositoryPoolFactory
      */
     protected $definitions = [];
 
+    /**
+     * @var RepositoryDefinitionFactory
+     */
+    protected $definitionFactory;
+
+    /**
+     * @param RepositoryDefinitionFactory $definitionFactory
+     */
+    public function __construct(RepositoryDefinitionFactory $definitionFactory)
+    {
+        $this->definitionFactory = $definitionFactory;
+    }
 
     /**
      * Add a repository, service from Symfony DIC, to the pool
@@ -34,9 +47,7 @@ class RepositoryPoolFactory
      */
     public function addRepository($repositoryClass, $serviceId, $entityClass)
     {
-        $reflectionClass = new \ReflectionClass($repositoryClass);
-
-        $repositoryDefinition = new RepositoryDefinition($reflectionClass, $serviceId, $entityClass);
+        $repositoryDefinition = $this->definitionFactory->build($repositoryClass, $serviceId, $entityClass);
 
         // this array is not ordered by slug
         $this->definitions[] = $repositoryDefinition;

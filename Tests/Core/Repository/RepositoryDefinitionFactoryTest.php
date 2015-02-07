@@ -24,7 +24,9 @@ class RepositoryDefinitionFactoryTest extends \PHPUnit_Framework_TestCase
     
     public function setUp()
     {
-        $this->sut = new RepositoryDefinitionFactory();
+        $resolver = \Phake::mock('RomaricDrigon\OrchestraBundle\Resolver\Repository\RepositoryNameResolver');
+
+        $this->sut = new RepositoryDefinitionFactory($resolver);
     }
 
     public function test_it_builds_repository_definiton()

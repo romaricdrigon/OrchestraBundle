@@ -42,12 +42,6 @@ interface RepositoryDefinitionInterface
     public function getServiceId();
 
     /**
-     * @return \ReflectionClass
-     * Temp, to be removed
-     */
-    public function getReflection();
-
-    /**
      * @return string fully qualified class name of the related entity
      */
     public function getEntityClass();

@@ -7,7 +7,10 @@
  * file that was distributed with this source code.
  */
 
+
 namespace RomaricDrigon\OrchestraBundle\Core\Repository;
+
+use RomaricDrigon\OrchestraBundle\Resolver\Repository\RepositoryNameResolver;
 
 /**
  * Class RepositoryDefinitionFactory
@@ -15,6 +18,19 @@ namespace RomaricDrigon\OrchestraBundle\Core\Repository;
  */
 class RepositoryDefinitionFactory
 {
+    /**
+     * @var RepositoryNameResolver
+     */
+    protected $nameResolver;
+
+    /**
+     * @param RepositoryNameResolver $nameResolver
+     */
+    public function __construct(RepositoryNameResolver $nameResolver)
+    {
+        $this->nameResolver = $nameResolver;
+    }
+
     /**
      * @param string $repositoryClass
      * @param string $serviceId
@@ -25,6 +41,8 @@ class RepositoryDefinitionFactory
     {
         $reflectionClass = new \ReflectionClass($repositoryClass);
 
-        return new RepositoryDefinition($reflectionClass, $serviceId, $entityClass);
+        $name = $this->nameResolver->getName($repositoryClass);
+
+        return new RepositoryDefinition($reflectionClass, $serviceId, $entityClass, $name);
     }
 }
